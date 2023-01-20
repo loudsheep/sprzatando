@@ -1,0 +1,16 @@
+{
+    "name": "Sprzątando",
+    "short_name": "Sprzątando",
+    "description": "Progressive Web App for Sprzątando",
+    "icons": [
+        {
+            "src": "/icon.png",
+            "sizes": "150x150",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "fullscreen",
+    "theme_color": "#4d1c7a",
+    "background_color": "#f5f7fa"
+}
