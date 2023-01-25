@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   display: flex;
   padding: 24px;
   justify-content: space-between;
+  background-color: ${({theme}) => theme.colors.success};
 `;
 
 export const Navbar = ({auth}) => {
