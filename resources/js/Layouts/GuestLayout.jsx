@@ -1,18 +1,52 @@
-import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link } from '@inertiajs/react';
+import styled from "styled-components";
+import dotsPath from "../assets/img/dots.svg";
+import cleaningLadyPath from "../assets/img/cleaningLady.svg";
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+  display: flex;
+`;
+
+const BannerWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors.mainColor};
+  position: relative;
+  flex: 1;
+`;
+
+const ChildreeWrapper = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.lightGray};
+`;
+
+const DotsWrapper = styled.div`
+  position: absolute;
+  transform: translate(-35%, -40%) rotate(-45deg) ;
+`;
+
+const LadyWrapper = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+`;
 
 export default function Guest({ children }) {
-    return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                </Link>
-            </div>
+  return (
+    <Wrapper>
+      <BannerWrapper>
+        <DotsWrapper>
+          <img src={dotsPath} alt="Ornamental dots :)" />
+        </DotsWrapper>
+        <LadyWrapper>
+          <img src={cleaningLadyPath} alt="Cleaning Lady" />
+        </LadyWrapper>
+      </BannerWrapper>
 
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {children}
-            </div>
-        </div>
-    );
+      <ChildreeWrapper>{children}</ChildreeWrapper>
+    </Wrapper>
+  );
 }
