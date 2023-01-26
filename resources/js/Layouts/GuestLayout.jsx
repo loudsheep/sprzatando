@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import dotsPath from "../assets/img/dots.svg";
 import cleaningLadyPath from "../assets/img/cleaningLady.svg";
+import logoPath from '../assets/img/logo.png'
+import { useWidth } from "@/hooks/useWidth";
+import { Link } from "@inertiajs/react";
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: hidden;
-  display: flex;
+  display: flex; 
 `;
 
 const BannerWrapper = styled.div`
@@ -17,6 +20,8 @@ const BannerWrapper = styled.div`
 
 const ChildreeWrapper = styled.div`
   display: flex;
+  position: relative;
+  flex-direction: column;
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -34,19 +39,38 @@ const LadyWrapper = styled.div`
   bottom: 0;
 `;
 
+const LogoWrapper = styled(Link)`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 80px;
+  /* transform: scale(.2); */
+
+  
+  
+`
+
 export default function Guest({ children }) {
+  const width = useWidth();
   return (
     <Wrapper>
-      <BannerWrapper>
-        <DotsWrapper>
-          <img src={dotsPath} alt="Ornamental dots :)" />
-        </DotsWrapper>
-        <LadyWrapper>
-          <img src={cleaningLadyPath} alt="Cleaning Lady" />
-        </LadyWrapper>
-      </BannerWrapper>
+      {width > 992
+        &&
+        <BannerWrapper>
+          <DotsWrapper>
+            <img src={dotsPath} alt="Ornamental dots :)" />
+          </DotsWrapper>
+          <LadyWrapper>
+            <img src={cleaningLadyPath} alt="Cleaning Lady" />
+          </LadyWrapper>
+        </BannerWrapper>}
 
-      <ChildreeWrapper>{children}</ChildreeWrapper>
+      <ChildreeWrapper>
+        <LogoWrapper href="/">
+          <img src={logoPath} alt="Logo" />
+        </LogoWrapper>
+        {children}
+      </ChildreeWrapper>
     </Wrapper>
   );
 }
