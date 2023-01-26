@@ -37,7 +37,7 @@ Route::middleware('guest')->group(function () {
 
     Route::get('landing-page', function () {
         return Inertia::render('Auth/LandingPage');
-    });
+    })->name('landing.page');
 });
 
 Route::middleware('auth')->group(function () {
