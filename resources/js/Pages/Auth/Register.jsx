@@ -1,120 +1,106 @@
-import { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect } from "react";
+import GuestLayout from "@/Layouts/GuestLayout";
+import PrimaryButton from "@/Components/Atoms/PrimaryButton";
+import { FormField } from "@/Components/Atoms/FormField";
+import { Head, Link, useForm } from "@inertiajs/react";
+import styled from "styled-components";
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+`;
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-    });
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
 
-    useEffect(() => {
-        return () => {
-            reset('password', 'password_confirmation');
-        };
-    }, []);
-
-    const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+  useEffect(() => {
+    return () => {
+      reset("password", "password_confirmation");
     };
+  }, []);
 
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('register'));
-    };
-
-    return (
-        <GuestLayout>
-            <Head title="Register" />
-
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel forInput="name" value="Name" />
-
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        autoComplete="name"
-                        isFocused={true}
-                        handleChange={onHandleChange}
-                        required
-                    />
-
-                    <InputError message={errors.name} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel forInput="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        handleChange={onHandleChange}
-                        required
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel forInput="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        handleChange={onHandleChange}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel forInput="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        handleChange={onHandleChange}
-                        required
-                    />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Already registered?
-                    </Link>
-
-                    <PrimaryButton className="ml-4" processing={processing}>
-                        Register
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
+  const onHandleChange = (event) => {
+    setData(
+      event.target.name,
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value
     );
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    post(route("register"));
+  };
+
+  return (
+    <GuestLayout>
+      <Head title="Register" />
+
+      <form style={{ width: "300px" }} onSubmit={submit}>
+        <FormField
+          name="name"
+          label="Nazwa"
+          forInput="name"
+          type="text"
+          value={data.name}
+          id="name"
+          handleChange={onHandleChange}
+          errorMessage={errors.name}
+        />
+
+        <FormField
+          id="email"
+          type="text"
+          name="email"
+          label="Email"
+          value={data.email}
+          forInput="email"
+          handleChange={onHandleChange}
+          errorMessage={errors.email}
+        />
+
+        <FormField
+          name="password"
+          label="Password"
+          forInput="password"
+          type="password"
+          value={data.password}
+          id="password"
+          handleChange={onHandleChange}
+          errorMessage={errors.password}
+        />
+
+        <FormField
+          id="password_confirmation"
+          type="password"
+          name="password_confirmation"
+          value={data.password_confirmation}
+          label="Confirm password"
+          handleChange={onHandleChange}
+          forInput="password_confirmation"
+          errorMessage={errors.password_confirmation}
+        />
+
+        <ButtonsWrapper>
+          <Link
+            href={route("login")}
+            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Masz już konto?
+          </Link>
+
+          <PrimaryButton processing={processing}>Zarejstruj</PrimaryButton>
+        </ButtonsWrapper>
+      </form>
+    </GuestLayout>
+  );
 }

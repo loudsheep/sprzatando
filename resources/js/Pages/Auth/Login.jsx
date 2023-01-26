@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import Checkbox from "@/Components/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
-import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
+import { ButtonsWrapper } from "./Register";
+import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { FormField } from "@/Components/Atoms/FormField";
 
 export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -43,39 +42,28 @@ export default function Login({ status, canResetPassword }) {
         <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
       )}
 
-      <form onSubmit={submit}>
-        <div>
-          <InputLabel forInput="email" value="Email" />
+      <form style={{ width: "300px" }} onSubmit={submit}>
+        <FormField
+          id="email"
+          type="text"
+          name="email"
+          label="Email"
+          value={data.email}
+          forInput="email"
+          handleChange={onHandleChange}
+          errorMessage={errors.email}
+        />
 
-          <TextInput
-            id="email"
-            type="email"
-            name="email"
-            value={data.email}
-            className="mt-1 block w-full"
-            autoComplete="username"
-            isFocused={true}
-            handleChange={onHandleChange}
-          />
-
-          <InputError message={errors.email} className="mt-2" />
-        </div>
-
-        <div className="mt-4">
-          <InputLabel forInput="password" value="Password" />
-
-          <TextInput
-            id="password"
-            type="password"
-            name="password"
-            value={data.password}
-            className="mt-1 block w-full"
-            autoComplete="current-password"
-            handleChange={onHandleChange}
-          />
-
-          <InputError message={errors.password} className="mt-2" />
-        </div>
+        <FormField
+          name="password"
+          label="Password"
+          forInput="password"
+          type="password"
+          value={data.password}
+          id="password"
+          handleChange={onHandleChange}
+          errorMessage={errors.password}
+        />
 
         <div className="block mt-4">
           <label className="flex items-center">
@@ -88,21 +76,20 @@ export default function Login({ status, canResetPassword }) {
           </label>
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <ButtonsWrapper className="flex items-center justify-end mt-4">
           {canResetPassword && (
             <Link
               href={route("password.request")}
               className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Forgot your password?
+              Niepamiętam hasła
             </Link>
           )}
 
-          <PrimaryButton className="ml-4" processing={processing}>
+          <PrimaryButton  processing={processing}>
             Log in
           </PrimaryButton>
-        </div>
-        <Link href="/">Register</Link>
+        </ButtonsWrapper>
       </form>
     </GuestLayout>
   );

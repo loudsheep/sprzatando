@@ -35,6 +35,7 @@ const DotsWrapper = styled.div`
 
 const LadyWrapper = styled.div`
   position: absolute;
+  width: 400px;
   right: 0;
   bottom: 0;
 `;
@@ -45,9 +46,6 @@ const LogoWrapper = styled(Link)`
   right: 10px;
   width: 80px;
   /* transform: scale(.2); */
-
-  
-  
 `
 
 export default function Guest({ children }) {
