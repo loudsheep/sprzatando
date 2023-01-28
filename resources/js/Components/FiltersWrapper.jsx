@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import Button from './Atoms/Button'
 import Filters from "./Filters";
-import Button from "./Atoms/Button";
 
-const FiltersWrapper = () => {
-  const FiltersWrapper = styled.div`
+const Wrapper = styled.div`
     padding: 2rem;
     background-color: #ccc;
     border-radius: 8px;
@@ -18,14 +16,15 @@ const FiltersWrapper = () => {
     font-size: 2rem;
   `;
 
+const FiltersWrapper = () => {
   return (
-    <FiltersWrapper>
+    <Wrapper>
       <FiltersHeader>Filtry</FiltersHeader>
       <form>
         <Filters></Filters>
         <Button text={"Pokaż 324 oferty"}></Button>
       </form>
-    </FiltersWrapper>
+    </Wrapper>
   );
 };
 
