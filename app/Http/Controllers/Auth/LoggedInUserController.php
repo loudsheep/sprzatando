@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Offer;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,11 +15,13 @@ class LoggedInUserController extends Controller
     public function show(Request $request) {
         // dd($request->query('location', 'nothing'));
 
+        $cities = Offer::select('city')->distinct()->get()->toArray();
+        $cities = array_map(function ($city) {
+            return $city['city'];
+        }, $cities);
+
         return Inertia::render('Welcome', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
+            'cities' => $cities
         ]);
     }
 }
