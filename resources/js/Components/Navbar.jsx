@@ -1,40 +1,53 @@
 import { Link } from "@inertiajs/react";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+const Nav = styled.nav`
   display: flex;
-  padding: 24px;
-  justify-content: space-between;
-  background-color: ${({theme}) => theme.colors.success};
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  background-color: ${({ theme }) => theme.colors.mainColor};
 `;
 
-export const Navbar = ({auth}) => {
-  return (
-    <Wrapper>
-      {auth.user ? (
-        <Link href={route("dashboard")} className="">
-          Dashboard
-        </Link>
-      ) : (
-        <>
-          <h1>LOGO</h1>
-          <div>
-            <Link
-              href={route("login")}
-              className="text-sm text-gray-700 dark:text-gray-500 underline"
-            >
-              Log in
-            </Link>
+const Wrapper = styled.div`
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+`;
 
-            <Link
-              href={route("register")}
-              className="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
-            >
-              Register
-            </Link>
-          </div>
-        </>
-      )}
-    </Wrapper>
+const StyledLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.white};
+  padding: 0 1rem;
+  font-size: 1.6rem;
+  transition: color 0.3s;
+
+  :hover {
+    color: #e2e0e0;
+  }
+`;
+
+export const Navbar = ({ auth }) => {
+  return (
+    <Nav>
+      <Wrapper>
+        {auth.user ? (
+          <Link href={route("dashboard")} className="">
+            Dashboard
+          </Link>
+        ) : (
+          <>
+            <h1>LOGO</h1>
+            <div>
+              <StyledLink href="#">Pomoc</StyledLink>
+              <StyledLink href="#">Ranking</StyledLink>
+              <StyledLink href="/landing-page">Twoje konto</StyledLink>
+              <StyledLink type="button" className="btn" href="/landing-page">
+                Dodaj ogłoszenie
+              </StyledLink>
+            </div>
+          </>
+        )}
+      </Wrapper>
+    </Nav>
   );
 };
