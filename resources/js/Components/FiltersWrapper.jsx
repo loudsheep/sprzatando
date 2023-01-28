@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Filters from "./Filters";
+import Button from "./Atoms/Button";
+
 const FiltersWrapper = () => {
   const FiltersWrapper = styled.div`
     padding: 2rem;

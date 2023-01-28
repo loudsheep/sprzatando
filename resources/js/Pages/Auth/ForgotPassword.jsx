@@ -1,9 +1,17 @@
 import GuestLayout from "@/Layouts/GuestLayout";
-import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
-import TextInput from "@/Components/TextInput";
+import { FormField } from "@/Components/Atoms/FormField";
 import { Head, useForm } from "@inertiajs/react";
+import styled from "styled-components";
 
+const FormWrapper = styled.form`
+  max-width: 300px;
+`;
+const Message = styled.p`
+  color: ${({ theme }) => theme.colors.darkGrey};
+  font-size: 1.3rem;
+  text-align: center;
+`;
 export default function ForgotPassword({ status }) {
   const { data, setData, post, processing, errors } = useForm({
     email: "",
@@ -23,35 +31,33 @@ export default function ForgotPassword({ status }) {
     <GuestLayout>
       <Head title="Forgot Password" />
 
-      <div className="mb-4 text-sm text-gray-600">
-        Forgot your password? No problem. Just let us know your email address
-        and we will email you a password reset link that will allow you to
-        choose a new one.
-      </div>
-
       {status && (
         <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
       )}
 
-      <form onSubmit={submit}>
-        <TextInput
+      <FormWrapper onSubmit={submit}>
+        <Message>
+          Forgot your password? <br /> No problem. Just let us know your email
+          address and we will email you a password reset link that will allow
+          you to choose a new one.
+        </Message>
+
+        <FormField
+          label={"Email"}
           id="password"
           type="email"
           name="email"
           value={data.email}
-          className="mt-1 block w-full"
-          isFocused={true}
+          errorMessage={errors.email}
           handleChange={onHandleChange}
         />
 
-        <InputError message={errors.email} className="mt-2" />
-
-        <div className="flex items-center justify-end mt-4">
-          <PrimaryButton className="ml-4" processing={processing}>
+        <div className="flex items-center justify-center mt-10">
+          <PrimaryButton processing={processing}>
             Email Password Reset Link
           </PrimaryButton>
         </div>
-      </form>
+      </FormWrapper>
     </GuestLayout>
   );
 }

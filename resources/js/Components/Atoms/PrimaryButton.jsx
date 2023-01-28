@@ -5,7 +5,7 @@ const Button = styled.button`
   color: white;
   padding: 10px 30px;
   border-radius: 10px;
-  width: 130px;
+  min-width: 130px;
   background-size: 300% 100%;
   &:hover {
     background-position: right center;
