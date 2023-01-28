@@ -35,7 +35,7 @@ const DotsWrapper = styled.div`
 
 const LadyWrapper = styled.div`
   position: absolute;
-  width: 400px;
+  width: 50%;
   right: 0;
   bottom: 0;
 `;

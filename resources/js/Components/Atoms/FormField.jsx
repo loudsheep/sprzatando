@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 13px;
+  margin-top: 13px;
   .error {
     border: 1px solid ${({ theme }) => theme.colors.error};
   }
@@ -23,6 +23,8 @@ const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.grey};
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 15px;
+  height: 3.8rem;
+  font-size: 15px;
 `;
 
 const ErrorMessage = styled.span`
@@ -41,6 +43,7 @@ export const FormField = forwardRef(
       isFocused,
       handleChange,
       errorMessage,
+      autoComplete,
     },
     ref
   ) => {
@@ -63,6 +66,7 @@ export const FormField = forwardRef(
           id={id}
           type={type}
           value={value}
+          autoComplete={autoComplete}
           onChange={handleChange}
         ></Input>
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

@@ -50,17 +50,19 @@ export default function Login({ status, canResetPassword }) {
           label="Email"
           value={data.email}
           forInput="email"
+          autoComplete={"email"}
           handleChange={onHandleChange}
           errorMessage={errors.email}
         />
 
         <FormField
           name="password"
-          label="Password"
+          label="Hasło"
           forInput="password"
           type="password"
           value={data.password}
           id="password"
+          autoComplete={"current-password"}
           handleChange={onHandleChange}
           errorMessage={errors.password}
         />
@@ -72,23 +74,21 @@ export default function Login({ status, canResetPassword }) {
               value={data.remember}
               handleChange={onHandleChange}
             />
-            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+            <span style={{color: 'grey', fontSize: '13px', marginLeft: '6px'}}>Pamiętaj mnie</span>
           </label>
         </div>
 
-        <ButtonsWrapper className="flex items-center justify-end mt-4">
+        <ButtonsWrapper>
           {canResetPassword && (
             <Link
               href={route("password.request")}
-              className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="underline text-base text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Niepamiętam hasła
             </Link>
           )}
 
-          <PrimaryButton  processing={processing}>
-            Log in
-          </PrimaryButton>
+          <PrimaryButton processing={processing}>Log in</PrimaryButton>
         </ButtonsWrapper>
       </form>
     </GuestLayout>

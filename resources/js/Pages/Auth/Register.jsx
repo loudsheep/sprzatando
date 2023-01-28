@@ -8,7 +8,7 @@ import styled from "styled-components";
 export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  margin: 16px 0;
   align-items: center;
 `;
 
@@ -70,7 +70,7 @@ export default function Register() {
 
         <FormField
           name="password"
-          label="Password"
+          label="Hasło"
           forInput="password"
           type="password"
           value={data.password}
@@ -84,7 +84,7 @@ export default function Register() {
           type="password"
           name="password_confirmation"
           value={data.password_confirmation}
-          label="Confirm password"
+          label="Potwierdź hasło"
           handleChange={onHandleChange}
           forInput="password_confirmation"
           errorMessage={errors.password_confirmation}
@@ -93,7 +93,7 @@ export default function Register() {
         <ButtonsWrapper>
           <Link
             href={route("login")}
-            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="underline text-base text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Masz już konto?
           </Link>
