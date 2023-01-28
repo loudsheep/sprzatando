@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "./Attoms/Button";
+import Button from "./Atoms/Button";
 import FiltersWrapper from "./FiltersWrapper";
 const FilterSection = () => {
   const Header = styled.header`
