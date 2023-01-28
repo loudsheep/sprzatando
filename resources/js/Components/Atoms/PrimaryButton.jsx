@@ -8,7 +8,7 @@ const Button = styled.button`
   width: 130px;
   background-size: 300% 100%;
   &:hover {
-    background-position: right center; 
+    background-position: right center;
     color: #fff;
     text-decoration: none;
     transform: translate(0%, -10%);
