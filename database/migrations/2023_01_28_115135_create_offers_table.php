@@ -15,18 +15,19 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
+            // creator id
             $table->foreignId('user_id');
             $table->string('city');
             $table->string('zip_code', 10);
             $table->integer('hourly_rate');
             $table->string('category');
             $table->text('description');
-            $table->dateTime('created');
             $table->dateTime('ends');
             $table->string('image')->nullable();
-            $table->boolean('is_done');
-            $table->boolean('is_banned');
-            $table->boolean('is_reported');
+            $table->boolean('is_done')->default(false);
+            $table->boolean('is_banned')->default(false);
+            $table->boolean('is_reported')->default(false);
+            $table->unsignedBigInteger('contractor_id')->nullable();
 
             $table->index('user_id');
 
