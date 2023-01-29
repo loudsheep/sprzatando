@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledFilterSelect = styled.select`
   padding: 1rem 2rem;
+  width: 100%;
   margin-bottom: 1.5rem;
   font-size: 1.4rem;
   border: none;
