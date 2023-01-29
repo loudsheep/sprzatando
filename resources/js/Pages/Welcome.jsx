@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 import { Navbar } from "@/Components/Navbar";
 import FilterSection from "@/Components/FilterSection";
+import styled from "styled-components";
 import { Offer } from "@/Components/Offer";
 import { useDispatch } from "react-redux";
 import { filterItemsActions } from "@/store/filter-items";
