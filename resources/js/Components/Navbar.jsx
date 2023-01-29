@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "@inertiajs/react";
 import styled from "styled-components";
 import BurgerBtn from "./BurgerBtn";
+import logoPath from "../assets/img/logo.png";
 
 const NavMobile = styled.nav`
   position: fixed;
@@ -52,6 +53,19 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const LogoWrapperMobile = styled.img`
+  position: fixed;
+  top: 10px;
+  left: 20px;
+  width: 75px;
+  height: 75px;
+`;
+
+const LogoWrapperDesktop = styled.img`
+  width: 75px;
+  height: 75px;
+`;
+
 export const Navbar = ({ auth }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [open, setOpen] = useState(false);
@@ -72,15 +86,16 @@ export const Navbar = ({ auth }) => {
     <Fragment>
       {windowWidth < 992 && (
         <Fragment>
+          <LogoWrapperMobile src={logoPath} />
           <BurgerBtn open={open} setOpen={setOpen} />
           <NavMobile open={open}>
             <>
-                <StyledLink href="#">Pomoc</StyledLink>
-                <StyledLink href="#">Ranking</StyledLink>
-                <StyledLink href="/landing-page">Twoje konto</StyledLink>
-                <StyledLink type="button" className="btn" href="/landing-page">
-                  Dodaj ogłoszenie
-                </StyledLink>
+              <StyledLink href="#">Pomoc</StyledLink>
+              <StyledLink href="#">Ranking</StyledLink>
+              <StyledLink href="/landing-page">Twoje konto</StyledLink>
+              <StyledLink type="button" className="btn" href="/landing-page">
+                Dodaj ogłoszenie
+              </StyledLink>
             </>
           </NavMobile>
         </Fragment>
@@ -88,7 +103,7 @@ export const Navbar = ({ auth }) => {
       {windowWidth > 992 && (
         <Fragment>
           <NavDesktop>
-            <h1>LOGO</h1>
+            <LogoWrapperDesktop src={logoPath} />
             <div>
               <StyledLink href="#">Pomoc</StyledLink>
               <StyledLink href="#">Ranking</StyledLink>
