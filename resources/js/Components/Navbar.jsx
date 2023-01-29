@@ -1,13 +1,14 @@
 import { Fragment } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@inertiajs/react";
 import styled from "styled-components";
 import BurgerBtn from "./BurgerBtn";
 
-const Nav = styled.nav`
+const NavMobile = styled.nav`
   position: fixed;
   top: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -18,35 +19,76 @@ const Nav = styled.nav`
   z-index: 100;
 `;
 
+const NavDesktop = styled.nav`
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  width: 100%;
+  padding: 0 4rem;
+  background-color: ${({ theme }) => theme.colors.mainColor};
+  z-index: 100;
+`;
+
 const StyledLink = styled(Link)`
   position: relative;
-  display: block;
-  margin: 0.5em 0;
-  padding: 0.5em 2em;
-  font-size: 2.8rem;
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0.5em;
+  font-size: 2.3rem;
   color: ${({ theme }) => theme.colors.white};
-  text-align: center;
+  text-transform: uppercase;
   text-decoration: none;
+  transition: color 0.3s;
 
   :hover {
     color: #e2e0e0;
   }
+
+  @media (min-width: 992px) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const Navbar = ({ auth }) => {
-  const [open, setOpen] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   return (
     <Fragment>
-      <BurgerBtn open={open} setOpen={setOpen} />
-      <Nav open={open}>
-        {auth.user ? (
-          <Link href={route("dashboard")} className="">
-            Dashboard
-          </Link>
-        ) : (
-          <>
-            {/* <h1>LOGO</h1> */}
+      {windowWidth < 992 && (
+        <Fragment>
+          <BurgerBtn open={open} setOpen={setOpen} />
+          <NavMobile open={open}>
+            <>
+                <StyledLink href="#">Pomoc</StyledLink>
+                <StyledLink href="#">Ranking</StyledLink>
+                <StyledLink href="/landing-page">Twoje konto</StyledLink>
+                <StyledLink type="button" className="btn" href="/landing-page">
+                  Dodaj ogłoszenie
+                </StyledLink>
+            </>
+          </NavMobile>
+        </Fragment>
+      )}
+      {windowWidth > 992 && (
+        <Fragment>
+          <NavDesktop>
+            <h1>LOGO</h1>
             <div>
               <StyledLink href="#">Pomoc</StyledLink>
               <StyledLink href="#">Ranking</StyledLink>
@@ -55,9 +97,9 @@ export const Navbar = ({ auth }) => {
                 Dodaj ogłoszenie
               </StyledLink>
             </div>
-          </>
-        )}
-      </Nav>
+          </NavDesktop>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
