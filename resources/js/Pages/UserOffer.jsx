@@ -45,11 +45,11 @@ export default function AddOffer(props) {
       <Head title="User Offer" />
       <Wrapper>
         <h1>Twoje oferty: </h1>
-        {offers.map((offer, i) => (
+        {props.createdOffers.map((offer, i) => (
           <Offer
-            title={offer.title}
+            title={offer.category}
             description={offer.description}
-            hourlyRate={offer.hourlyRate}
+            hourlyRate={offer.hourly_rate}
             category={offer.category}
             city={offer.city}
             isOwner={true}
