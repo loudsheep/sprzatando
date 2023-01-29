@@ -1,6 +1,7 @@
 import { Head } from "@inertiajs/react";
 import { Navbar } from "@/Components/Navbar";
 import FilterSection from "@/Components/FilterSection";
+import styled from "styled-components";
 import { Offer } from "@/Components/Offer";
 
 const OfferWrapper = styled.div`
