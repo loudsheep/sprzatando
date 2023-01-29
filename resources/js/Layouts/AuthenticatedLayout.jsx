@@ -31,6 +31,7 @@ const UserInfoBox = styled.div`
 const ChildrenWrapper = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
 `;
 

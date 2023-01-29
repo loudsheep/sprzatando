@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
+  max-width: 80rem;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   margin: 2rem;
@@ -43,10 +44,6 @@ const Button = styled.button`
   text-align: center;
 `;
 
-const Img = styled.img`
-    
-`
-
 export const Offer = ({
   title,
   description,
@@ -58,11 +55,11 @@ export const Offer = ({
   return (
     <Wrapper>
       <img
-        style={{ width: "200px", marginRight: '18px'}}
+        style={{ width: "200px", marginRight: "18px" }}
         src="https://i.wpimg.pl/360x262/wpcdn.pl/extradom/designs/72507/595148/b7e0091e80475f0b8c39a5f41167e473959cf28927e9dddf40d0876a8e7a250e.jpg"
         alt="house photo"
       />
-      <div>
+      <div style={{ width: "100%" }}>
         <h2>{title}</h2>
         <p>{description}</p>
         <p>Kategorie: {category}</p>

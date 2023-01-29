@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 13px;
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   font-size: 16px;
   color: ${({ theme }) => theme.colors.darkGrey};
   font-weight: bold;
@@ -44,6 +44,7 @@ export const FormField = forwardRef(
       handleChange,
       errorMessage,
       autoComplete,
+      isTextArea = false
     },
     ref
   ) => {

@@ -108,7 +108,7 @@ export const Navbar = ({ auth }) => {
               <StyledLink href="#">Pomoc</StyledLink>
               <StyledLink href="#">Ranking</StyledLink>
               <StyledLink href="/landing-page">Twoje konto</StyledLink>
-              <StyledLink type="button" className="btn" href="/landing-page">
+              <StyledLink type="button" className="btn" href={route('add.offer')}>
                 Dodaj ogłoszenie
               </StyledLink>
             </div>
