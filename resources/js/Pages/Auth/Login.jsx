@@ -4,7 +4,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import { ButtonsWrapper } from "./Register";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { FormField } from "@/Components/Atoms/FormField";
+import { FormField } from "@/Components/FormField";
 
 export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import GuestLayout from "@/Layouts/GuestLayout";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
-import { FormField } from "@/Components/Atoms/FormField";
+import { FormField } from "@/Components/FormField";
 import { Head, Link, useForm } from "@inertiajs/react";
 import styled from "styled-components";
 

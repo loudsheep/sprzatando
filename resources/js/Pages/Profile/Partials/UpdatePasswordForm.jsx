@@ -3,7 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/Atoms/PrimaryButton';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
-import { FormField } from '@/Components/Atoms/FormField';
+import { FormField } from '@/Components/FormField';
 
 export default function UpdatePasswordForm({ className }) {
     const passwordInput = useRef();
