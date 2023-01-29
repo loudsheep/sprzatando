@@ -3,9 +3,11 @@ import Button from "./Atoms/Button";
 import FiltersWrapper from "./FiltersWrapper";
 
 const Header = styled.header`
+  width: 100%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
-  margin-top: 80px;
+  margin: 80px auto 0 auto;
   padding: 0 100px;
 `;
 

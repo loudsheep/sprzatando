@@ -38,7 +38,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.name}
                         handleChange={(e) => setData('name', e.target.value)}
                         required
-                        isFocused
                         autoComplete="name"
                     />
 
