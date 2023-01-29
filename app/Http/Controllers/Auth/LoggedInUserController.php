@@ -14,6 +14,7 @@ class LoggedInUserController extends Controller
 {
     public function show(Request $request) {
         // dd($request->query('location', 'nothing'));
+        // dd($request->user()->contractedOffers->first());
 
         $cities = Offer::select('city')->distinct()->get()->toArray();
         $cities = array_map(function ($city) {

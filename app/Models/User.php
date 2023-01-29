@@ -42,7 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function offers() {
-        return $this->hasMany(Offer::class);
+    public function createdOffers() {
+        return $this->hasMany(Offer::class, 'creator_id', 'id');
+    }
+
+    public function contractedOffers() {
+        return $this->hasMany(Offer::class, 'contractor_id', 'id');
     }
 }
