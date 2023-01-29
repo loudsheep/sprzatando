@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Offers\AddOfferController;
+use App\Http\Controllers\Offers\CreatedOffersController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -45,13 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
 
-    Route::get('add-offer', function () {
-        return Inertia::render('AddOffer');
-    })->middleware(['auth', 'verified'])->name('add.offer');
+    Route::get('add-offer', [AddOfferController::class, 'show'])
+        ->middleware(['auth', 'verified'])
+        ->name('add.offer');
 
-    Route::get('user-offer', function () {
-        return Inertia::render('UserOffer');
-    })->middleware(['auth', 'verified'])->name('user.offer');
+    Route::get('user-offer', [CreatedOffersController::class, 'show'])
+        ->middleware('auth')
+        ->name('user.offer');
 
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
         ->middleware(['signed', 'throttle:6,1'])
