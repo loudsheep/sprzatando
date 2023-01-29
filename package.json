@@ -27,6 +27,8 @@
         "@mui/material": "^5.11.6",
         "@mui/styled-engine-sc": "^5.11.0",
         "@mui/x-date-pickers": "^5.0.16",
+        "@reduxjs/toolkit": "^1.9.2",
+        "react-redux": "^8.0.5",
         "styled-components": "^5.3.6"
     }
 }

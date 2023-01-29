@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { Fragment } from "react";
 import FilterSelect from "./FilterSelect";
 import FilterSlider from "./FilterSlider";
+import { useSelector } from "react-redux";
 
 
 const DUMMY_FILTERS_TYPES = [
@@ -23,11 +25,12 @@ const DUMMY_FILTERS_TYPES = [
   },
 ];
 
-const Filters = () => {
+const Filters = (props) => {
+  const prices = useSelector((state) => state.filterItems.prices);
   return (
     <Fragment>
-      {DUMMY_FILTERS_TYPES.map((filter,i) => (
-        <FilterSelect data={filter} key={i}/>
+      {DUMMY_FILTERS_TYPES.map((filter, i) => (
+        <FilterSelect data={filter} key={i} />
       ))}
       <FilterSlider />
     </Fragment>

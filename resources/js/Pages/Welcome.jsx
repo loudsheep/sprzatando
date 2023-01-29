@@ -1,7 +1,11 @@
+import { useEffect } from "react";
+import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 import { Navbar } from "@/Components/Navbar";
 import FilterSection from "@/Components/FilterSection";
 import { Offer } from "@/Components/Offer";
+import { useDispatch } from "react-redux";
+import { filterItemsActions } from "@/store/filter-items";
 
 const OfferWrapper = styled.div`
   width: 100%;
@@ -12,13 +16,21 @@ const OfferWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function Welcome({ auth, cities, offers }) {
+export default function Welcome({ auth, offers }) {
+  const dispatch = useDispatch();
+  const categories = offers.map((offer) => offer.category);
+  const cities = offers.map((offer) => offer.city);
+  const prices = offers.map((offer) => offer.hourly_rate);
+
+  useEffect(() => {
+    dispatch(filterItemsActions.addFilterItems({ categories, cities, prices }));
+  }, [categories, cities, prices]);
   return (
     <>
       <Head title="Welcome" />
       <header>
         <Navbar auth={auth} />
-        <FilterSection />
+        <FilterSection offers={offers} />
       </header>
       <section>
         <OfferWrapper>
