@@ -21,6 +21,6 @@ class AdminUserController extends Controller
         // abort(501);
         // return Inertia::render('Admin/Admin');
 
-        return 'Created new user with 3 new offers!';
+        return 'Created 1 new user with 3 new offers!';
     }
 }

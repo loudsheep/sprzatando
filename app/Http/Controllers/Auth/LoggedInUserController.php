@@ -12,9 +12,11 @@ use Symfony\Component\Console\Input\Input;
 
 class LoggedInUserController extends Controller
 {
-    public function show(Request $request) {
+    public function show(Request $request)
+    {
         // dd($request->query('location', 'nothing'));
         // dd($request->user()->contractedOffers->first());
+        // dd($request->user()->intrestedInOffers->first()->creator);
 
         $cities = Offer::select('city')->distinct()->get()->toArray();
         $cities = array_map(function ($city) {
