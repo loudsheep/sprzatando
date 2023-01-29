@@ -10,8 +10,9 @@ const NavWrapper = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-    color: ${({ theme }) => theme.colors.darkGrey};
-    font-size: 1.5rem;
+  color: ${({ theme }) => theme.colors.darkGrey};
+  font-size: 1.5rem;
+  margin-top: 2rem;
 `;
 export const UserNavMenu = () => {
   const menuOptions = [
@@ -29,14 +30,16 @@ export const UserNavMenu = () => {
     },
     {
       name: "Twoje Konto",
-      path: "/dashboard",
+      path: route("profile.edit"),
     },
   ];
 
   return (
     <NavWrapper>
       {menuOptions.map(({ name, path }) => (
-        <StyledLink href={path} as='' key={name}>{name}</StyledLink>
+        <StyledLink href={path} as="" key={name}>
+          {name}
+        </StyledLink>
       ))}
     </NavWrapper>
   );

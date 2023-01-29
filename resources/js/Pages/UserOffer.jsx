@@ -1,6 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Offer } from "../Components/Offer";
 import styled from "styled-components";
+import { Head } from "@inertiajs/react";
 // import { FormField } from "@/Components/Atoms/FormField";
 // import styled from "styled-components";
 
@@ -41,6 +42,7 @@ export default function AddOffer(props) {
   ];
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
+      <Head title="User Offer" />
       <Wrapper>
         <h1>Twoje oferty: </h1>
         {offers.map((offer, i) => (
