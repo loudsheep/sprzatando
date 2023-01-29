@@ -50,6 +50,7 @@ export default function AddOffer(props) {
             hourlyRate={offer.hourlyRate}
             category={offer.category}
             city={offer.city}
+            isOwner={true}
             key={i}
           />
         ))}

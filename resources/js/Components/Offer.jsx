@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  display: flex;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   margin: 2rem;
@@ -32,7 +33,7 @@ const Wrapper = styled.div`
   }
 `;
 const Button = styled.button`
-  background-color: ${({ theme }) => theme.colors.secondaryColor };
+  background-color: ${({ theme }) => theme.colors.secondaryColor};
   color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
   padding: 6px 10px;
@@ -42,18 +43,36 @@ const Button = styled.button`
   text-align: center;
 `;
 
-export const Offer = ({ title, description, hourlyRate, category, city }) => {
+const Img = styled.img`
+    
+`
+
+export const Offer = ({
+  title,
+  description,
+  hourlyRate,
+  category,
+  city,
+  isOwner = false,
+}) => {
   return (
     <Wrapper>
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <p>Kategorie: {category}</p>
-      <p>{city}</p>
-      <div className="container">
-        <div className="span">
-          <span>{hourlyRate}zł / h</span>
+      <img
+        style={{ width: "200px", marginRight: '18px'}}
+        src="https://i.wpimg.pl/360x262/wpcdn.pl/extradom/designs/72507/595148/b7e0091e80475f0b8c39a5f41167e473959cf28927e9dddf40d0876a8e7a250e.jpg"
+        alt="house photo"
+      />
+      <div>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <p>Kategorie: {category}</p>
+        <p>{city}</p>
+        <div className="container">
+          <div className="span">
+            <span>{hourlyRate}zł / h</span>
+          </div>
+          {isOwner ? <Button>Edytuj</Button> : <Button>Aplikuj</Button>}
         </div>
-        <Button>Chętni</Button>
       </div>
     </Wrapper>
   );
