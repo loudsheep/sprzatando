@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Navbar } from "@/Components/Navbar";
 import FilterSection from "@/Components/FilterSection";
 
-export default function Welcome({ auth, cities }) {
+export default function Welcome({ auth, cities, offers }) {
   return (
     <>
       <Head title="Welcome" />
@@ -11,6 +11,10 @@ export default function Welcome({ auth, cities }) {
         <Navbar auth={auth} />
         <FilterSection />
       </header>
+
+      {offers.map((offer) => (
+        <div>City - {offer.city}</div>
+      ))}
     </>
   );
 }

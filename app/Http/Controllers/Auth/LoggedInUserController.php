@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\DB;
 
 class LoggedInUserController extends Controller
 {
@@ -17,14 +18,17 @@ class LoggedInUserController extends Controller
         // dd($request->query('location', 'nothing'));
         // dd($request->user()->contractedOffers->first());
         // dd($request->user()->intrestedInOffers->first()->creator);
-
+        
         $cities = Offer::select('city')->distinct()->get()->toArray();
         $cities = array_map(function ($city) {
             return $city['city'];
         }, $cities);
+        
+        $offers = DB::table('offers')->orderBy('created_at', 'desc')->limit(5)->get()->toArray();
 
         return Inertia::render('Welcome', [
-            'cities' => $cities
+            'cities' => $cities,
+            'offers' => $offers,
         ]);
     }
 }
