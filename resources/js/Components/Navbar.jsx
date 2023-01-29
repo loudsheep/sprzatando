@@ -31,9 +31,17 @@ export const Navbar = ({ auth }) => {
     <Nav>
       <Wrapper>
         {auth.user ? (
-          <Link href={route("dashboard")} className="">
-            Dashboard
-          </Link>
+          <>
+            <h1>LOGO</h1>
+            <div>
+              <StyledLink href="#">Pomoc</StyledLink>
+              <StyledLink href="#">Ranking</StyledLink>
+              <StyledLink href="/landing-page">Twoje konto</StyledLink>
+              <StyledLink type="button" className="btn" href="/add-offer">
+                Dodaj ogłoszenie
+              </StyledLink>
+            </div>
+          </>
         ) : (
           <>
             <h1>LOGO</h1>

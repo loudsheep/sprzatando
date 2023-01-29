@@ -45,6 +45,10 @@ Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
 
+    Route::get('add-offer', function () {
+        return Inertia::render('AddOffer');
+    })->name('add.offer');
+
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
@@ -67,5 +71,5 @@ Route::middleware('auth')->group(function () {
         ->name('admin')
         // TODO uncomment this once admin page ready
         // ->middleware('can:manage_users')
-        ;
+    ;
 });

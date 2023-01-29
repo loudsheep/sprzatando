@@ -1,6 +1,6 @@
 import GuestLayout from "@/Layouts/GuestLayout";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
-import { FormField } from "@/Components/Atoms/FormField";
+import { FormField } from "@/Components/FormField";
 import { Head, useForm } from "@inertiajs/react";
 import styled from "styled-components";
 
@@ -37,9 +37,9 @@ export default function ForgotPassword({ status }) {
 
       <FormWrapper onSubmit={submit}>
         <Message>
-          Forgot your password? <br /> No problem. Just let us know your email
-          address and we will email you a password reset link that will allow
-          you to choose a new one.
+          Zapomniałeś hasła? <br />
+          Nie ma problemu. Powiedz nam tylko swój adres e-mail, a wyślemy Ci
+          link do resetowania hasła, dzięki któremu będziesz mógł wybrać nowe.
         </Message>
 
         <FormField
