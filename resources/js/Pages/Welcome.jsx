@@ -9,6 +9,7 @@ export default function Welcome({ auth, cities }) {
       <Head title="Welcome" />
       <Navbar auth={auth} />
       <FilterSection />
+      
     </>
   );
 }

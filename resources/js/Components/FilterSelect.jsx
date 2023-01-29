@@ -11,12 +11,15 @@ const StyledFilterSelect = styled.select`
 `;
 
 const FilterSelect = (props) => {
-
   return (
     <StyledFilterSelect name={props.data.name} id={props.data.id}>
-      <option value={props.data.title} selected disabled>{props.data.title}</option>
-      {props.data.type.map((type) => (
-        <option value={type}>{type}</option>
+      <option value={props.data.title} selected disabled>
+        {props.data.title}
+      </option>
+      {props.data.type.map((type, i) => (
+        <option key={i} value={type}>
+          {type}
+        </option>
       ))}
     </StyledFilterSelect>
   );

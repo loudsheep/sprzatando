@@ -2,6 +2,8 @@ import styled from "styled-components";
 import logoPath from "../assets/img/logo.png";
 import { UserNavMenu } from "../Components/UserNavMenu";
 import { Link } from "@inertiajs/react";
+import Dropdown from "@/Components/Dropdown";
+import { Svg } from "../Components/Atoms/SvgDropdown";
 
 const Wrapper = styled.div`
   display: grid;
@@ -16,7 +18,6 @@ const LogoWrapper = styled.div`
   justify-content: center;
   border-right: 1px solid ${({ theme }) => theme.colors.grey};
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
-
 `;
 
 const UserInfoBox = styled.div`
@@ -25,25 +26,50 @@ const UserInfoBox = styled.div`
   justify-content: flex-end;
   padding: 0 35px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
-  
+`;
+
+const ChildrenWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default function Authenticated({ auth, children }) {
   return (
     <Wrapper>
       <LogoWrapper>
-        <Link href="/">
+        <Link href='/'>
           <img src={logoPath} alt="logo" style={{ width: "70px" }} />
         </Link>
       </LogoWrapper>
 
       <UserInfoBox>
-        <p>Hello {auth.user.name}</p>
+        <Dropdown>
+          <Dropdown.Trigger>
+            <span className="inline-flex rounded-md">
+              <button
+                type="button"
+                className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+              >
+                {auth.user.name}
+
+                <Svg />
+              </button>
+            </span>
+          </Dropdown.Trigger>
+
+          <Dropdown.Content>
+            <Dropdown.Link href={route("profile.edit")}>Profile</Dropdown.Link>
+            <Dropdown.Link href={route("logout")} method="post" as="button">
+              Log Out
+            </Dropdown.Link>
+          </Dropdown.Content>
+        </Dropdown>
       </UserInfoBox>
 
       <UserNavMenu />
 
-      {children}
+      <ChildrenWrapper>{children}</ChildrenWrapper>
     </Wrapper>
   );
 }

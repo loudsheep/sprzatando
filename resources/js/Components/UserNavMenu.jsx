@@ -21,7 +21,7 @@ export const UserNavMenu = () => {
     },
     {
       name: "Twoje oferty",
-      path: "/",
+      path: "/user-offer",
     },
     {
       name: "Przyjęte zlecenia",
