@@ -1,11 +1,10 @@
 import { useRef, useState } from 'react';
 import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import Modal from '@/Components/Modal';
 import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
+import { FormField } from '@/Components/Atoms/FormField';
 
 export default function DeleteUserForm({ className }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
@@ -70,7 +69,7 @@ export default function DeleteUserForm({ className }) {
                     <div className="mt-6">
                         <InputLabel for="password" value="Password" className="sr-only" />
 
-                        <TextInput
+                        <FormField
                             id="password"
                             type="password"
                             name="password"
@@ -81,8 +80,6 @@ export default function DeleteUserForm({ className }) {
                             isFocused
                             placeholder="Password"
                         />
-
-                        <InputError message={errors.password} className="mt-2" />
                     </div>
 
                     <div className="mt-6 flex justify-end">

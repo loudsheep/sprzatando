@@ -1,9 +1,8 @@
-import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import PrimaryButton from '@/Components/Atoms/PrimaryButton';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import { FormField } from '@/Components/Atoms/FormField';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
     const user = usePage().props.auth.user;
@@ -33,7 +32,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 <div>
                     <InputLabel for="name" value="Name" />
 
-                    <TextInput
+                    <FormField
                         id="name"
                         className="mt-1 block w-full"
                         value={data.name}
@@ -43,13 +42,12 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         autoComplete="name"
                     />
 
-                    <InputError className="mt-2" message={errors.name} />
                 </div>
 
                 <div>
                     <InputLabel for="email" value="Email" />
 
-                    <TextInput
+                    <FormField
                         id="email"
                         type="email"
                         className="mt-1 block w-full"
@@ -59,7 +57,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         autoComplete="email"
                     />
 
-                    <InputError className="mt-2" message={errors.email} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (

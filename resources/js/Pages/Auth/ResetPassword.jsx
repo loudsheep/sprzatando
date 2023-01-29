@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import PrimaryButton from '@/Components/Atoms/PrimaryButton';
 import { Head, useForm } from '@inertiajs/react';
+import { FormField } from '@/Components/Atoms/FormField';
 
 export default function ResetPassword({ token, email }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -38,7 +37,7 @@ export default function ResetPassword({ token, email }) {
                 <div>
                     <InputLabel forInput="email" value="Email" />
 
-                    <TextInput
+                    <FormField
                         id="email"
                         type="email"
                         name="email"
@@ -48,13 +47,12 @@ export default function ResetPassword({ token, email }) {
                         handleChange={onHandleChange}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
                     <InputLabel forInput="password" value="Password" />
 
-                    <TextInput
+                    <FormField
                         id="password"
                         type="password"
                         name="password"
@@ -65,13 +63,12 @@ export default function ResetPassword({ token, email }) {
                         handleChange={onHandleChange}
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
                     <InputLabel forInput="password_confirmation" value="Confirm Password" />
 
-                    <TextInput
+                    <FormField
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
@@ -80,7 +77,6 @@ export default function ResetPassword({ token, email }) {
                         handleChange={onHandleChange}
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
