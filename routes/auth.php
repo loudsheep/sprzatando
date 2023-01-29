@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('add-offer', function () {
         return Inertia::render('AddOffer');
-    })->name('add.offer');
+    })->middleware(['auth', 'verified'])->name('add.offer');
 
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
         ->middleware(['signed', 'throttle:6,1'])
