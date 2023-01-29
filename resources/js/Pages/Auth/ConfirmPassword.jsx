@@ -3,7 +3,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { Head, useForm } from "@inertiajs/react";
-import { FormField } from "@/Components/Atoms/FormField";
+import { FormField } from "@/Components/FormField";
 
 export default function ConfirmPassword() {
   const { data, setData, post, processing, errors, reset } = useForm({

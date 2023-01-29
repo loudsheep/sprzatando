@@ -5,7 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 export default function AddOffer(props) {
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
-      <h1>Hello!</h1>
+      <h1>Hello world!</h1>
     </AuthenticatedLayout>
   );
 }

@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import DangerButton from "@/Components/DangerButton";
+import DangerButton from "@/Components/Atoms/DangerButton";
 import InputLabel from "@/Components/InputLabel";
 import Modal from "@/Components/Modal";
 import SecondaryButton from "@/Components/SecondaryButton";
 import { useForm } from "@inertiajs/react";
-import { FormField } from "@/Components/Atoms/FormField";
+import { FormField } from "@/Components/FormField";
 
 export default function DeleteUserForm({ className }) {
   const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);

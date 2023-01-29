@@ -2,7 +2,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/Atoms/PrimaryButton';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
-import { FormField } from '@/Components/Atoms/FormField';
+import { FormField } from '@/Components/FormField';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
     const user = usePage().props.auth.user;
