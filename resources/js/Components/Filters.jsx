@@ -26,8 +26,8 @@ const DUMMY_FILTERS_TYPES = [
 const Filters = () => {
   return (
     <Fragment>
-      {DUMMY_FILTERS_TYPES.map((filter) => (
-        <FilterSelect data={filter} />
+      {DUMMY_FILTERS_TYPES.map((filter,i) => (
+        <FilterSelect data={filter} key={i}/>
       ))}
       <FilterSlider />
     </Fragment>
