@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             // creator id
-            $table->foreignId('user_id');
+            $table->foreignId('creator_id');
             $table->string('city');
             $table->string('zip_code', 10);
             $table->integer('hourly_rate');
@@ -29,7 +29,8 @@ return new class extends Migration
             $table->boolean('is_reported')->default(false);
             $table->unsignedBigInteger('contractor_id')->nullable();
 
-            $table->index('user_id');
+            $table->index('creator_id');
+            $table->index('contractor_id');
 
             $table->timestamps();
         });

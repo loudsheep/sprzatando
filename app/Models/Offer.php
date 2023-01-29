@@ -9,7 +9,19 @@ class Offer extends Model
 {
     use HasFactory;
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id', 'id');
+    }
+
+    public function contractor()
+    {
+        return $this->belongsTo(User::class, 'contractor_id', 'id');
+    }
+
+    public function usersIntrested()
+    {
+        return $this->belongsToMany(User::class, 'intrested_in_offer', 'offer_id', 'intrested_user_id')
+            ->withTimestamps();
     }
 }

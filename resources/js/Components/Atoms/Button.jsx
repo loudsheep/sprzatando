@@ -1,14 +1,20 @@
 import styled from "styled-components";
 
-const Button = (props) => {
-  const Button = styled.button`
-    padding: 1rem 2rem;
-    background-color: #429142;
-    color: #fff;
-    border-radius: 8px;
-  `;
+const StyledButton = styled.button`
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  background-color: ${({theme}) => theme.colors.secondaryColor};
+  color: #fff;
+  border-radius: 8px;
+  transition: opacity .3s;
 
-  return <Button>{props.text}</Button>;
+  :hover{
+    opacity: .9;
+  }
+`;
+const Button = (props) => {
+
+  return <StyledButton>{props.text}</StyledButton>;
 };
 
 export default Button;

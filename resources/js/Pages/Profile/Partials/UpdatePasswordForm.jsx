@@ -1,10 +1,9 @@
 import { useRef } from 'react';
-import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import PrimaryButton from '@/Components/Atoms/PrimaryButton';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import { FormField } from '@/Components/Atoms/FormField';
 
 export default function UpdatePasswordForm({ className }) {
     const passwordInput = useRef();
@@ -50,7 +49,7 @@ export default function UpdatePasswordForm({ className }) {
                 <div>
                     <InputLabel for="current_password" value="Current Password" />
 
-                    <TextInput
+                    <FormField
                         id="current_password"
                         ref={currentPasswordInput}
                         value={data.current_password}
@@ -60,13 +59,12 @@ export default function UpdatePasswordForm({ className }) {
                         autoComplete="current-password"
                     />
 
-                    <InputError message={errors.current_password} className="mt-2" />
                 </div>
 
                 <div>
                     <InputLabel for="password" value="New Password" />
 
-                    <TextInput
+                    <FormField
                         id="password"
                         ref={passwordInput}
                         value={data.password}
@@ -76,13 +74,12 @@ export default function UpdatePasswordForm({ className }) {
                         autoComplete="new-password"
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
                 </div>
 
                 <div>
                     <InputLabel for="password_confirmation" value="Confirm Password" />
 
-                    <TextInput
+                    <FormField
                         id="password_confirmation"
                         value={data.password_confirmation}
                         handleChange={(e) => setData('password_confirmation', e.target.value)}
@@ -91,7 +88,6 @@ export default function UpdatePasswordForm({ className }) {
                         autoComplete="new-password"
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
                 <div className="flex items-center gap-4">

@@ -14,13 +14,13 @@ class AdminUserController extends Controller
     //
     public function show() {
 
-        // $users = User::factory()
-        // ->has(Offer::factory()->count(5))
-        // ->create();
+        $users = User::factory()
+        ->has(Offer::factory()->count(3), 'createdOffers')
+        ->create();
 
         // abort(501);
         // return Inertia::render('Admin/Admin');
 
-        return '501 Not implemented';
+        return 'Created 1 new user with 3 new offers!';
     }
 }

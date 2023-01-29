@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoggedInUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +17,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [LoggedInUserController::class, 'show']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
