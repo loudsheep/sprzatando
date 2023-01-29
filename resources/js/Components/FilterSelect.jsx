@@ -8,6 +8,10 @@ const StyledFilterSelect = styled.select`
   border: none;
   outline: none;
   border-radius: 8px;
+
+  @media (max-width: 576px) {
+    word-break: break-all;
+  }
 `;
 
 const FilterSelect = (props) => {
@@ -16,10 +20,8 @@ const FilterSelect = (props) => {
       <option value={props.data.title} selected disabled>
         {props.data.title}
       </option>
-      {props.data.type.map((type, i) => (
-        <option key={i} value={type}>
-          {type}
-        </option>
+      {props.data.type.map((type) => (
+        <option value={type}>{type}</option>
       ))}
     </StyledFilterSelect>
   );

@@ -7,9 +7,10 @@ export default function Welcome({ auth, cities }) {
   return (
     <>
       <Head title="Welcome" />
-      <Navbar auth={auth} />
-      <FilterSection />
-      
+      <header>
+        <Navbar auth={auth} />
+        <FilterSection />
+      </header>
     </>
   );
 }

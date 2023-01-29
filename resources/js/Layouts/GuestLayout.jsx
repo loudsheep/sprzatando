@@ -43,7 +43,7 @@ const LadyWrapper = styled.div`
 const LogoWrapper = styled(Link)`
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 20px;
   width: 80px;
   /* transform: scale(.2); */
 `

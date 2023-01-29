@@ -6,6 +6,10 @@ const FilterWrapper = styled.div`
   padding: 2rem;
   background-color: ${({ theme }) => theme.colors.mainColor};
   border-radius: 8px;
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 const FilterHeader = styled.h3`

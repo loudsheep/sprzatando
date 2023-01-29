@@ -9,6 +9,22 @@ class Offer extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'city',
+        'zip_code',
+        'hourly_rate',
+        'category',
+        'description',
+        'ends',
+        'image',
+    ];
+
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');

@@ -1,7 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Offer } from "../Components/Offer";
+import styled from "styled-components";
 // import { FormField } from "@/Components/Atoms/FormField";
 // import styled from "styled-components";
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default function AddOffer(props) {
   const offers = [
@@ -35,16 +41,19 @@ export default function AddOffer(props) {
   ];
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
-      <h1>User Offer: </h1>
-      {offers.map((offer) => (
-        <Offer
-          title={offer.title}
-          description={offer.description}
-          hourlyRate={offer.hourlyRate}
-          category={offer.category}
-          city={offer.city}
-        />
-      ))}
+      <Wrapper>
+        <h1>Twoje oferty: </h1>
+        {offers.map((offer, i) => (
+          <Offer
+            title={offer.title}
+            description={offer.description}
+            hourlyRate={offer.hourlyRate}
+            category={offer.category}
+            city={offer.city}
+            key={i}
+          />
+        ))}
+      </Wrapper>
     </AuthenticatedLayout>
   );
 }

@@ -21,11 +21,11 @@ export const UserNavMenu = () => {
     },
     {
       name: "Twoje oferty",
-      path: "/user-offer",
+      path: "user-offer",
     },
     {
       name: "Przyjęte zlecenia",
-      path: "/",
+      path: "#",
     },
     {
       name: "Twoje Konto",
@@ -36,9 +36,8 @@ export const UserNavMenu = () => {
   return (
     <NavWrapper>
       {menuOptions.map(({ name, path }) => (
-        <StyledLink href={path}>{name}</StyledLink>
+        <StyledLink href={path} as='' key={name}>{name}</StyledLink>
       ))}
-      <StyledLink href='/logout' method="post">Wyloguj się</StyledLink>
     </NavWrapper>
   );
 };
