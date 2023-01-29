@@ -15,7 +15,7 @@ class AdminUserController extends Controller
     public function show() {
 
         $users = User::factory()
-        ->has(Offer::factory()->count(3))
+        ->has(Offer::factory()->count(3), 'createdOffers')
         ->create();
 
         // abort(501);
