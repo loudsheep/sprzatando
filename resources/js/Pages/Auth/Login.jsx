@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Checkbox from "@/Components/Checkbox";
+import Checkbox from "@/Components/Atoms/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { ButtonsWrapper } from "./Register";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";

@@ -26,6 +26,7 @@
         "@inertiajs/inertia-react": "^0.8.1",
         "@mui/material": "^5.11.6",
         "@mui/styled-engine-sc": "^5.11.0",
+        "@mui/x-date-pickers": "^5.0.16",
         "styled-components": "^5.3.6"
     }
 }
