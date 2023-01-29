@@ -19,6 +19,7 @@ const FilterHeader = styled.h3`
 const FiltersForm = styled.form`
     display: flex;
     flex-direction: column;
+    align-items: center;
 `
 const FiltersWrapper = () => {
   return (
@@ -26,7 +27,7 @@ const FiltersWrapper = () => {
       <FilterHeader>Filtry</FilterHeader>
       <FiltersForm>
         <Filters></Filters>
-        <Button text={"Pokaż 324 oferty"}></Button>
+        <Button text={"Pokaż 324 oferty"} width={"100%"} type={'submit'}></Button>
       </FiltersForm>
     </FilterWrapper>
   );
