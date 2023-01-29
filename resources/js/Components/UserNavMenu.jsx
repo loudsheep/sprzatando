@@ -38,6 +38,7 @@ export const UserNavMenu = () => {
       {menuOptions.map(({ name, path }) => (
         <StyledLink href={path}>{name}</StyledLink>
       ))}
+      <StyledLink href='/logout' method="post">Wyloguj się</StyledLink>
     </NavWrapper>
   );
 };
