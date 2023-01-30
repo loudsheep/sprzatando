@@ -40,4 +40,8 @@ class Offer extends Model
         return $this->belongsToMany(User::class, 'intrested_in_offer', 'offer_id', 'intrested_user_id')
             ->withTimestamps();
     }
+
+    public function images() {
+        return $this->hasMany(OfferImages::class, 'offer_id', 'id');
+    }
 }
