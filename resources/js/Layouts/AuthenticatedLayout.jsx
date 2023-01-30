@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logoPath from "../assets/img/logo.png";
+import logoPath from "../assets/img/transparentLogo.png";
 import { UserNavMenu } from "../Components/UserNavMenu";
 import { Link } from "@inertiajs/react";
 import Dropdown from "@/Components/Dropdown";
@@ -31,10 +31,12 @@ const UserInfoBox = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding: 0 35px;
+  width: 100%;
   /* margin-bottom: 30px; */
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
   @media (max-width: 992px) {
     min-height: 6rem;
+    justify-content: space-between;
   }
 `;
 
@@ -92,6 +94,11 @@ export default function Authenticated({ auth, children }) {
       {width < 992 && (
         <MobileWrapper>
           <UserInfoBox>
+            <LogoWrapper>
+              <Link href="/">
+                <img src={logoPath} alt="logo" style={{ width: "70px" }} />
+              </Link>
+            </LogoWrapper>
             <Dropdown>
               <Dropdown.Trigger>
                 <span className="inline-flex rounded-md">
@@ -113,7 +120,9 @@ export default function Authenticated({ auth, children }) {
                 <Dropdown.Link href={route("add.offer")}>
                   Dodaj Ofertę
                 </Dropdown.Link>
-                <Dropdown.Link href="#">przyjęte oferty</Dropdown.Link>
+                <Dropdown.Link href={route("user.offer")}>
+                  Twoje oferty
+                </Dropdown.Link>
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Log Out
                 </Dropdown.Link>
