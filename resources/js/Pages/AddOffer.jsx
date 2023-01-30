@@ -94,7 +94,8 @@ export default function AddOffer(props) {
     "Kompleksowe pranie tapicerek",
     "Mycie samochodów",
     "Koszenie ogrodu",
-    "Zakupy do domu"
+    "Zakupy do domu",
+    "piekarnia",
   ];
 
   const submit = (e) => {
