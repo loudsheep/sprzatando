@@ -19,7 +19,6 @@ class LoggedInUserController extends Controller
         // dd($request->user()->contractedOffers->first());
         // dd($request->user()->intrestedInOffers->first()->creator);
         // dd(Offer::first()->images->all());
-        dd(Offer::first()->review);
 
         $cities = Offer::select('city')->distinct()->get()->toArray();
         $cities = array_map(function ($city) {
@@ -28,9 +27,13 @@ class LoggedInUserController extends Controller
 
         $offers = DB::table('offers')->orderBy('created_at', 'desc')->limit(5)->get()->toArray();
 
+        // $minPrice
+
         return Inertia::render('Welcome', [
             'cities' => $cities,
             'offers' => $offers,
+            'maxPrice' => Offer::max('price'),
+            'minPrice' => Offer::min('price'),
         ]);
     }
 }

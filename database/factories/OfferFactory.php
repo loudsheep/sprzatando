@@ -20,7 +20,8 @@ class OfferFactory extends Factory
         return [
             'city' => fake()->city(),
             'zip_code' => fake()->postcode(),
-            'hourly_rate' => fake()->numberBetween(20, 100),
+            'price' => fake()->numberBetween(50, 300),
+            'title' => fake()->words(3, true),
             'category' => fake()->words(2, true),
             'description' => fake()->text(200),
             'ends' => fake()->dateTimeBetween('+2 days', '+20 days'),
