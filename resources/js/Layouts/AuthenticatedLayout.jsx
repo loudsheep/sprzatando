@@ -31,9 +31,11 @@ const UserInfoBox = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding: 0 35px;
-  min-height: 6rem;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  @media (max-width: 992px) {
+    min-height: 6rem;
+  }
 `;
 
 const ChildrenWrapper = styled.div`

@@ -12,6 +12,7 @@ import { TextField } from "@material-ui/core";
 
 const StyledTitle = styled.h1`
   font-size: 2.4rem;
+  margin-top: 25px;
   color: ${({ theme }) => theme.colors.mainColor};
   font-weight: bold;
 `;
@@ -28,7 +29,7 @@ const FormWrapper = styled.div`
   max-width: 60rem;
   padding: 20px;
   max-height: 80%;
-  margin: 20px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
