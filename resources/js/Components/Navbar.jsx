@@ -1,9 +1,10 @@
 import { Fragment } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import styled from "styled-components";
 import BurgerBtn from "./BurgerBtn";
-import logoPath from "../assets/img/logo.png";
+import logoPath from "../assets/img/transparentLogo.png";
+import { useWidth } from "@/hooks/useWidth";
 
 const NavMobile = styled.nav`
   position: fixed;
@@ -67,20 +68,8 @@ const LogoWrapperDesktop = styled.img`
 `;
 
 export const Navbar = ({ auth }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const windowWidth = useWidth();
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    function handleWindowResize() {
-      setWindowWidth(window.innerWidth);
-    }
-
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, []);
 
   return (
     <Fragment>
@@ -92,8 +81,12 @@ export const Navbar = ({ auth }) => {
             <>
               <StyledLink href="#">Pomoc</StyledLink>
               <StyledLink href="#">Ranking</StyledLink>
-              <StyledLink href="/landing-page">Twoje konto</StyledLink>
-              <StyledLink type="button" className="btn" href="/landing-page">
+              <StyledLink href={route("profile.edit")}>Twoje konto</StyledLink>
+              <StyledLink
+                type="button"
+                className="btn"
+                href={route("add.offer")}
+              >
                 Dodaj ogłoszenie
               </StyledLink>
             </>
@@ -107,8 +100,12 @@ export const Navbar = ({ auth }) => {
             <div>
               <StyledLink href="#">Pomoc</StyledLink>
               <StyledLink href="#">Ranking</StyledLink>
-              <StyledLink href="/landing-page">Twoje konto</StyledLink>
-              <StyledLink type="button" className="btn" href={route('add.offer')}>
+              <StyledLink href={route("profile.edit")}>Twoje konto</StyledLink>
+              <StyledLink
+                type="button"
+                className="btn"
+                href={route("add.offer")}
+              >
                 Dodaj ogłoszenie
               </StyledLink>
             </div>

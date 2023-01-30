@@ -16,7 +16,7 @@ const StyledSubTitle = styled.h2`
   font-size: 1.9rem;
   color: ${({ theme }) => theme.colors.darkGrey};
   font-weight: bold;
-  margin-top: 2rem;
+  margin-top: 5rem;
 `;
 
 const FormWrapper = styled.div`
@@ -37,7 +37,7 @@ const FormWrapper = styled.div`
     display: flex;
     width: 100%;
     margin: 20px;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 `;
 
@@ -91,6 +91,10 @@ export default function AddOffer(props) {
     "Mycie okien",
     "Wywóz śmieci",
     "Wywóz gruzu",
+    "Kompleksowe pranie tapicerek",
+    "Mycie samochodów",
+    "Koszenie ogrodu",
+    "Zakupy do domu"
   ];
 
   const submit = (e) => {
@@ -151,6 +155,7 @@ export default function AddOffer(props) {
             }}
             renderInput={(params) => <TextField {...params} />}
           /> */}
+          <PrimaryButton type="submit" onClick={console.log(data)} >Anuluj</PrimaryButton>
           <PrimaryButton type="submit" onClick={console.log(data)}>Dodaj ofertę!</PrimaryButton>
         </div>
       </FormWrapper>

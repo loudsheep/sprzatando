@@ -44,7 +44,6 @@ export const FormField = forwardRef(
       handleChange,
       errorMessage,
       autoComplete,
-      isTextArea = false
     },
     ref
   ) => {
