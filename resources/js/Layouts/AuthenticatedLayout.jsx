@@ -4,12 +4,18 @@ import { UserNavMenu } from "../Components/UserNavMenu";
 import { Link } from "@inertiajs/react";
 import Dropdown from "@/Components/Dropdown";
 import { Svg } from "../Components/Atoms/SvgDropdown";
+import { useWidth } from "@/hooks/useWidth";
 
 const Wrapper = styled.div`
   display: grid;
   height: 100vh;
   grid-template-columns: 1fr 7fr;
   grid-template-rows: 1fr 8fr;
+`;
+
+const MobileWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const LogoWrapper = styled.div`
@@ -25,6 +31,8 @@ const UserInfoBox = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding: 0 35px;
+  min-height: 6rem;
+  margin-bottom: 30px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 `;
 
@@ -36,41 +44,83 @@ const ChildrenWrapper = styled.div`
 `;
 
 export default function Authenticated({ auth, children }) {
+  const width = useWidth();
+
   return (
-    <Wrapper>
-      <LogoWrapper>
-        <Link href='/'>
-          <img src={logoPath} alt="logo" style={{ width: "70px" }} />
-        </Link>
-      </LogoWrapper>
+    <>
+      {width > 992 && (
+        <Wrapper>
+          <LogoWrapper>
+            <Link href="/">
+              <img src={logoPath} alt="logo" style={{ width: "70px" }} />
+            </Link>
+          </LogoWrapper>
 
-      <UserInfoBox>
-        <Dropdown>
-          <Dropdown.Trigger>
-            <span className="inline-flex rounded-md">
-              <button
-                type="button"
-                className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-              >
-                {auth.user.name}
+          <UserInfoBox>
+            <Dropdown>
+              <Dropdown.Trigger>
+                <span className="inline-flex rounded-md">
+                  <button
+                    type="button"
+                    className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                  >
+                    {auth.user.name}
 
-                <Svg />
-              </button>
-            </span>
-          </Dropdown.Trigger>
+                    <Svg />
+                  </button>
+                </span>
+              </Dropdown.Trigger>
 
-          <Dropdown.Content>
-            <Dropdown.Link href={route("profile.edit")}>Profile</Dropdown.Link>
-            <Dropdown.Link href={route("logout")} method="post" as="button">
-              Log Out
-            </Dropdown.Link>
-          </Dropdown.Content>
-        </Dropdown>
-      </UserInfoBox>
+              <Dropdown.Content>
+                <Dropdown.Link href={route("profile.edit")}>
+                  Profile
+                </Dropdown.Link>
+                <Dropdown.Link href={route("logout")} method="post" as="button">
+                  Log Out
+                </Dropdown.Link>
+              </Dropdown.Content>
+            </Dropdown>
+          </UserInfoBox>
 
-      <UserNavMenu />
+          <UserNavMenu />
 
-      <ChildrenWrapper>{children}</ChildrenWrapper>
-    </Wrapper>
+          <ChildrenWrapper>{children}</ChildrenWrapper>
+        </Wrapper>
+      )}
+      {width < 992 && (
+        <MobileWrapper>
+          <UserInfoBox>
+            <Dropdown>
+              <Dropdown.Trigger>
+                <span className="inline-flex rounded-md">
+                  <button
+                    type="button"
+                    className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                  >
+                    {auth.user.name}
+
+                    <Svg />
+                  </button>
+                </span>
+              </Dropdown.Trigger>
+
+              <Dropdown.Content>
+                <Dropdown.Link href={route("profile.edit")}>
+                  Profil
+                </Dropdown.Link>
+                <Dropdown.Link href={route("add.offer")}>
+                  Dodaj Ofertę
+                </Dropdown.Link>
+                <Dropdown.Link href="#">przyjęte oferty</Dropdown.Link>
+                <Dropdown.Link href={route("logout")} method="post" as="button">
+                  Log Out
+                </Dropdown.Link>
+              </Dropdown.Content>
+            </Dropdown>
+          </UserInfoBox>
+          <ChildrenWrapper>{children}</ChildrenWrapper>
+        </MobileWrapper>
+      )}
+    </>
   );
 }

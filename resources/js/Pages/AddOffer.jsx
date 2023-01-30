@@ -26,16 +26,26 @@ const FormWrapper = styled.div`
   width: 100%;
   height: 100%;
   max-width: 60rem;
+  padding: 20px;
   max-height: 80%;
+  margin: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+
   .inputs-container {
+    flex-wrap: wrap;
     display: flex;
     width: 100%;
     justify-content: space-between;
     margin: 20px 0;
+    input {
+      width: 240px;
+      margin: 5px;
+    }
+    @media (max-width: 576px) {
+      justify-content: center;
+    }
   }
   .btn-container {
     display: flex;
@@ -45,9 +55,19 @@ const FormWrapper = styled.div`
   }
 `;
 
+const StyledDatePicker = styled(DatePicker)`
+  max-width: 40rem;
+  height: 56px;
+  font-size: 100%;
+  margin: 20px 0;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.grey};
+  border-radius: 15px;
+`;
+
 const TextArea = styled.textarea`
   width: 100%;
-  height: 120px;
+  height: 220px;
   border: 1px solid ${({ theme }) => theme.colors.grey};
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 15px;
@@ -114,6 +134,7 @@ export default function AddOffer(props) {
       <FormWrapper onSubmit={submit}>
         <div className="inputs-container">
           <FormField
+            className="input"
             label={"Tytuł ogłoszenia"}
             id="title"
             type="text"
@@ -123,6 +144,7 @@ export default function AddOffer(props) {
             handleChange={onHandleChange}
           />
           <FormField
+            className="input"
             label={"Miasto"}
             id="city"
             type="text"
@@ -152,7 +174,8 @@ export default function AddOffer(props) {
         </CheckboxWrapper>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
+          <StyledDatePicker
+            style={{ color: "blue" }}
             label="Data aktywności"
             name="date"
             value={data.selectedDate}

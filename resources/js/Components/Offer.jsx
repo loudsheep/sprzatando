@@ -19,13 +19,19 @@ const Wrapper = styled.div`
   p {
     color: ${({ theme }) => theme.colors.darkGrey};
   }
+  .info-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   .span {
     background-color: ${({ theme }) => theme.colors.darkGrey};
     color: ${({ theme }) => theme.colors.white};
     font-weight: bold;
     padding: 6px;
     border-radius: 8px;
-    margin: 10px;
     max-width: 80px;
     text-align: center;
   }
@@ -61,14 +67,18 @@ export const Offer = ({
         src="https://i.wpimg.pl/360x262/wpcdn.pl/extradom/designs/72507/595148/b7e0091e80475f0b8c39a5f41167e473959cf28927e9dddf40d0876a8e7a250e.jpg"
         alt="house photo"
       />
-      <div style={{ flex: "1" }}>
+      <div className="info-wrapper">
         <h2>{title}</h2>
         <p>{description}</p>
-        <p>Kategorie: {category}</p>
-        <p>{city}</p>
+        <p>
+          <strong>Kategorie:</strong> {category}
+        </p>
+        <p>
+          <strong>Miasto:</strong> {city}
+        </p>
         <div className="container">
           <div className="span">
-            <span>{price}zł / h</span>
+            <span>{price} zł</span>
           </div>
           {isOwner ? <Button>Edytuj</Button> : <Button>Aplikuj</Button>}
         </div>
