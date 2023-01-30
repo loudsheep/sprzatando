@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   max-width: 80rem;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -55,11 +57,11 @@ export const Offer = ({
   return (
     <Wrapper>
       <img
-        style={{ width: "200px", marginRight: "18px" }}
+        style={{ maxWidth: "100%", marginRight: "18px", flex: "1" }}
         src="https://i.wpimg.pl/360x262/wpcdn.pl/extradom/designs/72507/595148/b7e0091e80475f0b8c39a5f41167e473959cf28927e9dddf40d0876a8e7a250e.jpg"
         alt="house photo"
       />
-      <div style={{ width: "100%" }}>
+      <div style={{ flex: "1" }}>
         <h2>{title}</h2>
         <p>{description}</p>
         <p>Kategorie: {category}</p>
