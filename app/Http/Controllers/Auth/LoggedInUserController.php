@@ -32,8 +32,8 @@ class LoggedInUserController extends Controller
         return Inertia::render('Welcome', [
             'cities' => $cities,
             'offers' => $offers,
-            'maxPrice' => Offer::max('price'),
             'minPrice' => Offer::min('price'),
+            'maxPrice' => Offer::max('price'),
         ]);
     }
 }

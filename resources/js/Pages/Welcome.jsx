@@ -16,7 +16,7 @@ const OfferWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function Welcome({ auth, offers }) {
+export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {
   const dispatch = useDispatch();
   const categories = offers.map((offer) => offer.category);
   const cities = offers.map((offer) => offer.city);
