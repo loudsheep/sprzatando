@@ -24,10 +24,12 @@
         "@emotion/styled": "^11.10.5",
         "@fontsource/roboto": "^4.5.8",
         "@inertiajs/inertia-react": "^0.8.1",
+        "@material-ui/pickers": "^3.3.10",
         "@mui/material": "^5.11.6",
         "@mui/styled-engine-sc": "^5.11.0",
         "@mui/x-date-pickers": "^5.0.16",
         "@reduxjs/toolkit": "^1.9.2",
+        "dayjs": "^1.11.7",
         "react-redux": "^8.0.5",
         "styled-components": "^5.3.6"
     }

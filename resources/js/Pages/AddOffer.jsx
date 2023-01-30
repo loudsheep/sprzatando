@@ -5,7 +5,10 @@ import styled from "styled-components";
 import { Label } from "../Components/FormField";
 import Checkbox from "@/Components/Atoms/Checkbox";
 import PrimaryButton from "../Components/Atoms/PrimaryButton";
-// import { DatePicker } from "@mui/x-date-pickers";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/";
+import { TextField } from "@material-ui/core";
 
 const StyledTitle = styled.h1`
   font-size: 2.4rem;
@@ -27,6 +30,7 @@ const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px;
   .inputs-container {
     display: flex;
     width: 100%;
@@ -94,7 +98,7 @@ export default function AddOffer(props) {
     "Kompleksowe pranie tapicerek",
     "Mycie samochodów",
     "Koszenie ogrodu",
-    "Zakupy do domu"
+    "Zakupy do domu",
   ];
 
   const submit = (e) => {
@@ -102,6 +106,7 @@ export default function AddOffer(props) {
 
     // post(route("add.offer"));
   };
+
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
       <Head title="Dodaj ofertę" />
@@ -146,17 +151,25 @@ export default function AddOffer(props) {
           ))}
         </CheckboxWrapper>
 
-        <div className="btn-container">
-          {/* <DatePicker
-            label="Basic example"
-            value={value}
-            onChange={(newValue) => {
-              // setValue(newValue);
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            label="Data aktywności"
+            name="date"
+            value={data.selectedDate}
+            onChange={(date) => {
+              setData("selectedDate", date.$d);
             }}
-            renderInput={(params) => <TextField {...params} />}
-          /> */}
-          <PrimaryButton type="submit" onClick={console.log(data)} >Anuluj</PrimaryButton>
-          <PrimaryButton type="submit" onClick={console.log(data)}>Dodaj ofertę!</PrimaryButton>
+            renderInput={(props) => <TextField {...props} />}
+          />
+        </LocalizationProvider>
+
+        <div className="btn-container">
+          <PrimaryButton type="submit" onClick={console.log(data)}>
+            Anuluj
+          </PrimaryButton>
+          <PrimaryButton type="submit" onClick={console.log(data)}>
+            Dodaj ofertę!
+          </PrimaryButton>
         </div>
       </FormWrapper>
     </AuthenticatedLayout>
