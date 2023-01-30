@@ -20,7 +20,7 @@ export default function AddOffer({ auth, errors, createdOffers }) {
           <Offer
             title={offer.category}
             description={offer.description}
-            hourlyRate={offer.hourly_rate}
+            price={offer.price}
             category={offer.category}
             city={offer.city}
             isOwner={true}

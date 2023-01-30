@@ -47,7 +47,7 @@ const Button = styled.button`
 export const Offer = ({
   title,
   description,
-  hourlyRate,
+  price,
   category,
   city,
   isOwner = false,
@@ -66,7 +66,7 @@ export const Offer = ({
         <p>{city}</p>
         <div className="container">
           <div className="span">
-            <span>{hourlyRate}zł / h</span>
+            <span>{price}zł / h</span>
           </div>
           {isOwner ? <Button>Edytuj</Button> : <Button>Aplikuj</Button>}
         </div>
