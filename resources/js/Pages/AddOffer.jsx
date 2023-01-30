@@ -95,7 +95,6 @@ export default function AddOffer(props) {
     "Mycie samochodów",
     "Koszenie ogrodu",
     "Zakupy do domu",
-    "piekarnia",
   ];
 
   const submit = (e) => {
