@@ -19,11 +19,12 @@ return new class extends Migration
             $table->foreignId('creator_id');
             $table->string('city');
             $table->string('zip_code', 10);
-            $table->integer('hourly_rate');
-            $table->string('category');
+            $table->integer('price');
+            $table->string('title');
             $table->text('description');
+            $table->string('category');
             $table->dateTime('ends');
-            $table->string('image')->nullable();
+            $table->string('main_image')->nullable();
             $table->boolean('is_done')->default(false);
             $table->boolean('is_banned')->default(false);
             $table->boolean('is_reported')->default(false);

@@ -41,7 +41,13 @@ class Offer extends Model
             ->withTimestamps();
     }
 
-    public function images() {
+    public function images()
+    {
         return $this->hasMany(OfferImages::class, 'offer_id', 'id');
+    }
+
+    public function review()
+    {
+        return $this->hasOne(UserReviews::class, 'offer_id', 'id');
     }
 }

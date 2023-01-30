@@ -19,12 +19,13 @@ class LoggedInUserController extends Controller
         // dd($request->user()->contractedOffers->first());
         // dd($request->user()->intrestedInOffers->first()->creator);
         // dd(Offer::first()->images->all());
-        
+        dd(Offer::first()->review);
+
         $cities = Offer::select('city')->distinct()->get()->toArray();
         $cities = array_map(function ($city) {
             return $city['city'];
         }, $cities);
-        
+
         $offers = DB::table('offers')->orderBy('created_at', 'desc')->limit(5)->get()->toArray();
 
         return Inertia::render('Welcome', [
