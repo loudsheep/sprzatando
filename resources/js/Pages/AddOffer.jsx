@@ -1,7 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { FormField } from "@/Components/FormField";
-import styled from "styled-components";
 import { Label } from "../Components/FormField";
 import Checkbox from "@/Components/Atoms/Checkbox";
 import PrimaryButton from "../Components/Atoms/PrimaryButton";
@@ -9,84 +8,17 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/";
 import { TextField } from "@material-ui/core";
-
-const StyledTitle = styled.h1`
-  font-size: 2.4rem;
-  margin-top: 25px;
-  color: ${({ theme }) => theme.colors.mainColor};
-  font-weight: bold;
-`;
-const StyledSubTitle = styled.h2`
-  font-size: 1.9rem;
-  color: ${({ theme }) => theme.colors.darkGrey};
-  font-weight: bold;
-  margin-top: 5rem;
-`;
-
-const FormWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  max-width: 60rem;
-  padding: 20px;
-  max-height: 80%;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .inputs-container {
-    flex-wrap: wrap;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin: 20px 0;
-    input {
-      width: 240px;
-      margin: 5px;
-    }
-    @media (max-width: 576px) {
-      justify-content: center;
-    }
-  }
-  .btn-container {
-    display: flex;
-    width: 100%;
-    margin: 20px;
-    justify-content: space-between;
-  }
-`;
-
-const StyledDatePicker = styled(DatePicker)`
-  max-width: 40rem;
-  height: 56px;
-  font-size: 100%;
-  margin: 20px 0;
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.grey};
-  border-radius: 15px;
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  height: 220px;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  border-radius: 15px;
-  font-size: 1.5rem;
-  resize: none;
-`;
-
-const CheckboxWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  margin: 5px 0 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  div {
-    margin: 0 10px;
-  }
-`;
+import {
+  StyledTitle,
+  StyledSubTitle,
+  FormWrapper,
+  TextArea,
+  CheckboxWrapper,
+  StyledPhotoBox,
+  ImageSection,
+  UploadedImgWrapper,
+} from "./page-styles/AddOffer.styles";
+import IconPath from "../assets/img/UploadIcon.png";
 
 export default function AddOffer(props) {
   const { data, setData, post, errors } = useForm({
@@ -95,6 +27,8 @@ export default function AddOffer(props) {
     description: "",
     categories: [],
     city: "",
+    photos: [],
+    price: "",
     selectedDate: new Date(),
   });
 
@@ -111,6 +45,10 @@ export default function AddOffer(props) {
     setData("texarea", e.target.value);
   };
 
+  const handlePhotoUpload = (e) => {
+    setData("photos", [...data.photos, URL.createObjectURL(e.target.files[0])]);
+  };
+
   const categories = [
     "Sprzątanie mieszkań i domów",
     "Mycie okien",
@@ -125,8 +63,11 @@ export default function AddOffer(props) {
   const submit = (e) => {
     e.preventDefault();
 
-    // post(route("add.offer"));
+    post(route("add.offer"));
   };
+
+  const today = new Date();
+  const maxDate = new Date(today.setMonth(today.getMonth() + 1));
 
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
@@ -151,10 +92,62 @@ export default function AddOffer(props) {
             type="text"
             name="city"
             value={data.city}
-            errorMessage={errors.title}
+            errorMessage={errors.city}
             handleChange={onHandleChange}
           />
         </div>
+        <div className="inputs-container">
+          <FormField
+            className="input"
+            label={"Cena"}
+            id="price"
+            type="number"
+            name="price"
+            value={data.price}
+            errorMessage={errors.price}
+            handleChange={onHandleChange}
+          />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Data aktywności"
+              name="date"
+              value={data.selectedDate}
+              onChange={(date) => {
+                setData("selectedDate", date.$d);
+              }}
+              maxDate={maxDate}
+              minDate={new Date()}
+              InputProps={{
+                style: {
+                  fontSize: "1.8rem",
+                  width: "200px",
+                  marginTop: "30px",
+                },
+                label: { fontSize: "2rem" },
+              }}
+              renderInput={(props) => <TextField {...props} />}
+            />
+          </LocalizationProvider>
+        </div>
+
+        <StyledSubTitle>Dodaj zdjęcia</StyledSubTitle>
+
+        <ImageSection>
+          {data.photos &&
+            data.photos.map((photo) => (
+              <UploadedImgWrapper key={photo}>
+                <img src={photo} alt="uploaded photo" />
+              </UploadedImgWrapper>
+            ))}
+          <UploadedImgWrapper>
+            <StyledPhotoBox type="file" htmlFor="input-file">
+              <img src={IconPath} />
+            </StyledPhotoBox>
+          </UploadedImgWrapper>
+
+          <input type="file" id="input-file" onChange={handlePhotoUpload} />
+        </ImageSection>
+
         <Label htmlFor="desc">Opis</Label>
         <TextArea id="desc" onChange={handleTexareaChange} />
 
@@ -174,26 +167,11 @@ export default function AddOffer(props) {
           ))}
         </CheckboxWrapper>
 
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <StyledDatePicker
-            style={{ color: "blue" }}
-            label="Data aktywności"
-            name="date"
-            value={data.selectedDate}
-            onChange={(date) => {
-              setData("selectedDate", date.$d);
-            }}
-            renderInput={(props) => <TextField {...props} />}
-          />
-        </LocalizationProvider>
-
         <div className="btn-container">
-          <PrimaryButton type="submit" onClick={console.log(data)}>
+          <PrimaryButton type="submit" color={"grey"}>
             Anuluj
           </PrimaryButton>
-          <PrimaryButton type="submit" onClick={console.log(data)}>
-            Dodaj ofertę!
-          </PrimaryButton>
+          <PrimaryButton type="submit">Dodaj ofertę!</PrimaryButton>
         </div>
       </FormWrapper>
     </AuthenticatedLayout>

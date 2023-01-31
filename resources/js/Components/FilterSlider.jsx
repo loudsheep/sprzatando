@@ -45,7 +45,7 @@ const FilterSlider = () => {
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         sx={{
-          width: 0.95,
+          width: .95,
         }}
       />
     </Box>
