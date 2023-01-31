@@ -19,6 +19,7 @@ class LoggedInUserController extends Controller
         // dd($request->user()->contractedOffers->first());
         // dd($request->user()->intrestedInOffers->first()->creator);
         // dd(Offer::first()->images->all());
+        // dd($request->user()->reviews->avg('rating'));
 
         $cities = Offer::select('city')->distinct()->get()->toArray();
         $cities = array_map(function ($city) {

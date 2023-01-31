@@ -57,4 +57,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Offer::class, 'intrested_in_offer', 'intrested_user_id', 'offer_id')
             ->withTimestamps();
     }
+
+    public function reviews() {
+        return $this->hasManyThrough(UserReviews::class, Offer::class, 'contractor_id', 'offer_id', 'id', 'id');
+    }
 }
