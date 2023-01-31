@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm, Link } from "@inertiajs/react";
 import { FormField } from "@/Components/FormField";
 import { Label } from "../Components/FormField";
 import Checkbox from "@/Components/Atoms/Checkbox";
@@ -69,7 +69,6 @@ export default function AddOffer(props) {
 
   const submit = (e) => {
     e.preventDefault();
-
     post(route("add.offer"));
   };
 
