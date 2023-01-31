@@ -17,6 +17,7 @@ import {
   StyledPhotoBox,
   ImageSection,
   UploadedImgWrapper,
+  DeleteButton,
 } from "./page-styles/AddOffer.styles";
 import IconPath from "../assets/img/UploadIcon.png";
 
@@ -47,6 +48,12 @@ export default function AddOffer(props) {
 
   const handlePhotoUpload = (e) => {
     setData("photos", [...data.photos, URL.createObjectURL(e.target.files[0])]);
+  };
+
+  const deletePhoto = (p) => {
+    const array = data.photos.filter((photo) => p !== photo);
+    console.log(array);
+    setData("photos", array);
   };
 
   const categories = [
@@ -136,6 +143,9 @@ export default function AddOffer(props) {
           {data.photos &&
             data.photos.map((photo) => (
               <UploadedImgWrapper key={photo}>
+                <DeleteButton onClick={() => deletePhoto(photo)}>
+                  x
+                </DeleteButton>
                 <img src={photo} alt="uploaded photo" />
               </UploadedImgWrapper>
             ))}
