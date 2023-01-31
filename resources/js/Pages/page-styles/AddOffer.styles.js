@@ -13,7 +13,7 @@ export const StyledSubTitle = styled.h2`
   margin-top: 5rem;
 `;
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.form`
   width: 100%;
   height: 100%;
   max-width: 60rem;

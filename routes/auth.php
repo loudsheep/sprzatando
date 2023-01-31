@@ -51,6 +51,10 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'verified'])
         ->name('add.offer');
 
+    Route::post('add-offer', [AddOfferController::class, 'store'])
+        ->middleware(['auth', 'verified'])
+        ->name('offer.store');
+
     Route::get('user-offer', [CreatedOffersController::class, 'show'])
         ->middleware('auth')
         ->name('user.offer');

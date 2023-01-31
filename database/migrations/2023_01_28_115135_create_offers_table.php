@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('zip_code', 10);
             $table->integer('price');
-            $table->string('title');
+            $table->string('title', 100);
             $table->text('description');
             $table->string('category');
             $table->dateTime('ends');
