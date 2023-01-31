@@ -15,13 +15,15 @@ class Offer extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'creator_id',
         'city',
         'zip_code',
-        'hourly_rate',
+        'price',
         'category',
+        'title',
         'description',
         'ends',
-        'image',
+        'main_image',
     ];
 
 

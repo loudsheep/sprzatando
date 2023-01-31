@@ -47,7 +47,8 @@ export default function AddOffer(props) {
   };
 
   const handlePhotoUpload = (e) => {
-    setData("photos", [...data.photos, URL.createObjectURL(e.target.files[0])]);
+    setData("photos", [...data.photos, e.target.files[0]]);
+    // setData("photos", [...data.photos, URL.createObjectURL(e.target.files[0])]);
   };
 
   const deletePhoto = (p) => {
@@ -145,7 +146,7 @@ export default function AddOffer(props) {
                 <DeleteButton onClick={() => deletePhoto(photo)}>
                   x
                 </DeleteButton>
-                <img src={photo} alt="uploaded photo" />
+                <img src={URL.createObjectURL(photo)} alt="uploaded photo" />
               </UploadedImgWrapper>
             ))}
           <UploadedImgWrapper>

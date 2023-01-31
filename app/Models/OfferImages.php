@@ -9,6 +9,10 @@ class OfferImages extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'url'
+    ];
+
     public function offer()
     {
         return $this->belongsTo(Offer::class, 'offer_id', 'id');
