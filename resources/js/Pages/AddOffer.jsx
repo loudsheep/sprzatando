@@ -69,7 +69,7 @@ export default function AddOffer(props) {
 
   const submit = (e) => {
     e.preventDefault();
-    post(route("add.offer"));
+    post(route("offer.store"));
   };
 
   const today = new Date();
