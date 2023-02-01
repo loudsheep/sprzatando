@@ -20,7 +20,7 @@ class AddOfferController extends Controller
 
     public function store(Request $request)
     {
-        // dd(count($request->photos));
+        // dd($request);
         $validatedData = $request->validate(
             [
                 'title' => ['required', 'max:100'],
@@ -32,8 +32,14 @@ class AddOfferController extends Controller
                 'categories' => ['array', 'required']
             ],
             [
-                'numeric' => 'Musi być liczba',
-                'date' => 'Data',
+                'price.numeric' => 'The price must be a number',
+                // 'selectedDate.date' => '',
+                // 'title.required' => '',
+                // 'title.max:100' => '',
+                // 'city.required' => '',
+                // 'city.max:50' => '',
+                // 'photos.*.image' => 'Only image accepatble',
+                // 'categories.required' => 'At least 1 category required'
             ]
         );
 
@@ -60,7 +66,7 @@ class AddOfferController extends Controller
                 $image = Image::make(public_path("storage/" . $path))->fit(1000, 1000);
                 $image->save();
 
-                $additionalPhotos[] = $path;
+                $additionalPhotos[] = "/storage/" . $path;
             }
         }
 
