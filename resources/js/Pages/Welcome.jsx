@@ -36,9 +36,10 @@ export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {
         <OfferWrapper>
           {offers.map((offer, i) => (
             <Offer
-              title={offer.category}
+              title={offer.title}
               description={offer.description}
               price={offer.price}
+              main_image={offer.main_image}
               category={offer.category}
               city={offer.city}
               key={i}
