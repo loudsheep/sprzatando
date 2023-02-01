@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm, Link } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { FormField } from "@/Components/FormField";
 import { Label } from "../Components/FormField";
 import Checkbox from "@/Components/Atoms/Checkbox";
@@ -48,12 +48,10 @@ export default function AddOffer(props) {
 
   const handlePhotoUpload = (e) => {
     setData("photos", [...data.photos, e.target.files[0]]);
-    // setData("photos", [...data.photos, URL.createObjectURL(e.target.files[0])]);
   };
 
   const deletePhoto = (p) => {
     const array = data.photos.filter((photo) => p !== photo);
-    console.log(array);
     setData("photos", array);
   };
 
@@ -70,6 +68,7 @@ export default function AddOffer(props) {
 
   const submit = (e) => {
     e.preventDefault();
+    // console.log(data)
     post(route("offer.store"));
   };
 
@@ -80,7 +79,7 @@ export default function AddOffer(props) {
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
       <Head title="Dodaj ofertę" />
       <StyledTitle>Dodaj swoją ofertę!</StyledTitle>
-      <FormWrapper onSubmit={submit}>
+      <FormWrapper onSubmit={submit} enctype="multipart/form-data">
         <div className="inputs-container">
           <FormField
             className="input"
@@ -141,9 +140,9 @@ export default function AddOffer(props) {
 
         <ImageSection>
           {data.photos &&
-            data.photos.map((photo) => (
-              <UploadedImgWrapper key={photo}>
-                <DeleteButton onClick={() => deletePhoto(photo)}>
+            data.photos.map((photo , i) => (
+              <UploadedImgWrapper key={i}>
+                <DeleteButton type='button' onClick={() => deletePhoto(photo)}>
                   x
                 </DeleteButton>
                 <img src={URL.createObjectURL(photo)} alt="uploaded photo" />

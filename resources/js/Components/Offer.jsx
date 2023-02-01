@@ -5,6 +5,8 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   max-width: 80rem;
+  width: 100%;
+
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   margin: 2rem;
@@ -56,6 +58,7 @@ export const Offer = ({
   title,
   description,
   price,
+  image,
   category,
   city,
   isOwner = false,
@@ -64,12 +67,12 @@ export const Offer = ({
     <Wrapper>
       <img
         style={{ maxWidth: "100%", marginRight: "18px", flex: "1" }}
-        src="https://i.wpimg.pl/360x262/wpcdn.pl/extradom/designs/72507/595148/b7e0091e80475f0b8c39a5f41167e473959cf28927e9dddf40d0876a8e7a250e.jpg"
+        src={image}
         alt="house photo"
       />
       <div className="info-wrapper">
         <h2>{title}</h2>
-        <p>{description}</p>
+        <p>{description.slice(0, 100)}...</p>
         <p>
           <strong>Kategorie:</strong> {category}
         </p>

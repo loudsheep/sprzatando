@@ -19,7 +19,8 @@ export default function AddOffer({ auth, errors, createdOffers }) {
         {console.log(createdOffers[0])}
         {createdOffers.map((offer, i) => (
           <Offer
-            title={offer.category}
+            image={offer.main_image}
+            title={offer.title}
             description={offer.description}
             price={offer.price}
             category={offer.category}
