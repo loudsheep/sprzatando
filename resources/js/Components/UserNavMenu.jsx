@@ -22,7 +22,7 @@ export const UserNavMenu = () => {
     },
     {
       name: "Twoje oferty",
-      path: "user-offer",
+      path: "offers.created",
     },
     {
       name: "Przyjęte zlecenia",

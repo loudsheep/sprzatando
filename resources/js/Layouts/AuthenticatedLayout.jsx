@@ -120,7 +120,7 @@ export default function Authenticated({ auth, children }) {
                 <Dropdown.Link href={route("add.offer")}>
                   Dodaj Ofertę
                 </Dropdown.Link>
-                <Dropdown.Link href={route("user.offer")}>
+                <Dropdown.Link href={route("offers.created")}>
                   Twoje oferty
                 </Dropdown.Link>
                 <Dropdown.Link href={route("logout")} method="post" as="button">
