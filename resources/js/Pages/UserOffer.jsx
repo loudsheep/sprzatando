@@ -16,7 +16,6 @@ export default function AddOffer({ auth, errors, createdOffers }) {
       <Head title="User Offer" />
       <Wrapper>
         <h1>Twoje oferty: </h1>
-        {console.log(createdOffers[0])}
         {createdOffers.map((offer, i) => (
           <Offer
             image={offer.main_image}

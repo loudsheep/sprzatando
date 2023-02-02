@@ -64,6 +64,7 @@ export const Offer = ({
   image,
   category,
   city,
+  owner,
   isOwner = false,
 }) => {
   return (
@@ -74,7 +75,10 @@ export const Offer = ({
         alt="house photo"
       />
       <div className="info-wrapper">
-        <h2>{title}</h2>
+        <div>
+          <h2>{title}</h2>
+          <p>autor: {owner}</p>
+        </div>
 
         <p>
           {description.length > 100
