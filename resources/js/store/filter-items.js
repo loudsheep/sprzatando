@@ -1,45 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialCartItemState = { categories: [], cities: [], prices: [] };
+const initialCartItemState = { categories: [], cities: [], prices: [0, 0] };
 
 const filterItemsSlice = createSlice({
   name: "filter items slice",
   initialState: initialCartItemState,
   reducers: {
     addFilterItems(state, action) {
-      const { categories, cities, prices } = action.payload;
-      categories.forEach((category) => {
-        const existingCategory = state.categories.find(
-          (stateCategory) => stateCategory === category
-        );
-        if (!existingCategory) {
-          state.categories.push(category);
-        } else {
-          return;
-        }
-      });
+      const { categories, cities, minPrice, maxPrice } = action.payload;
 
-      cities.forEach((city) => {
-        const existingCity = state.cities.find(
-          (stateCity) => stateCity === city
-        );
-        if (!existingCity) {
-          state.cities.push(city);
-        } else {
-          return;
+      if (categories !== state.categories) {
+        if (categories.length > 0) {
+          state.categories.length = 0;
+          categories.forEach((category) => state.categories.push(category));
         }
-      });
+      }
 
-      prices.forEach((price) => {
-        const existingPrices = state.prices.find(
-          (statePrice) => statePrice === price
-        );
-        if (!existingPrices) {
-          state.prices.push(price);
-        } else {
-          return;
+      if (cities !== state.cities) {
+        if (cities.length > 0) {
+          state.cities.length = 0;
+          cities.forEach((city) => state.cities.push(city));
         }
-      });
+      }
+
+      if (minPrice) {
+        if (minPrice !== state.prices[0]) {
+          state.prices[0] = minPrice;
+        }
+      }
+
+      if (maxPrice) {
+        if (maxPrice !== state.prices[1]) {
+          state.prices[1] = maxPrice;
+        }
+      }
     },
   },
 });

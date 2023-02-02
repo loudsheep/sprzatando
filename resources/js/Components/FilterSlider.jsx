@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { makeStyles } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   slider: {
@@ -26,22 +27,18 @@ function valuetext(value) {
   return `${value} zł`;
 }
 
-const FilterSlider = (props) => {
+const FilterSlider = () => {
+  const prices = useSelector((state) => state.filterItems.prices);
   const classes = useStyles();
-  const min = props.prices[0];
-  const max = props.prices[1];
-  const [value, setValue] = useState([min, max]);
-  const [minPrice, setMinPrice] = useState(min);
-  const [maxPrice, setMaxPrice] = useState(max);
+  const [value, setValue] = useState([]);
+
+  useEffect(() => {
+    setValue(prices)
+  }, [prices])
 
   const sliderValueChangeHandler = (event, value) => {
     setValue(value);
   };
-
-  useEffect(() => {
-    setMinPrice(value[0]);
-    setMaxPrice(value[1]);
-  });
 
   return (
     <Box
@@ -54,7 +51,7 @@ const FilterSlider = (props) => {
       }}
     >
       <SliderLabel>
-        Cena: {minPrice}zł - {maxPrice}zł
+        Cena: {value[0]}zł - {value[1]}zł
       </SliderLabel>
       <Slider
         className={classes.slider}
@@ -62,8 +59,8 @@ const FilterSlider = (props) => {
         onChange={sliderValueChangeHandler}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
-        min={min}
-        max={max}
+        min={prices[0]}
+        max={prices[1]}
         sx={{
           width: 0.95,
         }}

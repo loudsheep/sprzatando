@@ -4,7 +4,6 @@ import FilterSelect from "./FilterSelect";
 import FilterSlider from "./FilterSlider";
 import { useSelector } from "react-redux";
 
-
 const DUMMY_FILTERS_TYPES = [
   {
     id: "f1",
@@ -26,13 +25,21 @@ const DUMMY_FILTERS_TYPES = [
 ];
 
 const Filters = (props) => {
-  const prices = useSelector((state) => state.filterItems.prices);
+  const categories = useSelector((state) => state.filterItems.categories);
+  const cities = useSelector((state) => state.filterItems.cities);
   return (
     <Fragment>
-      {DUMMY_FILTERS_TYPES.map((filter, i) => (
-        <FilterSelect data={filter} key={i} />
-      ))}
-      <FilterSlider prices={props.prices}/>
+      <FilterSelect
+        filters={categories}
+        type="cleaning"
+        title="Wybierz rodzaj sprzątania"
+      />
+      <FilterSelect
+        filters={cities}
+        type="location"
+        title="Wybierz lokalizacje"
+      />
+      <FilterSlider />
     </Fragment>
   );
 };

@@ -17,20 +17,31 @@ const OfferWrapper = styled.div`
   padding: 25px;
 `;
 
-export default function Welcome({ auth, cities, offers, minPrice, maxPrice, categories }) {
+export default function Welcome({
+  auth,
+  cities,
+  offers,
+  minPrice,
+  maxPrice,
+  categories,
+}) {
   const dispatch = useDispatch();
-  const categories = offers.map((offer) => offer.category);
-  const prices = offers.map((offer) => offer.hourly_rate);
-
   useEffect(() => {
-    dispatch(filterItemsActions.addFilterItems({ categories, cities, prices }));
-  }, [categories, cities, prices]);
+    dispatch(
+      filterItemsActions.addFilterItems({
+        categories,
+        cities,
+        minPrice,
+        maxPrice,
+      })
+    );
+  }, [categories, cities, minPrice, maxPrice]);
   return (
     <>
       <Head title="Welcome" />
       <header>
         <Navbar auth={auth} />
-        <FilterSection offers={offers} prices={[minPrice, maxPrice]} />
+        <FilterSection />
       </header>
       <main>
         <section>
