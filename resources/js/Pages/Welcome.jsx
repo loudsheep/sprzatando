@@ -20,7 +20,6 @@ const OfferWrapper = styled.div`
 export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {
   const dispatch = useDispatch();
   const categories = offers.map((offer) => offer.category);
-  // const cities = offers.map((offer) => offer.city);
   const prices = offers.map((offer) => offer.hourly_rate);
 
   useEffect(() => {
@@ -31,23 +30,25 @@ export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {
       <Head title="Welcome" />
       <header>
         <Navbar auth={auth} />
-        <FilterSection offers={offers} prices={[minPrice, maxPrice]}/>
+        <FilterSection offers={offers} prices={[minPrice, maxPrice]} />
       </header>
-      <section>
-        <OfferWrapper>
-          {offers.map((offer, i) => (
-            <Offer
-              title={offer.title}
-              description={offer.description}
-              price={offer.price}
-              image={offer.main_image}
-              category={offer.category}
-              city={offer.city}
-              key={i}
-            />
-          ))}
-        </OfferWrapper>
-      </section>
+      <main>
+        <section>
+          <OfferWrapper>
+            {offers.map((offer, i) => (
+              <Offer
+                title={offer.title}
+                description={offer.description}
+                price={offer.price}
+                image={offer.main_image}
+                category={offer.category}
+                city={offer.city}
+                key={i}
+              />
+            ))}
+          </OfferWrapper>
+        </section>
+      </main>
     </>
   );
 }
