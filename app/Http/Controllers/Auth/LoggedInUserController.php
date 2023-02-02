@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Offer;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Symfony\Component\Console\Input\Input;
@@ -27,8 +28,19 @@ class LoggedInUserController extends Controller
             return $city['city'];
         }, $cities);
 
-        $offers = Offer::with('creator')->orderBy('created_at', 'desc')->get()->toArray();
-        for ($i=0; $i < count($offers); $i++) { 
+        // if user is logged in
+        if (Auth::check()) {
+            $offers = Offer::with('creator')->orderBy('created_at', 'desc')
+                ->where('creator_id', '!=', $request->user()->id)
+                ->where('is_done', '==', 'false')
+                ->where('is_banned', '==', 'false')
+                ->where('is_reported', '==', 'false')
+                ->get()->toArray();
+        } else {
+            $offers = Offer::with('creator')->orderBy('created_at', 'desc')->get()->toArray();
+        }
+
+        for ($i = 0; $i < count($offers); $i++) {
             $offers[$i]["category"] = str_replace(";", ", ", $offers[$i]["category"]);
         }
 
@@ -36,7 +48,7 @@ class LoggedInUserController extends Controller
         $cat = [];
         foreach ($categories as $value) {
             foreach (explode(";", $value["category"]) as $c) {
-                if(!in_array($c, $cat)) {
+                if (!in_array($c, $cat)) {
                     $cat[] = $c;
                 }
             }
