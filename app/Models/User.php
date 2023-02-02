@@ -74,7 +74,7 @@ class User extends Authenticatable
         return $this->hasMany(Offer::class, 'contractor_id', 'id');
     }
 
-    public function intrestedInOffers()
+    public function interestedInOffers()
     {
         return $this->belongsToMany(Offer::class, 'intrested_in_offer', 'intrested_user_id', 'offer_id')
             ->withTimestamps();

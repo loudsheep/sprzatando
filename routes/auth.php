@@ -15,6 +15,7 @@ use App\Http\Controllers\Offers\CreatedOffersController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// guest
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -43,21 +44,10 @@ Route::middleware('guest')->group(function () {
     })->name('landing.page');
 });
 
+// user
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');
-
-    Route::get('add-offer', [AddOfferController::class, 'show'])
-        ->middleware(['auth', 'verified'])
-        ->name('add.offer');
-
-    Route::post('add-offer', [AddOfferController::class, 'store'])
-        ->middleware(['auth', 'verified'])
-        ->name('offer.store');
-
-    Route::get('user-offer', [CreatedOffersController::class, 'show'])
-        ->middleware('auth')
-        ->name('user.offer');
 
     Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
         ->middleware(['signed', 'throttle:6,1'])
@@ -82,4 +72,31 @@ Route::middleware('auth')->group(function () {
         // TODO uncomment this once admin page ready
         // ->middleware('can:manage_users')
     ;
+});
+
+// offers
+Route::middleware('auth')->group(function () {
+    Route::get('add-offer', [AddOfferController::class, 'show'])
+        ->middleware(['auth', 'verified'])
+        ->name('add.offer');
+
+    Route::post('add-offer', [AddOfferController::class, 'store'])
+        ->middleware(['auth', 'verified'])
+        ->name('offer.store');
+
+    Route::get('user-offer', [CreatedOffersController::class, 'showCreated'])
+        ->middleware('auth')
+        ->name('offers.created');
+
+    Route::get('offer-interested', [CreatedOffersController::class, 'showInterested'])
+        ->middleware('auth')
+        ->name('offers.interested');
+
+    Route::get('offer-done', [CreatedOffersController::class, 'showDone'])
+        ->middleware('auth')
+        ->name('offers.done');
+
+    Route::get('offer/{id}', [CreatedOffersController::class, 'details'])
+        ->middleware('auth')
+        ->name('offer.details');
 });

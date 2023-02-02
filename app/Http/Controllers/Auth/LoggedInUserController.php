@@ -18,7 +18,7 @@ class LoggedInUserController extends Controller
     {
         // dd($request->query('location', 'nothing'));
         // dd($request->user()->contractedOffers->first());
-        // dd($request->user()->intrestedInOffers->first()->creator);
+        // dd($request->user()->interestedInOffers->first()->creator);
         // dd(Offer::first()->images->all());
         // dd($request->user()->reviews->avg('rating'));
         // dd(Offer::with('creator')->orderBy('created_at', 'desc')->get()->toArray());
