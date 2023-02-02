@@ -16,8 +16,8 @@ const StyledFilterSelect = styled.select`
 
 const FilterSelect = (props) => {
   return (
-    <StyledFilterSelect name={props.type}>
-      <option value={props.title} disabled>
+    <StyledFilterSelect name={props.type} defaultValue={props.title}>
+      <option value={props.title} name="titleValue" disabled>
         {props.title}
       </option>
       {props.filters.map((filter,i) => (
