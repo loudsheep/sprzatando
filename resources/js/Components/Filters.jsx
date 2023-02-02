@@ -32,7 +32,7 @@ const Filters = (props) => {
       {DUMMY_FILTERS_TYPES.map((filter, i) => (
         <FilterSelect data={filter} key={i} />
       ))}
-      <FilterSlider />
+      <FilterSlider prices={props.prices}/>
     </Fragment>
   );
 };

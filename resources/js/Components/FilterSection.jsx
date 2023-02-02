@@ -61,7 +61,7 @@ const FilterSection = (props) => {
         <Text>Wybierz jedną z tysiąca usług sprzątających</Text>
         <Button text={"Sprawdź"} />
       </TextWrapper>
-      <FiltersWrapper offers={props.offers}/>
+      <FiltersWrapper offers={props.offers} prices={props.prices}/>
     </SectionFilterWrapper>
   );
 };

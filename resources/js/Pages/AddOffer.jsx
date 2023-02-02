@@ -115,7 +115,7 @@ export default function AddOffer(props) {
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="Data aktywności"
+              
               name="date"
               value={data.selectedDate}
               onChange={(date) => {
@@ -127,9 +127,8 @@ export default function AddOffer(props) {
                 style: {
                   fontSize: "1.8rem",
                   width: "200px",
-                  marginTop: "30px",
+                  margin: "30px 15px" ,
                 },
-                label: { fontSize: "2rem" },
               }}
               renderInput={(props) => <TextField {...props} />}
             />

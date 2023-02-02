@@ -12,10 +12,12 @@ function valuetext(value) {
   return `${value} zł`;
 }
 
-const FilterSlider = () => {
-  const [value, setValue] = useState([1, 100]);
-  const [minPrice, setMinPrice] = useState(1);
-  const [maxPrice, setMaxPrice] = useState(100);
+const FilterSlider = (props) => {
+  const min = props.prices[0];
+  const max = props.prices[1];
+  const [value, setValue] = useState([min, max]);
+  const [minPrice, setMinPrice] = useState(min);
+  const [maxPrice, setMaxPrice] = useState(max);
 
   const sliderValueChangeHandler = (event, value) => {
     setValue(value);
@@ -44,8 +46,10 @@ const FilterSlider = () => {
         onChange={sliderValueChangeHandler}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
+        min={min}
+        max={max}
         sx={{
-          width: .95,
+          width: 0.95,
         }}
       />
     </Box>

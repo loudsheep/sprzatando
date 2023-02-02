@@ -30,7 +30,7 @@ const FiltersWrapper = (props) => {
     <FilterWrapper>
       <FilterHeader>Filtry</FilterHeader>
       <FiltersForm>
-        <Filters offers={props.offers}></Filters>
+        <Filters offers={props.offers} prices={props.prices}></Filters>
         <Button text={"Pokaż 324 oferty"} width={"100%"} type={'submit'}></Button>
       </FiltersForm>
     </FilterWrapper>

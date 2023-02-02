@@ -30,7 +30,7 @@ export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {
       <Head title="Welcome" />
       <header>
         <Navbar auth={auth} />
-        <FilterSection offers={offers} />
+        <FilterSection offers={offers} prices={[minPrice, maxPrice]}/>
       </header>
       <section>
         <OfferWrapper>
