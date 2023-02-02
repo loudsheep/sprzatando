@@ -27,6 +27,8 @@ const Wrapper = styled.div`
     flex-direction: column;
     max-height: 40rem;
     justify-content: space-between;
+    margin-left: 18px;
+    margin-right: 18px;
   }
   .span {
     background-color: ${({ theme }) => theme.colors.darkGrey};
@@ -70,7 +72,7 @@ export const Offer = ({
   return (
     <Wrapper>
       <img
-        style={{ maxWidth: "28rem", marginRight: "18px", flex: "1" }}
+        style={{ maxWidth: "28rem", marginRight: "auto", flex: "1", marginLeft: "auto" }}
         src={image}
         alt="house photo"
       />
