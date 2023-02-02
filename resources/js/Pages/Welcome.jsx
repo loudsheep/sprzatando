@@ -19,7 +19,7 @@ const OfferWrapper = styled.div`
 
 export default function Welcome({ auth, cities, offers, minPrice, maxPrice, categories }) {
   const dispatch = useDispatch();
-  const categories = offers.map((offer) => offer.category);
+  // const categories = offers.map((offer) => offer.category);
   const prices = offers.map((offer) => offer.hourly_rate);
 
   useEffect(() => {
@@ -41,6 +41,7 @@ export default function Welcome({ auth, cities, offers, minPrice, maxPrice, cate
                 description={offer.description}
                 price={offer.price}
                 image={offer.main_image}
+                owner={offer.creator.name}
                 category={offer.category}
                 city={offer.city}
                 key={i}
