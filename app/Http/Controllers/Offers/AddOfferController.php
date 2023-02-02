@@ -24,7 +24,7 @@ class AddOfferController extends Controller
         $validatedData = $request->validate(
             [
                 'title' => ['required', 'max:100'],
-                'texarea' => ['required', 'max:500'],
+                'description' => ['required', 'max:500'],
                 'selectedDate' => ['date'],
                 'city' => ['required', 'max:50'],
                 'price' => ['numeric'],
@@ -70,14 +70,14 @@ class AddOfferController extends Controller
             }
         }
 
-
+        
         $offer = Offer::create([
             'title' => $request->title,
             'creator_id' => $request->user()->id,
             'zip_code' => '124231',
             'city' => $request->city,
             'price' => $request->price,
-            'description' => $request->texarea,
+            'description' => $request->description,
             'ends' => substr($request->selectedDate, 0, 10),
             'category' => implode(';', $request->categories),
             'main_image' => $mainImage,

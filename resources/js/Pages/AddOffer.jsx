@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm, Link } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { FormField } from "@/Components/FormField";
 import PrimaryButton from "../Components/Atoms/PrimaryButton";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -20,7 +20,7 @@ import { SelectCategory } from "@/Components/SelectCategory";
 import IconPath from "../assets/img/UploadIcon.png";
 
 export default function AddOffer(props) {
-  const { data, setData, post, errors } = useForm({
+  const initialState = {
     title: "",
     location: "",
     description: "",
@@ -29,19 +29,30 @@ export default function AddOffer(props) {
     photos: [],
     price: "",
     selectedDate: new Date(),
-  });
+  };
+  const { data, setData, post, errors } = useForm(initialState);
 
   const onHandleChange = (event) => {
     setData(event.target.name, event.target.value);
   };
 
   const handleCheckboxChange = (e) => {
-    const arr = [...data.categories, e.target.value];
-    setData("categories", arr);
+    const arr = [...data.categories];
+    const index = arr.indexOf(e.target.value);
+    if (e.target.checked) {
+      if (index === -1) {
+        arr.push(e.target.value);
+      }
+    } else {
+      if (index !== -1) {
+        arr.splice(index, 1);
+      }
+    }
+    setData({ ...data, categories: arr });
   };
 
-  const handleTexareaChange = (e) => {
-    setData("texarea", e.target.value);
+  const handleTextareaChange = (e) => {
+    setData("description", e.target.value);
   };
 
   const handlePhotoUpload = (e) => {
@@ -55,8 +66,8 @@ export default function AddOffer(props) {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(errors);
     post(route("offer.store"));
+    setData(initialState);
   };
 
   const today = new Date();
@@ -146,8 +157,8 @@ export default function AddOffer(props) {
 
         <Textarea
           id="desc"
-          handleChange={handleTexareaChange}
-          error={errors.texarea}
+          handleChange={handleTextareaChange}
+          error={errors.description}
         />
 
         <SelectCategory
@@ -156,9 +167,9 @@ export default function AddOffer(props) {
         />
 
         <div className="btn-container">
-          <Link href="/">
-            <PrimaryButton color={"grey"}>Anuluj</PrimaryButton>
-          </Link>
+          <PrimaryButton color={"grey"} onClick={() => history.back()}>
+            Anuluj
+          </PrimaryButton>
 
           <PrimaryButton type="submit">Dodaj ofertę!</PrimaryButton>
         </div>

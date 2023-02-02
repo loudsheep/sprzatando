@@ -20,21 +20,16 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-const ErrorMessage = styled.span`
-  font-size: 13px;
-  color: ${({ theme }) => theme.colors.error};
-`;
-
-export const Textarea = ({ handleTexareaChange, id, error }) => {
+export const Textarea = ({ handleChange, id, error }) => {
   return (
     <Wrapper>
-      <Label className={error ? "error-label" : ""} htmlFor={id}>
+      <Label className={error ? "error-labe" : ""} htmlFor={id}>
         Opis
       </Label>
       <TextArea
         className={error ? "error" : ""}
         id={id}
-        onChange={handleTexareaChange}
+        onChange={handleChange}
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Wrapper>

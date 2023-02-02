@@ -19,7 +19,6 @@ export const FormWrapper = styled.form`
   height: 100%;
   max-width: 60rem;
   padding: 20px;
-  max-height: 80%;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -34,7 +33,7 @@ export const FormWrapper = styled.form`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin: 20px 0;
+    margin: 14px 0;
     input {
       width: 240px;
       margin: 5px;

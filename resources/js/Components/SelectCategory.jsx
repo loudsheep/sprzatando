@@ -10,12 +10,15 @@ import Checkbox from "@/Components/Atoms/Checkbox";
 export const CheckboxWrapper = styled.div`
   display: flex;
   width: 100%;
-  margin: 5px 0 20px;
+  margin: 10px 0 20px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   div {
     margin: 0 10px;
+  }
+  .checkbox-column{
+    
   }
 `;
 
@@ -41,18 +44,40 @@ export const SelectCategory = ({ handleCheckboxChange, error }) => {
     <>
       <StyledSubTitle error={error}>Wybierz kategorie</StyledSubTitle>
       <CheckboxWrapper>
-        {categories.map((category, i) => (
-          <div key={i}>
-            <Checkbox
-              id={category}
-              handleChange={handleCheckboxChange}
-              value={category}
-            />
-            <Label htmlFor={category} style={{ fontWeight: "normal" }}>
-              {category}
-            </Label>
-          </div>
-        ))}
+        <div className="checkbox-column">
+          {categories.map(
+            (category, i) =>
+              i % 2 === 0 && (
+                <div key={i}>
+                  <Checkbox
+                    id={category}
+                    handleChange={handleCheckboxChange}
+                    value={category}
+                  />
+                  <Label htmlFor={category} style={{ fontWeight: "normal" }}>
+                    {category}
+                  </Label>
+                </div>
+              )
+          )}
+        </div>
+        <div className="checkbox-column">
+          {categories.map(
+            (category, i) =>
+              i % 2 !== 0 && (
+                <div key={i}>
+                  <Checkbox
+                    id={category}
+                    handleChange={handleCheckboxChange}
+                    value={category}
+                  />
+                  <Label htmlFor={category} style={{ fontWeight: "normal" }}>
+                    {category}
+                  </Label>
+                </div>
+              )
+          )}
+        </div>
       </CheckboxWrapper>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </>
