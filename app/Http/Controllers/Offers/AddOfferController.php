@@ -49,7 +49,7 @@ class AddOfferController extends Controller
             // throw ValidationException::withMessages(['photos' => 'At least 1 photo required']);
 
             // TODO change this
-            $mainImage = "Some image";
+            $mainImage = "/defaults/house.jpg";
         } else {
             $mainImage = $request->file('photos.0')->store('uploads', 'public');
             $image = Image::make(public_path("storage/" . $mainImage))->fit(1000, 1000);

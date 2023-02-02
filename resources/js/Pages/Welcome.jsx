@@ -52,6 +52,7 @@ export default function Welcome({
                 description={offer.description}
                 price={offer.price}
                 image={offer.main_image}
+                owner={offer.creator.name}
                 category={offer.category}
                 city={offer.city}
                 key={i}
