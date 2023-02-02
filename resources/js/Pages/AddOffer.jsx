@@ -1,8 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm, Link } from "@inertiajs/react";
 import { FormField } from "@/Components/FormField";
-import { Label } from "../Components/FormField";
-import Checkbox from "@/Components/Atoms/Checkbox";
 import PrimaryButton from "../Components/Atoms/PrimaryButton";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -12,13 +10,13 @@ import {
   StyledTitle,
   StyledSubTitle,
   FormWrapper,
-  TextArea,
-  CheckboxWrapper,
   StyledPhotoBox,
   ImageSection,
   UploadedImgWrapper,
   DeleteButton,
 } from "./page-styles/AddOffer.styles";
+import { Textarea } from "../Components/Atoms/Textarea";
+import { SelectCategory } from "@/Components/SelectCategory";
 import IconPath from "../assets/img/UploadIcon.png";
 
 export default function AddOffer(props) {
@@ -55,20 +53,9 @@ export default function AddOffer(props) {
     setData("photos", array);
   };
 
-  const categories = [
-    "Sprzątanie mieszkań i domów",
-    "Mycie okien",
-    "Wywóz śmieci",
-    "Wywóz gruzu",
-    "Kompleksowe pranie tapicerek",
-    "Mycie samochodów",
-    "Koszenie ogrodu",
-    "Zakupy do domu",
-  ];
-
   const submit = (e) => {
     e.preventDefault();
-    // console.log(data)
+    console.log(errors);
     post(route("offer.store"));
   };
 
@@ -78,7 +65,9 @@ export default function AddOffer(props) {
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
       <Head title="Dodaj ofertę" />
+
       <StyledTitle>Dodaj swoją ofertę!</StyledTitle>
+
       <FormWrapper onSubmit={submit} enctype="multipart/form-data">
         <div className="inputs-container">
           <FormField
@@ -115,7 +104,6 @@ export default function AddOffer(props) {
           />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              
               name="date"
               value={data.selectedDate}
               onChange={(date) => {
@@ -127,7 +115,7 @@ export default function AddOffer(props) {
                 style: {
                   fontSize: "1.8rem",
                   width: "200px",
-                  margin: "30px 15px" ,
+                  margin: "30px 15px",
                 },
               }}
               renderInput={(props) => <TextField {...props} />}
@@ -139,9 +127,9 @@ export default function AddOffer(props) {
 
         <ImageSection>
           {data.photos &&
-            data.photos.map((photo , i) => (
+            data.photos.map((photo, i) => (
               <UploadedImgWrapper key={i}>
-                <DeleteButton type='button' onClick={() => deletePhoto(photo)}>
+                <DeleteButton type="button" onClick={() => deletePhoto(photo)}>
                   x
                 </DeleteButton>
                 <img src={URL.createObjectURL(photo)} alt="uploaded photo" />
@@ -156,29 +144,22 @@ export default function AddOffer(props) {
           <input type="file" id="input-file" onChange={handlePhotoUpload} />
         </ImageSection>
 
-        <Label htmlFor="desc">Opis</Label>
-        <TextArea id="desc" onChange={handleTexareaChange} />
+        <Textarea
+          id="desc"
+          handleChange={handleTexareaChange}
+          error={errors.texarea}
+        />
 
-        <StyledSubTitle>Wybierz kategorie</StyledSubTitle>
-        <CheckboxWrapper>
-          {categories.map((category, i) => (
-            <div key={i}>
-              <Checkbox
-                id={category}
-                handleChange={handleCheckboxChange}
-                value={category}
-              />
-              <Label htmlFor={category} style={{ fontWeight: "normal" }}>
-                {category}
-              </Label>
-            </div>
-          ))}
-        </CheckboxWrapper>
+        <SelectCategory
+          handleCheckboxChange={handleCheckboxChange}
+          error={errors.categories}
+        />
 
         <div className="btn-container">
-          <PrimaryButton type="submit" color={"grey"}>
-            Anuluj
-          </PrimaryButton>
+          <Link href="/">
+            <PrimaryButton color={"grey"}>Anuluj</PrimaryButton>
+          </Link>
+
           <PrimaryButton type="submit">Dodaj ofertę!</PrimaryButton>
         </div>
       </FormWrapper>

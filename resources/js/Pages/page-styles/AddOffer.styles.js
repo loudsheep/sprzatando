@@ -8,7 +8,8 @@ export const StyledTitle = styled.h1`
 `;
 export const StyledSubTitle = styled.h2`
   font-size: 1.9rem;
-  color: ${({ theme }) => theme.colors.darkGrey};
+  color: ${({ error, theme }) =>
+    error ? theme.colors.error : theme.colors.darkGrey};
   font-weight: bold;
   margin-top: 5rem;
 `;
@@ -23,6 +24,10 @@ export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .error {
+    color: ${({ theme }) => theme.colors.error};
+  }
 
   .inputs-container {
     flex-wrap: wrap;
@@ -58,17 +63,6 @@ export const TextArea = styled.textarea`
   resize: none;
 `;
 
-export const CheckboxWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  margin: 5px 0 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  div {
-    margin: 0 10px;
-  }
-`;
 export const ImageSection = styled.div`
   display: flex;
   justify-content: center;
@@ -113,4 +107,4 @@ export const DeleteButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
