@@ -26,15 +26,27 @@ class LoggedInUserController extends Controller
             return $city['city'];
         }, $cities);
 
-        $offers = DB::table('offers')->orderBy('created_at', 'desc')->limit(5)->get()->toArray();
+        $offers = DB::table('offers')->orderBy('created_at', 'desc')->get()->toArray();
+        for ($i=0; $i < count($offers); $i++) { 
+            $offers[$i]->category = str_replace(";", ", ", $offers[$i]->category);
+        }
 
-        // $minPrice
+        $categories = Offer::select('category')->get()->toArray();
+        $cat = [];
+        foreach ($categories as $value) {
+            foreach (explode(";", $value["category"]) as $c) {
+                if(!in_array($c, $cat)) {
+                    $cat[] = $c;
+                }
+            }
+        }
 
         return Inertia::render('Welcome', [
             'cities' => $cities,
             'offers' => $offers,
-            'minPrice' => Offer::min('price'),
-            'maxPrice' => Offer::max('price'),
+            'minPrice' => Offer::min('price') ?? 0,
+            'maxPrice' => Offer::max('price') ?? 0,
+            'categories' => $cat,
         ]);
     }
 }

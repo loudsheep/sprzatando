@@ -17,7 +17,7 @@ const OfferWrapper = styled.div`
   padding: 25px;
 `;
 
-export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {
+export default function Welcome({ auth, cities, offers, minPrice, maxPrice, categories }) {
   const dispatch = useDispatch();
   const categories = offers.map((offer) => offer.category);
   const prices = offers.map((offer) => offer.hourly_rate);
