@@ -66,8 +66,10 @@ export default function AddOffer(props) {
 
   const submit = (e) => {
     e.preventDefault();
-    post(route("offer.store"));
-    setData(initialState);
+    post(route("offer.store"), {
+      preserveScroll: true,
+      onSuccess: () => setData(initialState),
+    });
   };
 
   const today = new Date();
@@ -159,15 +161,17 @@ export default function AddOffer(props) {
           id="desc"
           handleChange={handleTextareaChange}
           error={errors.description}
+          value={data.description}
         />
 
         <SelectCategory
           handleCheckboxChange={handleCheckboxChange}
+          value={data.category}
           error={errors.categories}
         />
 
         <div className="btn-container">
-          <PrimaryButton color={"grey"} onClick={() => history.back()}>
+          <PrimaryButton color={"grey"} onClick={() => console.log(data)/* history.back()*/}>
             Anuluj
           </PrimaryButton>
 

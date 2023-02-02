@@ -10,6 +10,12 @@ const Wrapper = styled.div`
     color: ${({ theme }) => theme.colors.error};
   }
 `;
+
+const ErrorMessage = styled.span`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.error};
+`;
+
 const TextArea = styled.textarea`
   width: 100%;
   height: 35rem;
@@ -20,7 +26,7 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-export const Textarea = ({ handleChange, id, error }) => {
+export const Textarea = ({ handleChange, id, error, value }) => {
   return (
     <Wrapper>
       <Label className={error ? "error-labe" : ""} htmlFor={id}>
@@ -30,6 +36,7 @@ export const Textarea = ({ handleChange, id, error }) => {
         className={error ? "error" : ""}
         id={id}
         onChange={handleChange}
+        value={value}
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Wrapper>
