@@ -14,6 +14,7 @@ const OfferWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 25px;
 `;
 
 export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {

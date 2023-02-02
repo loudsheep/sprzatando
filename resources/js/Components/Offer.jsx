@@ -3,10 +3,9 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
-  max-width: 80rem;
+  max-width: 90rem;
   width: 100%;
-
+  margin: 20px;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   margin: 2rem;
@@ -23,9 +22,10 @@ const Wrapper = styled.div`
   }
   .info-wrapper {
     flex: 1;
-    width: 100%;
     display: flex;
+    width: 40rem;
     flex-direction: column;
+    max-height: 40rem;
     justify-content: space-between;
   }
   .span {
@@ -41,6 +41,9 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  @media (max-width: 576px) {
+    justify-content: center;
   }
 `;
 const Button = styled.button`
@@ -66,19 +69,25 @@ export const Offer = ({
   return (
     <Wrapper>
       <img
-        style={{ maxWidth: "100%", marginRight: "18px", flex: "1" }}
+        style={{ maxWidth: "28rem", marginRight: "18px", flex: "1" }}
         src={image}
         alt="house photo"
       />
       <div className="info-wrapper">
         <h2>{title}</h2>
-        <p>{description.slice(0, 100)}...</p>
+
+        <p>
+          {description.length > 100
+            ? `${description.slice(0, 100)} ...`
+            : description}
+        </p>
         <p>
           <strong>Kategorie:</strong> {category}
         </p>
         <p>
           <strong>Miasto:</strong> {city}
         </p>
+
         <div className="container">
           <div className="span">
             <span>{price} zł</span>

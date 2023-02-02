@@ -2,6 +2,20 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import { makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles({
+  slider: {
+    height: "3px",
+    // backgroundColor: "white",
+    track: {
+      backgroundColor: "green",
+    },
+    rail: {
+      backgroundColor: "yellow",
+    },
+  },
+});
 
 const SliderLabel = styled.label`
   color: #fff;
@@ -13,6 +27,7 @@ function valuetext(value) {
 }
 
 const FilterSlider = (props) => {
+  const classes = useStyles();
   const min = props.prices[0];
   const max = props.prices[1];
   const [value, setValue] = useState([min, max]);
@@ -42,6 +57,7 @@ const FilterSlider = (props) => {
         Cena: {minPrice}zł - {maxPrice}zł
       </SliderLabel>
       <Slider
+        className={classes.slider}
         value={value}
         onChange={sliderValueChangeHandler}
         valueLabelDisplay="auto"
