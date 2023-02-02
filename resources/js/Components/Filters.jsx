@@ -24,7 +24,7 @@ const DUMMY_FILTERS_TYPES = [
   },
 ];
 
-const Filters = (props) => {
+const Filters = () => {
   const categories = useSelector((state) => state.filterItems.categories);
   const cities = useSelector((state) => state.filterItems.cities);
   return (
