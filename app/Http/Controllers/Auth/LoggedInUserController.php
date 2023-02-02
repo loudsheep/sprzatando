@@ -20,15 +20,16 @@ class LoggedInUserController extends Controller
         // dd($request->user()->intrestedInOffers->first()->creator);
         // dd(Offer::first()->images->all());
         // dd($request->user()->reviews->avg('rating'));
+        // dd(Offer::with('creator')->orderBy('created_at', 'desc')->get()->toArray());
 
         $cities = Offer::select('city')->distinct()->get()->toArray();
         $cities = array_map(function ($city) {
             return $city['city'];
         }, $cities);
 
-        $offers = DB::table('offers')->orderBy('created_at', 'desc')->get()->toArray();
+        $offers = Offer::with('creator')->orderBy('created_at', 'desc')->get()->toArray();
         for ($i=0; $i < count($offers); $i++) { 
-            $offers[$i]->category = str_replace(";", ", ", $offers[$i]->category);
+            $offers[$i]["category"] = str_replace(";", ", ", $offers[$i]["category"]);
         }
 
         $categories = Offer::select('category')->get()->toArray();
