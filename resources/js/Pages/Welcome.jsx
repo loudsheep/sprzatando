@@ -17,37 +17,50 @@ const OfferWrapper = styled.div`
   padding: 25px;
 `;
 
-export default function Welcome({ auth, cities, offers, minPrice, maxPrice, categories }) {
+export default function Welcome({
+  auth,
+  cities,
+  offers,
+  minPrice,
+  maxPrice,
+  categories,
+}) {
   const dispatch = useDispatch();
-  // const categories = offers.map((offer) => offer.category);
-  // const cities = offers.map((offer) => offer.city);
-  const prices = offers.map((offer) => offer.hourly_rate);
-
   useEffect(() => {
-    dispatch(filterItemsActions.addFilterItems({ categories, cities, prices }));
-  }, [categories, cities, prices]);
+    dispatch(
+      filterItemsActions.addFilterItems({
+        categories,
+        cities,
+        minPrice,
+        maxPrice,
+      })
+    );
+  }, [categories, cities, minPrice, maxPrice]);
   return (
     <>
       <Head title="Welcome" />
       <header>
         <Navbar auth={auth} />
-        <FilterSection offers={offers} prices={[minPrice, maxPrice]}/>
+        <FilterSection />
       </header>
-      <section>
-        <OfferWrapper>
-          {offers.map((offer, i) => (
-            <Offer
-              title={offer.title}
-              description={offer.description}
-              price={offer.price}
-              image={offer.main_image}
-              category={offer.category}
-              city={offer.city}
-              key={i}
-            />
-          ))}
-        </OfferWrapper>
-      </section>
+      <main>
+        <section>
+          <OfferWrapper>
+            {offers.map((offer, i) => (
+              <Offer
+                title={offer.title}
+                description={offer.description}
+                price={offer.price}
+                image={offer.main_image}
+                owner={offer.creator.name}
+                category={offer.category}
+                city={offer.city}
+                key={i}
+              />
+            ))}
+          </OfferWrapper>
+        </section>
+      </main>
     </>
   );
 }
