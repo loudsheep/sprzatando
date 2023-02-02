@@ -39,7 +39,7 @@ export default function Welcome({ auth, cities, offers, minPrice, maxPrice }) {
               title={offer.title}
               description={offer.description}
               price={offer.price}
-              main_image={offer.main_image}
+              image={offer.main_image}
               category={offer.category}
               city={offer.city}
               key={i}

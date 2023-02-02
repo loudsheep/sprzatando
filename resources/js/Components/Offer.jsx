@@ -61,7 +61,6 @@ export const Offer = ({
   image,
   category,
   city,
-  main_image,
   isOwner = false,
 }) => {
   return (
