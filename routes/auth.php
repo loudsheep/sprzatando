@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Offers\FollowOfferController;
 use App\Http\Controllers\Offers\AddOfferController;
 use App\Http\Controllers\Offers\CreatedOffersController;
 use Illuminate\Support\Facades\Route;
@@ -99,4 +100,8 @@ Route::middleware('auth')->group(function () {
     Route::get('offer/{id}', [CreatedOffersController::class, 'details'])
         ->middleware('auth')
         ->name('offer.details');
+
+    Route::post('follow-offer/{offer}', [FollowOfferController::class, 'store'])
+        ->middleware('auth')
+        ->name('offer.follow');
 });
