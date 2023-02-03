@@ -12,7 +12,7 @@ class CreatedOffersController extends Controller
 {
     public function showCreated(Request $request)
     {
-        $offers = $request->user()->createdOffers->toArray();
+        $offers = $request->user()->createdOffers()->with('creator')->orderBy('created_at', 'desc')->get()->toArray();
 
         return Inertia::render('UserOffer', [
             'createdOffers' => $offers

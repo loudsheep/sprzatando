@@ -24,20 +24,23 @@ class AddOfferController extends Controller
         $validatedData = $request->validate(
             [
                 'title' => ['required', 'max:100'],
-                'description' => ['required', 'max:500'],
+                'description' => ['required', 'max:500', 'min:50'],
                 'selectedDate' => ['date'],
                 'city' => ['required', 'max:50'],
                 'price' => ['numeric'],
                 'photos[]' => ['image'],
+                'photos' => ['array', 'min:1'],
                 'categories' => ['array', 'required']
             ],
             [
                 'price.numeric' => 'The price must be a number',
+                'description.required' => 'description.required',
+                'description.min' => 'description min 50 chars',
                 // 'selectedDate.date' => '',
                 // 'title.required' => '',
-                // 'title.max:100' => '',
+                // 'title.max' => '',
                 // 'city.required' => '',
-                // 'city.max:50' => '',
+                // 'city.max' => '',
                 // 'photos.*.image' => 'Only image accepatble',
                 // 'categories.required' => 'At least 1 category required'
             ]

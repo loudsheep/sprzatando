@@ -6,8 +6,13 @@ import { Head } from "@inertiajs/react";
 // import styled from "styled-components";
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+width: 100%;
+margin-top: 4rem;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+padding: 25px;
 `;
 
 export default function AddOffer({ auth, errors, createdOffers }) {
@@ -24,6 +29,7 @@ export default function AddOffer({ auth, errors, createdOffers }) {
             price={offer.price}
             category={offer.category}
             city={offer.city}
+            owner={offer.creator.name}
             isOwner={true}
             key={i}
           />
