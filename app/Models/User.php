@@ -58,7 +58,7 @@ class User extends Authenticatable
             "email" => $this->email,
         ]);
 
-        $this->notify(new ResetPasswordNotification($url));
+        $this->notify(new ResetPasswordNotification($url, $this->name));
     }
 
 

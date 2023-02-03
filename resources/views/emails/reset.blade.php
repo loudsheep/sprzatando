@@ -1,4 +1,4 @@
-Hello there!
+Hello there <?= $username; ?>!
 <br>
 Your password reset link:
 
