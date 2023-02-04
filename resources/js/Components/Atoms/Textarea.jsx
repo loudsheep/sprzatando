@@ -29,7 +29,7 @@ const TextArea = styled.textarea`
 export const Textarea = ({ handleChange, id, error, value }) => {
   return (
     <Wrapper>
-      <Label className={error ? "error-labe" : ""} htmlFor={id}>
+      <Label className={error ? "error-label" : ""} htmlFor={id}>
         Opis
       </Label>
       <TextArea

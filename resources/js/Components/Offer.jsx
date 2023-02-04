@@ -72,14 +72,19 @@ export const Offer = ({
   return (
     <Wrapper>
       <img
-        style={{ maxWidth: "28rem", marginRight: "auto", flex: "1", marginLeft: "auto" }}
+        style={{
+          maxWidth: "28rem",
+          marginRight: "auto",
+          flex: "1",
+          marginLeft: "auto",
+        }}
         src={image}
         alt="house photo"
       />
       <div className="info-wrapper">
         <div>
           <h2>{title}</h2>
-          <p>autor: {owner}</p>
+          {owner && <p>autor: {owner}</p>}
         </div>
 
         <p>

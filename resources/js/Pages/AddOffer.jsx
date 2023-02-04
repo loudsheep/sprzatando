@@ -1,11 +1,13 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm} from "@inertiajs/react";
+import { useState } from "react";
 import { FormField } from "@/Components/FormField";
 import PrimaryButton from "../Components/Atoms/PrimaryButton";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/";
 import { TextField } from "@material-ui/core";
+import { SubmitModal } from "../Components/SubmitModal";
 import {
   StyledTitle,
   StyledSubTitle,
@@ -31,6 +33,7 @@ export default function AddOffer(props) {
     selectedDate: new Date(),
   };
   const { data, setData, post, errors } = useForm(initialState);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onHandleChange = (event) => {
     setData(event.target.name, event.target.value);
@@ -68,7 +71,11 @@ export default function AddOffer(props) {
     e.preventDefault();
     post(route("offer.store"), {
       preserveScroll: true,
-      onSuccess: () => setData(initialState),
+      onError: () => console.log(errors),
+      onSuccess: () => {
+        setData(initialState);
+        setIsOpen(true);
+      },
     });
   };
 
@@ -77,11 +84,10 @@ export default function AddOffer(props) {
 
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
+      <SubmitModal isOpen={isOpen}  onClose={() => setIsOpen(false)}/>
       <Head title="Dodaj ofertę" />
-
       <StyledTitle>Dodaj swoją ofertę!</StyledTitle>
-
-      <FormWrapper onSubmit={submit} enctype="multipart/form-data">
+      <FormWrapper onSubmit={submit}>
         <div className="inputs-container">
           <FormField
             className="input"
@@ -171,7 +177,7 @@ export default function AddOffer(props) {
         />
 
         <div className="btn-container">
-          <PrimaryButton color={"grey"} onClick={() => console.log(data)/* history.back()*/}>
+          <PrimaryButton color={"grey"} onClick={() => history.back()}>
             Anuluj
           </PrimaryButton>
 
