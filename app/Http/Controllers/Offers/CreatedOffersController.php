@@ -29,15 +29,4 @@ class CreatedOffersController extends Controller
     {
         dd($request->user()->contractedOffers()->where('is_done', '=', true)->get()->toArray());
     }
-
-    public function details(Request $request)
-    {
-        $offer = Offer::find($request->id);
-        if ($offer == null) {
-            abort(404);
-        }
-
-        $creator = $offer->creator;
-        dd($creator->toArray());
-    }
 }

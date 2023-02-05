@@ -97,10 +97,6 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('offers.done');
 
-    Route::get('offer/{id}', [CreatedOffersController::class, 'details'])
-        ->middleware('auth')
-        ->name('offer.details');
-
     Route::post('follow-offer/{offer}', [FollowOfferController::class, 'store'])
         ->middleware('auth')
         ->name('offer.follow');

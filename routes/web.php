@@ -20,7 +20,6 @@ use Inertia\Inertia;
 
 Route::get('/', [LoggedInUserController::class, 'show']);
 
-Route::get('/offer-details', [OfferDetailsController::class, 'show'])->name('offer.details');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -31,5 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+// Routes that do not require user to be logged in
+Route::get('/offer/{id}', [OfferDetailsController::class, 'show'])->name('offer.details');
+
 
 require __DIR__ . '/auth.php';
