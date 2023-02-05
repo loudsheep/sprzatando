@@ -21,20 +21,7 @@ class EmailVerificationNotificationController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        // $request->user()->sendEmailVerificationNotification();
-        $emailUrl = URL::temporarySignedRoute(
-            "verification.verify",
-            Carbon::now()->addMinutes(60),
-            [
-                "id" => $request->user()->id,
-                "hash" => sha1($request->user()->email),
-            ]
-        );
-
-        Mail::send('emails.verify', ["url" => $emailUrl], function ($message) use ($request) {
-            $message->to($request->user()->email);
-            $message->subject("Zweryfikuj swój adres email");
-        });
+        $request->user()->sendEmailVerificationNotification();
 
         return back()->with('status', 'verification-link-sent');
     }
