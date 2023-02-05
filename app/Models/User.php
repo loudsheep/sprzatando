@@ -65,7 +65,7 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($url, $this->name));
     }
 
-    public function sendEmailVerificationNotification()
+    public function sendEmailVerificationNotification($ip = null)
     {
         $url = URL::temporarySignedRoute(
             "verification.verify",
@@ -76,7 +76,7 @@ class User extends Authenticatable
             ]
         );
 
-        $this->notify(new VerifyEmailNotification($url, $this->name));
+        $this->notify(new VerifyEmailNotification($url, $this->name, $ip));
     }
 
 

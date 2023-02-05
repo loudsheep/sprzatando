@@ -13,17 +13,19 @@ class VerifyEmailNotification extends Notification
 
     private $url;
     private $username;
+    private $ip;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($url, $username)
+    public function __construct($url, $username, $ip)
     {
         //
         $this->url = $url;
         $this->username = $username;
+        $this->ip = $ip;
     }
 
     /**
@@ -49,6 +51,7 @@ class VerifyEmailNotification extends Notification
             ->view("emails.verify", [
                 "url" => $this->url,
                 "username" => $this->username,
+                "ip" => $this->ip,
             ]);
     }
 
