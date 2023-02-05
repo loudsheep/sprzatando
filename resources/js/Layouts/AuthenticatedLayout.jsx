@@ -128,6 +128,7 @@ export default function Authenticated({ auth, children }) {
                 </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
+            
           </UserInfoBox>
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </MobileWrapper>

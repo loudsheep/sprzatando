@@ -36,6 +36,7 @@ const StyledButton = styled(Link)`
   color: white;
   border-radius: 8px;
   text-align: center;
+  height: 45px;
   cursor: pointer;
   :hover {
     opacity: 0.8;

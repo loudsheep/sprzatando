@@ -23,12 +23,15 @@ const Wrapper = styled.div`
   .info-wrapper {
     flex: 1;
     display: flex;
-    width: 40rem;
+    width: 100%;
+    max-width: 50rem;
     flex-direction: column;
     max-height: 40rem;
     justify-content: space-between;
     margin-left: 18px;
     margin-right: 18px;
+    overflow-wrap: break-word; 
+
   }
   .span {
     background-color: ${({ theme }) => theme.colors.darkGrey};

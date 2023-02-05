@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm} from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { useState } from "react";
 import { FormField } from "@/Components/FormField";
 import PrimaryButton from "../Components/Atoms/PrimaryButton";
@@ -79,12 +79,13 @@ export default function AddOffer(props) {
     });
   };
 
+
   const today = new Date();
   const maxDate = new Date(today.setMonth(today.getMonth() + 1));
 
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
-      <SubmitModal isOpen={isOpen}  onClose={() => setIsOpen(false)}/>
+      <SubmitModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       <Head title="Dodaj ofertę" />
       <StyledTitle>Dodaj swoją ofertę!</StyledTitle>
       <FormWrapper onSubmit={submit}>
