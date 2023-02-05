@@ -29,7 +29,7 @@ class AddOfferController extends Controller
                 'city' => ['required', 'max:50'],
                 'price' => ['numeric'],
                 'photos[]' => ['image'],
-                'photos' => ['array', 'min:1'],
+                'photos' => ['array'],
                 'categories' => ['array', 'required']
             ],
             [

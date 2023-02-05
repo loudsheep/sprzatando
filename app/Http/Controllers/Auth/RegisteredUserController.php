@@ -47,19 +47,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // send email verification when register
-        $emailUrl = URL::temporarySignedRoute(
-            "verification.verify",
-            Carbon::now()->addMinutes(60),
-            [
-                "id" => $user->id,
-                "hash" => sha1($user->email),
-            ]
-        );
-
-        Mail::send('emails.verify', ["url" => $emailUrl], function ($message) use ($user) {
-            $message->to($user->email);
-            $message->subject("Zweryfikuj swój adres email");
-        });
+        $user->sendEmailVerificationNotification();
 
         event(new Registered($user));
 

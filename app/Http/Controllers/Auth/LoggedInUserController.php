@@ -37,7 +37,11 @@ class LoggedInUserController extends Controller
                 ->where('is_reported', '==', 'false')
                 ->get()->toArray();
         } else {
-            $offers = Offer::with('creator')->orderBy('created_at', 'desc')->get()->toArray();
+            $offers = Offer::with('creator')->orderBy('created_at', 'desc')
+                ->where('is_done', '==', 'false')
+                ->where('is_banned', '==', 'false')
+                ->where('is_reported', '==', 'false')
+                ->get()->toArray();
         }
 
         for ($i = 0; $i < count($offers); $i++) {
