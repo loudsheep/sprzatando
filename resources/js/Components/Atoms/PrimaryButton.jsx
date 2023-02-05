@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-  background: ${({ theme }) => theme.gradient};
+  background: ${({ theme, color }) => color ? color : theme.gradient};
   color: white;
   padding: 10px 30px;
   border-radius: 10px;
@@ -25,7 +25,7 @@ export default function PrimaryButton({
   color
 }) {
   return (
-    <Button type={type} onClick={onClick} disabled={processing}>
+    <Button type={type} onClick={onClick} disabled={processing} color={color}>
       {children}
     </Button>
   );

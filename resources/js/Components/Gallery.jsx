@@ -58,7 +58,7 @@ const CloseButton = styled.button`
 
 export const Gallery = ({ images, mainImage }) => {
   const [showGallery, setShowGallery] = useState(false);
-  const [currentImg, setCurrentImg] = useState(mainImage);
+  const [currentImg, setCurrentImg] = useState();
   const imgs = [...images, mainImage];
   return (
     <>
@@ -79,7 +79,10 @@ export const Gallery = ({ images, mainImage }) => {
         <MainImage
           src={mainImage}
           alt="main photo"
-          onClick={() => setShowGallery(true)}
+          onClick={() => {
+            setShowGallery(true);
+            setCurrentImg(mainImage);
+          }}
         />
       </div>
       {showGallery && (
@@ -90,6 +93,7 @@ export const Gallery = ({ images, mainImage }) => {
             {imgs.map((img) => (
               <AdditionalPhotos
                 src={img}
+                key={img}
                 alt="photo"
                 isActive={img === currentImg}
                 onClick={() => setCurrentImg(img)}
