@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Link } from "@inertiajs/react";
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
   display: flex;
   flex-wrap: wrap;
   max-width: 90rem;
@@ -30,8 +31,7 @@ const Wrapper = styled.div`
     justify-content: space-between;
     margin-left: 18px;
     margin-right: 18px;
-    overflow-wrap: break-word; 
-
+    overflow-wrap: break-word;
   }
   .span {
     background-color: ${({ theme }) => theme.colors.darkGrey};
@@ -63,6 +63,7 @@ const Button = styled.button`
 `;
 
 export const Offer = ({
+  id,
   title,
   description,
   price,
@@ -73,7 +74,7 @@ export const Offer = ({
   isOwner = false,
 }) => {
   return (
-    <Wrapper>
+    <Wrapper href={`/offer/${id}`}>
       <img
         style={{
           maxWidth: "28rem",

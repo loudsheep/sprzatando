@@ -2,8 +2,8 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import styled from "styled-components";
-import BurgerBtn from "./BurgerBtn";
-import logoPath from "../assets/img/transparentLogo.png";
+import BurgerBtn from "../BurgerBtn";
+import logoPath from "../../assets/img/transparentLogo.png";
 import { useWidth } from "@/hooks/useWidth";
 
 const NavMobile = styled.nav`
@@ -22,7 +22,7 @@ const NavMobile = styled.nav`
 `;
 
 const NavDesktop = styled.nav`
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   display: flex;
   justify-content: space-between;

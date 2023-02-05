@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import SuccesIconPath from "@/assets/img/succesIcon.png";
 import modalBackgroundPath from "@/assets/img/modalBackground.png";
-import PrimaryButton from "../Components/Atoms/PrimaryButton";
+import PrimaryButton from "./Atoms/PrimaryButton";
 
 const Wrapper = styled.div`
   position: fixed;

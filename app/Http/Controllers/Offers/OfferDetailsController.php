@@ -23,7 +23,11 @@ class OfferDetailsController extends Controller
         $creator = $offer->creator->toArray();
 
         // additional images MAY BE EMPTY! (does not include main image)
+        $urls = [];
         $images = $offer->images->toArray();
+        foreach($images as $image) {
+            array_push($urls, $image['url']);
+        }
 
         $offer = $offer->toArray();
         $offer["ends"] = date('d.m.Y', strtotime($ends));
@@ -32,7 +36,7 @@ class OfferDetailsController extends Controller
         return Inertia::render('OfferDetails', [
             "offer" => $offer,
             'creator' => $creator,
-            'images' => $images
+            'images' => $urls
         ]);
     }
 }

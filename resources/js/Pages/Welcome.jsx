@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
-import { Navbar } from "@/Components/Navbar";
-import FilterSection from "@/Components/FilterSection";
+import { Navbar } from "@/Components/Navigations/Navbar";
+import FilterSection from "@/Components/FilterItems/FilterSection";
 import { Offer } from "@/Components/Offer";
 import { useDispatch } from "react-redux";
 import { filterItemsActions } from "@/store/filter-items";
@@ -48,6 +48,7 @@ export default function Welcome({
           <OfferWrapper>
             {offers.map((offer, i) => (
               <Offer
+                id={offer.id}
                 title={offer.title}
                 description={offer.description}
                 price={offer.price}

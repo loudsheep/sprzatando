@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "./Atoms/Button";
+import Button from "../Atoms/Button";
 import Filters from "./Filters";
 
 const FilterWrapper = styled.div`

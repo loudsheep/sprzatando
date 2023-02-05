@@ -6,23 +6,24 @@ import { Head } from "@inertiajs/react";
 // import styled from "styled-components";
 
 const Wrapper = styled.div`
-width: 100%;
-margin-top: 4rem;
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
-padding: 25px;
+  width: 100%;
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 25px;
 `;
 
 export default function AddOffer({ auth, errors, createdOffers }) {
   return (
     <AuthenticatedLayout auth={auth} errors={errors}>
-      <Head title="User Offer" />
+      <Head title="Twoje oferty" />
       <Wrapper>
         <h1>Twoje oferty: </h1>
         {createdOffers.map((offer, i) => (
           <Offer
+            id={offer.id}
             image={offer.main_image}
             title={offer.title}
             description={offer.description}
