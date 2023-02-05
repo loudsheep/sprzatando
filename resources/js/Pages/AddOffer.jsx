@@ -67,6 +67,12 @@ export default function AddOffer(props) {
     setData("photos", array);
   };
 
+  const handleCheckboxReset = () => {
+    const elements = document.querySelectorAll("input[type=checkbox]");
+    elements.forEach((el) => (el.checked = false));
+    setData(initialState);
+  };
+
   const submit = (e) => {
     e.preventDefault();
     post(route("offer.store"), {
@@ -74,11 +80,11 @@ export default function AddOffer(props) {
       onError: () => console.log(errors),
       onSuccess: () => {
         setData(initialState);
+        handleCheckboxReset();
         setIsOpen(true);
       },
     });
   };
-
 
   const today = new Date();
   const maxDate = new Date(today.setMonth(today.getMonth() + 1));
