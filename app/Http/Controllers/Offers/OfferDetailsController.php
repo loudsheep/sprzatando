@@ -10,15 +10,6 @@ use Inertia\Inertia;
 
 class OfferDetailsController extends Controller
 {
-    // public function show(Request $request)
-    // {
-    //     // $offers = $request->offer()->createdOffers()->with('creator')->orderBy('created_at', 'desc')->get()->toArray();
-
-    //     return Inertia::render('OfferDetails', [
-    //         "offer" => 'offer detailss'
-    //     ]);
-    // }
-
     public function show(Request $request)
     {
         // offer info
@@ -26,6 +17,7 @@ class OfferDetailsController extends Controller
         if ($offer == null) {
             abort(404);
         }
+        $ends = $offer->ends;
 
         // user that created this offer
         $creator = $offer->creator->toArray();
@@ -33,8 +25,12 @@ class OfferDetailsController extends Controller
         // additional images MAY BE EMPTY! (does not include main image)
         $images = $offer->images->toArray();
 
+        $offer = $offer->toArray();
+        $offer["ends"] = date('d.m.Y', strtotime($ends));
+        // $offer["ended"] = false;
+
         return Inertia::render('OfferDetails', [
-            "offer" => $offer->toArray(),
+            "offer" => $offer,
             'creator' => $creator,
             'images' => $images
         ]);
