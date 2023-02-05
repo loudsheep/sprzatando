@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
+
 class CreatedOffersController extends Controller
 {
     public function showCreated(Request $request)

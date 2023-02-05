@@ -52,7 +52,7 @@ export default function Authenticated({ auth, children }) {
 
   return (
     <>
-      {width > 992 && (
+      {width >= 992 && (
         <Wrapper>
           <LogoWrapper>
             <Link href="/">
