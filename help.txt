@@ -1,6 +1,0 @@
--Miasto
--Kod-pocztowy
--cena /h
--zdjęcia
--opis
--kategorie

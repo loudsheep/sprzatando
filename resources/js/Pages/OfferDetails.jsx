@@ -1,7 +1,11 @@
 import React from "react";
 import { Navbar } from "../Components/Navigations/Navbar";
 import { Head } from "@inertiajs/react";
-import { Wrapper, StyledTitle } from "./page-styles/OfferDetails.styles";
+import {
+  Wrapper,
+  StyledTitle,
+  StyledSubtitle,
+} from "./page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import styled from "styled-components";
 
@@ -15,9 +19,11 @@ export default function OfferDetails({ images, offer }) {
         <div className="section_column-first">
           <StyledTitle>{offer.title}</StyledTitle>
           <Gallery images={images} mainImage={offer.main_image} />
-          <p>{offer.description}</p>
+          <div style={{ overflowWrap: "break-word" }}>
+            <StyledSubtitle>Opis</StyledSubtitle>
+            <p>{offer.description}</p>
+          </div>
         </div>
-        {console.log(offer)}
         <div className="section_column-second">
           <p>{offer.creator.name}</p>
           <p>
