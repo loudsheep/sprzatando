@@ -79,7 +79,6 @@ export default function DeleteUserForm({ className }) {
               value={data.password}
               handleChange={(e) => setData("password", e.target.value)}
               className="mt-1 block w-3/4"
-              isFocused
               placeholder="Password"
             />
           </div>
