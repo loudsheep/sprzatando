@@ -96,7 +96,9 @@ export const Navbar = ({ auth }) => {
       {windowWidth > 992 && (
         <Fragment>
           <NavDesktop>
-            <LogoWrapperDesktop src={logoPath} />
+            <Link href="/">
+              <LogoWrapperDesktop src={logoPath} />
+            </Link>
             <div>
               <StyledLink href="#">Pomoc</StyledLink>
               <StyledLink href="#">Ranking</StyledLink>
