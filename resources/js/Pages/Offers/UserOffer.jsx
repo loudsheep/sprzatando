@@ -31,6 +31,7 @@ export default function AddOffer({ auth, errors, createdOffers }) {
             category={offer.category}
             city={offer.city}
             owner={offer.creator.name}
+            createdAt={offer.created_at}
             isOwner={true}
             key={i}
           />

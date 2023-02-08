@@ -67,6 +67,7 @@ const getTimeDifference = (createdAt) => {
   const today = new Date();
   const timeDifference = today.getTime() - createdDate.getTime();
 
+  let seconds = Math.floor(timeDifference / 1000);
   let minutes = Math.floor(timeDifference / (1000 * 60));
   let hours = Math.floor(timeDifference / (1000 * 60 * 60));
   let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
@@ -86,6 +87,9 @@ const getTimeDifference = (createdAt) => {
     "gru",
   ];
 
+  if (seconds < 60) {
+    return seconds + " sec temu";
+  }
   if (minutes < 60) {
     return minutes + " min temu";
   } else if (hours < 24) {
