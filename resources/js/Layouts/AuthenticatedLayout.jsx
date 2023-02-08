@@ -85,7 +85,7 @@ export default function Authenticated({ auth, children }) {
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
-        {/* //To do */}
+          {/* //To do */}
           <UserNavMenu />
 
           <ChildrenWrapper>{children}</ChildrenWrapper>
@@ -94,11 +94,9 @@ export default function Authenticated({ auth, children }) {
       {width < 992 && (
         <MobileWrapper>
           <UserInfoBox>
-            <LogoWrapper>
-              <Link href="/">
-                <img src={logoPath} alt="logo" style={{ width: "70px" }} />
-              </Link>
-            </LogoWrapper>
+            <Link href="/">
+              <img src={logoPath} alt="logo" style={{ width: "70px" }} />
+            </Link>
             <Dropdown>
               <Dropdown.Trigger>
                 <span className="inline-flex rounded-md">
@@ -128,7 +126,6 @@ export default function Authenticated({ auth, children }) {
                 </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
-            
           </UserInfoBox>
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </MobileWrapper>

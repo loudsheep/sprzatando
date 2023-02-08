@@ -53,7 +53,7 @@ const Text = styled.p`
   }
 `;
 
-const FilterSection = () => {
+const FilterSection = ({offers}) => {
   return (
     <SectionFilterWrapper>
       <TextWrapper>
@@ -61,7 +61,7 @@ const FilterSection = () => {
         <Text>Wybierz jedną z tysiąca usług sprzątających</Text>
         <Button text={"Sprawdź"} />
       </TextWrapper>
-      <FiltersWrapper/>
+      <FiltersWrapper offers={offers}/>
     </SectionFilterWrapper>
   );
 };

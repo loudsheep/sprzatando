@@ -15,7 +15,6 @@ const Image = styled.img`
 const MainImage = styled.img`
   width: 100%;
   max-width: 45rem;
-  margin: 20px;
   cursor: pointer;
   transition: transform 0.5s ease;
   &:hover {
@@ -25,6 +24,7 @@ const MainImage = styled.img`
 
 const GalleryWrapper = styled.div`
   position: fixed;
+  z-index: 1000;
   top: 0;
   bottom: 0;
   right: 0;

@@ -25,13 +25,13 @@ const FiltersForm = styled.form`
     flex-direction: column;
     align-items: center;
 `
-const FiltersWrapper = () => {
+const FiltersWrapper = ({offers}) => {
   return (
     <FilterWrapper>
       <FilterHeader>Filtry</FilterHeader>
       <FiltersForm>
         <Filters></Filters>
-        <Button text={"Pokaż 324 oferty"} width={"100%"} type={'submit'}></Button>
+        <Button text={`Pokaż ${offers.length}   oferty`} width={"100%"} type={'submit'}></Button>
       </FiltersForm>
     </FilterWrapper>
   );

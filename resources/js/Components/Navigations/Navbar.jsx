@@ -72,10 +72,12 @@ export const Navbar = ({ auth }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <Fragment>
+    <Fragment >
       {windowWidth < 992 && (
         <Fragment>
-          <LogoWrapperMobile src={logoPath} />
+          <Link href="/">
+            <LogoWrapperMobile src={logoPath} />
+          </Link>
           <BurgerBtn open={open} setOpen={setOpen} />
           <NavMobile open={open}>
             <>

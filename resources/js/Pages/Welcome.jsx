@@ -41,7 +41,7 @@ export default function Welcome({
       <Head title="Welcome" />
       <header>
         <Navbar auth={auth} />
-        <FilterSection />
+        <FilterSection offers={offers}/>
       </header>
       <main>
         <section>
