@@ -13,10 +13,19 @@ class CreatedOffersController extends Controller
 {
     public function showCreated(Request $request)
     {
-        $offers = $request->user()->createdOffers()->with('creator')->orderBy('created_at', 'desc')->get()->toArray();
+        $allOffers = $request->user()->createdOffers()->with('creator')
+            ->orderBy('created_at', 'desc')->get()->toArray();
+        $bannedOffers = $request->user()->createdOffers()->with('creator')
+            ->where('is_banned', '=', true)
+            ->orderBy('created_at', 'desc')->get()->toArray();
+        $doneOffers = $request->user()->createdOffers()->with('creator')
+            ->where('is_done', '=', true)
+            ->orderBy('created_at', 'desc')->get()->toArray();
 
         return Inertia::render('UserOffer', [
-            'createdOffers' => $offers
+            'createdOffers' => $allOffers,
+            'bannedOffers' => $bannedOffers,
+            'doneOffers' => $doneOffers
         ]);
     }
 

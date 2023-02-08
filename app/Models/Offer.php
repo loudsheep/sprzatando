@@ -27,6 +27,7 @@ class Offer extends Model
     ];
 
 
+    // relations
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');
@@ -51,5 +52,13 @@ class Offer extends Model
     public function review()
     {
         return $this->hasOne(UserReviews::class, 'offer_id', 'id');
+    }
+
+    // queries
+    public static function getOffersForMainPage()
+    {
+        return Offer::with('creator')->orderBy('created_at', 'desc')
+            ->where('is_done', '==', 'false')
+            ->where('is_banned', '==', 'false');
     }
 }
