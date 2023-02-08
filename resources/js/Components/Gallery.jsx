@@ -122,6 +122,7 @@ export const Gallery = ({ images, mainImage }) => {
               ) : (
                 <GalleryDot
                   isActive={img === currentImg}
+                  key={img}
                   onClick={() => setCurrentImg(img)}
                 />
               )

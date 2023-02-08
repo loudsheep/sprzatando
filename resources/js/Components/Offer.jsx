@@ -47,7 +47,7 @@ const Wrapper = styled(Link)`
     align-items: center;
     justify-content: space-between;
   }
-  @media (max-width: 576px) {
+  @media (max-width: 992px) {
     justify-content: center;
   }
 `;
@@ -62,6 +62,41 @@ const Button = styled.button`
   text-align: center;
 `;
 
+const getTimeDifference = (createdAt) => {
+  const createdDate = new Date(createdAt);
+  const today = new Date();
+  const timeDifference = today.getTime() - createdDate.getTime();
+
+  let minutes = Math.floor(timeDifference / (1000 * 60));
+  let hours = Math.floor(timeDifference / (1000 * 60 * 60));
+  let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+  let monthNames = [
+    "sty",
+    "lut",
+    "mar",
+    "kwi",
+    "maj",
+    "cze",
+    "lip",
+    "sie",
+    "wrz",
+    "paź",
+    "lis",
+    "gru",
+  ];
+
+  if (minutes < 60) {
+    return minutes + " min temu";
+  } else if (hours < 24) {
+    return hours + " h temu";
+  } else if (days < 4) {
+    return days + " dni temu";
+  } else {
+    return `${createdDate.getDate()} ${monthNames[createdDate.getMonth()]}`;
+  }
+};
+
 export const Offer = ({
   id,
   title,
@@ -71,6 +106,7 @@ export const Offer = ({
   category,
   city,
   owner,
+  createdAt,
   isOwner = false,
 }) => {
   return (
@@ -78,6 +114,7 @@ export const Offer = ({
       <img
         style={{
           maxWidth: "28rem",
+          width: "100%",
           marginRight: "auto",
           flex: "1",
           marginLeft: "auto",
@@ -86,11 +123,17 @@ export const Offer = ({
         alt="house photo"
       />
       <div className="info-wrapper">
-        <div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <h2>{title}</h2>
-          {owner && <p>autor: {owner}</p>}
+          <p>{getTimeDifference(createdAt)}</p>
         </div>
-
+        {owner && <p>autor: {owner}</p>}
         <p>
           {description.length > 100
             ? `${description.slice(0, 100)} ...`
