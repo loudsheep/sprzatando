@@ -16,7 +16,10 @@ class LoggedInUserController extends Controller
 {
     public function show(Request $request)
     {
-        $cities = Offer::select('city')->distinct()->get()->toArray();
+        $cities = Offer::select('city')->distinct()
+            ->where('is_done', '==', 'false')
+            ->where('is_banned', '==', 'false')
+            ->get()->toArray();
         $cities = array_map(function ($city) {
             return $city['city'];
         }, $cities);
@@ -24,13 +27,23 @@ class LoggedInUserController extends Controller
         // if user is logged in
         if (Auth::check()) {
             $offers = Offer::getOffersForMainPage()
-                ->where('creator_id', '!=', $request->user()->id)
-                ->get()->toArray();
+                ->where('creator_id', '!=', $request->user()->id);
         } else {
-            $offers = Offer::getOffersForMainPage()
-                ->get()->toArray();
+            $offers = Offer::getOffersForMainPage();
         }
 
+        // fiters
+        if ($request->location !== null) {
+            $offers = $offers->where('city', 'like', '%' . $request->location . '%');
+        }
+
+        if ($request->cleaning !== null) {
+            $offers = $offers->where('category', 'like', '%' . $request->cleaning . '%');
+        }
+
+        $offers = $offers->get()->toArray();
+
+        // categories
         for ($i = 0; $i < count($offers); $i++) {
             $offers[$i]["category"] = str_replace(";", ", ", $offers[$i]["category"]);
         }
