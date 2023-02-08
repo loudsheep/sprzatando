@@ -33,7 +33,7 @@ class OfferDetailsController extends Controller
         $offer["ends"] = date('d.m.Y', strtotime($ends));
         // $offer["ended"] = false;
 
-        return Inertia::render('OfferDetails', [
+        return Inertia::render('Offers/OfferDetails', [
             "offer" => $offer,
             'creator' => $creator,
             'images' => $urls

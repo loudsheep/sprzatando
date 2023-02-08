@@ -2,12 +2,12 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { useState } from "react";
 import { FormField } from "@/Components/FormField";
-import PrimaryButton from "../Components/Atoms/PrimaryButton";
+import PrimaryButton from "../../Components/Atoms/PrimaryButton";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/";
 import { TextField } from "@material-ui/core";
-import { SubmitModal } from "../Components/SubmitModal";
+import { SubmitModal } from "../../Components/SubmitModal";
 import {
   StyledTitle,
   StyledSubTitle,
@@ -16,10 +16,10 @@ import {
   ImageSection,
   UploadedImgWrapper,
   DeleteButton,
-} from "./page-styles/AddOffer.styles";
-import { Textarea } from "../Components/Atoms/Textarea";
+} from "../page-styles/AddOffer.styles";
+import { Textarea } from "../../Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
-import IconPath from "../assets/img/UploadIcon.png";
+import IconPath from "../../assets/img/UploadIcon.png";
 
 export default function AddOffer(props) {
   const initialState = {

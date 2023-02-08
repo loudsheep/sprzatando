@@ -15,7 +15,7 @@ class AddOfferController extends Controller
 {
     public function show()
     {
-        return Inertia::render('AddOffer');
+        return Inertia::render('Offers/AddOffer');
     }
 
     public function store(Request $request)

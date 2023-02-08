@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Offer } from "../Components/Offer";
+import { Offer } from "../../Components/Offer";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 // import { FormField } from "@/Components/Atoms/FormField";

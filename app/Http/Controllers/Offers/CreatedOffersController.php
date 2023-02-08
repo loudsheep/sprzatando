@@ -22,7 +22,7 @@ class CreatedOffersController extends Controller
             ->where('is_done', '=', true)
             ->orderBy('created_at', 'desc')->get()->toArray();
 
-        return Inertia::render('UserOffer', [
+        return Inertia::render('Offers/UserOffer', [
             'createdOffers' => $allOffers,
             'bannedOffers' => $bannedOffers,
             'doneOffers' => $doneOffers

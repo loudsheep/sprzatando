@@ -1,11 +1,11 @@
 import React from "react";
-import { Navbar } from "../Components/Navigations/Navbar";
+import { Navbar } from "../../Components/Navigations/Navbar";
 import { Head } from "@inertiajs/react";
 import {
   Wrapper,
   StyledTitle,
   StyledSubtitle,
-} from "./page-styles/OfferDetails.styles";
+} from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import styled from "styled-components";
 
