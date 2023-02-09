@@ -156,43 +156,45 @@ export default function AddOffer(props) {
             )}
           </ErrorWrapper>
         </div>
+        <ErrorWrapper>
+          <StyledSubTitle error={errors.photos}>Dodaj zdjęcia</StyledSubTitle>
 
-        <StyledSubTitle>Dodaj zdjęcia</StyledSubTitle>
-
-        <ImageSection>
-          {data.photos &&
-            data.photos.map((photo, i) => (
-              <ErrorWrapper key={i}>
-                <UploadedImgWrapper error={errors[`photos.${i}`]}>
-                  <DeleteButton
-                    type="button"
-                    onClick={() => deletePhoto(photo)}
-                  >
-                    x
-                  </DeleteButton>
-                  <img
-                    src={photo && URL.createObjectURL(photo)}
-                    alt="uploaded photo"
-                  />
-                </UploadedImgWrapper>
-                <ErrorMessage>
-                  {errors[`photos.${i}`] && errors[`photos.${i}`]}
-                </ErrorMessage>
-              </ErrorWrapper>
-            ))}
-          <UploadedImgWrapper>
-            <StyledPhotoBox htmlFor="input-file">
-              <img src={IconPath} />
-            </StyledPhotoBox>
-          </UploadedImgWrapper>
-          <input
-            type="file"
-            id="input-file"
-            accept="image/png, image/jpeg"
-            onChange={handlePhotoUpload}
-          />
-        </ImageSection>
-
+          <ImageSection>
+            {data.photos &&
+              data.photos.map((photo, i) => (
+                <ErrorWrapper key={i}>
+                  <UploadedImgWrapper error={errors[`photos.${i}`]}>
+                    <DeleteButton
+                      type="button"
+                      onClick={() => deletePhoto(photo)}
+                    >
+                      x
+                    </DeleteButton>
+                    <img
+                      src={photo && URL.createObjectURL(photo)}
+                      alt="uploaded photo"
+                    />
+                  </UploadedImgWrapper>
+                  <ErrorMessage>
+                    {errors[`photos.${i}`] && errors[`photos.${i}`]}
+                  </ErrorMessage>
+                </ErrorWrapper>
+              ))}
+            {console.log(errors)}
+            <UploadedImgWrapper>
+              <StyledPhotoBox htmlFor="input-file">
+                <img src={IconPath} />
+              </StyledPhotoBox>
+            </UploadedImgWrapper>
+            <input
+              type="file"
+              id="input-file"
+              accept="image/png, image/jpeg"
+              onChange={handlePhotoUpload}
+            />
+          </ImageSection>
+          {errors.photos && <ErrorMessage>{errors.photos}</ErrorMessage>}
+        </ErrorWrapper>
         <Textarea
           id="desc"
           handleChange={handleTextareaChange}
