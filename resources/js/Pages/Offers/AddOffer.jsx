@@ -17,6 +17,7 @@ import {
   UploadedImgWrapper,
   DeleteButton,
   ErrorMessage,
+  ErrorWrapper,
 } from "../page-styles/AddOffer.styles";
 import { Textarea } from "../../Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
@@ -129,25 +130,31 @@ export default function AddOffer(props) {
             errorMessage={errors.price}
             handleChange={onHandleChange}
           />
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              name="date"
-              value={data.selectedDate}
-              onChange={(date) => {
-                setData("selectedDate", date.$d);
-              }}
-              maxDate={maxDate}
-              minDate={new Date()}
-              InputProps={{
-                style: {
-                  fontSize: "1.8rem",
-                  width: "200px",
-                  margin: "30px 15px",
-                },
-              }}
-              renderInput={(props) => <TextField {...props} />}
-            />
-          </LocalizationProvider>
+          <ErrorWrapper>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                name="date"
+                value={data.selectedDate}
+                onChange={(date) => {
+                  setData("selectedDate", date.$d);
+                }}
+                maxDate={maxDate}
+                minDate={new Date()}
+                InputProps={{
+                  style: {
+                    fontSize: "1.8rem",
+                    width: "200px",
+                    margin: "30px 15px 10px",
+                    borderBottom: "1px solid #ff8d8d",
+                  },
+                }}
+                renderInput={(props) => <TextField {...props} />}
+              />
+            </LocalizationProvider>
+            {errors.selectedDate && (
+              <ErrorMessage>{errors.selectedDate}</ErrorMessage>
+            )}
+          </ErrorWrapper>
         </div>
 
         <StyledSubTitle>Dodaj zdjęcia</StyledSubTitle>
@@ -155,15 +162,7 @@ export default function AddOffer(props) {
         <ImageSection>
           {data.photos &&
             data.photos.map((photo, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  flex: 1,
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
+              <ErrorWrapper key={i}>
                 <UploadedImgWrapper error={errors[`photos.${i}`]}>
                   <DeleteButton
                     type="button"
@@ -179,7 +178,7 @@ export default function AddOffer(props) {
                 <ErrorMessage>
                   {errors[`photos.${i}`] && errors[`photos.${i}`]}
                 </ErrorMessage>
-              </div>
+              </ErrorWrapper>
             ))}
           <UploadedImgWrapper>
             <StyledPhotoBox htmlFor="input-file">

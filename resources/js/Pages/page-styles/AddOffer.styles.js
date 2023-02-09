@@ -102,7 +102,8 @@ export const DeleteButton = styled.button`
   height: 2.3rem;
   border: 1px solid ${({ theme }) => theme.colors.lightGrey};
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  transform: translate(72px, -300%);
+  top: -10px;
+  right: -10px;
   color: white;
   display: flex;
   justify-content: center;
@@ -113,3 +114,8 @@ export const ErrorMessage = styled.span`
   font-size: 13px;
   color: ${({ theme }) => theme.colors.error};
 `;
+export const ErrorWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
