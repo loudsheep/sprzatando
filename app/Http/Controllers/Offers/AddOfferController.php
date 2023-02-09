@@ -25,10 +25,10 @@ class AddOfferController extends Controller
             [
                 'title' => ['required', 'max:100'],
                 'description' => ['required', 'max:500', 'min:50'],
-                'selectedDate' => ['date'],
+                'selectedDate' => ['date', 'after_or_equal:now'],
                 'city' => ['required', 'max:50'],
                 'price' => ['numeric'],
-                'photos[]' => ['image'],
+                'photos.*' => ['image'],
                 'photos' => ['array'],
                 'categories' => ['array', 'required']
             ],
@@ -36,6 +36,8 @@ class AddOfferController extends Controller
                 'price.numeric' => 'The price must be a number',
                 'description.required' => 'description.required',
                 'description.min' => 'description min 50 chars',
+                'selectedDate.after_or_equal' => 'Date has to be at least tomorrow',
+                'photos.*.image' => 'MUST BE AN IMAGE',
                 // 'selectedDate.date' => '',
                 // 'title.required' => '',
                 // 'title.max' => '',
