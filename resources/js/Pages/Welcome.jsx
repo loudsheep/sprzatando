@@ -24,10 +24,10 @@ const Header = styled.header`
   padding-bottom: 4rem;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  -o-background-size: cover;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  background-size: cover;
+   -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size:cover;
+    background-size: cover;
 `;
 
 export default function Welcome({

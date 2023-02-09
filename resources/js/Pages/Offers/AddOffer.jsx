@@ -16,6 +16,7 @@ import {
   ImageSection,
   UploadedImgWrapper,
   DeleteButton,
+  ErrorMessage,
 } from "../page-styles/AddOffer.styles";
 import { Textarea } from "../../Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
@@ -154,20 +155,44 @@ export default function AddOffer(props) {
         <ImageSection>
           {data.photos &&
             data.photos.map((photo, i) => (
-              <UploadedImgWrapper key={i}>
-                <DeleteButton type="button" onClick={() => deletePhoto(photo)}>
-                  x
-                </DeleteButton>
-                <img src={photo && URL.createObjectURL(photo)} alt="uploaded photo" />
-              </UploadedImgWrapper>
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  flex: 1,
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <UploadedImgWrapper error={errors[`photos.${i}`]}>
+                  <DeleteButton
+                    type="button"
+                    onClick={() => deletePhoto(photo)}
+                  >
+                    x
+                  </DeleteButton>
+                  <img
+                    src={photo && URL.createObjectURL(photo)}
+                    alt="uploaded photo"
+                  />
+                </UploadedImgWrapper>
+                <ErrorMessage>
+                  {errors[`photos.${i}`] && errors[`photos.${i}`]}
+                </ErrorMessage>
+              </div>
             ))}
           <UploadedImgWrapper>
-            <StyledPhotoBox type="file" accept="image/png, image/jpeg" htmlFor="input-file">
+            <StyledPhotoBox htmlFor="input-file">
               <img src={IconPath} />
             </StyledPhotoBox>
           </UploadedImgWrapper>
-
-          <input type="file" id="input-file" onChange={handlePhotoUpload} />
+          {console.log(errors)}
+          <input
+            type="file"
+            id="input-file"
+            accept="image/png, image/jpeg"
+            onChange={handlePhotoUpload}
+          />
         </ImageSection>
 
         <Textarea

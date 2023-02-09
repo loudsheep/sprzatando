@@ -89,7 +89,8 @@ export const UploadedImgWrapper = styled.div`
   margin: 10px;
   background-color: ${({ theme }) => theme.colors.lightPurple};
   border-radius: 15px;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
+  border: 1px solid
+    ${({ theme, error }) => (error ? theme.colors.error : theme.colors.grey)};
   position: relative;
 `;
 
@@ -106,4 +107,9 @@ export const DeleteButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ErrorMessage = styled.span`
+  font-size: 13px;
+  color: ${({ theme }) => theme.colors.error};
 `;
