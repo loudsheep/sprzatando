@@ -14,7 +14,6 @@ export default function OfferDetails({ images, offer }) {
     <>
       <Head title="Szczegóły oferty" />
       <Navbar />
-
       <Wrapper>
         <div className="section_column-first">
           <StyledTitle>{offer.title}</StyledTitle>

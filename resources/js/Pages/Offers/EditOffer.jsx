@@ -1,8 +1,16 @@
-import { useSelector } from "react-redux"
+import { Head } from "@inertiajs/react";
 
-const EditOffer = () => {
-    const offers = useSelector(state => state.offers.offers)
-    console.log(offers)
-}
+const EditOffer = ({ offer }) => {
+  console.log(offer);
+  return (
+    <>
+    <Head title="Edit"/>
+      <div>
+        <p>Tutaj treść</p>
+        {offer.title}
+      </div>
+    </>
+  );
+};
 
-export default EditOffer
+export default EditOffer;
