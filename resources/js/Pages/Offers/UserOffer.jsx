@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 
 export default function AddOffer({ auth, errors, createdOffers }) {
   return (
-    <AuthenticatedLayout auth={auth} errors={errors}>
+    <AuthenticatedLayout auth={auth} errors={errors} >
       <Head title="Twoje oferty" />
       <Wrapper>
         <h1>Twoje oferty: </h1>

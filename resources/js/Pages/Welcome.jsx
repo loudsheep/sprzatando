@@ -6,6 +6,8 @@ import FilterSection from "@/Components/FilterItems/FilterSection";
 import { Offer } from "@/Components/Offer";
 import { useDispatch } from "react-redux";
 import { filterItemsActions } from "@/store/filter-items";
+import { offersActions } from "@/store/filter-logic";
+import linePath from "../assets/img/Lines.svg";
 
 const OfferWrapper = styled.div`
   width: 100%;
@@ -15,6 +17,14 @@ const OfferWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 25px;
+`;
+
+const Header = styled.header`
+  background: url(${({ img }) => img});
+  padding-bottom: 4rem;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 `;
 
 export default function Welcome({
@@ -35,14 +45,19 @@ export default function Welcome({
         maxPrice,
       })
     );
+    dispatch(
+      offersActions.setAllOffers({
+        offers,
+      })
+    );
   }, [categories, cities, minPrice, maxPrice]);
   return (
     <>
       <Head title="Welcome" />
-      <header>
+      <Header img={linePath}>
         <Navbar auth={auth} />
-        <FilterSection offers={offers}/>
-      </header>
+        <FilterSection offers={offers} />
+      </Header>
       <main>
         <section>
           <OfferWrapper>

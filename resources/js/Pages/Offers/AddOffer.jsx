@@ -158,11 +158,11 @@ export default function AddOffer(props) {
                 <DeleteButton type="button" onClick={() => deletePhoto(photo)}>
                   x
                 </DeleteButton>
-                <img src={URL.createObjectURL(photo)} alt="uploaded photo" />
+                <img src={photo && URL.createObjectURL(photo)} alt="uploaded photo" />
               </UploadedImgWrapper>
             ))}
           <UploadedImgWrapper>
-            <StyledPhotoBox type="file" htmlFor="input-file">
+            <StyledPhotoBox type="file" accept="image/png, image/jpeg" htmlFor="input-file">
               <img src={IconPath} />
             </StyledPhotoBox>
           </UploadedImgWrapper>

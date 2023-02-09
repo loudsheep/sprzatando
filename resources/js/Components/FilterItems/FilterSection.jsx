@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../Atoms/Button";
 import FiltersWrapper from "./FiltersWrapper";
 
+
 const SectionFilterWrapper = styled.div`
   width: 100%;
   max-width: 1200px;
@@ -9,7 +10,8 @@ const SectionFilterWrapper = styled.div`
   justify-content: space-between;
   margin: 10rem auto 0 auto;
   padding: 0 100px;
-
+  position: relative;
+  
   @media (min-width: 992px) {
     margin: 15rem auto 0 auto;
   }
@@ -47,11 +49,13 @@ const HeaderText = styled.h1`
 const Text = styled.p`
   font-size: 1.4rem;
   margin: 1rem 0 2rem 0;
-
+  color: ${({theme}) => theme.colors.darkGrey};
   @media (max-width: 768px) {
     margin: .5rem 0 1rem 0;
   }
 `;
+
+
 
 const FilterSection = ({offers}) => {
   return (
@@ -61,6 +65,7 @@ const FilterSection = ({offers}) => {
         <Text>Wybierz jedną z tysiąca usług sprzątających</Text>
         <Button text={"Sprawdź"} />
       </TextWrapper>
+    
       <FiltersWrapper offers={offers}/>
     </SectionFilterWrapper>
   );

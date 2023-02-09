@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 const SliderLabel = styled.label`
-  color: #fff;
+  color: ${({theme}) => theme.colors.darkGrey};
   align-self: start;
 `;
 
@@ -57,7 +57,6 @@ const FilterSlider = () => {
         className={classes.slider}
         value={value}
         onChange={sliderValueChangeHandler}
-        valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         min={prices[0]}
         max={prices[1]}

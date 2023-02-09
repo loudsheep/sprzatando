@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import FilterSelect from "./FilterSelect";
 import FilterSlider from "./FilterSlider";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const DUMMY_FILTERS_TYPES = [
   {
@@ -27,6 +28,7 @@ const DUMMY_FILTERS_TYPES = [
 const Filters = () => {
   const categories = useSelector((state) => state.filterItems.categories);
   const cities = useSelector((state) => state.filterItems.cities);
+  const dispatch = useDispatch();
   return (
     <Fragment>
       <FilterSelect
@@ -38,6 +40,9 @@ const Filters = () => {
         filters={cities}
         type="location"
         title="Wybierz lokalizacje"
+        handleChange={(e) =>
+          dispatch(offersActions.filterByCity(e.target.value))
+        }
       />
       <FilterSlider />
     </Fragment>
