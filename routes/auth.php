@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Offers\FollowOfferController;
 use App\Http\Controllers\Offers\AddOfferController;
 use App\Http\Controllers\Offers\CreatedOffersController;
+use App\Http\Controllers\Offers\EditOfferController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -100,4 +101,12 @@ Route::middleware('auth')->group(function () {
     Route::post('follow-offer/{offer}', [FollowOfferController::class, 'store'])
         ->middleware('auth')
         ->name('offer.follow');
+
+    Route::get('/offer/{offer}/edit', [EditOfferController::class, 'edit'])
+        ->middleware('auth')
+        ->name('offer.edit');
+
+    Route::patch('/offer/{offer}/edit', [EditOfferController::class, 'update'])
+        ->middleware('auth')
+        ->name('offer.update');
 });

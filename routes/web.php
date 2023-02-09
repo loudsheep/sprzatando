@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
 
 // Routes that do not require user to be logged in
-Route::get('/offer/{id}', [OfferDetailsController::class, 'show'])->name('offer.details');
+Route::get('/offer/{offer}', [OfferDetailsController::class, 'show'])->name('offer.details');
 
 
 require __DIR__ . '/auth.php';

@@ -10,10 +10,10 @@ use Inertia\Inertia;
 
 class OfferDetailsController extends Controller
 {
-    public function show(Request $request)
+    public function show(Offer $offer)
     {
         // offer info
-        $offer = Offer::find($request->id);
+        // $offer = Offer::find($request->id);
         if ($offer == null) {
             abort(404);
         }
