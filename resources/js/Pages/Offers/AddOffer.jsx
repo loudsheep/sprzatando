@@ -145,7 +145,7 @@ export default function AddOffer(props) {
                     fontSize: "1.8rem",
                     width: "200px",
                     margin: "30px 15px 10px",
-                    borderBottom: "1px solid #ff8d8d",
+                    borderBottom: errors.selectedDate && "1px solid #ff8d8d",
                   },
                 }}
                 renderInput={(props) => <TextField {...props} />}
@@ -185,7 +185,6 @@ export default function AddOffer(props) {
               <img src={IconPath} />
             </StyledPhotoBox>
           </UploadedImgWrapper>
-          {console.log(errors)}
           <input
             type="file"
             id="input-file"
