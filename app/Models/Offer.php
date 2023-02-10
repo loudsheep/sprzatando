@@ -35,9 +35,6 @@ class Offer extends Model
         'is_done',
         'is_reported',
         'is_banned',
-        'role',
-        'email_verified_at',
-        'ban_ending',
     ];
 
     // relations

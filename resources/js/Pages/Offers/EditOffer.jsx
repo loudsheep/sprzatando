@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {
   StyledTitle,
@@ -54,37 +54,46 @@ const DownInputWrapper = styled.div`
 `;
 
 const EditOffer = ({ offer, auth }) => {
-  const [change, setChange] = useState({
+  const initialState = {
     title: offer.title,
     description: offer.description,
     city: offer.city,
     price: offer.price,
-    checkedCategories: offer.category.split(";"),
-  });
+    categories: offer.category.split(";"),
+  };
+
+  const { data, setData, patch, errors } = useForm(initialState);
 
   const valueHandler = (e) => {
-    setChange({
-      ...change,
+    setData({
+      ...data,
       [e.target.name]: e.target.value,
     });
   };
 
   const checkedCheckboxHandler = (e) => {
-    const categoriesArr = [...change.checkedCategories];
+    const categoriesArr = [...data.categories];
     const index = categoriesArr.indexOf(e.target.value);
     if (e.target.checked) {
       categoriesArr.push(e.target.value);
     } else {
       categoriesArr.splice(index, 1);
     }
-    setChange({
-      ...change,
-      checkedCategories: categoriesArr,
+    setData({
+      ...data,
+      categories: categoriesArr,
     });
   };
 
   const formSubmitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    patch(route("offer.update", offer.id), {
+      preserveScroll: true,
+      onError: () => console.log(errors),
+      onSuccess: () => {
+        console.log("SUCCESS");
+      },
+    });
   };
 
   return (
@@ -98,7 +107,7 @@ const EditOffer = ({ offer, auth }) => {
               <FormField
                 className="input"
                 label={"Tytuł ogłoszenia"}
-                value={change.title}
+                value={data.title}
                 handleChange={valueHandler}
                 id="title"
                 type="text"
@@ -107,7 +116,7 @@ const EditOffer = ({ offer, auth }) => {
               <FormField
                 className="input"
                 label={"Miasto"}
-                value={change.city}
+                value={data.city}
                 handleChange={valueHandler}
                 id="city"
                 type="text"
@@ -118,7 +127,7 @@ const EditOffer = ({ offer, auth }) => {
               <FormField
                 className="input"
                 label={"Cena"}
-                value={change.price}
+                value={data.price}
                 handleChange={valueHandler}
                 id="price"
                 type="number"
@@ -129,12 +138,12 @@ const EditOffer = ({ offer, auth }) => {
           <Textarea
             id="desc"
             handleChange={valueHandler}
-            value={change.description}
+            value={data.description}
             name="description"
           />
           <SelectCategory
             handleCheckboxChange={checkedCheckboxHandler}
-            checked={change.checkedCategories}
+            checked={data.categories}
           />
 
           <div>

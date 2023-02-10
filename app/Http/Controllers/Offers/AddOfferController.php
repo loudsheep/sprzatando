@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Offers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Offer\CreateOrUpdateRequest;
+use App\Http\Requests\Offer\CreateOfferRequest;
 use App\Models\Offer;
 use App\Models\OfferImages;
 use Illuminate\Http\Request;
@@ -21,7 +21,7 @@ class AddOfferController extends Controller
         return Inertia::render('Offers/AddOffer');
     }
 
-    public function store(CreateOrUpdateRequest $request)
+    public function store(CreateOfferRequest $request)
     {
         $this->authorize('create', Offer::class);
 
