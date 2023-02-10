@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
-import { Navbar } from "@/Components/Navigations/Navbar";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {
   StyledTitle,
@@ -17,6 +16,7 @@ import {
 import { FormField } from "@/Components/FormField";
 import { Textarea } from "@/Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
+import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 
 const SectionTitle = styled.h1`
   margin: 2rem 0;
@@ -59,6 +59,7 @@ const EditOffer = ({ offer, auth }) => {
     description: offer.description,
     city: offer.city,
     price: offer.price,
+    checkedCategories: offer.category.split(";"),
   });
 
   const valueHandler = (e) => {
@@ -68,16 +69,30 @@ const EditOffer = ({ offer, auth }) => {
     });
   };
 
-  const checkedCheckboxHandler = (e) =>{
-    console.log(e.target)
-  }
+  const checkedCheckboxHandler = (e) => {
+    const categoriesArr = [...change.checkedCategories];
+    const index = categoriesArr.indexOf(e.target.value);
+    if (e.target.checked) {
+      categoriesArr.push(e.target.value);
+    } else {
+      categoriesArr.splice(index, 1);
+    }
+    setChange({
+      ...change,
+      checkedCategories: categoriesArr,
+    });
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault()
+  };
 
   return (
     <>
       <Authenticated auth={auth}>
         <Head title="Edit" />
         <SectionTitle>Edytuj Ofertę</SectionTitle>
-        <FormWrapper>
+        <FormWrapper onSubmit={formSubmitHandler}>
           <InputsWrapper>
             <HeaderInputsWrapper>
               <FormField
@@ -117,7 +132,17 @@ const EditOffer = ({ offer, auth }) => {
             value={change.description}
             name="description"
           />
-          <SelectCategory handleCheckboxChange={checkedCheckboxHandler} checked={offer.category}/>
+          <SelectCategory
+            handleCheckboxChange={checkedCheckboxHandler}
+            checked={change.checkedCategories}
+          />
+
+          <div>
+            <PrimaryButton color={"red"} onClick={() => window.history.back()}>
+              Anuluj
+            </PrimaryButton>
+            <PrimaryButton type="submit">Zapisz Zmiany</PrimaryButton>
+          </div>
         </FormWrapper>
       </Authenticated>
     </>

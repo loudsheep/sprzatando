@@ -39,20 +39,18 @@ export const SelectCategory = ({ handleCheckboxChange, error, checked }) => {
     "Kupa",
   ];
 
-  let checkedItemsArr = [];
   let isChecked = false;
 
-  if (checked) {
-    checkedItemsArr = checked.split(";");
-  }
-
   const checkboxesLeft = categories.map((category, i) => {
-    const found = checkedItemsArr.find((item) => item == category);
-    if (found) {
-      isChecked = true;
-    }else{
-      isChecked =false;
+    if (checked) {
+      const found = checked.find((item) => item == category);
+      if (found) {
+        isChecked = true;
+      } else {
+        isChecked = false;
+      }
     }
+
     if (i % 2 === 0) {
       return (
         <div key={i}>
@@ -71,11 +69,13 @@ export const SelectCategory = ({ handleCheckboxChange, error, checked }) => {
   });
 
   const checkboxesRight = categories.map((category, i) => {
-    const found = checkedItemsArr.find(item => item==category)
-    if(found){
-      isChecked=true
-    }else{
-      isChecked=false
+    if (checked) {
+      const found = checked.find((item) => item == category);
+      if (found) {
+        isChecked = true;
+      } else {
+        isChecked = false;
+      }
     }
 
     if (i % 2 !== 0) {
