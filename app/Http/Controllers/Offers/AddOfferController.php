@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Offers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Offer\CreateOrUpdateRequest;
 use App\Models\Offer;
 use App\Models\OfferImages;
 use Illuminate\Http\Request;
@@ -18,45 +19,15 @@ class AddOfferController extends Controller
         return Inertia::render('Offers/AddOffer');
     }
 
-    public function store(Request $request)
+    public function store(CreateOrUpdateRequest $request)
     {
-        // dd($request);
-        $validatedData = $request->validate(
-            [
-                'title' => ['required', 'max:100'],
-                'description' => ['required', 'max:500', 'min:50'],
-                'selectedDate' => ['date', 'after_or_equal:now'],
-                'city' => ['required', 'max:50'],
-                'price' => ['numeric'],
-                'photos.*' => ['image'],
-                'photos' => ['array', 'max:5'],
-                'categories' => ['array', 'required']
-            ],
-            [
-                'price.numeric' => 'Cena musi być liczbą',
-                'description.required' => 'Opis wymagany',
-                'description.min' => 'Minimum 50 znakó',
-                'selectedDate.after_or_equal' => 'Data przynajmniej na jutro ',
-                'photos.*.image' => 'Zły format pliku',
-                // 'selectedDate.date' => '',
-                // 'title.required' => '',
-                // 'title.max' => '',
-                // 'city.required' => '',
-                // 'city.max' => '',
-                // 'photos.*.image' => 'Only image accepatble',
-                // 'categories.required' => 'At least 1 category required'
-            ]
-        );
-
+        $validatedData = $request->validated();
 
         $mainImage = "";
-        if (count($request->photos) == 0) {
-            // throw ValidationException::withMessages(['photos' => 'At least 1 photo required']);
-
-            // TODO change this
+        if (count($validatedData["photos"]) == 0) {
             $mainImage = "/defaults/house.jpg";
         } else {
-            $mainImage = $request->file('photos.0')->store('uploads', 'public');
+            $mainImage = $validatedData["photos"][0]->store('uploads', 'public');
             $image = Image::make(public_path("storage/" . $mainImage))->fit(1000, 1000);
             $image->save();
 
@@ -64,9 +35,9 @@ class AddOfferController extends Controller
         }
 
         $additionalPhotos = [];
-        if (count($request->photos)  > 1) {
-            for ($i = 1; $i < count($request->photos); $i++) {
-                $path = $request->file('photos.' . $i)->store('uploads', 'public');
+        if (count($validatedData["photos"]) > 1) {
+            for ($i = 1; $i < count($validatedData["photos"]); $i++) {
+                $path = $validatedData["photos"][$i]->store('uploads', 'public');
 
                 $image = Image::make(public_path("storage/" . $path))->fit(1000, 1000);
                 $image->save();
@@ -75,16 +46,16 @@ class AddOfferController extends Controller
             }
         }
 
-        
+
         $offer = Offer::create([
-            'title' => $request->title,
+            'title' => $validatedData["title"],
             'creator_id' => $request->user()->id,
             'zip_code' => '124231',
-            'city' => $request->city,
-            'price' => $request->price,
-            'description' => $request->description,
-            'ends' => substr($request->selectedDate, 0, 10),
-            'category' => implode(';', $request->categories),
+            'city' => $validatedData["city"],
+            'price' => $validatedData["price"],
+            'description' => $validatedData["description"],
+            'ends' => substr($validatedData["selectedDate"], 0, 10),
+            'category' => implode(';', $validatedData["categories"]),
             'main_image' => $mainImage,
         ]);
 
