@@ -33,11 +33,11 @@ class AddOfferController extends Controller
                 'categories' => ['array', 'required']
             ],
             [
-                'price.numeric' => 'The price must be a number',
-                'description.required' => 'description.required',
-                'description.min' => 'description min 50 chars',
-                'selectedDate.after_or_equal' => 'Date has to be at least tomorrow',
-                'photos.*.image' => 'MUST BE AN IMAGE',
+                'price.numeric' => 'Cena musi być liczbą',
+                'description.required' => 'Opis wymagany',
+                'description.min' => 'Minimum 50 znakó',
+                'selectedDate.after_or_equal' => 'Data przynajmniej na jutro ',
+                'photos.*.image' => 'Zły format pliku',
                 // 'selectedDate.date' => '',
                 // 'title.required' => '',
                 // 'title.max' => '',
