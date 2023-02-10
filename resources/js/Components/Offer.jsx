@@ -88,14 +88,14 @@ const getTimeDifference = (createdAt) => {
   ];
 
   if (seconds < 60) {
-    return seconds + " sec temu";
+    return seconds + " sec";
   }
   if (minutes < 60) {
-    return minutes + " min temu";
+    return minutes + " min";
   } else if (hours < 24) {
-    return hours + " h temu";
+    return hours + " h";
   } else if (days < 4) {
-    return days + " dni temu";
+    return days + " dni";
   } else {
     return `${createdDate.getDate()} ${monthNames[createdDate.getMonth()]}`;
   }
