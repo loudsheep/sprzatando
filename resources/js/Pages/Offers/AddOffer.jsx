@@ -7,21 +7,16 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/";
 import { TextField } from "@material-ui/core";
-import { SubmitModal } from "../../Components/SubmitModal";
+import { SubmitModal } from "@/Components/SubmitModal";
+import { OfferImages } from "@/Components/AddImages";
 import {
   StyledTitle,
-  StyledSubTitle,
   FormWrapper,
-  StyledPhotoBox,
-  ImageSection,
-  UploadedImgWrapper,
-  DeleteButton,
   ErrorMessage,
   ErrorWrapper,
 } from "../page-styles/AddOffer.styles";
 import { Textarea } from "../../Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
-import IconPath from "../../assets/img/UploadIcon.png";
 
 export default function AddOffer(props) {
   const initialState = {
@@ -64,7 +59,7 @@ export default function AddOffer(props) {
     setData("photos", [...data.photos, e.target.files[0]]);
   };
 
-  const deletePhoto = (p) => {
+  const handleDeletePhoto = (p) => {
     const array = data.photos.filter((photo) => p !== photo);
     setData("photos", array);
   };
@@ -156,45 +151,14 @@ export default function AddOffer(props) {
             )}
           </ErrorWrapper>
         </div>
-        <ErrorWrapper>
-          <StyledSubTitle error={errors.photos}>Dodaj zdjęcia</StyledSubTitle>
 
-          <ImageSection>
-            {data.photos &&
-              data.photos.map((photo, i) => (
-                <ErrorWrapper key={i}>
-                  <UploadedImgWrapper error={errors[`photos.${i}`]}>
-                    <DeleteButton
-                      type="button"
-                      onClick={() => deletePhoto(photo)}
-                    >
-                      x
-                    </DeleteButton>
-                    <img
-                      src={photo && URL.createObjectURL(photo)}
-                      alt="uploaded photo"
-                    />
-                  </UploadedImgWrapper>
-                  <ErrorMessage>
-                    {errors[`photos.${i}`] && errors[`photos.${i}`]}
-                  </ErrorMessage>
-                </ErrorWrapper>
-              ))}
-            {console.log(errors)}
-            <UploadedImgWrapper>
-              <StyledPhotoBox htmlFor="input-file">
-                <img src={IconPath} />
-              </StyledPhotoBox>
-            </UploadedImgWrapper>
-            <input
-              type="file"
-              id="input-file"
-              accept="image/png, image/jpeg"
-              onChange={handlePhotoUpload}
-            />
-          </ImageSection>
-          {errors.photos && <ErrorMessage>{errors.photos}</ErrorMessage>}
-        </ErrorWrapper>
+        <OfferImages
+          photos={data.photos}
+          errors={errors}
+          handlePhotoUpload={handlePhotoUpload}
+          handleDeletePhoto={handleDeletePhoto}
+        />
+
         <Textarea
           id="desc"
           handleChange={handleTextareaChange}

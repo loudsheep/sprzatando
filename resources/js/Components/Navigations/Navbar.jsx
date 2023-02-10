@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import styled from "styled-components";
-import BurgerBtn from "../BurgerBtn";
+import BurgerBtn from "./BurgerBtn";
 import logoPath from "../../assets/img/transparentLogo.png";
 import { useWidth } from "@/hooks/useWidth";
 

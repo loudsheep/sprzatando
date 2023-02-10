@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import logoPath from "../assets/img/transparentLogo.png";
-import { UserNavMenu } from "../Components/UserNavMenu";
+import { UserNavMenu } from "../Components/Navigations/UserNavMenu";
 import { Link } from "@inertiajs/react";
 import Dropdown from "@/Components/Dropdown";
 import { Svg } from "../Components/Atoms/SvgDropdown";
