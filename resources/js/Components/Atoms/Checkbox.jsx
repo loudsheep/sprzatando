@@ -11,14 +11,15 @@ const Input = styled.input`
  }
 `
 
-export default function Checkbox({ name, value, handleChange, id }) {
-    return (
-        <Input
-            type="checkbox"
-            name={name}
-            value={value}
-            id={id}
-            onChange={(e) => handleChange(e)}
-        />
-    );
+export default function Checkbox({ name, value, handleChange, id, isChecked }) {
+  return (
+    <Input
+      type="checkbox"
+      name={name}
+      value={value}
+      id={id}
+      checked={isChecked || false}
+      onChange={(e) => handleChange(e)}
+    />
+  );
 }
