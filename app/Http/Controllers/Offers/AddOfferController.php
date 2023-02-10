@@ -16,11 +16,15 @@ class AddOfferController extends Controller
 {
     public function show()
     {
+        $this->authorize('create', Offer::class);
+
         return Inertia::render('Offers/AddOffer');
     }
 
     public function store(CreateOrUpdateRequest $request)
     {
+        $this->authorize('create', Offer::class);
+
         $validatedData = $request->validated();
 
         $mainImage = "";

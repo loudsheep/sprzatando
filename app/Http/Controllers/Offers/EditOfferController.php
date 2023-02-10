@@ -11,6 +11,8 @@ class EditOfferController extends Controller
 {
     // Show edit form and view
     public function edit(Offer $offer) {
+        $this->authorize('update', $offer);
+
         // CHANGE PATH WHEN VIEW IS CREATED!
         return Inertia::render('Offers/EditOffer', [
             'offer' => $offer,

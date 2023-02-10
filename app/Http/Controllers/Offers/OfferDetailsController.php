@@ -12,11 +12,6 @@ class OfferDetailsController extends Controller
 {
     public function show(Offer $offer)
     {
-        // offer info
-        // $offer = Offer::find($request->id);
-        if ($offer == null) {
-            abort(404);
-        }
         $ends = $offer->ends;
 
         // user that created this offer
