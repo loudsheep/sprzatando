@@ -124,6 +124,7 @@ export const Offer = ({
           marginLeft: "auto",
         }}
         src={image}
+        loading="lazy"
         alt="house photo"
       />
       <div className="info-wrapper">
@@ -155,7 +156,7 @@ export const Offer = ({
             <span>{price} zł</span>
           </div>
           {isOwner ? (
-            <Link href="/offer/1/edit">
+            <Link href={`/offer/${id}/edit`}>
               <Button>Edytuj</Button>
             </Link>
           ) : (

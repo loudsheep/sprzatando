@@ -9,7 +9,7 @@ import {
 import { Gallery } from "@/Components/Gallery";
 import styled from "styled-components";
 
-export default function OfferDetails({ images, offer }) {
+export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdmin, isRegularUser }) {
   return (
     <>
       <Head title="Szczegóły oferty" />

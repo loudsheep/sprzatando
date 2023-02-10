@@ -19,6 +19,7 @@ class LoggedInUserController extends Controller
         $cities = Offer::select('city')->distinct()
             ->where('is_done', '==', 'false')
             ->where('is_banned', '==', 'false')
+            ->where('creator_id', '!=', $request->user()->id ?? 0)
             ->get()->toArray();
         $cities = array_map(function ($city) {
             return $city['city'];
