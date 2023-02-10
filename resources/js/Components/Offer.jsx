@@ -155,7 +155,7 @@ export const Offer = ({
             <span>{price} zł</span>
           </div>
           {isOwner ? (
-            <Link href="/">
+            <Link href="/offer/1/edit">
               <Button>Edytuj</Button>
             </Link>
           ) : (

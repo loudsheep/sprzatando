@@ -17,8 +17,7 @@ export const CheckboxWrapper = styled.div`
   div {
     margin: 0 10px;
   }
-  .checkbox-column{
-    
+  .checkbox-column {
   }
 `;
 
@@ -27,7 +26,7 @@ const ErrorMessage = styled.span`
   color: ${({ theme }) => theme.colors.error};
 `;
 
-export const SelectCategory = ({ handleCheckboxChange, error }) => {
+export const SelectCategory = ({ handleCheckboxChange, error, checked }) => {
   const categories = [
     "Sprzątanie mieszkań i domów",
     "Mycie okien",
@@ -40,44 +39,68 @@ export const SelectCategory = ({ handleCheckboxChange, error }) => {
     "Kupa",
   ];
 
+  let checkedItemsArr = [];
+  let isChecked = false;
+
+  if (checked) {
+    checkedItemsArr = checked.split(";");
+  }
+
+  const checkboxesLeft = categories.map((category, i) => {
+    const found = checkedItemsArr.find((item) => item == category);
+    if (found) {
+      isChecked = true;
+    }else{
+      isChecked =false;
+    }
+    if (i % 2 === 0) {
+      return (
+        <div key={i}>
+          <Checkbox
+            id={category}
+            handleChange={handleCheckboxChange}
+            value={category}
+            isChecked={isChecked}
+          />
+          <Label htmlFor={category} style={{ fontWeight: "normal" }}>
+            {category}
+          </Label>
+        </div>
+      );
+    }
+  });
+
+  const checkboxesRight = categories.map((category, i) => {
+    const found = checkedItemsArr.find(item => item==category)
+    if(found){
+      isChecked=true
+    }else{
+      isChecked=false
+    }
+
+    if (i % 2 !== 0) {
+      return (
+        <div key={i}>
+          <Checkbox
+            id={category}
+            handleChange={handleCheckboxChange}
+            value={category}
+            isChecked={isChecked}
+          />
+          <Label htmlFor={category} style={{ fontWeight: "normal" }}>
+            {category}
+          </Label>
+        </div>
+      );
+    }
+  });
+
   return (
     <>
       <StyledSubTitle error={error}>Wybierz kategorie</StyledSubTitle>
       <CheckboxWrapper>
-        <div className="checkbox-column">
-          {categories.map(
-            (category, i) =>
-              i % 2 === 0 && (
-                <div key={i}>
-                  <Checkbox
-                    id={category}
-                    handleChange={handleCheckboxChange}
-                    value={category}
-                  />
-                  <Label htmlFor={category} style={{ fontWeight: "normal" }}>
-                    {category}
-                  </Label>
-                </div>
-              )
-          )}
-        </div>
-        <div className="checkbox-column">
-          {categories.map(
-            (category, i) =>
-              i % 2 !== 0 && (
-                <div key={i}>
-                  <Checkbox
-                    id={category}
-                    handleChange={handleCheckboxChange}
-                    value={category}
-                  />
-                  <Label htmlFor={category} style={{ fontWeight: "normal" }}>
-                    {category}
-                  </Label>
-                </div>
-              )
-          )}
-        </div>
+        <div className="checkbox-column">{checkboxesLeft}</div>
+        <div className="checkbox-column">{checkboxesRight}</div>
       </CheckboxWrapper>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </>

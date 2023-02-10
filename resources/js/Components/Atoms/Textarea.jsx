@@ -26,7 +26,7 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
-export const Textarea = ({ handleChange, id, error, value }) => {
+export const Textarea = ({ handleChange, id, error, value, name }) => {
   return (
     <Wrapper>
       <Label className={error ? "error-label" : ""} htmlFor={id}>
@@ -37,6 +37,7 @@ export const Textarea = ({ handleChange, id, error, value }) => {
         id={id}
         onChange={handleChange}
         value={value}
+        name={null || name}
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Wrapper>
