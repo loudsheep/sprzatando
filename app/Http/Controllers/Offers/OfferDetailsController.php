@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 class OfferDetailsController extends Controller
 {
-    public function show(Offer $offer)
+    public function show(Request $request, Offer $offer)
     {
         $ends = $offer->ends;
 
@@ -20,7 +20,7 @@ class OfferDetailsController extends Controller
         // additional images MAY BE EMPTY! (does not include main image)
         $urls = [];
         $images = $offer->images->toArray();
-        foreach($images as $image) {
+        foreach ($images as $image) {
             array_push($urls, $image['url']);
         }
 
@@ -28,10 +28,24 @@ class OfferDetailsController extends Controller
         $offer["ends"] = date('d.m.Y', strtotime($ends));
         // $offer["ended"] = false;
 
+        // info about user
+        $user = $request->user();
+
+        $isLoggedIn = $user != null;
+        $isOwner = $isLoggedIn && $user->id === $offer["creator_id"];
+        $isAdmin = $isLoggedIn && $user->role === "admin";
+        $isRegularUser = $isLoggedIn && !$isAdmin;
+
+
         return Inertia::render('Offers/OfferDetails', [
             "offer" => $offer,
             'creator' => $creator,
-            'images' => $urls
+            'images' => $urls,
+
+            'isLoggedIn' => $isLoggedIn,
+            'isOwner' => $isOwner,
+            'isAdmin' => $isAdmin,
+            'isRegularUser' => $isRegularUser,
         ]);
     }
 }
