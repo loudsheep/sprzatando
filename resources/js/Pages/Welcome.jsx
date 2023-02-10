@@ -77,7 +77,7 @@ export default function Welcome({
                 owner={offer.creator.name}
                 category={offer.category}
                 city={offer.city}
-                createdAt={offer.created_at}
+                createdAt={offer.updated_at}
                 key={i}
               />
             ))}
