@@ -124,6 +124,7 @@ export const Offer = ({
           marginLeft: "auto",
         }}
         src={image}
+        loading="lazy"
         alt="house photo"
       />
       <div className="info-wrapper">

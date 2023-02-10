@@ -20,7 +20,7 @@ const OfferWrapper = styled.div`
 `;
 
 const Header = styled.header`
-  background: url(${({ img }) => img});
+  background: url(${({ img }) => img}) 0 0 / cover;
   padding-bottom: 4rem;
   background-repeat: no-repeat;
   background-attachment: fixed;
