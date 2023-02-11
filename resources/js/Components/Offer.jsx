@@ -25,13 +25,14 @@ const Wrapper = styled(Link)`
     flex: 1;
     display: flex;
     width: 100%;
+    min-width: 20rem;
     max-width: 50rem;
     flex-direction: column;
     max-height: 40rem;
     justify-content: space-between;
     margin-left: 18px;
     margin-right: 18px;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
   .span {
     background-color: ${({ theme }) => theme.colors.darkGrey};
@@ -160,9 +161,7 @@ export const Offer = ({
               <Button>Edytuj</Button>
             </Link>
           ) : (
-            <Link href="#">
-              <Button>Aplikuj</Button>
-            </Link>
+            <Button>Aplikuj</Button>
           )}
         </div>
       </div>
