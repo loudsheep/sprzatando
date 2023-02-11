@@ -4,6 +4,7 @@ import FilterSelect from "./FilterSelect";
 import FilterSlider from "./FilterSlider";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { offersActions } from "@/store/filter-logic";
 
 const DUMMY_FILTERS_TYPES = [
   {
@@ -29,20 +30,38 @@ const Filters = () => {
   const categories = useSelector((state) => state.filterItems.categories);
   const cities = useSelector((state) => state.filterItems.cities);
   const dispatch = useDispatch();
-  return (
+
+  const handleCityChange = (e) => {
+    const city = e.target.value;
+    dispatch(
+      offersActions.filterByCity({
+        city,
+      })
+    );
+  }
+
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    dispatch(
+      offersActions.filterByCategory({
+        category,
+      })
+    );
+  }
+    return (
     <Fragment>
       <FilterSelect
         filters={categories}
         type="cleaning"
         title="Wybierz rodzaj sprzątania"
+        handleChange={(e) => handleCategoryChange(e)}
+        
       />
       <FilterSelect
         filters={cities}
         type="location"
         title="Wybierz lokalizacje"
-        handleChange={(e) =>
-          dispatch(offersActions.filterByCity(e.target.value))
-        }
+        handleChange={(e) => handleCityChange(e)}
       />
       <FilterSlider />
     </Fragment>

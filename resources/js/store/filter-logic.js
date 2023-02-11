@@ -15,11 +15,24 @@ const offersSlice = createSlice({
         offers.forEach((offer) => state.originalOffersArray.push(offer));
       }
     },
-    // filterByCity(state, action) {
-    //   let arr = [state.offers];
-    //   console.log(state.offers)
 
-    // },
+    //TODO: filtering by all criteria independently
+
+    filterByCity(state, action) {
+      const { city } = action.payload;
+      state.offersArray = state.originalOffersArray;
+      state.offersArray = state.offersArray.filter(
+        (offer) => offer.city === city
+      );
+      console.log(city)
+    },
+    filterByCategory(state, action) {
+      const { category } = action.payload;
+      state.offersArray = state.originalOffersArray;
+      state.offersArray = state.offersArray.filter(
+        (offer) => offer.category === category
+      );
+    },
     filterByPrice(state, action) {
       const { value } = action.payload;
       state.offersArray = state.originalOffersArray;

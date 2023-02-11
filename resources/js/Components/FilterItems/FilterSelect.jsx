@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { offersActions } from "@/store/filter-logic";
 
 const StyledFilterSelect = styled.select`
   padding: 1rem 2rem;
@@ -22,7 +21,7 @@ const FilterSelect = (props) => {
     <StyledFilterSelect
       name={props.type}
       defaultValue={props.title}
-      // onChange={props.handleChange}
+      onChange={props.handleChange}
     >
       <option value={props.title} name="titleValue" disabled>
         {props.title}

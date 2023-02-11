@@ -39,7 +39,7 @@ const FiltersWrapper = () => {
       <FilterHeader>Filtry</FilterHeader>
       <FiltersForm>
         <Filters />
-        <Button type={"submit"}>Pokaż {offers && offers.length} ofert</Button>
+        <Button>Pokaż {offers && offers.length} ofert</Button>
       </FiltersForm>
     </FilterWrapper>
   );

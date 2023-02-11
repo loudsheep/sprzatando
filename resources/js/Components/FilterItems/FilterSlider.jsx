@@ -31,7 +31,6 @@ function valuetext(value) {
 
 const FilterSlider = () => {
   const prices = useSelector((state) => state.filterItems.prices);
-  const offers = useSelector((state) => state.offers.offersArray);
   const classes = useStyles();
   const [value, setValue] = useState([]);
 

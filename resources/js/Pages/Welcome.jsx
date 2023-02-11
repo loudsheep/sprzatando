@@ -67,7 +67,7 @@ export default function Welcome({
         <FilterSection offers={offers} />
       </Header>
       <main>
-        <section>
+        <section id="section">
           <OfferWrapper>
             {offersArray.map((offer, i) => (
               <Offer
