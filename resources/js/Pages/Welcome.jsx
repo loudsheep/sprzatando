@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/react";
 import { Navbar } from "@/Components/Navigations/Navbar";
 import FilterSection from "@/Components/FilterItems/FilterSection";
 import { Offer } from "@/Components/Offer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterItemsActions } from "@/store/filter-items";
 import { offersActions } from "@/store/filter-logic";
 import linePath from "../assets/img/Lines.svg";
@@ -56,6 +56,8 @@ export default function Welcome({
       })
     );
   }, [categories, cities, minPrice, maxPrice]);
+
+  const offersArray = useSelector((state) => state.offers.offersArray);
   return (
     <>
       <Head title="Welcome" />
@@ -67,7 +69,7 @@ export default function Welcome({
       <main>
         <section>
           <OfferWrapper>
-            {offers.map((offer, i) => (
+            {offersArray.map((offer, i) => (
               <Offer
                 id={offer.id}
                 title={offer.title}

@@ -4,6 +4,8 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { offersActions } from "@/store/filter-logic";
 
 const useStyles = makeStyles({
   slider: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 const SliderLabel = styled.label`
-  color: ${({theme}) => theme.colors.darkGrey};
+  color: ${({ theme }) => theme.colors.darkGrey};
   align-self: start;
 `;
 
@@ -29,15 +31,23 @@ function valuetext(value) {
 
 const FilterSlider = () => {
   const prices = useSelector((state) => state.filterItems.prices);
+  const offers = useSelector((state) => state.offers.offersArray);
   const classes = useStyles();
   const [value, setValue] = useState([]);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setValue(prices)
-  }, [prices])
+    setValue(prices);
+  }, [prices]);
 
   const sliderValueChangeHandler = (event, value) => {
     setValue(value);
+    dispatch(
+      offersActions.filterByPrice({
+        value,
+      })
+    );
   };
 
   return (

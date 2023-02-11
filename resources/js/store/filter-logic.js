@@ -1,20 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { offers: [] };
+const initialState = { offersArray: [], originalOffersArray: [] };
 
 const offersSlice = createSlice({
   name: "offers",
   initialState,
   reducers: {
     setAllOffers(state, action) {
-      state.offers = action.payload;
-      console.log(state.offers);
+      const { offers } = action.payload;
+      if (state.offersArray.length === 0) {
+        offers.forEach((offer) => state.offersArray.push(offer));
+      }
+      if (state.originalOffersArray.length === 0) {
+        offers.forEach((offer) => state.originalOffersArray.push(offer));
+      }
     },
     // filterByCity(state, action) {
     //   let arr = [state.offers];
     //   console.log(state.offers)
-      
+
     // },
+    filterByPrice(state, action) {
+      const { value } = action.payload;
+      state.offersArray = state.originalOffersArray;
+      state.offersArray = state.offersArray.filter(
+        (offer) => offer.price >= value[0] && offer.price <= value[1]
+      );
+    },
   },
 });
 

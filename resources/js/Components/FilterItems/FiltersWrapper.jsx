@@ -32,7 +32,8 @@ const FiltersForm = styled.form`
   align-items: center;
 `;
 const FiltersWrapper = () => {
-  const offers = useSelector((state) => state.offers.offers.offers);
+  const offers = useSelector((state) => state.offers.offersArray);
+  
   return (
     <FilterWrapper>
       <FilterHeader>Filtry</FilterHeader>
