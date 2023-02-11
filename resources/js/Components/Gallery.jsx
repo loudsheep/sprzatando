@@ -15,6 +15,7 @@ const Image = styled.img`
 const MainImage = styled.img`
   width: 100%;
   max-width: 45rem;
+  height: 100%;
   cursor: pointer;
   transition: transform 0.5s ease;
   &:hover {
