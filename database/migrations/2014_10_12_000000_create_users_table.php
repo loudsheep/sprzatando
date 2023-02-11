@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('role', ['user', 'admin'])->default('user');
-            $table->timestamp('ban_ending')->nullable();
+            $table->dateTime('ban_ending')->nullable();
             $table->string('password');
             $table->string('profile_img')->nullable();
             $table->rememberToken();

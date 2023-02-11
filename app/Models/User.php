@@ -53,6 +53,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'ban_ending' => 'datetime',
     ];
 
     /**

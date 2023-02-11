@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,16 +33,34 @@ class AuthenticatedSessionController extends Controller
     {
 
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => ['required', 'email', 'string'],
+            'password' => ['required', 'string'],
         ]);
- 
+
         if (Auth::attempt($credentials)) {
+            // credentials are correct, check for ban
+            $user = Auth::user();
+            if ($user->ban_ending !== null) {
+                if ($user->ban_ending >= now()) {
+                    
+                    Auth::guard('web')->logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
+
+                    return back()->withErrors([
+                        'email' => 'Your account has been suspended.',
+                    ])->onlyInput('email');
+                }
+
+                $user->ban_ending = null;
+                $user->save();
+            }
+
             $request->session()->regenerate();
- 
+
             return redirect()->intended(RouteServiceProvider::HOME);
         }
- 
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
