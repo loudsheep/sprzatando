@@ -12,7 +12,6 @@ class FollowOfferController extends Controller
         if($offer->creator == auth()->user()) {
             return;
         }
-        // return auth()->user()->interestedInOffers()->toggle($offer);
-        // return $request->user()->interestedInOffers()->toggle($request->offer);
+        return auth()->user()->interestedInOffers()->toggle($offer);
     }
 }

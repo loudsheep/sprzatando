@@ -24,8 +24,8 @@ class OfferDetailsController extends Controller
             array_push($urls, $image['url']);
         }
 
-        $offer = $offer->toArray();
-        $offer["ends"] = date('d.m.Y', strtotime($ends));
+        // $offer = $offer->toArray();
+        $offer->ends = date('d.m.Y', strtotime($ends));
         // $offer["ended"] = false;
 
         // info about user
@@ -35,10 +35,10 @@ class OfferDetailsController extends Controller
         $isOwner = $isLoggedIn && $user->id === $offer["creator_id"];
         $isAdmin = $isLoggedIn && $user->role === "admin";
         $isRegularUser = $isLoggedIn && !$isAdmin;
-
+        $currentUserInterestedInOffer = $isLoggedIn && $offer->usersIntrested()->where('users.id', '=', $user->id)->get()->count() > 0;
 
         return Inertia::render('Offers/OfferDetails', [
-            "offer" => $offer,
+            "offer" => $offer->toArray(),
             'creator' => $creator,
             'images' => $urls,
 
@@ -46,6 +46,7 @@ class OfferDetailsController extends Controller
             'isOwner' => $isOwner,
             'isAdmin' => $isAdmin,
             'isRegularUser' => $isRegularUser,
+            'currentUserInterestedInOffer' => $currentUserInterestedInOffer,
         ]);
     }
 }
