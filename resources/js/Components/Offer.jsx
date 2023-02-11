@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "@inertiajs/react";
 
-const Wrapper = styled(Link)`
+const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   max-width: 90rem;
@@ -13,11 +13,6 @@ const Wrapper = styled(Link)`
   padding: 20px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.colors.lightPurple};
-  h2 {
-    font-size: 2.2rem;
-    font-weight: bold;
-    color: ${({ theme }) => theme.colors.mainColor};
-  }
   p {
     color: ${({ theme }) => theme.colors.darkGrey};
   }
@@ -61,6 +56,51 @@ const Button = styled.button`
   margin: 10px;
   max-width: 80px;
   text-align: center;
+`;
+
+const Image = styled.img`
+  max-width: 28rem;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+
+  vertical-align: middle;
+`;
+
+const ImgWrapper = styled.div`
+  display: inline-block;
+  overflow: hidden;
+  img {
+    max-width: 28rem;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    vertical-align: middle;
+    cursor: pointer;
+    &:hover {
+      -webkit-transform: scale(1.1); /* Safari and Chrome */
+      -moz-transform: scale(1.1); /* Firefox */
+      -ms-transform: scale(1.1); /* IE 9 */
+      -o-transform: scale(1.1); /* Opera */
+      transform: scale(1.1);
+    }
+  }
+`;
+
+const StyledLink = styled(Link)`
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.mainColor};
 `;
 
 const getTimeDifference = (createdAt) => {
@@ -115,19 +155,12 @@ export const Offer = ({
   isOwner = false,
 }) => {
   return (
-    <Wrapper href={`/offer/${id}`}>
-      <img
-        style={{
-          maxWidth: "28rem",
-          width: "100%",
-          marginRight: "auto",
-          flex: "1",
-          marginLeft: "auto",
-        }}
-        src={image}
-        loading="lazy"
-        alt="house photo"
-      />
+    <Wrapper>
+      <Link href={`/offer/${id}`}>
+        <ImgWrapper>
+          <img src={image} loading="lazy" alt="house photo" />
+        </ImgWrapper>
+      </Link>
       <div className="info-wrapper">
         <div
           style={{
@@ -136,7 +169,7 @@ export const Offer = ({
             alignItems: "center",
           }}
         >
-          <h2>{title}</h2>
+          <StyledLink href={`/offer/${id}`}>{title}</StyledLink>
           <p>{getTimeDifference(createdAt)}</p>
         </div>
         {owner && <p>autor: {owner}</p>}

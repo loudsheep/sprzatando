@@ -18,9 +18,6 @@ const MainImage = styled.img`
   height: 100%;
   cursor: pointer;
   transition: transform 0.5s ease;
-  &:hover {
-    transform: scale(1.03);
-  }
 `;
 
 const GalleryWrapper = styled.div`
