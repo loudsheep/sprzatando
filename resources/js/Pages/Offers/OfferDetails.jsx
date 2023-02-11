@@ -8,8 +8,17 @@ import {
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import styled from "styled-components";
+import PrimaryButton from "@/Components/Atoms/PrimaryButton";
+import { router } from '@inertiajs/react'
 
 export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdmin, isRegularUser, currentUserInterestedInOffer }) {
+
+  const handleInterestedButtons = (e) => {
+    e.preventDefault();
+
+    router.post("/follow-offer/" + offer.id);
+  };
+
   return (
     <>
       <Head title="Szczegóły oferty" />
@@ -29,6 +38,18 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
             <strong>Ważne do:</strong> {offer.ends} r.
           </p>
           <p>{offer.city}</p>
+
+          {isLoggedIn && !isOwner && (
+            <>
+              {!currentUserInterestedInOffer && (
+                <PrimaryButton onClick={handleInterestedButtons}>Zgłoś się do oferty</PrimaryButton>
+              )}
+
+              {currentUserInterestedInOffer && (
+                <PrimaryButton color={"grey"} onClick={handleInterestedButtons}>Odzgłoś się</PrimaryButton>
+              )}
+            </>
+          )}
         </div>
       </Wrapper>
     </>

@@ -34,13 +34,13 @@ class LoggedInUserController extends Controller
         }
 
         // fiters
-        if ($request->location !== null) {
-            $offers = $offers->where('city', 'like', '%' . $request->location . '%');
-        }
+        // if ($request->location !== null) {
+        //     $offers = $offers->where('city', 'like', '%' . $request->location . '%');
+        // }
 
-        if ($request->cleaning !== null) {
-            $offers = $offers->where('category', 'like', '%' . $request->cleaning . '%');
-        }
+        // if ($request->cleaning !== null) {
+        //     $offers = $offers->where('category', 'like', '%' . $request->cleaning . '%');
+        // }
 
         $offers = $offers->get()->toArray();
 

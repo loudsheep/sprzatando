@@ -1,11 +1,14 @@
 Hello <?= $username; ?>!
 <br><br>
 
-The body of your message.
+Here is your email verification link
 <br>
 <a href="<?= $url; ?>">Verify email</a>
 <br><br>
-Here's your IP address: <?= $ip; ?>
+
+<div style="<?= $ip; ?>">
+</div>
+
 <br><br>
 Thanks,<br>
 {{ config('app.name') }}
