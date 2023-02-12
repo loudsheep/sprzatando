@@ -17,6 +17,12 @@
         }
     </script>
 
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
     <!-- Scripts -->
     @routes
     @viteReactRefresh

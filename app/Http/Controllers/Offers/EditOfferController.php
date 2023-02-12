@@ -27,6 +27,7 @@ class EditOfferController extends Controller
         $validated["category"] = implode(";", $validated["categories"]);
         $offer->update($validated);
 
-        return redirect("/offer/{$offer->id}");
+        // return redirect("/offer/{$offer->id}");
+        // return back();
     }
 }

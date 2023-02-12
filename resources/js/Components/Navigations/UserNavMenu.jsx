@@ -18,7 +18,7 @@ export const UserNavMenu = () => {
   const menuOptions = [
     {
       name: "Dodaj ofertę",
-      path: "add-offer",
+      path: route("add.offer"),
     },
     {
       name: "Twoje oferty",

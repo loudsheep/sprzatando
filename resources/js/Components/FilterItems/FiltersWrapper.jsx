@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../Atoms/PrimaryButton";
 import Filters from "./Filters";
 import { useSelector } from "react-redux";
+import { Link } from "@inertiajs/react";
 
 const FilterWrapper = styled.div`
   padding: 2rem;
@@ -33,13 +34,17 @@ const FiltersForm = styled.form`
 `;
 const FiltersWrapper = () => {
   const offers = useSelector((state) => state.offers.offersArray);
-  
+
   return (
     <FilterWrapper>
       <FilterHeader>Filtry</FilterHeader>
       <FiltersForm>
         <Filters />
-        <Button>Pokaż {offers && offers.length} ofert</Button>
+        <Link href="#section">
+          <Button>
+            Pokaż {offers && offers.length} ofert
+          </Button>
+        </Link>
       </FiltersForm>
     </FilterWrapper>
   );
