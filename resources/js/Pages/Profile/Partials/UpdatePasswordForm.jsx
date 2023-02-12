@@ -24,12 +24,10 @@ export default function UpdatePasswordForm({ className }) {
             onError: () => {
                 if (errors.password) {
                     reset('password', 'password_confirmation');
-                    passwordInput.current.focus();
                 }
 
                 if (errors.current_password) {
                     reset('current_password');
-                    currentPasswordInput.current.focus();
                 }
             },
         });
@@ -54,6 +52,7 @@ export default function UpdatePasswordForm({ className }) {
                         ref={currentPasswordInput}
                         value={data.current_password}
                         handleChange={(e) => setData('current_password', e.target.value)}
+                        errorMessage={errors.current_password}
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="current-password"
@@ -69,6 +68,7 @@ export default function UpdatePasswordForm({ className }) {
                         ref={passwordInput}
                         value={data.password}
                         handleChange={(e) => setData('password', e.target.value)}
+                        errorMessage={errors.password}
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="new-password"
@@ -83,6 +83,7 @@ export default function UpdatePasswordForm({ className }) {
                         id="password_confirmation"
                         value={data.password_confirmation}
                         handleChange={(e) => setData('password_confirmation', e.target.value)}
+                        errorMessage={errors.password_confirmation}
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="new-password"

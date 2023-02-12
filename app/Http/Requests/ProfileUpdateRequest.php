@@ -16,8 +16,26 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['string', 'max:255'],
+            'name' => ['string', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        // TODO: change to proper messages
+        return [
+            'name.string' => 'error',
+            'name.max' => 'error',
+            'name.unique' => 'error',
+            'email.email' => 'error',
+            'email.max' => 'error',
+            'email.unique' => 'error',
         ];
     }
 }

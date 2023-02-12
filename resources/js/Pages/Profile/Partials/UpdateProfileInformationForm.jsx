@@ -37,6 +37,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         className="mt-1 block w-full"
                         value={data.name}
                         handleChange={(e) => setData('name', e.target.value)}
+                        errorMessage={errors.name}
                         required
                         autoComplete="name"
                     />
@@ -52,6 +53,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         className="mt-1 block w-full"
                         value={data.email}
                         handleChange={(e) => setData('email', e.target.value)}
+                        errorMessage={errors.email}
                         required
                         autoComplete="email"
                     />

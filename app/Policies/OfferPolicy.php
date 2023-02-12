@@ -41,7 +41,7 @@ class OfferPolicy
      */
     public function create(User $user)
     {
-        return $user->ban_ending == null;
+        return $user->ban_ending === null;
     }
 
     /**
