@@ -11,12 +11,18 @@ import styled from "styled-components";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { router } from '@inertiajs/react'
 
-export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdmin, isRegularUser, currentUserInterestedInOffer }) {
+export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdmin, isRegularUser, currentUserInterestedInOffer, isBanned }) {
 
   const handleInterestedButtons = (e) => {
     e.preventDefault();
 
     router.post("/follow-offer/" + offer.id);
+  };
+
+  const handleBanOffer = (e) => {
+    e.preventDefault();
+
+    router.post("/ban-offer/" + offer.id);
   };
 
   return (
@@ -39,7 +45,7 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
           </p>
           <p>{offer.city}</p>
 
-          { !isOwner && (
+          {!isOwner && (
             <>
               {!currentUserInterestedInOffer && (
                 <PrimaryButton onClick={handleInterestedButtons}>Zgłoś się do oferty</PrimaryButton>
@@ -50,6 +56,20 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
               )}
             </>
           )}
+          <br />
+
+          {isAdmin && (
+            <>
+              {!isBanned && (
+                <PrimaryButton color={"red"} onClick={handleBanOffer}>BANUJ OFERTĘ</PrimaryButton>
+              )}
+              
+              {isBanned && (
+                <PrimaryButton color={"green"} onClick={handleBanOffer}>ODBANUJ OFERTĘ</PrimaryButton>
+              )}
+            </>
+          )}
+
         </div>
       </Wrapper>
     </>

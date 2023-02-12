@@ -70,6 +70,18 @@ class OfferPolicy
     }
 
     /**
+     * Determine whether the user can ban the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Offer  $offer
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function ban(User $user, Offer $offer)
+    {
+        return $user->role === "admin";
+    }
+
+    /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user

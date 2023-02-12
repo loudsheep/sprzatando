@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BanOfferController;
 use App\Http\Controllers\Auth\AdminUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -109,4 +110,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/offer/{offer}/edit', [EditOfferController::class, 'update'])
         ->middleware('auth')
         ->name('offer.update');
+});
+
+
+// admin
+Route::middleware('auth')->group(function () {
+    Route::post('ban-offer/{offer}', [BanOfferController::class, 'update'])
+        ->middleware('auth')
+        ->name('offer.ban');
 });

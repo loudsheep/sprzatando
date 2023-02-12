@@ -12,6 +12,10 @@ class OfferDetailsController extends Controller
 {
     public function show(Request $request, Offer $offer)
     {
+        if($offer->is_banned && $request->user()->role === "user") {
+            abort(404);
+        }
+
         $ends = $offer->ends;
 
         // user that created this offer
@@ -41,6 +45,7 @@ class OfferDetailsController extends Controller
             "offer" => $offer->toArray(),
             'creator' => $creator,
             'images' => $urls,
+            'isBanned' => $offer->is_banned,
 
             'isLoggedIn' => $isLoggedIn,
             'isOwner' => $isOwner,
