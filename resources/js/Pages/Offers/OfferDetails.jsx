@@ -39,7 +39,7 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
           </p>
           <p>{offer.city}</p>
 
-          {isLoggedIn && !isOwner && (
+          { !isOwner && (
             <>
               {!currentUserInterestedInOffer && (
                 <PrimaryButton onClick={handleInterestedButtons}>Zgłoś się do oferty</PrimaryButton>
