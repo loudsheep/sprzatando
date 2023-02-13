@@ -113,9 +113,13 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// admin
+// admin related
 Route::middleware('auth')->group(function () {
     Route::post('ban-offer/{offer}', [BanOfferController::class, 'update'])
         ->middleware('auth')
         ->name('offer.ban');
+
+    Route::post('report-offer/{offer}', [BanOfferController::class, 'report'])
+        ->middleware(['auth', 'throttle:3,1'])
+        ->name('offer.report');
 });

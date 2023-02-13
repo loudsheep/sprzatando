@@ -17,4 +17,15 @@ class BanOfferController extends Controller
 
         return back();
     }
+
+    public function report(Request $request, Offer $offer) {
+        if($offer->is_reported) {
+            return back();
+        }
+
+        $offer->is_reported = true;
+        $offer->save();
+
+        return back();
+    }
 }

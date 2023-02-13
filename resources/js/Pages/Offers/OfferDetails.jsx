@@ -25,6 +25,12 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
     router.post("/ban-offer/" + offer.id);
   };
 
+  const handleReportOffer = (e) => {
+    e.preventDefault();
+
+    router.post("/report-offer/" + offer.id);
+  };
+
   return (
     <>
       <Head title="Szczegóły oferty" />
@@ -63,11 +69,15 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
               {!isBanned && (
                 <PrimaryButton color={"red"} onClick={handleBanOffer}>BANUJ OFERTĘ</PrimaryButton>
               )}
-              
+
               {isBanned && (
                 <PrimaryButton color={"green"} onClick={handleBanOffer}>ODBANUJ OFERTĘ</PrimaryButton>
               )}
             </>
+          )}
+
+          {!isOwner && isRegularUser && (
+            <PrimaryButton color={"#ff0000"} onClick={handleReportOffer} style="border: 1px red solid;">Reportój ofertę</PrimaryButton>
           )}
 
         </div>

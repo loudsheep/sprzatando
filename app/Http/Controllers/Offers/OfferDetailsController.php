@@ -38,7 +38,7 @@ class OfferDetailsController extends Controller
         $isLoggedIn = $user != null;
         $isOwner = $isLoggedIn && $user->id === $offer["creator_id"];
         $isAdmin = $isLoggedIn && $user->role === "admin";
-        $isRegularUser = $isLoggedIn && !$isAdmin;
+        $isRegularUser = !$isAdmin;
         $currentUserInterestedInOffer = $isLoggedIn && $offer->usersIntrested()->where('users.id', '=', $user->id)->get()->count() > 0;
 
         return Inertia::render('Offers/OfferDetails', [
