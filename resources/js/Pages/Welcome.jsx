@@ -38,7 +38,7 @@ const Section = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export default function Welcome({
   auth,
@@ -71,15 +71,15 @@ export default function Welcome({
 
   const offersPerPage = 6;
 
-  const indexOfLastExc = currentPage * offersPerPage;
-  const indexOfFirstExc = indexOfLastExc - offersPerPage;
+  const indexOfLastOffer = currentPage * offersPerPage;
+  const indexOfFirstOffer = indexOfLastOffer - offersPerPage;
 
   const paginate = (e, value) => {
     setCurrentPage(value);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const currentOffers = offersArray.slice(indexOfFirstExc, indexOfLastExc);
+  const currentOffers = offersArray.slice(indexOfFirstOffer, indexOfLastOffer);
 
   return (
     <>
@@ -107,19 +107,21 @@ export default function Welcome({
               />
             ))}
           </OfferWrapper>
-          <Pagination
-            style={{
-              margin: "10px auto 4rem",
-            }}
-            count={Math.ceil(offersArray.length / offersPerPage)}
-            shape="circular"
-            page={currentPage}
-            defaultPage={1}
-            onChange={paginate}
-            color="secondary"
-            size="string"
-            variant="outlined"
-          />
+          {offersArray.length > offersPerPage && (
+            <Pagination
+              style={{
+                margin: "10px auto 4rem",
+              }}
+              count={Math.ceil(offersArray.length / offersPerPage)}
+              shape="circular"
+              page={currentPage}
+              defaultPage={1}
+              onChange={paginate}
+              color="secondary"
+              size="string"
+              variant="outlined"
+            />
+          )}
         </Section>
       </main>
     </>
