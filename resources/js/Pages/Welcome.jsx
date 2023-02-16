@@ -26,7 +26,6 @@ const Header = styled.header`
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100vh;
-
   -o-background-size: cover;
   -moz-background-size: cover;
   -webkit-background-size: cover;

@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { offersActions } from "@/store/filter-logic";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const useStyles = makeStyles({
   slider: {
@@ -49,6 +50,15 @@ const FilterSlider = () => {
     );
   };
 
+  const theme = createTheme({
+    palette: {
+      primary: {
+        // Purple and green play nicely together.
+        main: '#7F39F9',
+      }
+    },
+  });
+
   return (
     <Box
       sx={{
@@ -62,17 +72,20 @@ const FilterSlider = () => {
       <SliderLabel>
         Cena: {value[0]}zł - {value[1]}zł
       </SliderLabel>
-      <Slider
-        className={classes.slider}
-        value={value}
-        onChange={sliderValueChangeHandler}
-        getAriaValueText={valuetext}
-        min={prices[0]}
-        max={prices[1]}
-        sx={{
-          width: 0.95,
-        }}
-      />
+      <ThemeProvider theme={theme}>
+        <Slider
+          className={classes.slider}
+          value={value}
+          onChange={sliderValueChangeHandler}
+          getAriaValueText={valuetext}
+          min={prices[0]}
+          max={prices[1]}
+          color="primary"
+          sx={{
+            width: 0.95,
+          }}
+        />
+      </ThemeProvider>
     </Box>
   );
 };
