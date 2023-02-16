@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 import { Navbar } from "@/Components/Navigations/Navbar";
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterItemsActions } from "@/store/filter-items";
 import { offersActions } from "@/store/filter-logic";
 import linePath from "../assets/img/Lines.svg";
+import { Pagination } from "@mui/material";
 
 const OfferWrapper = styled.div`
   width: 100%;
@@ -31,6 +32,13 @@ const Header = styled.header`
   -webkit-background-size: cover;
   background-size: cover;
 `;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 
 export default function Welcome({
   auth,
@@ -58,18 +66,33 @@ export default function Welcome({
   }, [categories, cities, minPrice, maxPrice]);
 
   const offersArray = useSelector((state) => state.offers.offersArray);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const offersPerPage = 6;
+
+  const indexOfLastExc = currentPage * offersPerPage;
+  const indexOfFirstExc = indexOfLastExc - offersPerPage;
+
+  const paginate = (e, value) => {
+    setCurrentPage(value);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const currentOffers = offersArray.slice(indexOfFirstExc, indexOfLastExc);
+
   return (
     <>
       <Head title="Welcome" />
-      
+
       <Header img={linePath}>
         <Navbar auth={auth} />
         <FilterSection offers={offers} />
       </Header>
       <main>
-        <section id="section">
+        <Section id="section">
           <OfferWrapper>
-            {offersArray.map((offer, i) => (
+            {currentOffers.map((offer, i) => (
               <Offer
                 id={offer.id}
                 title={offer.title}
@@ -84,7 +107,20 @@ export default function Welcome({
               />
             ))}
           </OfferWrapper>
-        </section>
+          <Pagination
+            style={{
+              margin: "10px auto 4rem",
+            }}
+            count={Math.ceil(offersArray.length / offersPerPage)}
+            shape="circular"
+            page={currentPage}
+            defaultPage={1}
+            onChange={paginate}
+            color="secondary"
+            size="string"
+            variant="outlined"
+          />
+        </Section>
       </main>
     </>
   );
