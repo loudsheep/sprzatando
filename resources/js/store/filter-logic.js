@@ -1,6 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = { offersArray: [], originalOffersArray: [] };
+const initialState = {
+  offersArray: [],
+  originalOffersArray: [],
+  cityFilter: null,
+  categoryFilter: null,
+  priceFilter: [],
+};
 
 const offersSlice = createSlice({
   name: "offers",
@@ -8,37 +14,45 @@ const offersSlice = createSlice({
   reducers: {
     setAllOffers(state, action) {
       const { offers } = action.payload;
-      if (state.offersArray.length === 0) {
-        offers.forEach((offer) => state.offersArray.push(offer));
-      }
-      if (state.originalOffersArray.length === 0) {
-        offers.forEach((offer) => state.originalOffersArray.push(offer));
-      }
+      state.offersArray = offers;
+      state.originalOffersArray = offers;
     },
-
-    //TODO: filtering by all criteria independently
-
-    filterByCity(state, action) {
+    setCityFilter(state, action) {
       const { city } = action.payload;
-      state.offersArray = state.originalOffersArray;
-      state.offersArray = state.offersArray.filter(
-        (offer) => offer.city === city
-      );
-      console.log(city)
+      state.cityFilter = city;
     },
-    filterByCategory(state, action) {
+    setCategoryFilter(state, action) {
       const { category } = action.payload;
-      state.offersArray = state.originalOffersArray;
-      state.offersArray = state.offersArray.filter(
-        (offer) => offer.category === category
-      );
+      state.categoryFilter = category;
     },
-    filterByPrice(state, action) {
+    setPriceFilter(state, action) {
       const { value } = action.payload;
-      state.offersArray = state.originalOffersArray;
-      state.offersArray = state.offersArray.filter(
-        (offer) => offer.price >= value[0] && offer.price <= value[1]
-      );
+      state.priceFilter = value;
+    },
+    filterOffers(state) {
+      let filteredOffers = state.originalOffersArray;
+
+      if (state.cityFilter) {
+        filteredOffers = filteredOffers.filter(
+          (offer) => offer.city === state.cityFilter
+        );
+      }
+
+      if (state.categoryFilter) {
+        filteredOffers = filteredOffers.filter(
+          (offer) => offer.category === state.categoryFilter
+        );
+      }
+
+      if (state.priceFilter.length > 0) {
+        filteredOffers = filteredOffers.filter(
+          (offer) =>
+            offer.price >= state.priceFilter[0] &&
+            offer.price <= state.priceFilter[1]
+        );
+      }
+
+      state.offersArray = filteredOffers;
     },
   },
 });

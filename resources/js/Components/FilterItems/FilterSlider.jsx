@@ -44,18 +44,18 @@ const FilterSlider = () => {
   const sliderValueChangeHandler = (event, value) => {
     setValue(value);
     dispatch(
-      offersActions.filterByPrice({
+      offersActions.setPriceFilter({
         value,
       })
     );
+    dispatch(offersActions.filterOffers());
   };
 
   const theme = createTheme({
     palette: {
       primary: {
-        // Purple and green play nicely together.
-        main: '#7F39F9',
-      }
+        main: "#7F39F9",
+      },
     },
   });
 

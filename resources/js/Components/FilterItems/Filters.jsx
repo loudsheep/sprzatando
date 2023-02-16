@@ -34,28 +34,29 @@ const Filters = () => {
   const handleCityChange = (e) => {
     const city = e.target.value;
     dispatch(
-      offersActions.filterByCity({
+      offersActions.setCityFilter({
         city,
       })
     );
-  }
+    dispatch(offersActions.filterOffers());
+  };
 
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     dispatch(
-      offersActions.filterByCategory({
+      offersActions.setCategoryFilter({
         category,
       })
     );
-  }
-    return (
+    dispatch(offersActions.filterOffers());
+  };
+  return (
     <Fragment>
       <FilterSelect
         filters={categories}
         type="cleaning"
         title="Wybierz rodzaj sprzątania"
         handleChange={(e) => handleCategoryChange(e)}
-        
       />
       <FilterSelect
         filters={cities}
