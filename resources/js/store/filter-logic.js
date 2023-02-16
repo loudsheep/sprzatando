@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   offersArray: [],
@@ -39,8 +39,8 @@ const offersSlice = createSlice({
       }
 
       if (state.categoryFilter) {
-        filteredOffers = filteredOffers.filter(
-          (offer) => offer.category === state.categoryFilter
+        filteredOffers = filteredOffers.filter((offer) =>
+          offer.category.includes(state.categoryFilter)
         );
       }
 
