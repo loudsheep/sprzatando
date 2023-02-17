@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Offers;
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 
@@ -12,7 +13,7 @@ class OfferDetailsController extends Controller
 {
     public function show(Request $request, Offer $offer)
     {
-        if($offer->is_banned && $request->user()->role === "user") {
+        if($offer->is_banned && ($request->user() === null || $request->user()->role === "user")) {
             abort(404);
         }
 
