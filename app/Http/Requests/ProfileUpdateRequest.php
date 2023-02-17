@@ -17,7 +17,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
-            'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'email' => ['required', 'ascii', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }
 
@@ -30,12 +30,14 @@ class ProfileUpdateRequest extends FormRequest
     {
         // TODO: change to proper messages
         return [
-            'name.string' => 'error',
-            'name.max' => 'error',
-            'name.unique' => 'error',
-            'email.email' => 'error',
-            'email.max' => 'error',
-            'email.unique' => 'error',
+            'name.string' => 'error1',
+            'name.required' => 'error8',
+            'name.max' => 'error2',
+            'name.unique' => 'error3',
+            'email.email' => 'error4',
+            'email.max' => 'error5',
+            'email.unique' => 'error6',
+            'email.ascii' => 'error7'
         ];
     }
 }

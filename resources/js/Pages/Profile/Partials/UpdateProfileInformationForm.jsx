@@ -14,6 +14,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
     const submit = (e) => {
         e.preventDefault();
+        console.log(data);
 
         patch(route('profile.update'));
     };

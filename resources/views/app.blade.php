@@ -17,11 +17,11 @@
         }
     </script>
 
-    <style>
+    <!-- <style>
         html {
             scroll-behavior: smooth;
         }
-    </style>
+    </style> -->
 
     <!-- Scripts -->
     @routes
