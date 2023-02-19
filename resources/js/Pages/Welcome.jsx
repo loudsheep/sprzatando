@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 import { Navbar } from "@/Components/Navigations/Navbar";
@@ -66,7 +66,7 @@ export default function Welcome({
 
   const offersArray = useSelector((state) => state.offers.offersArray);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = useSelector((state) => state.offers.currentPage);
 
   const offersPerPage = 6;
 
@@ -74,7 +74,12 @@ export default function Welcome({
   const indexOfFirstOffer = indexOfLastOffer - offersPerPage;
 
   const paginate = (e, value) => {
-    setCurrentPage(value);
+    dispatch(
+      offersActions.setCurrentPage({
+        value,
+      })
+    );
+    
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

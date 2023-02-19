@@ -6,6 +6,7 @@ const initialState = {
   cityFilter: null,
   categoryFilter: null,
   priceFilter: [],
+  currentPage: 1,
 };
 
 const offersSlice = createSlice({
@@ -29,6 +30,10 @@ const offersSlice = createSlice({
       const { value } = action.payload;
       state.priceFilter = value;
     },
+    setCurrentPage(state, action) {
+      const { value } = action.payload;
+      state.currentPage = value;
+    },
     filterOffers(state) {
       let filteredOffers = state.originalOffersArray;
 
@@ -36,12 +41,14 @@ const offersSlice = createSlice({
         filteredOffers = filteredOffers.filter(
           (offer) => offer.city === state.cityFilter
         );
+        state.currentPage = 1;
       }
 
       if (state.categoryFilter) {
         filteredOffers = filteredOffers.filter((offer) =>
           offer.category.includes(state.categoryFilter)
         );
+        state.currentPage = 1;
       }
 
       if (state.priceFilter.length > 0) {
@@ -50,6 +57,7 @@ const offersSlice = createSlice({
             offer.price >= state.priceFilter[0] &&
             offer.price <= state.priceFilter[1]
         );
+        state.currentPage = 1;
       }
 
       state.offersArray = filteredOffers;

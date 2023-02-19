@@ -89,7 +89,9 @@ export default function AddOffer(props) {
   return (
     <AuthenticatedLayout auth={props.auth} errors={props.errors}>
       <SubmitModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-      <Head title="Dodaj ofertę" />
+      <Head title="Dodaj ofertę">
+        <meta charset="UTF-8" />
+      </Head>
       <StyledTitle>Dodaj swoją ofertę!</StyledTitle>
       <FormWrapper onSubmit={submit}>
         <div className="inputs-container">

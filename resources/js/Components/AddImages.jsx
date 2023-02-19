@@ -42,7 +42,7 @@ export const OfferImages = ({
 
         <UploadedImgWrapper>
           <StyledPhotoBox htmlFor="input-file">
-            <img src={IconPath} />
+            <img src={IconPath} alt="add photo icon"/>
           </StyledPhotoBox>
         </UploadedImgWrapper>
         <input

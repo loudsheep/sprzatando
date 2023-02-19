@@ -40,7 +40,7 @@ const FiltersWrapper = () => {
       <FilterHeader>Filtry</FilterHeader>
       <FiltersForm>
         <Filters />
-        <Link href="#section">
+        <Link href="#section" type='button'>
           <Button>
             Pokaż {offers && offers.length} ofert
           </Button>

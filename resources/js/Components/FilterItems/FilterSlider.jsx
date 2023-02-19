@@ -3,8 +3,7 @@ import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import { makeStyles } from "@material-ui/core";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { offersActions } from "@/store/filter-logic";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
