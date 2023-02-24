@@ -69,6 +69,7 @@ class Offer extends Model
     {
         return Offer::with('creator')->orderBy('created_at', 'desc')
             ->where('is_done', '==', 'false')
-            ->where('is_banned', '==', 'false');
+            ->where('is_banned', '==', 'false')
+            ->has('creator');
     }
 }
