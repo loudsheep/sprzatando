@@ -30,7 +30,7 @@ const Header = styled.header`
   -moz-background-size: cover;
   -webkit-background-size: cover;
   background-size: cover;
-`;
+ `;
 
 const Section = styled.section`
   display: flex;
@@ -79,7 +79,7 @@ export default function Welcome({
         value,
       })
     );
-    
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

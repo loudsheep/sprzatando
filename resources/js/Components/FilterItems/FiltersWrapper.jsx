@@ -27,7 +27,7 @@ const FilterHeader = styled.h3`
   font-size: 2rem;
 `;
 
-const FiltersForm = styled.form`
+const FiltersForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,16 +35,22 @@ const FiltersForm = styled.form`
 const FiltersWrapper = () => {
   const offers = useSelector((state) => state.offers.offersArray);
 
+  const handleClickScroll = () => {
+    const element = document.getElementById("section");
+    if (element) {
+      // 👇 Will scroll smoothly to the top of the next section
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <FilterWrapper>
       <FilterHeader>Filtry</FilterHeader>
       <FiltersForm>
         <Filters />
-        <Link href="#section" type='button'>
-          <Button>
-            Pokaż {offers && offers.length} ofert
-          </Button>
-        </Link>
+        <Button onClick={handleClickScroll}>
+          Pokaż {offers && offers.length} ofert
+        </Button>
       </FiltersForm>
     </FilterWrapper>
   );
