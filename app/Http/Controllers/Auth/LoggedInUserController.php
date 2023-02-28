@@ -33,15 +33,6 @@ class LoggedInUserController extends Controller
             $offers = Offer::getOffersForMainPage();
         }
 
-        // fiters
-        // if ($request->location !== null) {
-        //     $offers = $offers->where('city', 'like', '%' . $request->location . '%');
-        // }
-
-        // if ($request->cleaning !== null) {
-        //     $offers = $offers->where('category', 'like', '%' . $request->cleaning . '%');
-        // }
-
         $offers = $offers->get()->toArray();
 
         // categories
@@ -57,6 +48,11 @@ class LoggedInUserController extends Controller
                     $cat[] = $c;
                 }
             }
+        }
+
+        foreach ($offers as $key => $value) {
+            unset($offers[$key]["creator"]["email"]);
+            unset($offers[$key]["creator"]["email_verified_at"]);
         }
 
         return Inertia::render('Welcome', [

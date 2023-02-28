@@ -77,7 +77,7 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
           )}
 
           {!isOwner && isRegularUser && (
-            <PrimaryButton color={"#ff0000"} onClick={handleReportOffer} style="border: 1px red solid;">Reportój ofertę</PrimaryButton>
+            <PrimaryButton color={"#ff0000"} onClick={handleReportOffer} style="border: 1px red solid;">Reportuj ofertę</PrimaryButton>
           )}
 
         </div>
