@@ -71,10 +71,12 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 
     Route::get('admin', [AdminUserController::class, 'show'])
-        ->name('admin')
+        ->name('admin');
         // TODO uncomment this once admin page ready
         // ->middleware('can:manage_users')
-    ;
+
+    Route::get('time', [AdminUserController::class, 'time'])
+        ->name('time');
 });
 
 // offers
