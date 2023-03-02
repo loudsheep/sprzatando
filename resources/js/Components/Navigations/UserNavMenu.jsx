@@ -57,7 +57,6 @@ export const UserNavMenu = () => {
       icon: userIconPath,
     },
   ];
-  console.log(url);
   return (
     <NavWrapper>
       {menuOptions.map(({ name, path, routeUrl, icon }) => (
