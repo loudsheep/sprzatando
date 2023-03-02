@@ -22,16 +22,20 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  background-color: white;
 `;
 
 const UserInfoBox = styled.div`
+  background-color: white;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  min-height: 8rem;
   padding: 0 35px;
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
+  grid-column-start: span 2;
+  box-shadow: 0px -7px 17px 0px rgba(66, 68, 90, 1);
+  z-index: 9;
   @media (max-width: 992px) {
     min-height: 6rem;
     justify-content: space-between;
@@ -52,13 +56,14 @@ export default function Authenticated({ auth, children, prophileImg }) {
     <>
       {width >= 992 && (
         <Wrapper>
+          
+
+          <UserInfoBox>
           <LogoWrapper>
             <Link href="/">
               <img src={logoPath} alt="logo" style={{ width: "70px" }} />
             </Link>
           </LogoWrapper>
-
-          <UserInfoBox>
             <Dropdown>
               <Dropdown.Trigger>
                 <span className="inline-flex rounded-md">
@@ -67,7 +72,7 @@ export default function Authenticated({ auth, children, prophileImg }) {
                     className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                   >
                     {auth.user.name}
-                    <img src=""/>
+                    <img src="" />
                     <Svg />
                   </button>
                 </span>

@@ -8,8 +8,10 @@ import userOfferPath from "../../assets/img/nav-icons/userOffer.png";
 const NavWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: white;
   padding-top: 4rem;
-  border-right: 1px solid ${({ theme }) => theme.colors.grey};
+  box-shadow: -4px -2px 10px 0px rgba(66, 68, 90, 1);
+ 
 `;
 
 const MenuItem = styled.div`
