@@ -74,7 +74,6 @@ export default function AddOffer(props) {
     e.preventDefault();
     post(route("offer.store"), {
       preserveScroll: true,
-      onError: () => console.log(errors),
       onSuccess: () => {
         setData(initialState);
         handleCheckboxReset();

@@ -9,7 +9,7 @@ import { useWidth } from "@/hooks/useWidth";
 const Wrapper = styled.div`
   display: grid;
   height: 100vh;
-  grid-template-columns: 1fr 7fr;
+  grid-template-columns: 1fr 6fr;
   grid-template-rows: 1fr 8fr;
 `;
 
@@ -22,7 +22,6 @@ const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid ${({ theme }) => theme.colors.grey};
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 `;
 
