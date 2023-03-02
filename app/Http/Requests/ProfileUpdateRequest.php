@@ -33,10 +33,10 @@ class ProfileUpdateRequest extends FormRequest
             'name.string' => 'error1',
             'name.required' => 'error8',
             'name.max' => 'error2',
-            'name.unique' => 'error3',
+            'name.unique' => 'Name shall be unique',
             'email.email' => 'error4',
             'email.max' => 'error5',
-            'email.unique' => 'error6',
+            'email.unique' => 'Email must be unique',
             'email.ascii' => 'error7'
         ];
     }
