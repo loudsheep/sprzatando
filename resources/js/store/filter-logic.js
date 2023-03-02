@@ -38,16 +38,24 @@ const offersSlice = createSlice({
       let filteredOffers = state.originalOffersArray;
 
       if (state.cityFilter) {
-        filteredOffers = filteredOffers.filter(
-          (offer) => offer.city === state.cityFilter
-        );
+        if (state.cityFilter === "Wybierz lokalizacje") {
+          filteredOffers = filteredOffers;
+        } else {
+          filteredOffers = filteredOffers.filter(
+            (offer) => offer.city === state.cityFilter
+          );
+        }
         state.currentPage = 1;
       }
 
       if (state.categoryFilter) {
-        filteredOffers = filteredOffers.filter((offer) =>
-          offer.category.includes(state.categoryFilter)
-        );
+        if (state.categoryFilter === "Wybierz rodzaj sprzątania") {
+          filteredOffers = filteredOffers;
+        } else {
+          filteredOffers = filteredOffers.filter((offer) =>
+            offer.category.includes(state.categoryFilter)
+          );
+        }
         state.currentPage = 1;
       }
 

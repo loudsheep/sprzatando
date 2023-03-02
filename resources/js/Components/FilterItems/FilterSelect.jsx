@@ -23,7 +23,7 @@ const FilterSelect = (props) => {
       defaultValue={props.title}
       onChange={props.handleChange}
     >
-      <option value={props.title} name="titleValue" disabled>
+      <option value={props.title} name="titleValue" >
         {props.title}
       </option>
       {props.filters.map((filter, i) => (
