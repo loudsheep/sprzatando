@@ -67,9 +67,11 @@ class Offer extends Model
     // queries
     public static function getOffersForMainPage()
     {
-        return Offer::with('creator')->orderBy('created_at', 'desc')
+        return Offer::with('creator')
+            ->orderBy('created_at', 'desc')
             ->where('is_done', '==', 'false')
             ->where('is_banned', '==', 'false')
+            ->where('ends', '>=', today())
             ->has('creator');
     }
 }

@@ -39,6 +39,11 @@ const Section = styled.section`
   justify-content: center;
 `;
 
+const NoOffers = styled.div`
+padding-bottom: 30px;
+font-size: 3rem;
+`;
+
 export default function Welcome({
   auth,
   cities,
@@ -125,6 +130,11 @@ export default function Welcome({
               size="string"
               variant="outlined"
             />
+          )}
+          {offersArray.length == 0 && (
+            <NoOffers>
+              Brak aktualnych ofert
+            </NoOffers>
           )}
         </Section>
       </main>
