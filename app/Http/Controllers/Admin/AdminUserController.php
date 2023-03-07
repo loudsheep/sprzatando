@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
@@ -15,15 +15,11 @@ class AdminUserController extends Controller
     //
     public function show()
     {
+        dd(User::all());
+    }
 
-        $users = User::factory()
-            ->has(Offer::factory()->count(3), 'createdOffers')
-            ->create();
-
-        // abort(501);
-        // return Inertia::render('Admin/Admin');
-
-        return 'Created 1 new user with 3 new offers!';
+    public function detail(User $user) {
+        dd($user);
     }
 
     public function time()

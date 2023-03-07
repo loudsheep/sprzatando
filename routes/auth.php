@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminReportedController;
 use App\Http\Controllers\Admin\BanOfferController;
-use App\Http\Controllers\Auth\AdminUserController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -69,15 +70,6 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
-
-    Route::get('admin', [AdminUserController::class, 'show'])
-        ->middleware('can:manage_users', 'auth')
-        ->name('admin');
-    // TODO uncomment this once admin page ready
-
-    Route::get('time', [AdminUserController::class, 'time'])
-        ->middleware('can:manage_users', 'auth')
-        ->name('time');
 });
 
 // offers
@@ -125,4 +117,20 @@ Route::middleware('auth')->group(function () {
     Route::post('report-offer/{offer}', [BanOfferController::class, 'report'])
         ->middleware(['auth', 'throttle:3,1'])
         ->name('offer.report');
+
+    Route::get('admin/users', [AdminUserController::class, 'show'])
+        ->middleware('can:manage_users', 'auth')
+        ->name('admin');
+
+    Route::get('admin/users/{user}', [AdminUserController::class, 'detail'])
+        ->middleware('can:manage_users', 'auth')
+        ->name('admin');
+
+    Route::get('admin/reported', [AdminReportedController::class, 'show'])
+        ->middleware('can:manage_users', 'auth')
+        ->name('admin');
+
+    Route::get('time', [AdminUserController::class, 'time'])
+        ->middleware('can:manage_users', 'auth')
+        ->name('time');
 });
