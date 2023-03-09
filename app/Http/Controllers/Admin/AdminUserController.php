@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
 use App\Models\User;
+use App\Models\UserReviews;
 use Carbon\Carbon;
 use Database\Factories\UserFactory;
 use Illuminate\Http\Request;
@@ -13,12 +14,20 @@ use Inertia\Inertia;
 class AdminUserController extends Controller
 {
     //
-    public function show()
+    public function show(Request $request)
     {
-        dd(User::all());
+        $users = User::withCount('createdOffers')
+        ->withAvg('reviews', 'rating')
+        ->where('id', '!=', $request->user()->id)
+        ->get()->makeVisible(['created_at', 'ban_ending', 'email']);
+
+        return Inertia::render('Admin/Users', [
+            'users' => $users,
+        ]);
     }
 
-    public function detail(User $user) {
+    public function detail(User $user)
+    {
         dd($user);
     }
 

@@ -89,7 +89,6 @@ export default function Welcome({
   };
 
   const currentOffers = offersArray.slice(indexOfFirstOffer, indexOfLastOffer);
-
   return (
     <>
       <Head title="Welcome" />

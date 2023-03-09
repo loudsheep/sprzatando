@@ -4,8 +4,7 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { FormField } from '@/Components/FormField';
 
-export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
-    const user = usePage().props.auth.user;
+export default function UpdateProfileInformation({ user, mustVerifyEmail, status, className }) {
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,

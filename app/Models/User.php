@@ -37,6 +37,8 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'email',
+        'email_verified_at',
         'remember_token',
         'role',
         'ban_ending',
@@ -105,6 +107,6 @@ class User extends Authenticatable
 
     public function reviews()
     {
-        return $this->hasManyThrough(UserReviews::class, Offer::class, 'contractor_id', 'offer_id', 'id', 'id');
+        return $this->hasManyThrough(UserReviews::class, Offer::class, 'creator_id', 'offer_id', 'id', 'id');
     }
 }
