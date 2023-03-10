@@ -1,3 +1,4 @@
+import { Head } from "@inertiajs/react";
 import styled from "styled-components";
 
 const UserContainer = styled.table`
@@ -21,10 +22,10 @@ const Cont = styled.div`
 
 
 export default function Dashboard({ users }) {
-    console.log(users);
     return (
         <>
             {/* TODO add some layout for this */}
+            <Head title="Users" />
 
             <Cont>
                 <h1>Lista użytkowników</h1>
