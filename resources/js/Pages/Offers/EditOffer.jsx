@@ -98,7 +98,7 @@ const EditOffer = ({ offer, auth }) => {
 
   return (
     <>
-      <Authenticated auth={auth} >
+      <Authenticated auth={auth} prophileImg={auth.user.profile_img}>
         <Head title="Edit" />
         <SectionTitle>Edytuj Ofertę</SectionTitle>
         <FormWrapper onSubmit={formSubmitHandler}>
