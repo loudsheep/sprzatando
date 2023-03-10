@@ -23,6 +23,12 @@ const Header = styled.h1`
   color: #303030;
 `;
 
+const TypeBoxWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
 export default function UserOffer({
   auth,
   errors,
@@ -45,7 +51,7 @@ export default function UserOffer({
       <Head title="Twoje oferty" />
       <Wrapper>
         <Header>Twoje oferty: </Header>
-        <div style={{ display: "flex" }}>
+        <TypeBoxWrapper>
           <TypeBox
             id="active"
             value="active"
@@ -70,7 +76,7 @@ export default function UserOffer({
             onChange={handleTypeChange}
             checked={selectedType === "done"}
           />
-        </div>
+        </TypeBoxWrapper>
 
         {selectedType === "active" &&
           activeOffers.map((offer, i) => (
