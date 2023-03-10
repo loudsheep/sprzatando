@@ -98,7 +98,7 @@ const EditOffer = ({ offer, auth }) => {
 
   return (
     <>
-      <Authenticated auth={auth}>
+      <Authenticated auth={auth} >
         <Head title="Edit" />
         <SectionTitle>Edytuj Ofertę</SectionTitle>
         <FormWrapper onSubmit={formSubmitHandler}>

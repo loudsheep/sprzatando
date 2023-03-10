@@ -86,7 +86,11 @@ export default function AddOffer(props) {
   const maxDate = new Date(today.setMonth(today.getMonth() + 1));
 
   return (
-    <AuthenticatedLayout auth={props.auth} errors={props.errors}>
+    <AuthenticatedLayout
+      auth={props.auth}
+      errors={props.errors}
+      prophileImg={props.auth.user.profile_img}
+    >
       <SubmitModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       <Head title="Dodaj ofertę">
         <meta charset="UTF-8" />
