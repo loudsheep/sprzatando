@@ -11,6 +11,7 @@ const NavWrapper = styled.div`
   background-color: white;
   padding-top: 4rem;
   box-shadow: -4px -2px 10px 0px rgba(66, 68, 90, 1);
+  z-index: 1;
  
 `;
 
