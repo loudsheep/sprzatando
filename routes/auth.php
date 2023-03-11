@@ -16,6 +16,7 @@ use App\Http\Controllers\Offers\FollowOfferController;
 use App\Http\Controllers\Offers\AddOfferController;
 use App\Http\Controllers\Offers\CreatedOffersController;
 use App\Http\Controllers\Offers\EditOfferController;
+use App\Http\Controllers\Offers\ExtendExpirationDateController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -98,7 +99,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('offer.follow');
 
-    Route::post('extend-expiration/{offer}', [FollowOfferController::class, 'store'])
+    Route::post('extend-expiration/{offer}', [ExtendExpirationDateController::class, 'updateEndDate'])
         ->middleware('auth');
 
     Route::get('/offer/{offer}/edit', [EditOfferController::class, 'edit'])
