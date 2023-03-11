@@ -56,8 +56,6 @@ export default function Authenticated({ auth, children, prophileImg }) {
     <>
       {width >= 992 && (
         <Wrapper>
-          
-
           <UserInfoBox>
           <LogoWrapper>
             <Link href="/">

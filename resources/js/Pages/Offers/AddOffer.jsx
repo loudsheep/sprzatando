@@ -182,7 +182,7 @@ export default function AddOffer(props) {
             Anuluj
           </PrimaryButton>
 
-          <PrimaryButton type="submit">Dodaj ofertę!</PrimaryButton>
+          <PrimaryButton type="submit">Dodaj</PrimaryButton>
         </div>
       </FormWrapper>
     </AuthenticatedLayout>

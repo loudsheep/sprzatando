@@ -34,6 +34,7 @@ export default function UserOffer({
   activeOffers,
   bannedOffers,
   doneOffers,
+  expiredOffers
 }) {
   const [selectedType, setSelectedType] = useState("active");
 
@@ -75,6 +76,14 @@ export default function UserOffer({
             onChange={handleTypeChange}
             checked={selectedType === "done"}
           />
+          <TypeBox
+            id="expired"
+            value="expired"
+            title="Wygasłe"
+            name="type"
+            onChange={handleTypeChange}
+            checked={selectedType === "expired"}
+          />
         </TypeBoxWrapper>
 
           {selectedType === "active" &&
@@ -113,6 +122,22 @@ export default function UserOffer({
 
           {selectedType === "done" &&
             doneOffers.map((offer, i) => (
+              <Offer
+                id={offer.id}
+                image={offer.main_image}
+                title={offer.title}
+                description={offer.description}
+                price={offer.price}
+                category={offer.category}
+                city={offer.city}
+                owner={offer.creator.name}
+                createdAt={offer.created_at}
+                isOwner={true}
+                key={i}
+              />
+            ))}
+            {selectedType === "expired" &&
+            expiredOffers.map((offer, i) => (
               <Offer
                 id={offer.id}
                 image={offer.main_image}
