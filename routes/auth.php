@@ -99,7 +99,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('offer.follow');
 
-    Route::post('extend-expiration/{offer}', [ExtendExpirationDateController::class, 'updateEndDate'])
+    Route::post('extend-expiration/{offer}', [ExtendExpirationDateController::class, 'update'])
         ->middleware('auth');
 
     Route::get('/offer/{offer}/edit', [EditOfferController::class, 'edit'])

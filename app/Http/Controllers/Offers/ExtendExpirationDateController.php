@@ -10,11 +10,11 @@ use Inertia\Inertia;
 
 class ExtendExpirationDateController extends Controller
 {
-    public function updateEndDate(Offer $offer)
+    public function update(Offer $offer)
     {
         $this->authorize('update', $offer);
 
-        $offer->ends = Carbon::parse($offer->ends)->addMonth();
+        $offer->ends = Carbon::today()->addWeeks(2);
         $offer->save();
 
         return back();
