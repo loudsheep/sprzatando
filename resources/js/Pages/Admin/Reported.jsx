@@ -1,4 +1,4 @@
-import { Offer } from "@/Components/Offer";
+import { Offer } from "@/Components/Offer/Offer";
 import { Head } from "@inertiajs/react";
 import styled from "styled-components";
 
