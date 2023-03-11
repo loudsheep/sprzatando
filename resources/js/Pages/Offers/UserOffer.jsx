@@ -5,9 +5,6 @@ import { Head } from "@inertiajs/react";
 import { TypeBox } from "../../Components/Atoms/OfferTypeBox";
 import { useState } from "react";
 
-// import { FormField } from "@/Components/Atoms/FormField";
-// import styled from "styled-components";
-
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 4rem;
@@ -15,6 +12,8 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 25px;
+  height: 100%;
+  margin-bottom: 10px;
 `;
 
 const Header = styled.h1`
@@ -78,56 +77,56 @@ export default function UserOffer({
           />
         </TypeBoxWrapper>
 
-        {selectedType === "active" &&
-          activeOffers.map((offer, i) => (
-            <Offer
-              id={offer.id}
-              image={offer.main_image}
-              title={offer.title}
-              description={offer.description}
-              price={offer.price}
-              category={offer.category}
-              city={offer.city}
-              owner={offer.creator.name}
-              createdAt={offer.created_at}
-              isOwner={true}
-              key={i}
-            />
-          ))}
+          {selectedType === "active" &&
+            activeOffers.map((offer, i) => (
+              <Offer
+                id={offer.id}
+                image={offer.main_image}
+                title={offer.title}
+                description={offer.description}
+                price={offer.price}
+                category={offer.category}
+                city={offer.city}
+                owner={offer.creator.name}
+                createdAt={offer.created_at}
+                isOwner={true}
+                key={i}
+              />
+            ))}
 
-        {selectedType === "banned" &&
-          bannedOffers.map((offer, i) => (
-            <Offer
-              id={offer.id}
-              image={offer.main_image}
-              title={offer.title}
-              description={offer.description}
-              price={offer.price}
-              category={offer.category}
-              city={offer.city}
-              owner={offer.creator.name}
-              createdAt={offer.created_at}
-              isOwner={true}
-              key={i}
-            />
-          ))}
+          {selectedType === "banned" &&
+            bannedOffers.map((offer, i) => (
+              <Offer
+                id={offer.id}
+                image={offer.main_image}
+                title={offer.title}
+                description={offer.description}
+                price={offer.price}
+                category={offer.category}
+                city={offer.city}
+                owner={offer.creator.name}
+                createdAt={offer.created_at}
+                isOwner={true}
+                key={i}
+              />
+            ))}
 
-        {selectedType === "done" &&
-          doneOffers.map((offer, i) => (
-            <Offer
-              id={offer.id}
-              image={offer.main_image}
-              title={offer.title}
-              description={offer.description}
-              price={offer.price}
-              category={offer.category}
-              city={offer.city}
-              owner={offer.creator.name}
-              createdAt={offer.created_at}
-              isOwner={true}
-              key={i}
-            />
-          ))}
+          {selectedType === "done" &&
+            doneOffers.map((offer, i) => (
+              <Offer
+                id={offer.id}
+                image={offer.main_image}
+                title={offer.title}
+                description={offer.description}
+                price={offer.price}
+                category={offer.category}
+                city={offer.city}
+                owner={offer.creator.name}
+                createdAt={offer.created_at}
+                isOwner={true}
+                key={i}
+              />
+            ))}
       </Wrapper>
     </AuthenticatedLayout>
   );
