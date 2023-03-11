@@ -37,7 +37,7 @@ const Trigger = ({ children }) => {
 
 const Content = ({
   align = "right",
-  width = "48",
+  width = "80",
   contentClasses = "py-1 bg-white",
   children,
 }) => {
@@ -55,6 +55,8 @@ const Content = ({
 
   if (width === "48") {
     widthClasses = "w-48";
+  } else if (width === "80") {
+    widthClasses = "w-80";
   }
 
   return (

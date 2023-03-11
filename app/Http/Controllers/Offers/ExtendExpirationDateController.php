@@ -17,6 +17,6 @@ class ExtendExpirationDateController extends Controller
         $offer->ends = Carbon::parse($offer->ends)->addMonth();
         $offer->save();
 
-        return Inertia::location('#');
+        return back();
     }
 }
