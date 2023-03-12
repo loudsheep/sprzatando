@@ -42,10 +42,11 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
   @media (max-width: 992px) {
     justify-content: center;
-  }
+    }
 `;
 export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.secondaryColor};
@@ -53,9 +54,10 @@ export const Button = styled.button`
   font-weight: bold;
   padding: 6px 10px;
   border-radius: 8px;
-  margin: 10px;
+  margin-left: 10px;
   max-width: 100px;
   text-align: center;
+  
 `;
 
 export const Image = styled.img`

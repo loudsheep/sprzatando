@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Navbar } from "../../Components/Navigations/Navbar";
 import { Head } from "@inertiajs/react";
 import {
@@ -7,11 +7,21 @@ import {
   StyledSubtitle,
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
-import styled from "styled-components";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
-import { router } from '@inertiajs/react'
+import { router } from "@inertiajs/react";
+import { ErrorButton } from "@/Components/Atoms/ErrorButton";
+import { SuccesReported } from "@/Components/InfoModal";
 
-export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdmin, isRegularUser, currentUserInterestedInOffer, isBanned }) {
+export default function OfferDetails({
+  images,
+  offer,
+  isOwner,
+  isAdmin,
+  isRegularUser,
+  currentUserInterestedInOffer,
+  isBanned,
+}) {
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleInterestedButtons = (e) => {
     e.preventDefault();
@@ -27,8 +37,10 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
 
   const handleReportOffer = (e) => {
     e.preventDefault();
-
-    router.post("/report-offer/" + offer.id);
+    router.post("/report-offer/" + offer.id).then((e) => {
+      console.log(isVisible)
+      setIsVisible(true);
+    });
   };
 
   return (
@@ -36,6 +48,10 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
       <Head title="Szczegóły oferty" />
       <Navbar />
       <Wrapper>
+        {/* <SuccesReported
+          isVisible={isVisible}
+          onInfoClose={() => setIsVisible(false)}
+        /> */}
         <div className="section_column-first">
           <StyledTitle>{offer.title}</StyledTitle>
           <Gallery images={images} mainImage={offer.main_image} />
@@ -54,11 +70,15 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
           {!isOwner && (
             <>
               {!currentUserInterestedInOffer && (
-                <PrimaryButton onClick={handleInterestedButtons}>Zgłoś się do oferty</PrimaryButton>
+                <PrimaryButton onClick={handleInterestedButtons}>
+                  Zgłoś się do oferty
+                </PrimaryButton>
               )}
 
               {currentUserInterestedInOffer && (
-                <PrimaryButton color={"grey"} onClick={handleInterestedButtons}>Odzgłoś się</PrimaryButton>
+                <PrimaryButton color={"grey"} onClick={handleInterestedButtons}>
+                  Odzgłoś się
+                </PrimaryButton>
               )}
             </>
           )}
@@ -67,19 +87,22 @@ export default function OfferDetails({ images, offer, isLoggedIn, isOwner, isAdm
           {isAdmin && (
             <>
               {!isBanned && (
-                <PrimaryButton color={"red"} onClick={handleBanOffer}>BANUJ OFERTĘ</PrimaryButton>
+                <PrimaryButton color={"red"} onClick={handleBanOffer}>
+                  BANUJ OFERTĘ
+                </PrimaryButton>
               )}
 
               {isBanned && (
-                <PrimaryButton color={"green"} onClick={handleBanOffer}>ODBANUJ OFERTĘ</PrimaryButton>
+                <PrimaryButton color={"green"} onClick={handleBanOffer}>
+                  ODBANUJ OFERTĘ
+                </PrimaryButton>
               )}
             </>
           )}
 
           {!isOwner && isRegularUser && (
-            <PrimaryButton color={"#ff0000"} onClick={handleReportOffer} style="border: 1px red solid;">Reportuj ofertę</PrimaryButton>
+            <ErrorButton onClick={handleReportOffer} text="Reportój :)" />
           )}
-
         </div>
       </Wrapper>
     </>
