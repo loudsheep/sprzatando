@@ -16,17 +16,24 @@ class CreatedOffersController extends Controller
         $activeOffers = $request->user()->createdOffers()->with('creator')
             ->where('is_banned', '=', false)
             ->where('is_done', '=', false)
-            ->where('ends', '>', now())
+            ->where('ends', '>=', today())
             ->orderBy('created_at', 'desc')->get()->toArray();
+
         $bannedOffers = $request->user()->createdOffers()->with('creator')
             ->where('is_banned', '=', true)
             ->orderBy('created_at', 'desc')->get()->toArray();
+
         $doneOffers = $request->user()->createdOffers()->with('creator')
             ->where('is_done', '=', true)
+            ->where('is_banned', '=', false)
             ->orderBy('created_at', 'desc')->get()->toArray();
+
         $expiredOffers = $request->user()->createdOffers()->with('creator')
-            ->where('ends', '<', now())
+            ->where('is_banned', '=', false)
+            ->where('is_done', '=', false)
+            ->where('ends', '<', today())
             ->orderBy('created_at', 'desc')->get()->toArray();
+
 
         return Inertia::render('Offers/UserOffer', [
             'activeOffers' => $activeOffers,
