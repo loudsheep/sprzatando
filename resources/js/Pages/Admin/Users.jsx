@@ -46,7 +46,7 @@ export default function Dashboard({ users }) {
                             <td>{u.email}</td>
                             <td>{u.name}</td>
                             <td>{u.created_offers_count}</td>
-                            <td>{u.reviews_avg_rating ?? "-"}</td>
+                            <td>{u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})</td>
                             <td>{u.ban_ending !== null ? "Yes" : "No"}</td>
                             <td>{new Date(u.created_at).toLocaleDateString("pl-PL")}</td>
                         </tr>

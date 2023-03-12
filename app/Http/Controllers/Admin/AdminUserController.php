@@ -18,6 +18,7 @@ class AdminUserController extends Controller
     {
         $users = User::withCount('createdOffers')
         ->withAvg('reviews', 'rating')
+        ->withCount('reviews')
         ->where('id', '!=', $request->user()->id)
         ->get()->makeVisible(['created_at', 'ban_ending', 'email']);
 
