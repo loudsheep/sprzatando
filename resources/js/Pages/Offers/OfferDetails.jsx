@@ -11,6 +11,7 @@ import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { router } from "@inertiajs/react";
 import { ErrorButton } from "@/Components/Atoms/ErrorButton";
 import { SuccesReported } from "@/Components/InfoModal";
+import { set } from "lodash";
 
 export default function OfferDetails({
   images,
@@ -21,7 +22,7 @@ export default function OfferDetails({
   currentUserInterestedInOffer,
   isBanned,
 }) {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleInterestedButtons = (e) => {
     e.preventDefault();
@@ -37,10 +38,11 @@ export default function OfferDetails({
 
   const handleReportOffer = (e) => {
     e.preventDefault();
-    router.post("/report-offer/" + offer.id).then((e) => {
-      console.log(isVisible)
-      setIsVisible(true);
-    });
+    router.post(
+      "/report-offer/" + offer.id,
+      {},
+      { onSuccess: setIsVisible(true) }
+    );
   };
 
   return (
@@ -48,10 +50,10 @@ export default function OfferDetails({
       <Head title="Szczegóły oferty" />
       <Navbar />
       <Wrapper>
-        {/* <SuccesReported
+        <SuccesReported
           isVisible={isVisible}
           onInfoClose={() => setIsVisible(false)}
-        /> */}
+        />
         <div className="section_column-first">
           <StyledTitle>{offer.title}</StyledTitle>
           <Gallery images={images} mainImage={offer.main_image} />
@@ -69,13 +71,11 @@ export default function OfferDetails({
 
           {!isOwner && (
             <>
-              {!currentUserInterestedInOffer && (
+              {!currentUserInterestedInOffer ? (
                 <PrimaryButton onClick={handleInterestedButtons}>
                   Zgłoś się do oferty
                 </PrimaryButton>
-              )}
-
-              {currentUserInterestedInOffer && (
+              ) : (
                 <PrimaryButton color={"grey"} onClick={handleInterestedButtons}>
                   Odzgłoś się
                 </PrimaryButton>
