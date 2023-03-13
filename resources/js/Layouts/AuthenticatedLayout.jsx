@@ -9,8 +9,8 @@ import { useWidth } from "@/hooks/useWidth";
 const Wrapper = styled.div`
   display: grid;
   height: 100vh;
-  grid-template-columns: 1fr 6fr;
-  grid-template-rows: 1fr 8fr;
+  grid-template-columns: 23rem 6fr;
+  grid-template-rows: 90px 8fr;
 `;
 
 const MobileWrapper = styled.div`
