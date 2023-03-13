@@ -119,7 +119,7 @@ Route::middleware('auth')->group(function () {
         ->name('offer.ban');
 
     Route::post('report-offer/{offer}', [BanOfferController::class, 'report'])
-        ->middleware(['auth', 'throttle:3,1'])
+        ->middleware(['auth', 'throttle:6,1'])
         ->name('offer.report');
 
     Route::get('admin/users', [AdminUserController::class, 'show'])

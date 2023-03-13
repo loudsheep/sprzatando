@@ -40,7 +40,9 @@ export default function OfferDetails({
     router.post(
       "/report-offer/" + offer.id,
       {},
-      { onSuccess: setIsVisible(true) }
+      {
+        onSuccess: () => { setIsVisible(true) }
+      }
     );
   };
 
