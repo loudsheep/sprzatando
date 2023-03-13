@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   padding: 6rem 3rem;
   width: 100%;
   justify-content: center;
+  position: relative;
 
   color: ${({ theme }) => theme.colors.dark};
   .section_column-first {

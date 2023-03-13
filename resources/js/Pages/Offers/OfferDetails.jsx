@@ -11,7 +11,6 @@ import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { router } from "@inertiajs/react";
 import { ErrorButton } from "@/Components/Atoms/ErrorButton";
 import { SuccesReported } from "@/Components/InfoModal";
-import { set } from "lodash";
 
 export default function OfferDetails({
   images,
