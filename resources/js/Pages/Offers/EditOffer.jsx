@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Head, useForm } from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
@@ -17,6 +17,7 @@ import { FormField } from "@/Components/FormField";
 import { Textarea } from "@/Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
+import { OfferImages } from "@/Components/AddImages";
 
 const SectionTitle = styled.h1`
   margin: 2rem 0;
@@ -60,6 +61,7 @@ const EditOffer = ({ offer, auth }) => {
     city: offer.city,
     price: offer.price,
     categories: offer.category.split(";"),
+    img: [offer.main_image],
   };
 
   const { data, setData, patch, errors } = useForm(initialState);
@@ -95,6 +97,21 @@ const EditOffer = ({ offer, auth }) => {
       },
     });
   };
+
+  const handlePhotoUpload = (e) => {
+    const photo = URL.createObjectURL(e.target.files[0]);
+    setData("img", [...data.img, photo]);
+  };
+
+  const handleDeletePhoto = (p) => {
+    const array = data.img.filter((photo) => p !== photo);
+    setData("img", array);
+  };
+
+  useEffect(() => {
+    console.log(data.img);
+    console.log(offer.main_image);
+  }, [data.img, offer.main_image]);
 
   return (
     <>
@@ -140,6 +157,14 @@ const EditOffer = ({ offer, auth }) => {
             handleChange={valueHandler}
             value={data.description}
             name="description"
+          />
+          <OfferImages
+            photos={data.img}
+            errors={errors}
+            handlePhotoUpload={handlePhotoUpload}
+            handleDeletePhoto={handleDeletePhoto}
+            title="Edytuj zdjęcia"
+            action="edit"
           />
           <SelectCategory
             handleCheckboxChange={checkedCheckboxHandler}

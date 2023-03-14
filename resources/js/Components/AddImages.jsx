@@ -14,10 +14,12 @@ export const OfferImages = ({
   errors,
   handlePhotoUpload,
   handleDeletePhoto,
+  title,
+  action
 }) => {
   return (
     <ErrorWrapper>
-      <StyledSubTitle error={errors.photos}>Dodaj zdjęcia</StyledSubTitle>
+      <StyledSubTitle error={errors.photos}>{title}</StyledSubTitle>
       <ImageSection>
         {photos &&
           photos.map((photo, i) => (
@@ -30,7 +32,7 @@ export const OfferImages = ({
                   x
                 </DeleteButton>
                 <img
-                  src={photo && URL.createObjectURL(photo)}
+                  src={action === 'add' ? photo && URL.createObjectURL(photo) : photo}
                   alt="uploaded photo"
                 />
               </UploadedImgWrapper>
@@ -42,7 +44,7 @@ export const OfferImages = ({
 
         <UploadedImgWrapper>
           <StyledPhotoBox htmlFor="input-file">
-            <img src={IconPath} alt="add photo icon"/>
+            <img src={IconPath} alt="add photo icon" />
           </StyledPhotoBox>
         </UploadedImgWrapper>
         <input

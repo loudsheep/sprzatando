@@ -162,6 +162,8 @@ export default function AddOffer(props) {
           errors={errors}
           handlePhotoUpload={handlePhotoUpload}
           handleDeletePhoto={handleDeletePhoto}
+          title='Dodaj zdjęcia'
+          action='add'
         />
 
         <Textarea
