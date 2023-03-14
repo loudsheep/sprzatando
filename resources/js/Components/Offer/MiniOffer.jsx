@@ -1,45 +1,7 @@
 import { Wrapper, Button, ImgWrapper, StyledLink } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
-
-const getTimeDifference = (createdAt) => {
-  const createdDate = new Date(createdAt);
-  const today = new Date();
-  const timeDifference = today.getTime() - createdDate.getTime();
-
-  let seconds = Math.floor(timeDifference / 1000);
-  let minutes = Math.floor(timeDifference / (1000 * 60));
-  let hours = Math.floor(timeDifference / (1000 * 60 * 60));
-  let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-  let monthNames = [
-    "sty",
-    "lut",
-    "mar",
-    "kwi",
-    "maj",
-    "cze",
-    "lip",
-    "sie",
-    "wrz",
-    "paź",
-    "lis",
-    "gru",
-  ];
-
-  if (seconds < 60) {
-    return seconds + " sec temu";
-  }
-  if (minutes < 60) {
-    return minutes + " min temu";
-  } else if (hours < 24) {
-    return hours + " h temu";
-  } else if (days < 4) {
-    return days + " dni temu";
-  } else {
-    return `${createdDate.getDate()} ${monthNames[createdDate.getMonth()]}`;
-  }
-};
+import { useTimeDifference } from "../../hooks/useTimeDifference";
 
 const formatDate = (date) => {
   let d = new Date(date);
@@ -65,7 +27,7 @@ export const MiniOffer = ({
   function handleClick() {
     Inertia.post(`extend-expiration/${id}`);
   }
-
+  const timeDifference = useTimeDifference(createdAt);
   return (
     <Wrapper>
       <Link href={`/offer/${id}`}>
@@ -82,11 +44,11 @@ export const MiniOffer = ({
           }}
         >
           <StyledLink href={`/offer/${id}`}>{title}</StyledLink>
-          <p>{getTimeDifference(createdAt)}</p>
+          <p>{timeDifference}</p>
         </div>
 
         <p>
-          <strong>Kategorie:</strong> {category}
+          <strong>Kategorie:</strong> {category.replace(";", ", ")}
         </p>
 
         <div className="container">

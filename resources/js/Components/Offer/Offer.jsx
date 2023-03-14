@@ -1,45 +1,7 @@
 import { Wrapper, Button, ImgWrapper, StyledLink } from "./Offer.styles";
 import { Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
-
-const getTimeDifference = (createdAt) => {
-  const createdDate = new Date(createdAt);
-  const today = new Date();
-  const timeDifference = today.getTime() - createdDate.getTime();
-
-  let seconds = Math.floor(timeDifference / 1000);
-  let minutes = Math.floor(timeDifference / (1000 * 60));
-  let hours = Math.floor(timeDifference / (1000 * 60 * 60));
-  let days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-  let monthNames = [
-    "sty",
-    "lut",
-    "mar",
-    "kwi",
-    "maj",
-    "cze",
-    "lip",
-    "sie",
-    "wrz",
-    "paź",
-    "lis",
-    "gru",
-  ];
-
-  if (seconds < 60) {
-    return seconds + " sec";
-  }
-  if (minutes < 60) {
-    return minutes + " min";
-  } else if (hours < 24) {
-    return hours + " h";
-  } else if (days < 4) {
-    return days + " dni";
-  } else {
-    return `${createdDate.getDate()} ${monthNames[createdDate.getMonth()]}`;
-  }
-};
+import { useTimeDifference } from "../../hooks/useTimeDifference";
 
 export const Offer = ({
   id,
@@ -57,7 +19,7 @@ export const Offer = ({
   function handleClick() {
     Inertia.post(`extend-expiration/${id}`);
   }
-
+  const timeDifference = useTimeDifference(createdAt);
   return (
     <Wrapper>
       <Link href={`/offer/${id}`}>
@@ -74,7 +36,7 @@ export const Offer = ({
           }}
         >
           <StyledLink href={`/offer/${id}`}>{title}</StyledLink>
-          <p>{getTimeDifference(createdAt)}</p>
+          <p>{timeDifference}</p>
         </div>
         {owner && <p>autor: {owner}</p>}
         <p>

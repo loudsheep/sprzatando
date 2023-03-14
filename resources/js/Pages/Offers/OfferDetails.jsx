@@ -78,7 +78,7 @@ export default function OfferDetails({
                 </PrimaryButton>
               ) : (
                 <PrimaryButton color={"grey"} onClick={handleInterestedButtons}>
-                  Odzgłoś się
+                  Rezygnuj
                 </PrimaryButton>
               )}
             </>
