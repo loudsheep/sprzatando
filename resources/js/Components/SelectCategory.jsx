@@ -42,8 +42,12 @@ export const SelectCategory = ({ handleCheckboxChange, error, checked }) => {
   let isChecked = false;
 
   const checkboxesLeft = categories.map((category, i) => {
-    if (checked.includes(category)) {
-      isChecked = true;
+    if (checked) {
+      if (checked.includes(category)) {
+        isChecked = true;
+      } else {
+        isChecked = false;
+      }
     } else {
       isChecked = false;
     }
