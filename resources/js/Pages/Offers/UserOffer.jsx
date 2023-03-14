@@ -1,5 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Offer } from "../../Components/Offer/Offer";
+import { MiniOffer } from "@/Components/Offer/MiniOffer";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 import { TypeBox } from "../../Components/Atoms/OfferTypeBox";
@@ -88,7 +89,7 @@ export default function UserOffer({
 
           {selectedType === "active" &&
             activeOffers.map((offer, i) => (
-              <Offer
+              <MiniOffer
                 id={offer.id}
                 image={offer.main_image}
                 title={offer.title}
@@ -97,6 +98,8 @@ export default function UserOffer({
                 category={offer.category}
                 city={offer.city}
                 owner={offer.creator.name}
+                ends={offer.ends}
+                interested={offer.users_intrested_count}
                 createdAt={offer.created_at}
                 isOwner={true}
                 key={i}
