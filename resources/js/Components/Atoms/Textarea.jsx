@@ -3,11 +3,18 @@ import { Label } from "../FormField";
 
 const Wrapper = styled.div`
   width: 100%;
+  position: relative;
   .error {
+    color: ${({ theme }) => theme.colors.darkGrey};
     border: 1px solid ${({ theme }) => theme.colors.error};
   }
   .error-label {
     color: ${({ theme }) => theme.colors.error};
+  }
+  .info-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
   }
 `;
 
@@ -26,12 +33,23 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 
+const MessageLength = styled.span`
+  color: ${({ theme, error }) =>
+    error ? theme.colors.error : theme.colors.darkGrey};
+  font-size: 1.4rem;
+`;
+
 export const Textarea = ({ handleChange, id, error, value, name }) => {
   return (
     <Wrapper>
-      <Label className={error ? "error-label" : ""} htmlFor={id}>
-        Opis
-      </Label>
+      <div className="info-wrapper">
+        <Label className={error ? "error-label" : ""} htmlFor={id}>
+          Opis
+        </Label>
+        <MessageLength error={value.length >= 500}>
+          {value.length} / 500
+        </MessageLength>
+      </div>
       <TextArea
         className={error ? "error" : ""}
         id={id}

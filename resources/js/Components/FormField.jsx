@@ -17,6 +17,7 @@ export const Label = styled.label`
   font-size: 16px;
   color: ${({ theme }) => theme.colors.darkGrey};
   font-weight: bold;
+  
 `;
 
 const Input = styled.input`
