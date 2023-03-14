@@ -61,7 +61,7 @@ const EditOffer = ({ offer, auth }) => {
     city: offer.city,
     price: offer.price,
     categories: offer.category.split(";"),
-    img: [offer.main_image],
+    photos: [offer.main_image],
   };
 
   const { data, setData, patch, errors } = useForm(initialState);
@@ -93,6 +93,7 @@ const EditOffer = ({ offer, auth }) => {
       preserveScroll: true,
       onError: () => console.log(errors),
       onSuccess: () => {
+        setData(initialState);
         console.log("SUCCESS");
       },
     });
@@ -100,18 +101,13 @@ const EditOffer = ({ offer, auth }) => {
 
   const handlePhotoUpload = (e) => {
     const photo = URL.createObjectURL(e.target.files[0]);
-    setData("img", [...data.img, photo]);
+    setData("photos", [...data.photos, photo]);
   };
 
   const handleDeletePhoto = (p) => {
-    const array = data.img.filter((photo) => p !== photo);
-    setData("img", array);
+    const array = data.photos.filter((photo) => p !== photo);
+    setData("photos", array);
   };
-
-  useEffect(() => {
-    console.log(data.img);
-    console.log(offer.main_image);
-  }, [data.img, offer.main_image]);
 
   return (
     <>
@@ -159,7 +155,7 @@ const EditOffer = ({ offer, auth }) => {
             name="description"
           />
           <OfferImages
-            photos={data.img}
+            photos={data.photos}
             errors={errors}
             handlePhotoUpload={handlePhotoUpload}
             handleDeletePhoto={handleDeletePhoto}

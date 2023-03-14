@@ -42,13 +42,10 @@ export const SelectCategory = ({ handleCheckboxChange, error, checked }) => {
   let isChecked = false;
 
   const checkboxesLeft = categories.map((category, i) => {
-    if (checked) {
-      const found = checked.find((item) => item == category);
-      if (found) {
-        isChecked = true;
-      } else {
-        isChecked = false;
-      }
+    if (checked.includes(category)) {
+      isChecked = true;
+    } else {
+      isChecked = false;
     }
 
     if (i % 2 === 0) {

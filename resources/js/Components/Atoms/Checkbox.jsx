@@ -18,7 +18,7 @@ export default function Checkbox({ name, value, handleChange, id, isChecked }) {
       name={name}
       value={value}
       id={id}
-      // checked={isChecked || false}
+      defaultChecked={isChecked || false}
       onChange={(e) => handleChange(e)}
     />
   );
