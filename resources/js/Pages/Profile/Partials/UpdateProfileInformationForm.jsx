@@ -1,100 +1,87 @@
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/Atoms/PrimaryButton';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
-import { FormField } from '@/Components/FormField';
+import styled from "styled-components";
+import PrimaryButton from "@/Components/Atoms/PrimaryButton";
+import { Link, useForm, usePage } from "@inertiajs/react";
+import { Transition } from "@headlessui/react";
+import EditProfile from "../EditProfileSection";
 
-export default function UpdateProfileInformation({ user, mustVerifyEmail, status, className }) {
+const BottomBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        name: user.name,
-        email: user.email,
-    });
+export default function UpdateProfileInformation({
+  user,
+  mustVerifyEmail,
+  status,
+  className,
+}) {
+  const form = useForm({ name: user.name, email: user.email });
 
-    const submit = (e) => {
-        e.preventDefault();
-        console.log(data);
+  const submit = (e) => {
+    e.preventDefault();
+    console.log(form.data);
 
-        patch(route('profile.update'));
-    };
+    form.patch(route("profile.update"));
+  };
 
-    return (
-        <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
+  return (
+    <EditProfile
+      form={form}
+      formFields={[
+        { id: "name", label: "Name", type: "text", required: true, ref: false },
+        {
+          id: "email",
+          label: "Email",
+          type: "email",
+          required: true,
+          ref: false,
+        },
+      ]}
+      headerTexts={{
+        title: "Profile Information",
+        desc: "Update your account's profile information and email address.",
+      }}
+      submit={submit}
+    >
+      {mustVerifyEmail && user.email_verified_at === null && (
+        <div>
+          <p className="text-sm mt-2 text-gray-800">
+            Your email address is unverified.
+            <Link
+              href={route("verification.send")}
+              method="post"
+              as="button"
+              className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Click here to re-send the verification email.
+            </Link>
+          </p>
 
-                <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
-                </p>
-            </header>
+          {status === "verification-link-sent" && (
+            <div className="mt-2 font-medium text-sm text-green-600">
+              A new verification link has been sent to your email address.
+            </div>
+          )}
+        </div>
+      )}
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel for="name" value="Name" />
+      <BottomBox>
+        <PrimaryButton
+          processing={form.processing}
+          styling={{ margin: "15px 15px 15px 0" }}
+        >
+          Save
+        </PrimaryButton>
 
-                    <FormField
-                        id="name"
-                        className="mt-1 block w-full"
-                        value={data.name}
-                        handleChange={(e) => setData('name', e.target.value)}
-                        errorMessage={errors.name}
-                        required
-                        autoComplete="name"
-                    />
-
-                </div>
-
-                <div>
-                    <InputLabel for="email" value="Email" />
-
-                    <FormField
-                        id="email"
-                        type="email"
-                        className="mt-1 block w-full"
-                        value={data.email}
-                        handleChange={(e) => setData('email', e.target.value)}
-                        errorMessage={errors.email}
-                        required
-                        autoComplete="email"
-                    />
-
-                </div>
-
-                {mustVerifyEmail && user.email_verified_at === null && (
-                    <div>
-                        <p className="text-sm mt-2 text-gray-800">
-                            Your email address is unverified.
-                            <Link
-                                href={route('verification.send')}
-                                method="post"
-                                as="button"
-                                className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                            >
-                                Click here to re-send the verification email.
-                            </Link>
-                        </p>
-
-                        {status === 'verification-link-sent' && (
-                            <div className="mt-2 font-medium text-sm text-green-600">
-                                A new verification link has been sent to your email address.
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                <div className="flex items-center gap-4">
-                    <PrimaryButton processing={processing}>Save</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enterFrom="opacity-0"
-                        leaveTo="opacity-0"
-                        className="transition ease-in-out"
-                    >
-                        <p className="text-sm text-gray-600">Saved.</p>
-                    </Transition>
-                </div>
-            </form>
-        </section>
-    );
+        <Transition
+          show={form.recentlySuccessful}
+          enterFrom="opacity-0"
+          leaveTo="opacity-0"
+          className="transition ease-in-out"
+        >
+          <p className="text-sm text-gray-600">Saved.</p>
+        </Transition>
+      </BottomBox>
+    </EditProfile>
+  );
 }
