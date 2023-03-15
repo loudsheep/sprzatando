@@ -30,10 +30,11 @@ class EditOfferController extends Controller
     public function update(UpdateOfferRequest $request, Offer $offer) {
         $this->authorize('update', $offer);
 
-        dd($request);
-
+        $offerHadMainImage = $offer->main_image !== null &&  $offer->main_image != '/defaults/house.jpg';
+        
         $validated = $request->validated();
         $validated["category"] = implode(";", $validated["categories"]);
+        dd($validated);
         $offer->update($validated);
 
         // return redirect("/offer/{$offer->id}");

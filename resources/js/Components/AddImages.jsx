@@ -32,7 +32,7 @@ export const OfferImages = ({
                   x
                 </DeleteButton>
                 <img
-                  src={action === 'add' ? photo && URL.createObjectURL(photo) : photo}
+                  src={action === 'add' ? photo && URL.createObjectURL(photo) : (typeof photo === 'string' ? photo : URL.createObjectURL(photo))}
                   alt="uploaded photo"
                 />
               </UploadedImgWrapper>
