@@ -48,7 +48,7 @@ const AdditionalPhotos = styled.img`
   max-width: 100px;
   margin: 10px;
   cursor: pointer;
-  opacity: ${({ isActive }) => (isActive ? "0.5" : "1")};
+  opacity: ${({ isActive }) => (isActive ? "1" : "0.5")};
 `;
 
 const CloseButton = styled.button`
@@ -75,6 +75,12 @@ export const Gallery = ({ images, mainImage }) => {
   const [currentImg, setCurrentImg] = useState();
   const imgs = [...images, mainImage];
   const width = useWidth();
+
+  const clickHandler = (e) => {
+    if(e.target === e.currentTarget) {
+      setShowGallery(false)
+    }
+  };
 
   return (
     <>
@@ -104,7 +110,7 @@ export const Gallery = ({ images, mainImage }) => {
         />
       </div>
       {showGallery && (
-        <GalleryWrapper>
+        <GalleryWrapper onClick={clickHandler}>
           <CloseButton onClick={() => setShowGallery(false)}>X</CloseButton>
           <MainGalleryImage src={currentImg} alt="main photo" />
           <div>
