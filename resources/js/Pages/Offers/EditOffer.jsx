@@ -54,14 +54,15 @@ const DownInputWrapper = styled.div`
   }
 `;
 
-const EditOffer = ({ offer, auth }) => {
+const EditOffer = ({ offer, images, auth }) => {
+  
   const initialState = {
     title: offer.title,
     description: offer.description,
     city: offer.city,
     price: offer.price,
     categories: offer.category.split(";"),
-    photos: [offer.main_image],
+    photos: [offer.main_image].concat(images),
   };
 
   const { data, setData, patch, errors } = useForm(initialState);

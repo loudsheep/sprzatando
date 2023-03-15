@@ -14,8 +14,15 @@ class EditOfferController extends Controller
     public function edit(Offer $offer) {
         $this->authorize('update', $offer);
 
+        $images = $offer->images;
+
+        foreach ($images as $key => $value) {
+            $images[$key] = $value->url;
+        }
+
         return Inertia::render('Offers/EditOffer', [
             'offer' => $offer,
+            'images' => $images,
         ]);
     }
 
@@ -23,11 +30,13 @@ class EditOfferController extends Controller
     public function update(UpdateOfferRequest $request, Offer $offer) {
         $this->authorize('update', $offer);
 
+        dd($request);
+
         $validated = $request->validated();
         $validated["category"] = implode(";", $validated["categories"]);
         $offer->update($validated);
 
         // return redirect("/offer/{$offer->id}");
-        // return back();
+        return back();
     }
 }
