@@ -30,7 +30,7 @@ export default function AddOffer(props) {
     selectedDate: new Date(),
   };
   const { data, setData, post, errors } = useForm(initialState);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const onHandleChange = (event) => {
     setData(event.target.name, event.target.value);
@@ -91,7 +91,10 @@ export default function AddOffer(props) {
       errors={props.errors}
       prophileImg={props.auth.user.profile_img}
     >
-      <SubmitModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <SubmitModal isOpen={isOpen} onClose={(e) => {
+        setIsOpen(false)
+        e.stopPropagation();
+      }} />
       <Head title="Dodaj ofertę">
         <meta charset="UTF-8" />
       </Head>

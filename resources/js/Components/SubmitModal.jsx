@@ -77,7 +77,11 @@ export const SubmitModal = ({ isOpen, onClose }) => {
     <>
       {isOpen && (
         <Wrapper fadeIn={fadeIn} onClick={onClose}>
-          <StyledModal zoomIn={zoomIn} bgImg={modalBackgroundPath}>
+          <StyledModal
+            zoomIn={zoomIn}
+            bgImg={modalBackgroundPath}
+            onClick={(event) => event.stopPropagation()}
+          >
             <div>
               <Icon src={SuccesIconPath} />
               <StyledSubTitle style={{ margin: "0" }}>
