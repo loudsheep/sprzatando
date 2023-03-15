@@ -37,46 +37,23 @@ class EditOfferController extends Controller
         $this->authorize('update', $offer);
 
         $validated = $request->validated();
-        $offerHadMainImage = $offer->main_image !== null &&  $offer->main_image != '/defaults/house.jpg';
-        $images = $offer->images;
-
         $validated["category"] = implode(";", $validated["categories"]);
-
         $additionalPhotos = [];
 
         if (count($validated["photos"]) == 0) {
             $validated["main_image"] = "/defaults/house.jpg";
-        } else if (count($validated["photos"]) > 0) {
-            if (gettype($validated["photos"][0]) == 'string') {
-                if (Storage::drive('public')->exists(str_replace("/storage/", '', $validated["photos"][0]))) {
-                    $validated["main_image"] = $validated["photos"][0];
-                }
-            } else {
-                $mainImage = $validated["photos"][0]->store('uploads', 'public');
-                $image = Image::make(public_path("storage/" . $mainImage))->fit(1000, 1000);
-                $image->save();
-
-                $validated["main_image"] = "/storage/" . $mainImage;
-            }
+        } else {
+            $validated["main_image"] = self::saveOrReturnImagePath($validated["photos"][0]) ?? "/defaults/house.jpg";
         }
 
         if (count($validated["photos"]) > 1) {
             for ($i = 1; $i < count($validated["photos"]); $i++) {
-                if (gettype($validated["photos"][$i]) == 'string') {
-                    if (Storage::drive('public')->exists(str_replace("/storage/", '', $validated["photos"][$i]))) {
-                        $additionalPhotos[] = $validated["photos"][$i];
-                    }
-                } else {
-                    $path = $validated["photos"][$i]->store('uploads', 'public');
-
-                    $image = Image::make(public_path("storage/" . $path))->fit(1000, 1000);
-                    $image->save();
-
-                    $additionalPhotos[] = "/storage/" . $path;
+                $photo = self::saveOrReturnImagePath($validated["photos"][$i]);
+                if ($photo !== null) {
+                    $additionalPhotos[] = $photo;
                 }
             }
         }
-        dd($images, $validated);
 
         $offer->update($validated);
         if (count($additionalPhotos) > 0) {
@@ -90,5 +67,23 @@ class EditOfferController extends Controller
         }
 
         return back();
+    }
+
+    private static function saveOrReturnImagePath(string|UploadedFile $image)
+    {
+        if (gettype($image) === 'string') {
+            if (Storage::drive('public')->exists(str_replace("/storage/", '', $image))) {
+                return $image;
+            }
+        } else {
+            $path = $image->store('uploads', 'public');
+
+            $image = Image::make(public_path("storage/" . $path))->fit(1000, 1000);
+            $image->save();
+
+            return "/storage/" . $path;
+        }
+
+        return null;
     }
 }
