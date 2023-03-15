@@ -109,7 +109,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('offer.edit');
 
-    Route::patch('/offer/{offer}/edit', [EditOfferController::class, 'update'])
+    Route::post('/offer/{offer}/edit', [EditOfferController::class, 'update'])
         ->middleware('auth')
         ->name('offer.update');
 });

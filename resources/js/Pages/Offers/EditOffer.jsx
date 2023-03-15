@@ -65,7 +65,7 @@ const EditOffer = ({ offer, images, auth }) => {
     photos: [offer.main_image].concat(images),
   };
 
-  const { data, setData, patch, errors } = useForm(initialState);
+  const { data, setData, post, errors } = useForm(initialState);
 
   const valueHandler = (e) => {
     setData({
@@ -90,19 +90,19 @@ const EditOffer = ({ offer, images, auth }) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    patch(route("offer.update", offer.id), {
+
+    post(route("offer.update", offer.id), {
       preserveScroll: true,
       onError: () => console.log(errors),
       onSuccess: () => {
-        setData(initialState);
+        // setData(initialState);
         console.log("SUCCESS");
       },
     });
   };
 
   const handlePhotoUpload = (e) => {
-    const photo = URL.createObjectURL(e.target.files[0]);
-    setData("photos", [...data.photos, photo]);
+    setData("photos", [...data.photos, e.target.files[0]]);
   };
 
   const handleDeletePhoto = (p) => {
@@ -115,7 +115,7 @@ const EditOffer = ({ offer, images, auth }) => {
       <Authenticated auth={auth} prophileImg={auth.user.profile_img}>
         <Head title="Edit" />
         <SectionTitle>Edytuj Ofertę</SectionTitle>
-        <FormWrapper onSubmit={formSubmitHandler}>
+        <FormWrapper onSubmit={formSubmitHandler} enctype={'multipart/form-data'}>
           <InputsWrapper>
             <HeaderInputsWrapper>
               <FormField

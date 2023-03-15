@@ -28,7 +28,8 @@ class UpdateOfferRequest extends FormRequest
             'description' => ['required', 'min:50', 'max:500', 'string'],
             'city' => ['required', 'min:2', 'max:50', 'string'],
             'price' => ['required', 'numeric', 'min:1', 'max:2137'],
-            'categories' => ['array', 'required', 'min:1']
+            'categories' => ['array', 'required', 'min:1'],
+            'photos' => ['array'],
         ];
     }
 
@@ -46,7 +47,7 @@ class UpdateOfferRequest extends FormRequest
             'selectedDate.after_or_equal' => 'Data przynajmniej na jutro ',
             'photos.*.image' => 'Zły format pliku',
             'photos.*.mimes' => 'Image format must be peg,png,bmp,gif',
-            'photos.*.size' => 'Image above 5MB',
+            'photos.*.max' => 'Image above 5MB',
             // TODO: add more error messages in polish
         ];
     }
