@@ -29,7 +29,8 @@ class UpdateOfferRequest extends FormRequest
             'city' => ['required', 'min:2', 'max:50', 'string'],
             'price' => ['required', 'numeric', 'min:1', 'max:2137'],
             'categories' => ['array', 'required', 'min:1'],
-            'photos' => ['array'],
+            'photos' => ['array', 'max:5'],
+            'photos.*' => ['max:5120'],
         ];
     }
 

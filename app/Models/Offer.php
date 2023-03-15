@@ -15,7 +15,6 @@ class Offer extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'creator_id',
         'city',
         'zip_code',
         'price',
