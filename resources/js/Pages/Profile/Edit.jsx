@@ -3,6 +3,20 @@ import DeleteUserForm from "./Partials/DeleteUserForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import { Head } from "@inertiajs/react";
+import styled from "styled-components";
+
+const EditSectionWrapper = styled.div`
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+`;
 
 export default function Edit({ auth, user, mustVerifyEmail, status }) {
   return (
@@ -16,27 +30,18 @@ export default function Edit({ auth, user, mustVerifyEmail, status }) {
       }
     >
       <Head title="Profile" />
+      <EditSectionWrapper>
+        <UpdateProfileInformationForm
+          user={user}
+          mustVerifyEmail={mustVerifyEmail}
+          status={status}
+          className="max-w-xl"
+        />
 
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-          <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <UpdateProfileInformationForm
-              user={user}
-              mustVerifyEmail={mustVerifyEmail}
-              status={status}
-              className="max-w-xl"
-            />
-          </div>
+        <UpdatePasswordForm className="max-w-xl" />
 
-          <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <UpdatePasswordForm className="max-w-xl" />
-          </div>
-
-          <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <DeleteUserForm className="max-w-xl" />
-          </div>
-        </div>
-      </div>
+        <DeleteUserForm className="max-w-xl" />
+      </EditSectionWrapper>
     </AuthenticatedLayout>
   );
 }

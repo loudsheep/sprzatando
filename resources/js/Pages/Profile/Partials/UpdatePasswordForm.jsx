@@ -1,109 +1,88 @@
-import { useRef } from 'react';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/Atoms/PrimaryButton';
-import { useForm } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
-import { FormField } from '@/Components/FormField';
+import { useRef } from "react";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/Atoms/PrimaryButton";
+import { useForm } from "@inertiajs/react";
+import { Transition } from "@headlessui/react";
+import { FormField } from "@/Components/FormField";
+import EditProfile from "../EditProfileSection";
 
 export default function UpdatePasswordForm({ className }) {
-    const passwordInput = useRef();
-    const currentPasswordInput = useRef();
+  const passwordInput = useRef();
+  const currentPasswordInput = useRef();
 
-    const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
-        current_password: '',
-        password: '',
-        password_confirmation: '',
+  const form = useForm({
+    current_password: "",
+    password: "",
+    password_confirmation: "",
+  });
+
+  const updatePassword = (e) => {
+    e.preventDefault();
+
+    form.put(route("password.update"), {
+      preserveScroll: true,
+      onSuccess: () => form.reset(),
+      onError: () => {
+        if (form.errors.password) {
+          form.reset("password", "password_confirmation");
+        }
+
+        if (form.errors.current_password) {
+          form.reset("current_password");
+        }
+      },
     });
+  };
 
-    const updatePassword = (e) => {
-        e.preventDefault();
+  return (
+    <EditProfile
+      form={form}
+      formFields={[
+        {
+          id: "current_password",
+          label: "Current Password",
+          required: true,
+          ref: passwordInput,
+          type: "password",
+        },
+        {
+          id: "password",
+          label: "New Password",
+          required: true,
+          ref: currentPasswordInput,
+          type: "password",
+        },
+        {
+          id: "password_confirmation",
+          label: "Confirm Password",
+          required: true,
+          ref: false,
+          type: "password",
+        },
+      ]}
+      headerTexts={{
+        title: "Update Password",
+        desc: "Ensure your account is using a long, random password to stay secure.",
+      }}
+      submit={updatePassword}
+    >
+      <div className="flex items-center gap-4">
+        <PrimaryButton
+          processing={form.processing}
+          styling={{ margin: "15px 15px 15px 0" }}
+        >
+          Save
+        </PrimaryButton>
 
-        put(route('password.update'), {
-            preserveScroll: true,
-            onSuccess: () => reset(),
-            onError: () => {
-                if (errors.password) {
-                    reset('password', 'password_confirmation');
-                }
-
-                if (errors.current_password) {
-                    reset('current_password');
-                }
-            },
-        });
-    };
-
-    return (
-        <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900">Update Password</h2>
-
-                <p className="mt-1 text-sm text-gray-600">
-                    Ensure your account is using a long, random password to stay secure.
-                </p>
-            </header>
-
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel for="current_password" value="Current Password" />
-
-                    <FormField
-                        id="current_password"
-                        ref={currentPasswordInput}
-                        value={data.current_password}
-                        handleChange={(e) => setData('current_password', e.target.value)}
-                        errorMessage={errors.current_password}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                    />
-
-                </div>
-
-                <div>
-                    <InputLabel for="password" value="New Password" />
-
-                    <FormField
-                        id="password"
-                        ref={passwordInput}
-                        value={data.password}
-                        handleChange={(e) => setData('password', e.target.value)}
-                        errorMessage={errors.password}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
-
-                </div>
-
-                <div>
-                    <InputLabel for="password_confirmation" value="Confirm Password" />
-
-                    <FormField
-                        id="password_confirmation"
-                        value={data.password_confirmation}
-                        handleChange={(e) => setData('password_confirmation', e.target.value)}
-                        errorMessage={errors.password_confirmation}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
-
-                </div>
-
-                <div className="flex items-center gap-4">
-                    <PrimaryButton processing={processing}>Save</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enterFrom="opacity-0"
-                        leaveTo="opacity-0"
-                        className="transition ease-in-out"
-                    >
-                        <p className="text-sm text-gray-600">Saved.</p>
-                    </Transition>
-                </div>
-            </form>
-        </section>
-    );
+        <Transition
+          show={form.recentlySuccessful}
+          enterFrom="opacity-0"
+          leaveTo="opacity-0"
+          className="transition ease-in-out"
+        >
+          <p className="text-sm text-gray-600">Saved.</p>
+        </Transition>
+      </div>
+    </EditProfile>
+  );
 }
