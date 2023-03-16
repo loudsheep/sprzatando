@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   margin: 2rem;
   padding: 20px;
   border-radius: 10px;
-  `border: 1px solid ${({ theme }) => theme.colors.lightPurple};`
+  border: 1px solid ${({ theme }) => theme.colors.lightPurple};
   p {
     color: ${({ theme }) => theme.colors.darkGrey};
   }

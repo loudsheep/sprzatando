@@ -113,7 +113,7 @@ export default function Welcome({ auth, users }) {
 
                 <UsersWrapper>
                     {users.map((user, i) => (
-                        <User>
+                        <User style={{backgroundColor: auth.user?.id == user.id ? "#b3ff99": "", borderColor: auth.user?.id == user.id ? "#66d450": ""}}>
                             <div className="pic">
                                 {i + 1}.
                                 <img src={user.profile_img} alt="" />
