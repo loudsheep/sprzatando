@@ -41,7 +41,9 @@ export default function OfferDetails({
       "/report-offer/" + offer.id,
       {},
       {
-        onSuccess: () => { setIsVisible(true) }
+        onSuccess: () => {
+          setIsVisible(true);
+        },
       }
     );
   };
@@ -87,13 +89,11 @@ export default function OfferDetails({
 
           {isAdmin && (
             <>
-              {!isBanned && (
+              {isBanned ? (
                 <PrimaryButton color={"red"} onClick={handleBanOffer}>
                   BANUJ OFERTĘ
                 </PrimaryButton>
-              )}
-
-              {isBanned && (
+              ) : (
                 <PrimaryButton color={"green"} onClick={handleBanOffer}>
                   ODBANUJ OFERTĘ
                 </PrimaryButton>
