@@ -103,7 +103,7 @@ export const Navbar = ({ auth }) => {
             </Link>
             <div>
               <StyledLink href="#">Pomoc</StyledLink>
-              <StyledLink href="#">Ranking</StyledLink>
+              <StyledLink href={route("ranking")}>Ranking</StyledLink>
               <StyledLink href={route("profile.edit")}>Twoje konto</StyledLink>
               <StyledLink
                 type="button"
