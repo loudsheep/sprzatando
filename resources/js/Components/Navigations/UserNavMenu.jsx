@@ -4,6 +4,9 @@ import addIconPath from "../../assets/img/nav-icons/add.png";
 import acceptedIconPath from "../../assets/img/nav-icons/accepted.png";
 import userIconPath from "../../assets/img/nav-icons/user.png";
 import userOfferPath from "../../assets/img/nav-icons/userOffer.png";
+import { useWidth } from "@/hooks/useWidth";
+import { useState } from "react";
+import { TestDiv } from "../Atoms/SvgDropdown";
 
 const NavWrapper = styled.div`
   display: flex;
@@ -12,7 +15,18 @@ const NavWrapper = styled.div`
   padding-top: 4rem;
   box-shadow: -4px -2px 10px 0px rgba(66, 68, 90, 1);
   z-index: 1;
- 
+`;
+
+const MobileWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding-top: 4rem;
+  box-shadow: -4px -2px 10px 0px rgba(66, 68, 90, 1);
+  z-index: 1;
+  bottom: 0;
+  height: calc(100vh);
 `;
 
 const MenuItem = styled.div`
@@ -58,16 +72,44 @@ export const UserNavMenu = () => {
       icon: userIconPath,
     },
   ];
+
+  const width = useWidth();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleTogleSidebar = () => {
+    setIsOpen(true);
+  };
+
   return (
-    <NavWrapper>
-      {menuOptions.map(({ name, path, routeUrl, icon }) => (
-        <Link href={path} key={name}>
-          <MenuItem isActivee={url === routeUrl}>
-            <img src={icon} width="25px" height="25px" alt="icon" />
-            {name}
-          </MenuItem>
-        </Link>
-      ))}
-    </NavWrapper>
+    <>
+      {width >= 992 ? (
+        <NavWrapper>
+          {menuOptions.map(({ name, path, routeUrl, icon }) => (
+            <Link href={path} key={name}>
+              <MenuItem isActivee={url === routeUrl}>
+                <img src={icon} width="25px" height="25px" alt="icon" />
+                {name}
+              </MenuItem>
+            </Link>
+          ))}
+        </NavWrapper>
+      ) : (
+        <>
+          <TestDiv onClick={handleTogleSidebar} />
+          {isOpen && (
+            <MobileWrapper isOpen={isOpen}>
+              {menuOptions.map(({ name, path, routeUrl, icon }) => (
+                <Link href={path} key={name}>
+                  <MenuItem isActivee={url === routeUrl}>
+                    <img src={icon} width="25px" height="25px" alt="icon" />
+                    {name}
+                  </MenuItem>
+                </Link>
+              ))}
+            </MobileWrapper>
+          )}
+        </>
+      )}
+    </>
   );
 };

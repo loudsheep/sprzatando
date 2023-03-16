@@ -30,7 +30,7 @@ const UserInfoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 8rem;
+  height: 8rem;
   padding: 0 35px;
   width: 100%;
   grid-column-start: span 2;
@@ -57,20 +57,25 @@ export default function Authenticated({ auth, children, prophileImg }) {
       {width >= 992 && (
         <Wrapper>
           <UserInfoBox>
-          <LogoWrapper>
-            <Link href="/">
-              <img src={logoPath} alt="logo" style={{ width: "70px" }} />
-            </Link>
-          </LogoWrapper>
-            <Dropdown >
-              
+            <LogoWrapper>
+              <Link href="/">
+                <img src={logoPath} alt="logo" style={{ width: "70px" }} />
+              </Link>
+            </LogoWrapper>
+            <Dropdown>
               <Dropdown.Trigger>
                 <span className="inline-flex rounded-md">
                   <button
                     type="button"
                     className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                   >
-                    <img style={{marginRight: '13px', borderRadius: '50%'}} width={40} height={40} src={prophileImg} alt="user prophile image"/>
+                    <img
+                      style={{ marginRight: "13px", borderRadius: "50%" }}
+                      width={40}
+                      height={40}
+                      src={prophileImg}
+                      alt="user prophile image"
+                    />
                     {auth.user.name}
                     <Svg />
                   </button>
@@ -105,7 +110,13 @@ export default function Authenticated({ auth, children, prophileImg }) {
                     type="button"
                     className="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                   >
-                    <img style={{marginRight: '13px', borderRadius: '50%'}} width={40} height={40} src={prophileImg} alt="user prophile image"/>
+                    <img
+                      style={{ marginRight: "13px", borderRadius: "50%" }}
+                      width={40}
+                      height={40}
+                      src={prophileImg}
+                      alt="user prophile image"
+                    />
                     {auth.user.name}
 
                     <Svg />
@@ -129,7 +140,11 @@ export default function Authenticated({ auth, children, prophileImg }) {
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
-          <ChildrenWrapper>{children}</ChildrenWrapper>
+          <UserNavMenu />
+          <ChildrenWrapper>
+           
+            {children}
+          </ChildrenWrapper>
         </MobileWrapper>
       )}
     </>

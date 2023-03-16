@@ -1,7 +1,15 @@
+import styled from "styled-components";
+
+export const TestDiv = styled.div` 
+  width: 30px;
+  height: 30px;
+  background-color: ${({theme}) => theme.colors.secondaryColor}
+`;
+
 export const Svg = () => {
   return (
     <svg
-      className="ml-2 -mr-0.8 h-6 w-6s"
+      className="ml-3 -mr-0.9 h-8 w-6s"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 20 20"
       fill="currentColor"

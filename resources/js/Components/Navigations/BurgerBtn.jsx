@@ -1,6 +1,6 @@
 import styled from "styled-components";
 const StyledBurger = styled.button`
-  position: fixed;
+  position: ${({isUserPanel}) => isUserPanel ? 'static' : 'fixed'};
   top: 20px;
   right: 20px;
   display: flex;
@@ -43,9 +43,13 @@ const StyledBurger = styled.button`
   }
 `;
 
-const BurgerBtn = ({ open, setOpen }) => {
+const BurgerBtn = ({ open, setOpen, isUserPanel}) => {
   return (
-    <StyledBurger open={open} onClick={() => setOpen(!open)}>
+    <StyledBurger
+      open={open}
+      onClick={() => setOpen(!open)}
+      isUserPanel={isUserPanel}
+    >
       <div />
       <div />
       <div />
