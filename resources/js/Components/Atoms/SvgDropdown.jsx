@@ -4,14 +4,20 @@ import SvgPath from "../../assets/img/nav-icons/svg.svg";
 const ImgWrapper = styled.div`
   position: absolute;
   top: 8rem;
-  transform: ${({ isOpen }) => (isOpen ? "rotate(90deg)" : "rotate(-90deg)")};
+  background-color: ${({ theme }) => theme.colors.grey};
+  transform: translateX(150%);
   right: 15px;
 `;
 
 export const TestDiv = ({ onClick, isOpen }) => {
   return (
     <ImgWrapper onClick={onClick} isOpen={isOpen}>
-      <img src={SvgPath} alt="icon" width="30px" />
+      <img
+        src={SvgPath}
+        alt="icon"
+        width="30px"
+        style={{ transform: isOpen ? "rotate(90deg)" : "rotate(-90deg)" }}
+      />
     </ImgWrapper>
   );
 };

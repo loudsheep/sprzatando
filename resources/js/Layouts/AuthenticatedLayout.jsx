@@ -83,11 +83,8 @@ export default function Authenticated({ auth, children, prophileImg }) {
                 </span>
               </Dropdown.Trigger>
               <Dropdown.Content>
-                <Dropdown.Link href={route("profile.edit")}>
-                  Profile
-                </Dropdown.Link>
                 <Dropdown.Link href={route("logout")} method="post" as="button">
-                  Log Out
+                  Wyloguj
                 </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
@@ -126,26 +123,14 @@ export default function Authenticated({ auth, children, prophileImg }) {
               </Dropdown.Trigger>
 
               <Dropdown.Content>
-                <Dropdown.Link href={route("profile.edit")}>
-                  Profil
-                </Dropdown.Link>
-                <Dropdown.Link href={route("add.offer")}>
-                  Dodaj Ofertę
-                </Dropdown.Link>
-                <Dropdown.Link href={route("offers.created")}>
-                  Twoje oferty
-                </Dropdown.Link>
                 <Dropdown.Link href={route("logout")} method="post" as="button">
-                  Log Out
+                  Wyloguj
                 </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
           <UserNavMenu />
-          <ChildrenWrapper>
-           
-            {children}
-          </ChildrenWrapper>
+          <ChildrenWrapper>{children}</ChildrenWrapper>
         </MobileWrapper>
       )}
     </>

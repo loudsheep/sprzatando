@@ -17,12 +17,21 @@ const NavWrapper = styled.div`
   z-index: 1;
 `;
 
-const fadeIn = keyframes`
+const slideIn = keyframes`
   from {
     transform: translateX(-100%);
   }
   to {
     transform: translateX(0);
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
   }
 `;
 
@@ -38,7 +47,9 @@ const MobileWrapper = styled.div`
   height: calc(100vh);
   max-width: 25rem;
   width: 100%;
-  animation: ${({ fadeIn }) => fadeIn} 1s;
+  transform: ${({ isOpen }) => (isOpen ? "translate(0)" : "translate(-100%)")};
+  animation: ${({ isOpen, slideIn, slideOut }) => (isOpen ? slideIn : slideOut)}
+    0.8s;
 `;
 
 const MenuItem = styled.div`
@@ -107,19 +118,17 @@ export const UserNavMenu = () => {
         </NavWrapper>
       ) : (
         <>
-          <TestDiv onClick={handleTogleSidebar} isOpen={isOpen}/>
-          {isOpen && (
-            <MobileWrapper isOpen={isOpen} fadeIn={fadeIn}>
-              {menuOptions.map(({ name, path, routeUrl, icon }) => (
-                <Link href={path} key={name}>
-                  <MenuItem isActivee={url === routeUrl}>
-                    <img src={icon} width="25px" height="25px" alt="icon" />
-                    {name}
-                  </MenuItem>
-                </Link>
-              ))}
-            </MobileWrapper>
-          )}
+          <MobileWrapper isOpen={isOpen} slideIn={slideIn} slideOut={slideOut}>
+          <TestDiv onClick={handleTogleSidebar} isOpen={isOpen} />
+            {menuOptions.map(({ name, path, routeUrl, icon }) => (
+              <Link href={path} key={name}>
+                <MenuItem isActivee={url === routeUrl}>
+                  <img src={icon} width="25px" height="25px" alt="icon" />
+                  {name}
+                </MenuItem>
+              </Link>
+            ))}
+          </MobileWrapper>
         </>
       )}
     </>
