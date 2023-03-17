@@ -10,7 +10,7 @@ const StyledTitle = styled.h1`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 400px;
+  max-width: 400px;
   align-items: center;
   text-align: center;
   padding: 40px;
@@ -28,8 +28,11 @@ const ButtonsWrapper = styled.div`
   }
 `;
 
-const StyledButton = styled(Link)`
+const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.colors.darkGrey};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 260px;
   margin: 10px;
   padding: 10px 0;
@@ -56,8 +59,16 @@ export default function LandingPage() {
         </p>
       </Wrapper>
       <ButtonsWrapper>
-        <StyledButton className="main-button" href="/login" type="button">Zaloguj</StyledButton>
-        <StyledButton href="/register" type="button">Zarejstruj</StyledButton>
+        <Link href="/login">
+          <StyledButton className="main-button" type="button">
+            Zaloguj
+          </StyledButton>
+        </Link>
+        <Link href="/register">
+          <StyledButton type="button">
+            Zarejstruj
+          </StyledButton>
+        </Link>
       </ButtonsWrapper>
     </GuestLayout>
   );

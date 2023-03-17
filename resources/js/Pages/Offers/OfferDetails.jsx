@@ -90,13 +90,11 @@ export default function OfferDetails({
           {isAdmin && (
             <>
               {isBanned ? (
-                <PrimaryButton color={"red"} onClick={handleBanOffer}>
-                  BANUJ OFERTĘ
-                </PrimaryButton>
-              ) : (
                 <PrimaryButton color={"green"} onClick={handleBanOffer}>
                   ODBANUJ OFERTĘ
                 </PrimaryButton>
+              ) : (
+                <ErrorButton onClick={handleBanOffer} text="BANUJ" />
               )}
             </>
           )}

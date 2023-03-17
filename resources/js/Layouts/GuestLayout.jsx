@@ -6,10 +6,11 @@ import { useWidth } from "@/hooks/useWidth";
 import { Link } from "@inertiajs/react";
 
 const Wrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  overflow-y: hidden;
   display: flex; 
+  overflow-y: hidden;
+  padding: 0;
 `;
 
 const BannerWrapper = styled.div`
@@ -20,7 +21,6 @@ const BannerWrapper = styled.div`
 
 const ChildreeWrapper = styled.div`
   display: flex;
-  /* position: relative; */
   flex-direction: column;
   flex: 1;
   justify-content: center;
@@ -43,7 +43,7 @@ const LadyWrapper = styled.div`
 const LogoWrapper = styled(Link)`
   position: absolute;
   top: 10px;
-  right: 20px;
+  right: 10px;
   width: 80px;
   /* transform: scale(.2); */
 `
