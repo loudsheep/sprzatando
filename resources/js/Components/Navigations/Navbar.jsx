@@ -82,7 +82,7 @@ export const Navbar = ({ auth }) => {
           <NavMobile open={open}>
             <>
               <StyledLink href="#">Pomoc</StyledLink>
-              <StyledLink href="#">Ranking</StyledLink>
+              <StyledLink href={route("ranking")}>Ranking</StyledLink>
               <StyledLink href={route("profile.edit")}>Twoje konto</StyledLink>
               <StyledLink
                 type="button"
