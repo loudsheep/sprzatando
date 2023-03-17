@@ -34,7 +34,6 @@ class CreatedOffersController extends Controller
             ->where('ends', '<', today())
             ->orderBy('created_at', 'desc')->get()->toArray();
 
-
         return Inertia::render('Offers/UserOffer', [
             'activeOffers' => $activeOffers,
             'bannedOffers' => $bannedOffers,

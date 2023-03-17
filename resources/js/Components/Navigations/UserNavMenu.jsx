@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Link, usePage } from "@inertiajs/react";
 import addIconPath from "../../assets/img/nav-icons/add.png";
 import acceptedIconPath from "../../assets/img/nav-icons/accepted.png";
@@ -17,16 +17,28 @@ const NavWrapper = styled.div`
   z-index: 1;
 `;
 
+const fadeIn = keyframes`
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
 const MobileWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   background-color: white;
   padding-top: 4rem;
   box-shadow: -4px -2px 10px 0px rgba(66, 68, 90, 1);
-  z-index: 1;
+  z-index: 9;
   bottom: 0;
   height: calc(100vh);
+  max-width: 25rem;
+  width: 100%;
+  animation: ${({ fadeIn }) => fadeIn} 1s;
 `;
 
 const MenuItem = styled.div`
@@ -77,7 +89,7 @@ export const UserNavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTogleSidebar = () => {
-    setIsOpen(true);
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -95,9 +107,9 @@ export const UserNavMenu = () => {
         </NavWrapper>
       ) : (
         <>
-          <TestDiv onClick={handleTogleSidebar} />
+          <TestDiv onClick={handleTogleSidebar} isOpen={isOpen}/>
           {isOpen && (
-            <MobileWrapper isOpen={isOpen}>
+            <MobileWrapper isOpen={isOpen} fadeIn={fadeIn}>
               {menuOptions.map(({ name, path, routeUrl, icon }) => (
                 <Link href={path} key={name}>
                   <MenuItem isActivee={url === routeUrl}>
