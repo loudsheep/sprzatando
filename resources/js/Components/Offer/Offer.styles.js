@@ -4,6 +4,7 @@ import { Link } from "@inertiajs/react";
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   max-width: 90rem;
   width: 100%;
   margin: 20px;
@@ -28,6 +29,7 @@ export const Wrapper = styled.div`
     margin-left: 18px;
     margin-right: 18px;
     overflow-wrap: anywhere;
+    
   }
   .span {
     background-color: ${({ theme }) => theme.colors.darkGrey};

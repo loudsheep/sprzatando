@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Box = styled.div`
-  width: 120px;
+  width: 140px;
   height: 50px;
   margin: 12px;
   display: flex;
@@ -11,7 +11,7 @@ const Box = styled.div`
   font-weight: bold;
   background-color: ${({ isChecked, theme }) => (isChecked ? "#F1DDF7" : theme.colors.lightGrey)};
   border: 2px solid #9015b7;
-  border-radius: 15px;
+  border-radius: 8px;
   cursor: pointer;
 `;
 

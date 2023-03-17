@@ -91,10 +91,7 @@ export default function AddOffer(props) {
       errors={props.errors}
       prophileImg={props.auth.user.profile_img}
     >
-      <SubmitModal isOpen={isOpen} onClose={(e) => {
-        setIsOpen(false)
-        e.stopPropagation();
-      }} />
+      <SubmitModal isOpen={isOpen} onClose={()=>setIsOpen(false)} />
       <Head title="Dodaj ofertę">
         <meta charset="UTF-8" />
       </Head>
