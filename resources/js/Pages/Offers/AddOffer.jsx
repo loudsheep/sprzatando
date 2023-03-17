@@ -30,7 +30,7 @@ export default function AddOffer(props) {
     selectedDate: new Date(),
   };
   const { data, setData, post, errors } = useForm(initialState);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const onHandleChange = (event) => {
     setData(event.target.name, event.target.value);

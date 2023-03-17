@@ -43,14 +43,6 @@ const MainGalleryImage = styled.img`
   max-width: 500px;
 `;
 
-const AdditionalPhotos = styled.img`
-  width: 100%;
-  max-width: 100px;
-  margin: 10px;
-  cursor: pointer;
-  opacity: ${({ isActive }) => (isActive ? "1" : "0.5")};
-`;
-
 const CloseButton = styled.button`
   position: absolute;
   color: ${({ theme }) => theme.colors.white};
@@ -73,6 +65,8 @@ const GalleryDot = styled.div`
 export const Gallery = ({ images, mainImage }) => {
   const [showGallery, setShowGallery] = useState(false);
   const [currentImg, setCurrentImg] = useState();
+  const [prevImg, setPrevImg] = useState();
+  const [nextImg, setNextImg] = useState();
   const imgs = [...images, mainImage];
   const width = useWidth();
 
@@ -115,21 +109,11 @@ export const Gallery = ({ images, mainImage }) => {
           <MainGalleryImage src={currentImg} alt="main photo" />
           <div>
             {imgs.map((img) =>
-              width >= 576 ? (
-                <AdditionalPhotos
-                  src={img}
-                  key={img}
-                  alt="photo"
-                  isActive={img === currentImg}
-                  onClick={() => setCurrentImg(img)}
-                />
-              ) : (
-                <GalleryDot
-                  isActive={img === currentImg}
-                  key={img}
-                  onClick={() => setCurrentImg(img)}
-                />
-              )
+               <GalleryDot
+               isActive={img === currentImg}
+               key={img}
+               onClick={() => setCurrentImg(img)}
+             />
             )}
           </div>
         </GalleryWrapper>
