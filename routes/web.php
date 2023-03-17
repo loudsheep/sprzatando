@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoggedInUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Offers\OfferDetailsController;
+use App\Http\Controllers\RankingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
 
 // Routes that do not require user to be logged in
 Route::get('/offer/{offer}', [OfferDetailsController::class, 'show'])->name('offer.details');
+Route::get('/ranking', [RankingController::class, 'show'])->name('ranking');
 
 
 require __DIR__ . '/auth.php';

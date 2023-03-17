@@ -61,8 +61,8 @@ export const UserNavMenu = () => {
     },
     {
       name: "Przyjęte zlecenia",
-      path: "#",
-      routeUrl: "",
+      path: route("offers.interested"),
+      routeUrl: "/offer-interested",
       icon: acceptedIconPath,
     },
     {

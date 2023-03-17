@@ -42,14 +42,4 @@ class CreatedOffersController extends Controller
             'expiredOffers' => $expiredOffers
         ]);
     }
-
-    public function showInterested(Request $request)
-    {
-        dd($request->user()->interestedInOffers()->where('is_done', '=', false)->get()->toArray());
-    }
-
-    public function showDone(Request $request)
-    {
-        dd($request->user()->contractedOffers()->where('is_done', '=', true)->get()->toArray());
-    }
 }

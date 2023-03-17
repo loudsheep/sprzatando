@@ -87,7 +87,7 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('offers.created');
 
-    Route::get('offer-interested', [CreatedOffersController::class, 'showInterested'])
+    Route::get('offer-interested', [FollowOfferController::class, 'show'])
         ->middleware('auth')
         ->name('offers.interested');
 
