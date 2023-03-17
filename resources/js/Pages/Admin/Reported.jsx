@@ -1,4 +1,4 @@
-import { Offer } from "@/Components/Offer/Offer";
+import { MiniOffer } from "@/Components/Offer/MiniOffer";
 import { Head } from "@inertiajs/react";
 import styled from "styled-components";
 
@@ -23,7 +23,6 @@ const Cont = styled.div`
 
 
 export default function Dashboard({ offers }) {
-    console.log(offers);
     return (
         <>
             {/* TODO add some layout for this */}
@@ -33,7 +32,7 @@ export default function Dashboard({ offers }) {
                 <h1>Zgłoszone oferty</h1>
 
                 {offers.map((offer, i) => (
-                    <Offer
+                    <MiniOffer
                         id={offer.id}
                         title={offer.title}
                         description={offer.description}
@@ -41,6 +40,7 @@ export default function Dashboard({ offers }) {
                         image={offer.main_image}
                         owner={offer.creator.name}
                         category={offer.category}
+                        ends={offer.ends}
                         city={offer.city}
                         createdAt={offer.created_at}
                         key={i}

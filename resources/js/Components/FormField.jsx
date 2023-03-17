@@ -23,7 +23,7 @@ export const Label = styled.label`
 const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.grey};
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  border-radius: 12px;
+  border-radius: 8px;
   height: 3.8rem;
   font-size: 15px;
 `;
