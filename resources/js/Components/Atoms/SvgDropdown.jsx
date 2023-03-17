@@ -1,10 +1,20 @@
 import styled from "styled-components";
+import SvgPath from "../../assets/img/nav-icons/svg.svg";
 
-export const TestDiv = styled.div` 
-  width: 30px;
-  height: 30px;
-  background-color: ${({theme}) => theme.colors.secondaryColor}
+const ImgWrapper = styled.div`
+  position: absolute;
+  top: 8rem;
+  transform: ${({ isOpen }) => (isOpen ? "rotate(90deg)" : "rotate(-90deg)")};
+  right: 15px;
 `;
+
+export const TestDiv = ({ onClick, isOpen }) => {
+  return (
+    <ImgWrapper onClick={onClick} isOpen={isOpen}>
+      <img src={SvgPath} alt="icon" width="30px" />
+    </ImgWrapper>
+  );
+};
 
 export const Svg = () => {
   return (

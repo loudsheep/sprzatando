@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 const MobileWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const LogoWrapper = styled.div`
@@ -30,7 +31,7 @@ const UserInfoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 8rem;
+  min-height: 8rem;
   padding: 0 35px;
   width: 100%;
   grid-column-start: span 2;
