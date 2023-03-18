@@ -47,7 +47,7 @@ class Offer extends Model
         return $this->belongsTo(User::class, 'contractor_id', 'id');
     }
 
-    public function usersIntrested()
+    public function usersInterested()
     {
         return $this->belongsToMany(User::class, 'intrested_in_offer', 'offer_id', 'intrested_user_id')
             ->withTimestamps();

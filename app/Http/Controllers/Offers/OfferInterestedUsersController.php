@@ -11,8 +11,8 @@ class OfferInterestedUsersController extends Controller
 {
     public function show(Offer $offer)
     {
-        $interestedUsers = $offer->usersIntrested()->get()->toArray();
-        dd($interestedUsers);
+        $interestedUsers = $offer->usersInterested()->get()->toArray();
+
         return Inertia::render('Offers/UsersInterested', [
             'interestedUsers' => $interestedUsers
         ]);
