@@ -2,6 +2,7 @@ import { Head, router } from "@inertiajs/react";
 import styled from "styled-components";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Button from "@/Components/Atoms/Button";
+import { Inertia } from "@inertiajs/inertia";
 
 const StyledTitle = styled.h1`
   font-size: 2.6rem;
@@ -38,29 +39,37 @@ const UserInfo = styled.div`
 
 `;
 
-export default function UsersInterested({ auth, errors, interestedUsers }) {
+export default function UsersInterested({ auth, errors, offer, interestedUsers }) {
+
+  const handleUserSelect = () => {
+    console.log("click");
+    // Inertia.post(`/offer/${offer.id}/select/${userId}`);
+  };
+
   return (
     <>
+      <Head title="Chętni" />
+
       <AuthenticatedLayout
         auth={auth}
         errors={errors}
         prophileImg={auth.user.profile_img}
       >
-        <Head title="Chętni" />
         <StyledTitle>Chętni do oferty:</StyledTitle>
-        {interestedUsers.map(({ name, profile_img }, i) => (
+        {interestedUsers.map(({ id, name, profile_img }, i) => (
           <UserInfo key={i}>
-            <img src={profile_img} alt="profile img" />
+            <img src={profile_img} style={{ 'borderRadius': '50%' }} alt="profile img" />
             <span>
               {i + 1}. <strong>{name}</strong>
             </span>
             <div className="btn-wrapper">
-              <Button text="wybierz" onClick={() => {}}/>
-              <Button text="odrzuć" color='error'/>
+              <Button text="wybierz" onClick={handleUserSelect} />
+              <Button text="odrzuć" color='error' />
             </div>
           </UserInfo>
         ))}
-        {console.log(interestedUsers)}
+        <Button text="TEST" onClick={() => console.log("DEWX")}></Button>
+
       </AuthenticatedLayout>
     </>
   );

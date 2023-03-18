@@ -82,6 +82,18 @@ class OfferPolicy
     }
 
     /**
+     * Determine whether the user can follow the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Offer  $offer
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function follow(User $user, Offer $offer)
+    {
+        return $user->id !== $offer->creator_id;
+    }
+
+    /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user

@@ -98,7 +98,6 @@ export default function UserOffer({
               city={offer.city}
               owner={offer.creator.name}
               createdAt={offer.created_at}
-              isInterested={true}
               key={i}
             />
           ))}

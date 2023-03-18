@@ -116,6 +116,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/offers/{offer}/interested-users', [OfferInterestedUsersController::class, 'show'])
         ->middleware('auth');
+
+    Route::post('/offers/{offer}/select/{user}', [OfferInterestedUsersController::class, 'store'])
+        ->middleware('auth');
 });
 
 

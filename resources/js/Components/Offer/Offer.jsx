@@ -13,13 +13,19 @@ export const Offer = ({
   city,
   owner,
   createdAt,
-  isInterested,
+  isInterested = false,
   isOwner = false,
   isExpired = false,
 }) => {
+
   function handleClick() {
     Inertia.post(`extend-expiration/${id}`);
   }
+
+  const handleResign = () => {
+    Inertia.post(`follow-offer/${id}`);
+  };
+
   const timeDifference = useTimeDifference(createdAt);
   return (
     <Wrapper>
@@ -61,9 +67,7 @@ export const Offer = ({
               <Button>Edytuj</Button>
             </Link>
           ) : isInterested ? (
-            <Link href={'#'}>
-              <Button>Zakończ</Button>
-            </Link>
+              <Button onClick={handleResign}>Rezygnuj</Button>
           ) : (
             <Link href={`/offer/${id}`}>
               <Button>Aplikuj</Button>
