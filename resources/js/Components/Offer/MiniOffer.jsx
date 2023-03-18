@@ -12,17 +12,15 @@ const formatDate = (date) => {
 export const MiniOffer = ({
   id,
   title,
-  description,
   price,
   image,
   category,
   city,
-  owner,
   createdAt,
   ends,
   interested = 0,
-  isOwner = false,
-  isExpired = false,
+  isOwner,
+  isExpired,
 }) => {
   function handleClick() {
     Inertia.post(`extend-expiration/${id}`);
@@ -61,7 +59,7 @@ export const MiniOffer = ({
           </p>
 
           <p>
-            <Link>
+            <Link href={`offers/${id}/interested-users`}>
               <strong>{interested}</strong> osób chętnych
             </Link>
           </p>

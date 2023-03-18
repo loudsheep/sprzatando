@@ -17,6 +17,7 @@ use App\Http\Controllers\Offers\AddOfferController;
 use App\Http\Controllers\Offers\CreatedOffersController;
 use App\Http\Controllers\Offers\EditOfferController;
 use App\Http\Controllers\Offers\OfferExpirationDateController;
+use App\Http\Controllers\Offers\OfferInterestedUsersController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -112,6 +113,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/offer/{offer}/edit', [EditOfferController::class, 'update'])
         ->middleware('auth')
         ->name('offer.update');
+
+    Route::get('/offers/{offer}/interested-users', [OfferInterestedUsersController::class, 'show'])
+        ->middleware('auth');
 });
 
 

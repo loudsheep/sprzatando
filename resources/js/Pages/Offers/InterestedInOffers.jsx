@@ -49,7 +49,7 @@ export default function UserOffer({
     >
       <Head title="Twoje oferty" />
       <Wrapper>
-        <Header>Twoje oferty: </Header>
+        <Header>Oferty: </Header>
         <TypeBoxWrapper>
           <TypeBox
             id="interested"
@@ -69,39 +69,39 @@ export default function UserOffer({
           />
         </TypeBoxWrapper>
 
-          {selectedType === "interested" &&
-            interestedInOffers.map((offer, i) => (
-              <Offer
-                id={offer.id}
-                image={offer.main_image}
-                title={offer.title}
-                description={offer.description}
-                price={offer.price}
-                category={offer.category}
-                city={offer.city}
-                owner={offer.creator?.name ?? 'DELETED USER'}
-                createdAt={offer.created_at}
-                isOwner={true}
-                key={i}
-              />
-            ))}
+        {selectedType === "interested" &&
+          interestedInOffers.map((offer, i) => (
+            <Offer
+              id={offer.id}
+              image={offer.main_image}
+              title={offer.title}
+              description={offer.description}
+              price={offer.price}
+              category={offer.category}
+              city={offer.city}
+              owner={offer.creator?.name ?? "DELETED USER"}
+              createdAt={offer.created_at}
+              isInterested={true}
+              key={i}
+            />
+          ))}
 
-          {selectedType === "done" &&
-            doneOffers.map((offer, i) => (
-              <Offer
-                id={offer.id}
-                image={offer.main_image}
-                title={offer.title}
-                description={offer.description}
-                price={offer.price}
-                category={offer.category}
-                city={offer.city}
-                owner={offer.creator.name}
-                createdAt={offer.created_at}
-                isOwner={true}
-                key={i}
-              />
-            ))}
+        {selectedType === "done" &&
+          doneOffers.map((offer, i) => (
+            <Offer
+              id={offer.id}
+              image={offer.main_image}
+              title={offer.title}
+              description={offer.description}
+              price={offer.price}
+              category={offer.category}
+              city={offer.city}
+              owner={offer.creator.name}
+              createdAt={offer.created_at}
+              isInterested={true}
+              key={i}
+            />
+          ))}
       </Wrapper>
     </AuthenticatedLayout>
   );

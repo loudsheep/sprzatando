@@ -13,6 +13,7 @@ export const Offer = ({
   city,
   owner,
   createdAt,
+  isInterested,
   isOwner = false,
   isExpired = false,
 }) => {
@@ -59,8 +60,14 @@ export const Offer = ({
             <Link href={`/offer/${id}/edit`}>
               <Button>Edytuj</Button>
             </Link>
+          ) : isInterested ? (
+            <Link href={'#'}>
+              <Button>Zakończ</Button>
+            </Link>
           ) : (
-            <Button>Aplikuj</Button>
+            <Link href={`/offer/${id}`}>
+              <Button>Aplikuj</Button>
+            </Link>
           )}
           {isExpired && <Button onClick={handleClick}>Aktywuj</Button>}
         </div>
