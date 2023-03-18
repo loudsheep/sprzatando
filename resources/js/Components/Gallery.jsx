@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useWidth } from "@/hooks/useWidth";
+import iconPath from "@/assets/img/switchGalleryIcon.png";
 
 const Image = styled.img`
   width: 100px;
@@ -110,6 +111,18 @@ export const Gallery = ({ images, mainImage }) => {
     }
   };
 
+  const handleButtonPress = (button) => {
+    if (button === "left") {
+      setCurrentImg(prevImg);
+      const currentIndex = imgs.indexOf(prevImg);
+      setPrevNextImages(imgs, currentIndex);
+    } else if (button === "right") {
+      setCurrentImg(nextImg);
+      const currentIndex = imgs.indexOf(nextImg);
+      setPrevNextImages(imgs, currentIndex);
+    }
+  };
+
   useEffect(() => {
     const handleKeyPress = (e) => {
       handleArrowPress(e);
@@ -144,6 +157,17 @@ export const Gallery = ({ images, mainImage }) => {
       {showGallery && (
         <GalleryWrapper onClick={clickHandler}>
           <CloseButton onClick={() => setShowGallery(false)}>X</CloseButton>
+          <button
+            onClick={() => handleButtonPress("left")}
+            style={{
+              backgroundColor: "rgba(0, 0, 0, .3)",
+              position: "absolute",
+              left: "2rem",
+              transform: "rotate(180deg)",
+            }}
+          >
+            <img src={iconPath} alt="switch icon" width={60} />
+          </button>
           <MainGalleryImage src={currentImg} alt="main photo" />
           <div>
             {imgs.map((img) => (
@@ -154,6 +178,16 @@ export const Gallery = ({ images, mainImage }) => {
               />
             ))}
           </div>
+          <button
+            onClick={() => handleButtonPress("right")}
+            style={{
+              position: "absolute",
+              right: "2rem",
+              backgroundColor: "rgba(0, 0, 0, 0.3)",
+            }}
+          >
+            <img src={iconPath} alt="switch icon" width={60} />
+          </button>
         </GalleryWrapper>
       )}
     </>
