@@ -32,7 +32,7 @@ export default function ForgotPassword({ status }) {
       <Head title="Forgot Password" />
 
       {status && (
-        <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
+        <div className="mb-4 font-medium text-xl text-green-500">{status}</div>
       )}
 
       <FormWrapper onSubmit={submit}>

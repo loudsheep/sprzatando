@@ -33,52 +33,44 @@ export default function ResetPassword({ token, email }) {
         <GuestLayout>
             <Head title="Reset Password" />
 
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel forInput="email" value="Email" />
+            <form style={{ width: "300px" }} onSubmit={submit}>
+                <FormField
+                    id="email"
+                    type="email"
+                    name="email"
+                    label="Email"
+                    errorMessage={errors.email}
+                    value={data.email}
+                    className="mt-1 block w-full"
+                    autoComplete="username"
+                    handleChange={onHandleChange}
+                />
 
-                    <FormField
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        handleChange={onHandleChange}
-                    />
+                <FormField
+                    id="password"
+                    type="password"
+                    name="password"
+                    label="Hasło"
+                    errorMessage={errors.password}
+                    value={data.password}
+                    className="mt-1 block w-full"
+                    autoComplete="new-password"
+                    handleChange={onHandleChange}
+                />
 
-                </div>
+                <FormField
+                    type="password"
+                    name="password_confirmation"
+                    label="Potwierdź hasło"
+                    errorMessage={errors.password_confirmation}
+                    value={data.password_confirmation}
+                    className="mt-1 block w-full"
+                    autoComplete="new-password"
+                    handleChange={onHandleChange}
+                />
 
-                <div className="mt-4">
-                    <InputLabel forInput="password" value="Password" />
 
-                    <FormField
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        handleChange={onHandleChange}
-                    />
-
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel forInput="password_confirmation" value="Confirm Password" />
-
-                    <FormField
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                        handleChange={onHandleChange}
-                    />
-
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
+                <div className="flex items-center justify-center mt-4">
                     <PrimaryButton className="ml-4" processing={processing}>
                         Reset Password
                     </PrimaryButton>

@@ -39,7 +39,7 @@ export default function Login({ status, canResetPassword }) {
       <Head title="Log in" />
 
       {status && (
-        <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
+        <div className="mb-4 font-medium text-xl text-green-600">{status}</div>
       )}
 
       <form style={{ width: "300px" }} onSubmit={submit}>
