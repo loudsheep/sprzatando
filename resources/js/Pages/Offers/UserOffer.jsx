@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-const Header = styled.h1`
+const StyledTitle = styled.h1`
   font-size: 2.6rem;
   font-weight: bold;
   color: #303030;
@@ -51,7 +51,7 @@ export default function UserOffer({
     >
       <Head title="Twoje oferty" />
       <Wrapper>
-        <Header>Twoje oferty: </Header>
+        <StyledTitle>Twoje oferty: </StyledTitle>
         <TypeBoxWrapper>
           <TypeBox
             id="active"
