@@ -1,6 +1,6 @@
 import { Head } from "@inertiajs/react";
 
-export const InterestedUsers = () => {
+export default function UsersInterested({ interestedUsers }) {
   return (
     <>
       <Head title="Chętni" />

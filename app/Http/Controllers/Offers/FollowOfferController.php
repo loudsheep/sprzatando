@@ -21,7 +21,7 @@ class FollowOfferController extends Controller
 
     public function show(Request $request)
     {
-        // $activeOffers = $request->user()->createdOffers()->with('creator')->withCount('usersIntrested')
+        // $activeOffers = $request->user()->createdOffers()->with('creator')->withCount('usersInterested')
         //     ->where('is_banned', '=', false)
         //     ->where('is_done', '=', false)
         //     ->where('ends', '>=', today())
