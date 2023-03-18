@@ -99,7 +99,7 @@ export default function UserOffer({
                 city={offer.city}
                 owner={offer.creator.name}
                 ends={offer.ends}
-                interested={offer.users_intrested_count}
+                interested={offer.users_interested_count}
                 createdAt={offer.created_at}
                 isOwner={true}
                 key={i}
