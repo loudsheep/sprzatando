@@ -73,7 +73,7 @@ export const Navbar = ({ auth }) => {
 
   return (
     <Fragment >
-      {windowWidth < 992 && (
+      {windowWidth <= 992 && (
         <Fragment>
           <Link href="/">
             <LogoWrapperMobile src={logoPath} />

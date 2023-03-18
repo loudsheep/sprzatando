@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWidth } from "@/hooks/useWidth";
 
 const Image = styled.img`
@@ -71,10 +71,54 @@ export const Gallery = ({ images, mainImage }) => {
   const width = useWidth();
 
   const clickHandler = (e) => {
-    if(e.target === e.currentTarget) {
-      setShowGallery(false)
+    if (e.target === e.currentTarget) {
+      setShowGallery(false);
     }
   };
+
+  const setPrevNextImages = (images, currentIndex) => {
+    const lastIndex = images.length - 1;
+
+    if (currentIndex === lastIndex) {
+      setPrevImg(images[currentIndex - 1]);
+      setNextImg(images[0]);
+    } else if (currentIndex === 0) {
+      setPrevImg(images[lastIndex]);
+      setNextImg(images[currentIndex + 1]);
+    } else {
+      setPrevImg(images[currentIndex - 1]);
+      setNextImg(images[currentIndex + 1]);
+    }
+  };
+
+  const handleGalleryOpen = (img) => {
+    setShowGallery(true);
+    setCurrentImg(img);
+    const currentIndex = imgs.indexOf(img);
+    setPrevNextImages(imgs, currentIndex);
+  };
+
+  const handleArrowPress = (e) => {
+    if (e.key === "ArrowLeft") {
+      setCurrentImg(prevImg);
+      const currentIndex = imgs.indexOf(prevImg);
+      setPrevNextImages(imgs, currentIndex);
+    } else if (e.key === "ArrowRight") {
+      setCurrentImg(nextImg);
+      const currentIndex = imgs.indexOf(nextImg);
+      setPrevNextImages(imgs, currentIndex);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      handleArrowPress(e);
+    };
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleArrowPress]);
 
   return (
     <>
@@ -86,10 +130,7 @@ export const Gallery = ({ images, mainImage }) => {
                 src={img}
                 key={img}
                 alt="photo"
-                onClick={() => {
-                  setShowGallery(true);
-                  setCurrentImg(img);
-                }}
+                onClick={() => handleGalleryOpen(img)}
               />
             ))}
           </div>
@@ -97,10 +138,7 @@ export const Gallery = ({ images, mainImage }) => {
         <MainImage
           src={mainImage}
           alt="main photo"
-          onClick={() => {
-            setShowGallery(true);
-            setCurrentImg(mainImage);
-          }}
+          onClick={() => handleGalleryOpen(mainImage)}
         />
       </div>
       {showGallery && (
@@ -108,13 +146,13 @@ export const Gallery = ({ images, mainImage }) => {
           <CloseButton onClick={() => setShowGallery(false)}>X</CloseButton>
           <MainGalleryImage src={currentImg} alt="main photo" />
           <div>
-            {imgs.map((img) =>
-               <GalleryDot
-               isActive={img === currentImg}
-               key={img}
-               onClick={() => setCurrentImg(img)}
-             />
-            )}
+            {imgs.map((img) => (
+              <GalleryDot
+                isActive={img === currentImg}
+                key={img}
+                onClick={() => handleGalleryOpen(img)}
+              />
+            ))}
           </div>
         </GalleryWrapper>
       )}
