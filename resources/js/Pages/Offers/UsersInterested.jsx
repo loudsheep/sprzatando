@@ -1,6 +1,7 @@
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 import styled from "styled-components";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Button from "@/Components/Atoms/Button";
 
 const StyledTitle = styled.h1`
   font-size: 2.6rem;
@@ -15,7 +16,8 @@ const UserInfo = styled.div`
   height: 100px;
   display: flex;
   align-items: center;
-  padding: 0 3rem;
+  justify-content: space-between;
+  padding: 0 2rem;
   margin: 15px;
   border-radius: 15px;
   border: 1px solid ${({ theme }) => theme.colors.lightPurple};
@@ -30,6 +32,10 @@ const UserInfo = styled.div`
     font-size: 2rem;
     margin: 0 20px;
   }
+  .btn-wrapper{
+    display: flex
+  }
+
 `;
 
 export default function UsersInterested({ auth, errors, interestedUsers }) {
@@ -48,6 +54,10 @@ export default function UsersInterested({ auth, errors, interestedUsers }) {
             <span>
               {i + 1}. <strong>{name}</strong>
             </span>
+            <div className="btn-wrapper">
+              <Button text="wybierz" onClick={() => {}}/>
+              <Button text="odrzuć" color='error'/>
+            </div>
           </UserInfo>
         ))}
         {console.log(interestedUsers)}

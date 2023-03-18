@@ -20,7 +20,7 @@ class OfferInterestedUsersController extends Controller
             })
             ->toArray();
 
-        dd($interestedUsers);
+        // dd($interestedUsers);
         return Inertia::render('Offers/UsersInterested', [
             'interestedUsers' => $interestedUsers
         ]);
