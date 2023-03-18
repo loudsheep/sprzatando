@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Navbar } from "../../Components/Navigations/Navbar";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import {
   Wrapper,
   StyledTitle,
   StyledSubtitle,
+  IconWrapper,
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { router } from "@inertiajs/react";
 import { ErrorButton } from "@/Components/Atoms/ErrorButton";
 import { SuccesReported } from "@/Components/InfoModal";
+import backIconPath from "@/assets/img/backIcon.png";
 
 export default function OfferDetails({
   images,
@@ -53,6 +55,9 @@ export default function OfferDetails({
       <Head title="Szczegóły oferty" />
       <Navbar />
       <Wrapper>
+        <IconWrapper onClick={() => history.back()}>
+          <img src={backIconPath} alt="back icon" />
+        </IconWrapper>
         <SuccesReported
           isVisible={isVisible}
           onInfoClose={() => setIsVisible(false)}

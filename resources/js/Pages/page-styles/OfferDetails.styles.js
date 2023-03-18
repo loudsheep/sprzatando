@@ -31,3 +31,14 @@ export const StyledTitle = styled.h1`
   font-size: 3rem;
   font-weight: bold;
 `;
+
+export const IconWrapper = styled.div`
+  max-width: 40px;
+  max-height: 40px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  @media (max-width: 992px) {
+    top: 100px;
+  }
+`
