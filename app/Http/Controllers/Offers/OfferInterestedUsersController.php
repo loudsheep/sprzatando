@@ -33,8 +33,19 @@ class OfferInterestedUsersController extends Controller
     {
         $this->authorize('update', $offer);
 
-        dd($offer, $user);
+        if (
+            !$offer->usersInterested->contains($user)
+            || $offer->is_done || $offer->is_banned
+        ) {
+            abort(403);
+        }
 
-        // TODO the rest of this method
+        $offer->contractor()->associate($user);
+        $offer->is_done = true;
+        $offer->save();
+
+        // TODO change to back()
+        dd($offer, $user);
+        // return back();
     }
 }
