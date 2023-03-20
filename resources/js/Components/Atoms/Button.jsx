@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  padding: .5rem;
+  padding: 0.5rem;
   width: ${(props) => props.width || "auto"};
   font-size: 1.5rem;
   font-weight: bold;
-  background-color: ${({ theme, color }) =>color ? theme.colors.error : theme.colors.secondaryColor};
+  background-color: ${({ theme, color }) =>
+    color ? theme.colors.error : theme.colors.secondaryColor};
   color: #fff;
   border-radius: 8px;
   transition: opacity 0.3s;
@@ -14,10 +15,10 @@ const StyledButton = styled.button`
     opacity: 0.9;
   }
 `;
-const Button = (props) => {
+const Button = ({ width, color, onClick, text }) => {
   return (
-    <StyledButton type={props.type || "button"} width={props.width} color={props.color}>
-      {props.text}
+    <StyledButton onClick={onClick} width={width} color={color}>
+      {text}
     </StyledButton>
   );
 };

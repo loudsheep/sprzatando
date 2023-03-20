@@ -33,17 +33,19 @@ const UserInfo = styled.div`
     font-size: 2rem;
     margin: 0 20px;
   }
-  .btn-wrapper{
-    display: flex
+  .btn-wrapper {
+    display: flex;
   }
-
 `;
 
-export default function UsersInterested({ auth, errors, offer, interestedUsers }) {
-
-  const handleUserSelect = () => {
-    console.log("click");
-    // Inertia.post(`/offer/${offer.id}/select/${userId}`);
+export default function UsersInterested({
+  auth,
+  errors,
+  offer,
+  interestedUsers,
+}) {
+  const handleUserSelect = (userId) => {
+    Inertia.post(`/offer/${offer.id}/select/${userId}`);
   };
 
   return (
@@ -58,18 +60,20 @@ export default function UsersInterested({ auth, errors, offer, interestedUsers }
         <StyledTitle>Chętni do oferty:</StyledTitle>
         {interestedUsers.map(({ id, name, profile_img }, i) => (
           <UserInfo key={i}>
-            <img src={profile_img} style={{ 'borderRadius': '50%' }} alt="profile img" />
+            <img
+              src={profile_img}
+              style={{ borderRadius: "50%" }}
+              alt="profile img"
+            />
             <span>
               {i + 1}. <strong>{name}</strong>
             </span>
             <div className="btn-wrapper">
-              <Button text="wybierz" onClick={handleUserSelect} />
-              <Button text="odrzuć" color='error' />
+              <Button text="wybierz" onClick={() => handleUserSelect(id)} />
+              <Button text="odrzuć" color="error" />
             </div>
           </UserInfo>
         ))}
-        <Button text="TEST" onClick={() => console.log("DEWX")}></Button>
-
       </AuthenticatedLayout>
     </>
   );
