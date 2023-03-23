@@ -14,6 +14,10 @@ class OfferInterestedUsersController extends Controller
     {
         $this->authorize('update', $offer);
 
+        if ($offer->is_done) {
+            abort(404);
+        }
+
         $interestedUsers = $offer->usersInterested()
             ->withAvg('reviews', 'rating')
             ->withCount('contractedOffers')

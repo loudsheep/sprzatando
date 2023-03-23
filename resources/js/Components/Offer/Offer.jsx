@@ -19,11 +19,11 @@ export const Offer = ({
 }) => {
 
   function handleClick() {
-    Inertia.post(`extend-expiration/${id}`);
+    Inertia.post(route('offer.extend', id));
   }
 
   const handleResign = () => {
-    Inertia.post(`follow-offer/${id}`);
+    Inertia.post(route('offer.follow', id));
   };
 
   const timeDifference = useTimeDifference(createdAt);

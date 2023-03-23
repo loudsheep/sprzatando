@@ -13,7 +13,7 @@ class OfferDetailsController extends Controller
 {
     public function show(Request $request, Offer $offer)
     {
-        if($offer->is_banned && ($request->user() === null || $request->user()->role === "user")) {
+        if($offer->is_banned && ($request->user() === null || $request->user()->role === "user") || $offer->is_done) {
             abort(404);
         }
 

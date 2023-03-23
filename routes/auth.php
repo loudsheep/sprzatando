@@ -101,7 +101,8 @@ Route::middleware('auth')->group(function () {
         ->name('offer.follow');
 
     Route::post('extend-expiration/{offer}', [OfferExpirationDateController::class, 'extend'])
-        ->middleware('auth');
+        ->middleware('auth')
+        ->name('offer.extend');
 
     Route::post('deactivate/{offer}', [OfferExpirationDateController::class, 'deactivate'])
         ->middleware('auth');
@@ -114,11 +115,13 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('offer.update');
 
-    Route::get('/offers/{offer}/interested-users', [OfferInterestedUsersController::class, 'show'])
-        ->middleware('auth');
+    Route::get('/offer/{offer}/interested-users', [OfferInterestedUsersController::class, 'show'])
+        ->middleware('auth')
+        ->name('offer.interested.users');
 
-    Route::post('/offers/{offer}/select/{user}', [OfferInterestedUsersController::class, 'store'])
-        ->middleware('auth');
+    Route::post('/offer/{offer}/select/{user}', [OfferInterestedUsersController::class, 'store'])
+        ->middleware('auth')
+        ->name('offer.user.select');
 });
 
 

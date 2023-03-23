@@ -1,4 +1,4 @@
-import { Head, router } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import styled from "styled-components";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Button from "@/Components/Atoms/Button";
@@ -45,7 +45,7 @@ export default function UsersInterested({
   interestedUsers,
 }) {
   const handleUserSelect = (userId) => {
-    Inertia.post(`/offer/${offer.id}/select/${userId}`);
+    Inertia.post(route('offer.user.select', [offer.id, userId]));
   };
 
   return (

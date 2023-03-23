@@ -23,7 +23,7 @@ export const MiniOffer = ({
   isExpired,
 }) => {
   function handleClick() {
-    Inertia.post(`extend-expiration/${id}`);
+    Inertia.post(route('offer.extend', id));
   }
   const timeDifference = useTimeDifference(createdAt);
   return (
@@ -59,7 +59,7 @@ export const MiniOffer = ({
           </p>
 
           <p>
-            <Link href={`offers/${id}/interested-users`}>
+            <Link href={route('offer.interested.users', id)}>
               <strong>{interested}</strong> osób chętnych
             </Link>
           </p>
@@ -70,7 +70,7 @@ export const MiniOffer = ({
             <span>{price} zł</span>
           </div>
           {isOwner ? (
-            <Link href={`/offer/${id}/edit`}>
+            <Link href={route('offer.edit', id)}>
               <Button>Edytuj</Button>
             </Link>
           ) : (

@@ -28,19 +28,19 @@ export default function OfferDetails({
   const handleInterestedButtons = (e) => {
     e.preventDefault();
 
-    router.post("/follow-offer/" + offer.id);
+    router.post(route('offer.follow', offer.id))
   };
 
   const handleBanOffer = (e) => {
     e.preventDefault();
 
-    router.post("/ban-offer/" + offer.id);
+    router.post(route('offer.ban', offer.id));
   };
 
   const handleReportOffer = (e) => {
     e.preventDefault();
     router.post(
-      "/report-offer/" + offer.id,
+      route('offer.report', offer.id),
       {},
       {
         onSuccess: () => {
