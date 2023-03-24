@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "../Atoms/Button";
+import { Wrapper, Button, ImgWrapper, StyledLink } from "../Offer/Offer.styles";
 import FiltersWrapper from "./FiltersWrapper";
 
 
@@ -63,7 +63,7 @@ const FilterSection = ({offers}) => {
       <TextWrapper>
         <HeaderText>Przenieś sprzątanie na wyższy poziom</HeaderText>
         <Text>Wybierz jedną z tysiąca usług sprzątających</Text>
-        <Button text={"Sprawdź"} />
+        <Button>Sprawdź</Button>
       </TextWrapper>
     
       <FiltersWrapper offers={offers}/>

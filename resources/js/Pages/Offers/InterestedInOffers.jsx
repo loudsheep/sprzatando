@@ -88,7 +88,7 @@ export default function UserOffer({
 
         {selectedType === "done" &&
           doneOffers.map((offer, i) => (
-            <Offer
+            <MiniOffer
               id={offer.id}
               image={offer.main_image}
               title={offer.title}
@@ -98,6 +98,8 @@ export default function UserOffer({
               city={offer.city}
               owner={offer.creator.name}
               createdAt={offer.created_at}
+              isContractor={true}
+              review={offer.review}
               key={i}
             />
           ))}

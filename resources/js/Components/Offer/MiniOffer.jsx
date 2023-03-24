@@ -20,6 +20,8 @@ export const MiniOffer = ({
   ends,
   interested = 0,
   isOwner,
+  isContractor = false,
+  review = null,
   isExpired,
 }) => {
   function handleClick() {
@@ -49,32 +51,63 @@ export const MiniOffer = ({
           <strong>Kategorie:</strong> {category.replace(";", ", ")}
         </p>
 
-        <div className="container">
-          <p>
-            <strong>Miasto:</strong> {city}
-          </p>
+        {isOwner ? (
+          <>
+            <div className="container">
+              <p>
+                <strong>Miasto:</strong> {city}
+              </p>
 
-          <p>
-            <strong>Ważna do</strong> {formatDate(ends)}
-          </p>
+              <p>
+                <strong>Ważna do</strong> {formatDate(ends)}
+              </p>
 
-          <p>
-            <Link href={route('offer.interested.users', id)}>
-              <strong>{interested}</strong> osób chętnych
-            </Link>
-          </p>
-        </div>
+              <p>
+                <Link href={route('offer.interested.users', id)}>
+                  <strong>{interested}</strong> osób chętnych
+                </Link>
+              </p>
+            </div>
+
+          </>
+        ) : (
+          <>
+            <div className="container">
+              <p>
+                <strong>Miasto:</strong> {city}
+              </p>
+
+              <p>
+                {review ? (
+                  <>
+                    <Link href={'TODO'}>
+                      <strong>Ocena:</strong> {review.rating} / 5
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <strong>Brak oceny pracy</strong>
+                  </>
+                )}
+              </p>
+            </div>
+          </>
+        )}
 
         <div className="container">
           <div className="span">
             <span>{price} zł</span>
           </div>
-          {isOwner ? (
-            <Link href={route('offer.edit', id)}>
-              <Button>Edytuj</Button>
-            </Link>
-          ) : (
-            <Button>Aplikuj</Button>
+          {!isContractor && (
+            <>
+              {isOwner ? (
+                <Link href={route('offer.edit', id)}>
+                  <Button>Edytuj</Button>
+                </Link>
+              ) : (
+                <Button>Aplikuj</Button>
+              )}
+            </>
           )}
           {isExpired && <Button onClick={handleClick}>Aktywuj</Button>}
         </div>

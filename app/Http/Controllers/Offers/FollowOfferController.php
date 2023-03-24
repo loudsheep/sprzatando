@@ -25,7 +25,7 @@ class FollowOfferController extends Controller
             // ->where()
             ->get()->toArray();
 
-        $contractedOffers = $request->user()->contractedOffers()->with('creator')->get()->toArray();
+        $contractedOffers = $request->user()->contractedOffers()->with(['creator', 'review'])->get()->toArray();
 
         return Inertia::render('Offers/InterestedInOffers', [
             'interestedInOffers' => $interestedInOffers,
