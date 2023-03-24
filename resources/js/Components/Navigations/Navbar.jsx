@@ -60,6 +60,7 @@ const LogoWrapperMobile = styled.img`
   left: 20px;
   width: 75px;
   height: 75px;
+  z-index: 3;
 `;
 
 const LogoWrapperDesktop = styled.img`
