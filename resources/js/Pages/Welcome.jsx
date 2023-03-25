@@ -111,6 +111,7 @@ export default function Welcome({
                 category={offer.category}
                 city={offer.city}
                 createdAt={offer.created_at}
+                buttons={{ 'Aplikuj': route('offer.details', offer.id)}}
                 key={i}
               />
             ))}

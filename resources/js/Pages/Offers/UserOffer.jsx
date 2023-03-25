@@ -87,75 +87,77 @@ export default function UserOffer({
           />
         </TypeBoxWrapper>
 
-          {selectedType === "active" &&
-            activeOffers.map((offer, i) => (
-              <MiniOffer
-                id={offer.id}
-                image={offer.main_image}
-                title={offer.title}
-                description={offer.description}
-                price={offer.price}
-                category={offer.category}
-                city={offer.city}
-                owner={offer.creator.name}
-                ends={offer.ends}
-                interested={offer.users_interested_count}
-                createdAt={offer.created_at}
-                isOwner={true}
-                key={i}
-              />
-            ))}
+        {selectedType === "active" &&
+          activeOffers.map((offer, i) => (
+            <MiniOffer
+              id={offer.id}
+              image={offer.main_image}
+              title={offer.title}
+              description={offer.description}
+              price={offer.price}
+              category={offer.category}
+              city={offer.city}
+              owner={offer.creator.name}
+              ends={offer.ends}
+              interested={offer.users_interested_count}
+              createdAt={offer.created_at}
+              isOwner={true}
+              key={i}
+            />
+          ))}
 
-          {selectedType === "banned" &&
-            bannedOffers.map((offer, i) => (
-              <Offer
-                id={offer.id}
-                image={offer.main_image}
-                title={offer.title}
-                description={offer.description}
-                price={offer.price}
-                category={offer.category}
-                city={offer.city}
-                owner={offer.creator.name}
-                createdAt={offer.created_at}
-                isOwner={true}
-                key={i}
-              />
-            ))}
+        {selectedType === "banned" &&
+          bannedOffers.map((offer, i) => (
+            <Offer
+              id={offer.id}
+              image={offer.main_image}
+              title={offer.title}
+              description={offer.description}
+              price={offer.price}
+              category={offer.category}
+              city={offer.city}
+              owner={offer.creator.name}
+              createdAt={offer.created_at}
+              isOwner={true}
+              key={i}
+            />
+          ))}
 
-          {selectedType === "done" &&
-            doneOffers.map((offer, i) => (
-              <Offer
-                id={offer.id}
-                image={offer.main_image}
-                title={offer.title}
-                description={offer.description}
-                price={offer.price}
-                category={offer.category}
-                city={offer.city}
-                owner={offer.creator.name}
-                createdAt={offer.created_at}
-                isOwner={true}
-                key={i}
-              />
-            ))}
-            {selectedType === "expired" &&
-            expiredOffers.map((offer, i) => (
-              <Offer
-                id={offer.id}
-                image={offer.main_image}
-                title={offer.title}
-                description={offer.description}
-                price={offer.price}
-                category={offer.category}
-                city={offer.city}
-                owner={offer.creator.name}
-                createdAt={offer.created_at}
-                isOwner={true}
-                isExpired={true}
-                key={i}
-              />
-            ))}
+        {selectedType === "done" &&
+          doneOffers.map((offer, i) => (
+            <Offer
+              id={offer.id}
+              image={offer.main_image}
+              title={offer.title}
+              description={offer.description}
+              price={offer.price}
+              category={offer.category}
+              city={offer.city}
+              owner={offer.creator.name}
+              createdAt={offer.created_at}
+              isOwner={true}
+              buttons={{ 'Oceń': 'TODO' }}
+              key={i}
+            />
+          ))}
+        {selectedType === "expired" &&
+          expiredOffers.map((offer, i) => (
+            <Offer
+              id={offer.id}
+              image={offer.main_image}
+              title={offer.title}
+              description={offer.description}
+              price={offer.price}
+              category={offer.category}
+              city={offer.city}
+              owner={offer.creator.name}
+              createdAt={offer.created_at}
+              isOwner={true}
+              isExpired={true}
+              buttons={{ 'Edytuj': route('offer.edit', offer.id), 'Aktywuj': route('offer.extend', offer.id) }}
+              key={i}
+            />
+          ))}
       </Wrapper>
     </AuthenticatedLayout>
   );

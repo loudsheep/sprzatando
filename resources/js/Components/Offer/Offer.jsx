@@ -16,6 +16,7 @@ export const Offer = ({
   isInterested = false,
   isOwner = false,
   isExpired = false,
+  buttons = {}
 }) => {
 
   function handleClick() {
@@ -62,18 +63,27 @@ export const Offer = ({
           <div className="span">
             <span>{price} zł</span>
           </div>
-          {isOwner ? (
+
+          {/* Better??? idk */}
+          {Object.keys(buttons).map((key) => (
+            <Link href={buttons[key]}>
+              <Button>{key}</Button>
+            </Link>
+          ))}
+
+          {/* {isOwner ? (
             <Link href={`/offer/${id}/edit`}>
               <Button>Edytuj</Button>
             </Link>
           ) : isInterested ? (
-              <Button onClick={handleResign}>Rezygnuj</Button>
+            <Button onClick={handleResign}>Rezygnuj</Button>
           ) : (
             <Link href={`/offer/${id}`}>
               <Button>Aplikuj</Button>
             </Link>
           )}
-          {isExpired && <Button onClick={handleClick}>Aktywuj</Button>}
+
+          {isExpired && <Button onClick={handleClick}>Aktywuj</Button>} */}
         </div>
       </div>
     </Wrapper>

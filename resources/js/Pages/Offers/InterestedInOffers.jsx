@@ -81,6 +81,7 @@ export default function UserOffer({
               city={offer.city}
               owner={offer.creator?.name ?? "DELETED USER"}
               createdAt={offer.created_at}
+              buttons={{ 'Rezugnuj': route('offer.follow', offer.id) }}
               isInterested={true}
               key={i}
             />

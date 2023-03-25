@@ -100,7 +100,15 @@ Route::middleware('auth')->group(function () {
         ->middleware('auth')
         ->name('offer.follow');
 
+    Route::get('follow-offer/{offer}', [FollowOfferController::class, 'store'])
+        ->middleware('auth')
+        ->name('offer.follow');
+
     Route::post('extend-expiration/{offer}', [OfferExpirationDateController::class, 'extend'])
+        ->middleware('auth')
+        ->name('offer.extend');
+
+    Route::get('extend-expiration/{offer}', [OfferExpirationDateController::class, 'extend'])
         ->middleware('auth')
         ->name('offer.extend');
 
