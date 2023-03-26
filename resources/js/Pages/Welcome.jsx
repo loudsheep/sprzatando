@@ -102,17 +102,8 @@ export default function Welcome({
           <OfferWrapper>
             {currentOffers.map((offer, i) => (
               <Offer
-                id={offer.id}
-                title={offer.title}
-                description={offer.description}
-                price={offer.price}
-                image={offer.main_image}
-                owner={offer.creator.name}
-                category={offer.category}
-                city={offer.city}
-                createdAt={offer.created_at}
-                buttons={{ 'Aplikuj': route('offer.details', offer.id)}}
-                key={i}
+                offer={offer}
+                buttons={{ 'Aplikuj': route('offer.details', offer.id) }}
               />
             ))}
           </OfferWrapper>

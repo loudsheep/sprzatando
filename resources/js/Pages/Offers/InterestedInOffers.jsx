@@ -72,18 +72,8 @@ export default function UserOffer({
         {selectedType === "interested" &&
           interestedInOffers.map((offer, i) => (
             <Offer
-              id={offer.id}
-              image={offer.main_image}
-              title={offer.title}
-              description={offer.description}
-              price={offer.price}
-              category={offer.category}
-              city={offer.city}
-              owner={offer.creator?.name ?? "DELETED USER"}
-              createdAt={offer.created_at}
+              offer={offer}
               buttons={{ 'Rezygnuj': route('offer.follow', offer.id) }}
-              isInterested={true}
-              key={i}
             />
           ))}
 
@@ -91,18 +81,7 @@ export default function UserOffer({
           doneOffers.map((offer, i) => (
             <MiniOffer
               offer={offer}
-              id={offer.id}
-              image={offer.main_image}
-              title={offer.title}
-              description={offer.description}
-              price={offer.price}
-              category={offer.category}
-              city={offer.city}
-              owner={offer.creator.name}
-              createdAt={offer.created_at}
-              isContractor={true}
               review={offer.review}
-              key={i}
             />
           ))}
       </Wrapper>

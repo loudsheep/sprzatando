@@ -4,35 +4,24 @@ import { Inertia } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../hooks/useTimeDifference";
 
 export const Offer = ({
-  id,
-  title,
-  description,
-  price,
-  image,
-  category,
-  city,
-  owner,
-  createdAt,
-  isInterested = false,
-  isOwner = false,
-  isExpired = false,
+  offer,
   buttons = {}
 }) => {
 
   function handleClick() {
-    Inertia.post(route('offer.extend', id));
+    Inertia.post(route('offer.extend', offer.id));
   }
 
   const handleResign = () => {
-    Inertia.post(route('offer.follow', id));
+    Inertia.post(route('offer.follow', offer.id));
   };
 
-  const timeDifference = useTimeDifference(createdAt);
+  const timeDifference = useTimeDifference(offer.created_at);
   return (
     <Wrapper>
-      <Link href={`/offer/${id}`}>
+      <Link href={route('offer.details', offer.id)}>
         <ImgWrapper>
-          <img src={image} loading="lazy" alt="house photo" />
+          <img src={offer.main_image} loading="lazy" alt="house photo" />
         </ImgWrapper>
       </Link>
       <div className="info-wrapper">
@@ -43,25 +32,25 @@ export const Offer = ({
             alignItems: "center",
           }}
         >
-          <StyledLink href={`/offer/${id}`}>{title}</StyledLink>
+          <StyledLink href={route('offer.details', offer.id)}>{offer.title}</StyledLink>
           <p>{timeDifference}</p>
         </div>
-        {owner && <p>autor: {owner}</p>}
+        {offer.creator.name && <p>autor: {offer.creator.name}</p>}
         <p>
-          {description.length > 100
-            ? `${description.slice(0, 100)} ...`
-            : description}
+          {offer.description.length > 100
+            ? `${offer.description.slice(0, 100)} ...`
+            : offer.description}
         </p>
         <p>
-          <strong>Kategorie:</strong> {category}
+          <strong>Kategorie:</strong> {offer.category}
         </p>
         <p>
-          <strong>Miasto:</strong> {city}
+          <strong>Miasto:</strong> {offer.city}
         </p>
 
         <div className="container">
           <div className="span">
-            <span>{price} zł</span>
+            <span>{offer.price} zł</span>
           </div>
 
           {/* Better??? idk */}
@@ -70,20 +59,6 @@ export const Offer = ({
               <Button>{key}</Button>
             </Link>
           ))}
-
-          {/* {isOwner ? (
-            <Link href={`/offer/${id}/edit`}>
-              <Button>Edytuj</Button>
-            </Link>
-          ) : isInterested ? (
-            <Button onClick={handleResign}>Rezygnuj</Button>
-          ) : (
-            <Link href={`/offer/${id}`}>
-              <Button>Aplikuj</Button>
-            </Link>
-          )}
-
-          {isExpired && <Button onClick={handleClick}>Aktywuj</Button>} */}
         </div>
       </div>
     </Wrapper>
