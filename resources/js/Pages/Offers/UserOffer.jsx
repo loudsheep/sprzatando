@@ -90,6 +90,7 @@ export default function UserOffer({
         {selectedType === "active" &&
           activeOffers.map((offer, i) => (
             <MiniOffer
+              offer={offer}
               id={offer.id}
               image={offer.main_image}
               title={offer.title}
@@ -102,6 +103,7 @@ export default function UserOffer({
               interested={offer.users_interested_count}
               createdAt={offer.created_at}
               isOwner={true}
+              buttons={{ 'Edytuj': route('offer.edit', offer.id) }}
               key={i}
             />
           ))}

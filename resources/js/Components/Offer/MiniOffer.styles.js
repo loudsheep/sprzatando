@@ -104,3 +104,26 @@ export const StyledLink = styled(Link)`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.mainColor};
 `;
+
+export const Review = styled.div`
+  width: 100%;
+  margin: 2rem 10% 0 10%;  
+  display: flex;
+  flex-direction: row;
+
+  img {
+    height: 5rem;
+  }
+
+  .seperator {
+    padding: 0 1rem;
+    height: 100%;
+    border-right: 2px solid ${({ theme }) => theme.colors.secondaryColor};
+  }
+
+  .description {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+`;

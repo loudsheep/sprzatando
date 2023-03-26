@@ -81,7 +81,7 @@ export default function UserOffer({
               city={offer.city}
               owner={offer.creator?.name ?? "DELETED USER"}
               createdAt={offer.created_at}
-              buttons={{ 'Rezugnuj': route('offer.follow', offer.id) }}
+              buttons={{ 'Rezygnuj': route('offer.follow', offer.id) }}
               isInterested={true}
               key={i}
             />
@@ -90,6 +90,7 @@ export default function UserOffer({
         {selectedType === "done" &&
           doneOffers.map((offer, i) => (
             <MiniOffer
+              offer={offer}
               id={offer.id}
               image={offer.main_image}
               title={offer.title}

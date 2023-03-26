@@ -1,7 +1,8 @@
-import { Wrapper, Button, ImgWrapper, StyledLink } from "./MiniOffer.styles";
+import { Wrapper, Button, ImgWrapper, StyledLink, Review } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../hooks/useTimeDifference";
+import { useState } from "react";
 
 const formatDate = (date) => {
   let d = new Date(date);
@@ -10,29 +11,27 @@ const formatDate = (date) => {
 };
 
 export const MiniOffer = ({
-  id,
-  title,
-  price,
-  image,
-  category,
-  city,
-  createdAt,
-  ends,
+  offer,
   interested = 0,
   isOwner,
-  isContractor = false,
   review = null,
-  isExpired,
+  buttons = {}
 }) => {
   function handleClick() {
-    Inertia.post(route('offer.extend', id));
+    Inertia.post(route('offer.extend', offer.id));
   }
-  const timeDifference = useTimeDifference(createdAt);
+  const timeDifference = useTimeDifference(offer.created_at);
+
+  const [showReview, setShowReview] = useState(false);
+  function toggleReview() {
+    setShowReview(!showReview);
+  }
+
   return (
     <Wrapper>
-      <Link href={`/offer/${id}`}>
+      <Link href={route('offer.details', offer.id)}>
         <ImgWrapper>
-          <img src={image} loading="lazy" alt="house photo" />
+          <img src={offer.main_image} loading="lazy" alt="house photo" />
         </ImgWrapper>
       </Link>
       <div className="info-wrapper">
@@ -43,27 +42,27 @@ export const MiniOffer = ({
             alignItems: "center",
           }}
         >
-          <StyledLink href={`/offer/${id}`}>{title}</StyledLink>
+          <StyledLink href={route('offer.details', offer.id)}>{offer.title}</StyledLink>
           <p>{timeDifference}</p>
         </div>
 
         <p>
-          <strong>Kategorie:</strong> {category.replace(";", ", ")}
+          <strong>Kategorie:</strong> {offer.category.replace(";", ", ")}
         </p>
 
         {isOwner ? (
           <>
             <div className="container">
               <p>
-                <strong>Miasto:</strong> {city}
+                <strong>Miasto:</strong> {offer.city}
               </p>
 
               <p>
-                <strong>Ważna do</strong> {formatDate(ends)}
+                <strong>Ważna do</strong> {formatDate(offer.ends)}
               </p>
 
               <p>
-                <Link href={route('offer.interested.users', id)}>
+                <Link href={route('offer.interested.users', offer.id)}>
                   <strong>{interested}</strong> osób chętnych
                 </Link>
               </p>
@@ -74,44 +73,55 @@ export const MiniOffer = ({
           <>
             <div className="container">
               <p>
-                <strong>Miasto:</strong> {city}
+                <strong>Miasto:</strong> {offer.city}
               </p>
 
-              <p>
+              <div>
                 {review ? (
                   <>
-                    <Link href={'TODO'}>
+                    <p style={{ cursor: 'pointer' }} onClick={toggleReview}>
                       <strong>Ocena:</strong> {review.rating} / 5
-                    </Link>
+                    </p>
                   </>
                 ) : (
                   <>
                     <strong>Brak oceny pracy</strong>
                   </>
                 )}
-              </p>
+              </div>
             </div>
           </>
         )}
 
         <div className="container">
           <div className="span">
-            <span>{price} zł</span>
+            <span>{offer.price} zł</span>
           </div>
-          {!isContractor && (
-            <>
-              {isOwner ? (
-                <Link href={route('offer.edit', id)}>
-                  <Button>Edytuj</Button>
-                </Link>
-              ) : (
-                <Button>Aplikuj</Button>
-              )}
-            </>
-          )}
-          {isExpired && <Button onClick={handleClick}>Aktywuj</Button>}
+
+          {/* Better??? idk */}
+          {Object.keys(buttons).map((key) => (
+            <Link href={buttons[key]}>
+              <Button>{key}</Button>
+            </Link>
+          ))}
         </div>
       </div>
+
+      {review !== null && showReview && (
+        <Review>
+          <img src={offer.creator.profile_img} alt="" />
+
+          <div className="seperator"></div>
+
+          <div className="description">
+            <b>
+              {offer.creator.name} - <span style={{ color: '#ffda09' }}>{review.rating} ★</span>
+            </b>
+
+            {review.description}
+          </div>
+        </Review>
+      )}
     </Wrapper>
   );
 };
