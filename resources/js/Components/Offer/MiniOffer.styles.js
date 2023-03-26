@@ -16,6 +16,13 @@ export const Wrapper = styled.div`
   p {
     color: ${({ theme }) => theme.colors.darkGrey};
   }
+  .rating {
+    color: ${({ theme }) => theme.colors.darkGrey};
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
   .info-wrapper {
     flex: 1;
     display: flex;

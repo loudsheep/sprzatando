@@ -78,7 +78,7 @@ export const MiniOffer = ({
 
               <div>
                 {review ? (
-                  <p style={{ cursor: 'pointer' }} onClick={toggleReview}>
+                  <p className='rating' onClick={toggleReview}>
                     <strong>Ocena:</strong> {review.rating} / 5
                   </p>
                 ) : (
