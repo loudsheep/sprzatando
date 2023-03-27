@@ -93,7 +93,7 @@ export default function Register() {
         <ButtonsWrapper>
           <Link
             href={route("login")}
-            className="underline text-base text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="underline text-2xl text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Masz już konto?
           </Link>

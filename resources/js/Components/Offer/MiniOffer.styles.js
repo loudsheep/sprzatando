@@ -120,6 +120,7 @@ export const Review = styled.div`
 
   img {
     height: 5rem;
+    border-radius: 50%;
   }
 
   .seperator {
