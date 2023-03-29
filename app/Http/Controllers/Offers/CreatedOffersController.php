@@ -23,7 +23,7 @@ class CreatedOffersController extends Controller
             ->where('is_banned', '=', true)
             ->orderBy('created_at', 'desc')->get()->toArray();
 
-        $doneOffers = $request->user()->createdOffers()->with('creator')
+        $doneOffers = $request->user()->createdOffers()->with(['creator', 'contractor', 'review'])
             ->where('is_done', '=', true)
             ->where('is_banned', '=', false)
             ->orderBy('created_at', 'desc')->get()->toArray();

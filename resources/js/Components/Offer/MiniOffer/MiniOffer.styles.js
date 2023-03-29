@@ -135,3 +135,18 @@ export const Review = styled.div`
     flex-direction: column;
   }
 `;
+
+export const Contractor = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  * {
+    margin: 0 0.5rem;
+  }
+
+  img {
+    height: 5rem;
+    border-radius: 50%;
+  }
+`;

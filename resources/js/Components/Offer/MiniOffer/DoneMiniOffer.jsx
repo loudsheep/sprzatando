@@ -1,7 +1,7 @@
-import { Wrapper, Button, ImgWrapper, StyledLink, Review } from "./MiniOffer.styles";
+import { Wrapper, Button, ImgWrapper, StyledLink, Review, Contractor } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
-import { useTimeDifference } from "../../hooks/useTimeDifference";
+import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { useState } from "react";
 
 const formatDate = (date) => {
@@ -10,11 +10,8 @@ const formatDate = (date) => {
   return d.toLocaleDateString();
 };
 
-export const MiniOffer = ({
+export const DoneMiniOffer = ({
   offer,
-  interested = 0,
-  isOwner,
-  review = null,
   buttons = {}
 }) => {
   function handleClick() {
@@ -50,62 +47,47 @@ export const MiniOffer = ({
           <strong>Kategorie:</strong> {offer.category.replace(";", ", ")}
         </p>
 
-        {isOwner ? (
-          <>
-            <div className="container">
-              <p>
-                <strong>Miasto:</strong> {offer.city}
-              </p>
+        <div className="container">
+          <p>
+            <strong>Miasto:</strong> {offer.city}
+          </p>
 
-              <p>
-                <strong>Ważna do</strong> {formatDate(offer.ends)}
+          <div>
+            {offer.review ? (
+              <p className='rating' onClick={toggleReview}>
+                <strong>Ocena:</strong> {offer.review.rating} / 5
               </p>
-
+            ) : (
               <p>
-                <Link href={route('offer.interested.users', offer.id)}>
-                  <strong>{interested}</strong> osób chętnych
+                <strong>Brak oceny</strong> <Link href={'TODO'}>
+                  <Button>Oceń</Button>
                 </Link>
               </p>
-            </div>
+            )}
+          </div>
+        </div>
 
-          </>
-        ) : (
-          <>
-            <div className="container">
-              <p>
-                <strong>Miasto:</strong> {offer.city}
-              </p>
-
-              <div>
-                {review ? (
-                  <p className='rating' onClick={toggleReview}>
-                    <strong>Ocena:</strong> {review.rating} / 5
-                  </p>
-                ) : (
-                  <p>
-                    <strong>Brak oceny pracy</strong>
-                  </p>
-                )}
-              </div>
-            </div>
-          </>
-        )}
 
         <div className="container">
           <div className="span">
             <span>{offer.price} zł</span>
           </div>
 
-          {/* Better??? idk */}
-          {Object.keys(buttons).map((key) => (
-            <Link href={buttons[key]}>
-              <Button>{key}</Button>
-            </Link>
-          ))}
+          <Contractor>
+            <p>
+              <strong>
+                Wykonał:
+              </strong>
+            </p>
+            <img src={offer.contractor.profile_img} alt="" />
+            <p>
+              {offer.contractor.name}
+            </p>
+          </Contractor>
         </div>
       </div>
 
-      {review !== null && showReview && (
+      {offer.review !== null && showReview && (
         <Review>
           <img src={offer.creator.profile_img} alt="" />
 
@@ -113,10 +95,10 @@ export const MiniOffer = ({
 
           <div className="description">
             <b>
-              {offer.creator.name} - <span style={{ color: '#ffda09' }}>{review.rating} ★</span>
+              {offer.creator.name} - <span style={{ color: '#ffda09' }}>{offer.review.rating} ★</span>
             </b>
 
-            {review.description}
+            {offer.review.description}
           </div>
         </Review>
       )}

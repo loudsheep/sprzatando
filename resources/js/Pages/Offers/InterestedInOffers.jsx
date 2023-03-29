@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Offer } from "../../Components/Offer/Offer";
-import { MiniOffer } from "@/Components/Offer/MiniOffer";
+import { MiniOffer } from "@/Components/Offer/MiniOffer/MiniOffer";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 import { TypeBox } from "../../Components/Atoms/OfferTypeBox";

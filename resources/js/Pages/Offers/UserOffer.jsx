@@ -1,6 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Offer } from "../../Components/Offer/Offer";
-import { MiniOffer } from "@/Components/Offer/MiniOffer";
+import { MiniOffer } from "@/Components/Offer/MiniOffer/MiniOffer";
+import { DoneMiniOffer } from "@/Components/Offer/MiniOffer/DoneMiniOffer";
 import styled from "styled-components";
 import { Head } from "@inertiajs/react";
 import { TypeBox } from "../../Components/Atoms/OfferTypeBox";
@@ -92,6 +93,7 @@ export default function UserOffer({
             <MiniOffer
               offer={offer}
               isOwner={true}
+              interested={offer.users_interested_count}
               buttons={{ 'Edytuj': route('offer.edit', offer.id) }}
             />
           ))}
@@ -106,9 +108,9 @@ export default function UserOffer({
 
         {selectedType === "done" &&
           doneOffers.map((offer, i) => (
-            <Offer
+            <DoneMiniOffer
               offer={offer}
-              buttons={{ 'Oceń': 'TODO' }}
+              buttons={{}}
             />
           ))}
         {selectedType === "expired" &&
