@@ -1,5 +1,6 @@
 import { Wrapper, Button, ImgWrapper, StyledLink, Review, ReviewForm, Contractor } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { FormField } from "@/Components/FormField";
@@ -27,6 +28,24 @@ export const DoneMiniOffer = ({
 
   function toggleReviewForm() {
     setShowReviewForm(!showReviewForm);
+  }
+
+  const { data, setData, post, errors } = useForm();
+  const onHandleChange = (event) => {
+    setData(event.target.name, event.target.value);
+  };
+
+  function submitReview(e) {
+    e.preventDefault();
+    post(route("offer.review", offer.id), {
+      // preserveScroll: true,
+      // onSuccess: () => {
+      //   // setData(initialState);
+      //   // handleCheckboxReset();
+      //   // setIsOpen(true);
+      // },
+    });
+    console.log(errors);
   }
 
   return (
@@ -108,15 +127,19 @@ export const DoneMiniOffer = ({
       )}
 
       {/* TODO review form */}
-      {/* {(!offer.review && showReviewForm) && (
-        <ReviewForm>
-          <Textarea
-            id="desc"
-            value=""
-            error=""
-          />
+      {(!offer.review && showReviewForm) && (
+        <ReviewForm onSubmit={submitReview}>
+          <img src={offer.creator.profile_img} alt="" />
+          <div className="seperator"></div>
+
+          <div className="description">
+            <input type="number" name="rating" value={data.rating} placeholder="Ocena (1 do 5)" min={1} max={5} style={{ width: "50%" }} onChange={onHandleChange}/>
+            <textarea name="description" style={{ "width": "100%" }} placeholder="Wystaw opinię wykonawcy" onChange={onHandleChange}></textarea>
+          </div>
+
+          <Button>Zapisz</Button>
         </ReviewForm>
-      )} */}
+      )}
     </Wrapper>
   );
 };
