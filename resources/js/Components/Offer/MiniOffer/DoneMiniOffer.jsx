@@ -1,7 +1,10 @@
-import { Wrapper, Button, ImgWrapper, StyledLink, Review, Contractor } from "./MiniOffer.styles";
+import { Wrapper, Button, ImgWrapper, StyledLink, Review, ReviewForm, Contractor } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
+import { FormField } from "@/Components/FormField";
+import { Textarea } from "@/Components/Atoms/Textarea";
+import { TextField } from "@material-ui/core";
 import { useState } from "react";
 
 const formatDate = (date) => {
@@ -12,16 +15,18 @@ const formatDate = (date) => {
 
 export const DoneMiniOffer = ({
   offer,
-  buttons = {}
 }) => {
-  function handleClick() {
-    Inertia.post(route('offer.extend', offer.id));
-  }
   const timeDifference = useTimeDifference(offer.created_at);
 
   const [showReview, setShowReview] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+
   function toggleReview() {
     setShowReview(!showReview);
+  }
+
+  function toggleReviewForm() {
+    setShowReviewForm(!showReviewForm);
   }
 
   return (
@@ -59,9 +64,8 @@ export const DoneMiniOffer = ({
               </p>
             ) : (
               <p>
-                <strong>Brak oceny</strong> <Link href={'TODO'}>
-                  <Button>Oceń</Button>
-                </Link>
+                <strong>Brak oceny</strong>
+                <Button onClick={toggleReviewForm}>Oceń</Button>
               </p>
             )}
           </div>
@@ -102,6 +106,17 @@ export const DoneMiniOffer = ({
           </div>
         </Review>
       )}
+
+      {/* TODO review form */}
+      {/* {(!offer.review && showReviewForm) && (
+        <ReviewForm>
+          <Textarea
+            id="desc"
+            value=""
+            error=""
+          />
+        </ReviewForm>
+      )} */}
     </Wrapper>
   );
 };

@@ -136,6 +136,13 @@ export const Review = styled.div`
   }
 `;
 
+export const ReviewForm = styled.form`
+  width: 100%;
+  margin: 2rem 10% 0 10%;  
+  display: flex;
+  flex-direction: row;
+`;
+
 export const Contractor = styled.div`
   display: flex;
   flex-direction: row;

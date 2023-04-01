@@ -110,7 +110,6 @@ export default function UserOffer({
           doneOffers.map((offer, i) => (
             <DoneMiniOffer
               offer={offer}
-              buttons={{}}
             />
           ))}
         {selectedType === "expired" &&
