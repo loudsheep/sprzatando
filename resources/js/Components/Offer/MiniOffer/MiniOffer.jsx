@@ -1,7 +1,7 @@
 import { Wrapper, Button, ImgWrapper, StyledLink, Review } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
-import { useTimeDifference } from "../../hooks/useTimeDifference";
+import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { useState } from "react";
 
 const formatDate = (date) => {

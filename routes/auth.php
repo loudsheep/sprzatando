@@ -18,6 +18,7 @@ use App\Http\Controllers\Offers\CreatedOffersController;
 use App\Http\Controllers\Offers\EditOfferController;
 use App\Http\Controllers\Offers\OfferExpirationDateController;
 use App\Http\Controllers\Offers\OfferInterestedUsersController;
+use App\Http\Controllers\Offers\ReviewOfferController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -130,6 +131,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/offer/{offer}/select/{user}', [OfferInterestedUsersController::class, 'store'])
         ->middleware('auth')
         ->name('offer.user.select');
+
+    Route::post('/offer/{offer}/review', [ReviewOfferController::class, 'review'])
+        ->middleware('auth')
+        ->name('offer.review');
 });
 
 

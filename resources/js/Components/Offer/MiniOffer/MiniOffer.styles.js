@@ -135,3 +135,43 @@ export const Review = styled.div`
     flex-direction: column;
   }
 `;
+
+export const ReviewForm = styled.form`
+  width: 100%;
+  margin: 2rem 10% 0 10%;  
+  display: flex;
+  flex-direction: row;
+
+  img {
+    height: 5rem;
+    border-radius: 50%;
+  }
+
+  .seperator {
+    padding: 0 1rem;
+    height: 100%;
+    border-right: 2px solid ${({ theme }) => theme.colors.secondaryColor};
+  }
+
+  .description {
+    width: 100%;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const Contractor = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  * {
+    margin: 0 0.5rem;
+  }
+
+  img {
+    height: 5rem;
+    border-radius: 50%;
+  }
+`;
