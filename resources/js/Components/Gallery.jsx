@@ -68,7 +68,7 @@ export const Gallery = ({ images, mainImage }) => {
   const [currentImg, setCurrentImg] = useState();
   const [prevImg, setPrevImg] = useState();
   const [nextImg, setNextImg] = useState();
-  const imgs = [...images, mainImage];
+  const imgs = [mainImage, ...images];
   const width = useWidth();
 
   const clickHandler = (e) => {

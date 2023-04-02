@@ -45,7 +45,6 @@ export const DoneMiniOffer = ({
       //   // setIsOpen(true);
       // },
     });
-    console.log(errors);
   }
 
   return (
