@@ -97,8 +97,8 @@ export const MiniOffer = ({
           </div>
 
           {/* Better??? idk */}
-          {Object.keys(buttons).map((key) => (
-            <Link href={buttons[key]}>
+          {Object.keys(buttons).map((key, i) => (
+            <Link key={i} href={buttons[key]}>
               <Button>{key}</Button>
             </Link>
           ))}

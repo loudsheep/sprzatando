@@ -35,7 +35,7 @@ export default function UserOffer({
   activeOffers,
   bannedOffers,
   doneOffers,
-  expiredOffers
+  expiredOffers,
 }) {
   const [selectedType, setSelectedType] = useState("active");
 
@@ -90,32 +90,31 @@ export default function UserOffer({
         {selectedType === "active" &&
           activeOffers.map((offer, i) => (
             <MiniOffer
+            key={i}
               offer={offer}
               isOwner={true}
-              buttons={{ 'Edytuj': route('offer.edit', offer.id) }}
+              buttons={{ Edytuj: route("offer.edit", offer.id) }}
             />
           ))}
 
         {selectedType === "banned" &&
           bannedOffers.map((offer, i) => (
-            <Offer
-              offer={offer}
-              isOwner={true}
-            />
+            <Offer key={i} offer={offer} isOwner={true} />
           ))}
 
         {selectedType === "done" &&
           doneOffers.map((offer, i) => (
-            <Offer
-              offer={offer}
-              buttons={{ 'Oceń': 'TODO' }}
-            />
+            <Offer key={i} offer={offer} buttons={{ Oceń: "TODO" }} />
           ))}
         {selectedType === "expired" &&
           expiredOffers.map((offer, i) => (
             <Offer
+            key={i}
               offer={offer}
-              buttons={{ 'Edytuj': route('offer.edit', offer.id), 'Aktywuj': route('offer.extend', offer.id) }}
+              buttons={{
+                Edytuj: route("offer.edit", offer.id),
+                Aktywuj: route("offer.extend", offer.id),
+              }}
             />
           ))}
       </Wrapper>
