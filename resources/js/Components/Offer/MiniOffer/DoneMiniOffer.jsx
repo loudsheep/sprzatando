@@ -1,22 +1,20 @@
-import { Wrapper, Button, ImgWrapper, StyledLink, Review, ReviewForm, Contractor } from "./MiniOffer.styles";
-import { Link } from "@inertiajs/react";
-import { Head, useForm } from "@inertiajs/react";
-import { Inertia } from "@inertiajs/inertia";
+import {
+  Wrapper,
+  Button,
+  ImgWrapper,
+  StyledLink,
+  Review,
+  ReviewForm,
+  Contractor,
+} from "./MiniOffer.styles";
+import ReactStars from "react-rating-stars-component";
+import { useForm } from "@inertiajs/react";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { FormField } from "@/Components/FormField";
 import { Textarea } from "@/Components/Atoms/Textarea";
-import { TextField } from "@material-ui/core";
 import { useState } from "react";
 
-const formatDate = (date) => {
-  let d = new Date(date);
-
-  return d.toLocaleDateString();
-};
-
-export const DoneMiniOffer = ({
-  offer,
-}) => {
+export const DoneMiniOffer = ({ offer }) => {
   const timeDifference = useTimeDifference(offer.created_at);
 
   const [showReview, setShowReview] = useState(false);
@@ -31,29 +29,33 @@ export const DoneMiniOffer = ({
   }
 
   const { data, setData, post, errors } = useForm();
+
   const onHandleChange = (event) => {
     setData(event.target.name, event.target.value);
   };
 
+  const handleRatingChange = (rate) => {
+    setData("rating", rate);
+    console.log(data);
+  };
+
   function submitReview(e) {
     e.preventDefault();
+    console.log(errors);
     post(route("offer.review", offer.id), {
-      // preserveScroll: true,
-      // onSuccess: () => {
-      //   // setData(initialState);
-      //   // handleCheckboxReset();
-      //   // setIsOpen(true);
-      // },
+      preserveScroll: true,
+      onSuccess: () => {
+        console.log(data);
+      },
     });
   }
 
   return (
     <Wrapper>
-      <Link href={route('offer.details', offer.id)}>
-        <ImgWrapper>
-          <img src={offer.main_image} loading="lazy" alt="house photo" />
-        </ImgWrapper>
-      </Link>
+      <ImgWrapper>
+        <img src={offer.main_image} loading="lazy" alt="house photo" />
+      </ImgWrapper>
+
       <div className="info-wrapper">
         <div
           style={{
@@ -62,7 +64,7 @@ export const DoneMiniOffer = ({
             alignItems: "center",
           }}
         >
-          <StyledLink href={route('offer.details', offer.id)}>{offer.title}</StyledLink>
+          <StyledLink href="#">{offer.title}</StyledLink>
           <p>{timeDifference}</p>
         </div>
 
@@ -77,7 +79,7 @@ export const DoneMiniOffer = ({
 
           <div>
             {offer.review ? (
-              <p className='rating' onClick={toggleReview}>
+              <p className="rating" onClick={toggleReview}>
                 <strong>Ocena:</strong> {offer.review.rating} / 5
               </p>
             ) : (
@@ -89,7 +91,6 @@ export const DoneMiniOffer = ({
           </div>
         </div>
 
-
         <div className="container">
           <div className="span">
             <span>{offer.price} zł</span>
@@ -97,14 +98,10 @@ export const DoneMiniOffer = ({
 
           <Contractor>
             <p>
-              <strong>
-                Wykonał:
-              </strong>
+              <strong>Wykonał:</strong>
             </p>
             <img src={offer.contractor.profile_img} alt="" />
-            <p>
-              {offer.contractor.name}
-            </p>
+            <p>{offer.contractor.name}</p>
           </Contractor>
         </div>
       </div>
@@ -117,7 +114,8 @@ export const DoneMiniOffer = ({
 
           <div className="description">
             <b>
-              {offer.creator.name} - <span style={{ color: '#ffda09' }}>{offer.review.rating} ★</span>
+              {offer.creator.name} -{" "}
+              <span style={{ color: "#ffda09" }}>{offer.review.rating} ★</span>
             </b>
 
             {offer.review.description}
@@ -126,17 +124,32 @@ export const DoneMiniOffer = ({
       )}
 
       {/* TODO review form */}
-      {(!offer.review && showReviewForm) && (
+      {!offer.review && showReviewForm && (
         <ReviewForm onSubmit={submitReview}>
-          <img src={offer.creator.profile_img} alt="" />
+          <img src={offer.creator.profile_img} alt="profile img" />
           <div className="seperator"></div>
 
           <div className="description">
-            <input type="number" name="rating" value={data.rating} placeholder="Ocena (1 do 5)" min={1} max={5} style={{ width: "50%" }} onChange={onHandleChange}/>
-            <textarea name="description" style={{ "width": "100%" }} placeholder="Wystaw opinię wykonawcy" onChange={onHandleChange}></textarea>
+            <ReactStars
+              count={5}
+              name="rating"
+              onChange={handleRatingChange}
+              size={45}
+              activeColor="#7F39F9"
+              emptyIcon={<i className="far fa-star"></i>}
+              halfIcon={<i className="fa fa-star-half-alt"></i>}
+              fullIcon={<i className="fa fa-star"></i>}
+            />
+            <Textarea
+              id="desc"
+              name="description"
+              value={data.description ?? ""}
+              error={errors.description}
+              handleChange={onHandleChange}
+              height={"15rem"}
+            />
+            <Button style={{ height: "40px", margin: "10px 0" }}>Zapisz</Button>
           </div>
-
-          <Button>Zapisz</Button>
         </ReviewForm>
       )}
     </Wrapper>

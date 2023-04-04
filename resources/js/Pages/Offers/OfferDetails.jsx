@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navbar } from "../../Components/Navigations/Navbar";
-import { Head, Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import {
   Wrapper,
   StyledTitle,
@@ -10,7 +10,7 @@ import {
 import { Gallery } from "@/Components/Gallery";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { router } from "@inertiajs/react";
-import { ErrorButton } from "@/Components/Atoms/ErrorButton";
+import Button from "@/Components/Atoms/Button";
 import { SuccesReported } from "@/Components/InfoModal";
 import backIconPath from "@/assets/img/backIcon.png";
 
@@ -28,19 +28,19 @@ export default function OfferDetails({
   const handleInterestedButtons = (e) => {
     e.preventDefault();
 
-    router.post(route('offer.follow', offer.id))
+    router.post(route("offer.follow", offer.id));
   };
 
   const handleBanOffer = (e) => {
     e.preventDefault();
 
-    router.post(route('offer.ban', offer.id));
+    router.post(route("offer.ban", offer.id));
   };
 
   const handleReportOffer = (e) => {
     e.preventDefault();
     router.post(
-      route('offer.report', offer.id),
+      route("offer.report", offer.id),
       {},
       {
         onSuccess: () => {
@@ -95,11 +95,13 @@ export default function OfferDetails({
           {isAdmin && (
             <>
               {isBanned ? (
-                <PrimaryButton color={"green"} onClick={handleBanOffer}>
-                  ODBANUJ OFERTĘ
-                </PrimaryButton>
+                <Button
+                  onClick={handleBanOffer}
+                  style={{ backgroundColor: "blue" }}
+                  text="ODBANUJ"
+                />
               ) : (
-                <ErrorButton onClick={handleBanOffer} text="BANUJ" />
+                <Button onClick={handleBanOffer} text="BANUJ" color={"error"} />
               )}
             </>
           )}

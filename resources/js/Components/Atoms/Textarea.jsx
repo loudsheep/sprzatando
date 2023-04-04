@@ -25,7 +25,7 @@ const ErrorMessage = styled.span`
 
 const TextArea = styled.textarea`
   width: 100%;
-  height: 35rem;
+  height: ${({ height }) => (height ? height : "35rem")};
   border: 1px solid ${({ theme }) => theme.colors.grey};
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   border-radius: 15px;
@@ -39,7 +39,7 @@ const MessageLength = styled.span`
   font-size: 1.4rem;
 `;
 
-export const Textarea = ({ handleChange, id, error, value, name }) => {
+export const Textarea = ({ handleChange, id, error, value, name, height }) => {
   return (
     <Wrapper>
       <div className="info-wrapper">
@@ -56,6 +56,7 @@ export const Textarea = ({ handleChange, id, error, value, name }) => {
         onChange={handleChange}
         value={value}
         name={null || name}
+        height={height}
       />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Wrapper>

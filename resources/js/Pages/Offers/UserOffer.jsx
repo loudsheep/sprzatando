@@ -106,7 +106,7 @@ export default function UserOffer({
 
         {selectedType === "done" &&
           doneOffers.map((offer, i) => (
-            <Offer key={i} offer={offer} buttons={{ Oceń: "TODO" }} />
+            <DoneMiniOffer key={i} offer={offer} buttons={{ Oceń: "TODO" }} />
           ))}
         {selectedType === "expired" &&
           expiredOffers.map((offer, i) => (
