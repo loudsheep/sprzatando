@@ -1,4 +1,4 @@
-import { MiniOffer } from "@/Components/Offer/MiniOffer";
+import { MiniOffer } from "@/Components/Offer/MiniOffer/MiniOffer";
 import { Head } from "@inertiajs/react";
 import styled from "styled-components";
 
