@@ -9,6 +9,7 @@ import {
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
+import { ErrorButton } from "@/Components/Atoms/ErrorButton";
 import { router } from "@inertiajs/react";
 import Button from "@/Components/Atoms/Button";
 import { SuccesReported } from "@/Components/InfoModal";
