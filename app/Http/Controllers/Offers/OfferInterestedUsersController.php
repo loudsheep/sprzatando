@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Offers;
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class OfferInterestedUsersController extends Controller
@@ -48,8 +47,6 @@ class OfferInterestedUsersController extends Controller
         $offer->is_done = true;
         $offer->save();
 
-        // TODO change to back()
-        dd($offer, $user);
-        // return back();
+        return redirect()->route('offers.created')->with('tab', 'done');
     }
 }

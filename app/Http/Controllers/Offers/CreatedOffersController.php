@@ -11,7 +11,7 @@ use Inertia\Inertia;
 
 class CreatedOffersController extends Controller
 {
-    public function showCreated(Request $request)
+    public function show(Request $request)
     {
         $activeOffers = $request->user()->createdOffers()->with('creator')->withCount('usersInterested')
             ->where('is_banned', '=', false)

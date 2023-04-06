@@ -85,17 +85,13 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'verified'])
         ->name('offer.store');
 
-    Route::get('user-offer', [CreatedOffersController::class, 'showCreated'])
+    Route::get('user-offer', [CreatedOffersController::class, 'show'])
         ->middleware('auth')
         ->name('offers.created');
 
     Route::get('offer-interested', [FollowOfferController::class, 'show'])
         ->middleware('auth')
         ->name('offers.interested');
-
-    Route::get('offer-done', [CreatedOffersController::class, 'showDone'])
-        ->middleware('auth')
-        ->name('offers.done');
 
     Route::post('follow-offer/{offer}', [FollowOfferController::class, 'store'])
         ->middleware('auth')

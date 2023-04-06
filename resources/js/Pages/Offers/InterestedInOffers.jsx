@@ -72,6 +72,7 @@ export default function UserOffer({
         {selectedType === "interested" &&
           interestedInOffers.map((offer, i) => (
             <Offer
+              key={i}
               offer={offer}
               buttons={{ 'Rezygnuj': route('offer.follow', offer.id) }}
             />
@@ -80,6 +81,7 @@ export default function UserOffer({
         {selectedType === "done" &&
           doneOffers.map((offer, i) => (
             <MiniOffer
+              key={i}
               offer={offer}
               review={offer.review}
             />

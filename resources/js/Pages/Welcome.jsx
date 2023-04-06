@@ -102,6 +102,7 @@ export default function Welcome({
           <OfferWrapper>
             {currentOffers.map((offer, i) => (
               <Offer
+                key={i}
                 offer={offer}
                 buttons={{ 'Aplikuj': route('offer.details', offer.id) }}
               />
