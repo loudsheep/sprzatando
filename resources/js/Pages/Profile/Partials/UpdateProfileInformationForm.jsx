@@ -6,7 +6,10 @@ import EditProfile from "../EditProfileSection";
 
 const BottomBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  p {
+    margin-left: 5rem;
+  }
 `;
 
 export default function UpdateProfileInformation({
@@ -28,7 +31,7 @@ export default function UpdateProfileInformation({
     <EditProfile
       form={form}
       formFields={[
-        { id: "name", label: "Name", type: "text", required: true, ref: false },
+        { id: "name", label: "Nazwa użytkownika", type: "text", required: true, ref: false },
         {
           id: "email",
           label: "Email",
@@ -38,28 +41,28 @@ export default function UpdateProfileInformation({
         },
       ]}
       headerTexts={{
-        title: "Profile Information",
-        desc: "Update your account's profile information and email address.",
+        title: "Informacje o profilu",
+        desc: "Zmień swoją nazwę użytkownika lub swój adres email.",
       }}
       submit={submit}
     >
-      {mustVerifyEmail && user.email_verified_at === null && (
+      {(mustVerifyEmail && user.email_verified_at === null) && (
         <div>
-          <p className="text-sm mt-2 text-gray-800">
-            Your email address is unverified.
+          <p className="text-lg mt-2 text-gray-800">
+            Twój email jest nie zweryfikowany.
             <Link
               href={route("verification.send")}
               method="post"
               as="button"
-              className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="underline text-lg text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Click here to re-send the verification email.
+              Kliknij aby wysłać ponownie link weryfikacjyny.
             </Link>
           </p>
 
           {status === "verification-link-sent" && (
-            <div className="mt-2 font-medium text-sm text-green-600">
-              A new verification link has been sent to your email address.
+            <div className="mt-2 font-medium text-xl text-green-600">
+              Nowy link weryfikacyjny został wysłany na podany adres email.
             </div>
           )}
         </div>
@@ -70,7 +73,7 @@ export default function UpdateProfileInformation({
           processing={form.processing}
           styling={{ margin: "15px 15px 15px 0" }}
         >
-          Save
+          Zapisz
         </PrimaryButton>
 
         <Transition
@@ -79,7 +82,7 @@ export default function UpdateProfileInformation({
           leaveTo="opacity-0"
           className="transition ease-in-out"
         >
-          <p className="text-sm text-gray-600">Saved.</p>
+          <p className="text-xxl text-gray-600">Zapisano.</p>
         </Transition>
       </BottomBox>
     </EditProfile>

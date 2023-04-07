@@ -80,7 +80,7 @@ export default function UpdatePasswordForm({ className }) {
           leaveTo="opacity-0"
           className="transition ease-in-out"
         >
-          <p className="text-sm text-gray-600">Saved.</p>
+          <p className="text-xxl text-gray-600">Zapisano.</p>
         </Transition>
       </div>
     </EditProfile>
