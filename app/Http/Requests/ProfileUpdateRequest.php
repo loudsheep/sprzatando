@@ -30,14 +30,14 @@ class ProfileUpdateRequest extends FormRequest
     {
         // TODO: change to proper messages
         return [
-            'name.string' => 'error1',
-            'name.required' => 'error8',
-            'name.max' => 'error2',
-            'name.unique' => 'Name shall be unique',
-            'email.email' => 'error4',
-            'email.max' => 'error5',
-            'email.unique' => 'Email must be unique',
-            'email.ascii' => 'error7'
+            'name.string' => 'Niedozwolone znaki',
+            'name.required' => 'Nazwa wymagana',
+            'name.max' => 'Przekroczono ilość znaków',
+            'name.unique' => 'Nazwa jest już używana',
+            'email.email' => 'Zły format email',
+            'email.max' => 'Za duża ilość znaków',
+            'email.unique' => 'Email jest już używany',
+            'email.ascii' => 'Niedozwolone znaki specjalne',
         ];
     }
 }

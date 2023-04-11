@@ -44,12 +44,18 @@ class CreateOfferRequest extends FormRequest
     {
         return [
             'price.numeric' => 'Cena musi być liczbą',
+            'title.required'=> 'Opis wymagany',
+            'title.min'=> 'Minimum 2 znaki',
+            'title.max'=> 'Maksymalnie 100 znaków',
+            'title.string'=> 'Niedozwolone znaki',
             'description.required' => 'Opis wymagany',
             'description.min' => 'Minimum 50 znaków',
-            'selectedDate.after_or_equal' => 'Data przynajmniej na jutro ',
+            'description.max' => 'Maksymalnie 500 znaków',
+            'selectedDate.after_or_equal' => 'Data musi być ustawiona przynajmniej na jutro ',
             'photos.*.image' => 'Zły format pliku',
-            'photos.*.mimes' => 'Image format must be peg,png,bmp,gif',
-            'photos.*.size' => 'Image above 5MB',
+            'photos.*.mimes' => 'Wymagany format pliku: peg,png,bmp,gif',
+            'photos.*.size' => 'Plik nie może przekraczać 5MB',
+            'photos.max' => 'Ilość zdjęć nie może przekraczać 5',
             // TODO: add more error messages in polish
         ];
     }

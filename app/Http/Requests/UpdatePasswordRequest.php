@@ -29,7 +29,7 @@ class UpdatePasswordRequest extends FormRequest
     {
         // TODO: change to proper messages, and more
         return [
-            'password.required' => 'required',
+            'password.required' => 'Hasło wymagane',
         ];
     }
 }
