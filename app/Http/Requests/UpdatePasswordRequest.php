@@ -30,6 +30,9 @@ class UpdatePasswordRequest extends FormRequest
         // TODO: change to proper messages, and more
         return [
             'password.required' => 'Hasło wymagane',
+            'current_password.required' => 'Podaj aktualne hasło',
+            'current_password.current_password' => 'Nieprawidłowe hasło',
+            'password.confirmed' => 'Potwierdzenie hasła się nie zgadza',
         ];
     }
 }

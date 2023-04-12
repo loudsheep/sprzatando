@@ -43,20 +43,30 @@ class CreateOfferRequest extends FormRequest
     public function messages()
     {
         return [
-            'price.numeric' => 'Cena musi być liczbą',
-            'title.required'=> 'Opis wymagany',
-            'title.min'=> 'Minimum 2 znaki',
-            'title.max'=> 'Maksymalnie 100 znaków',
-            'title.string'=> 'Niedozwolone znaki',
+            'title.required' => 'Tytuł wymagany',
+            'title.min' => 'Minimum :min znaki',
+            'title.max' => 'Maksymalnie :max znaków',
+            'title.string' => 'Niedozwolone znaki',
+            'description.string' => 'Niedozwolone znaki',
             'description.required' => 'Opis wymagany',
-            'description.min' => 'Minimum 50 znaków',
-            'description.max' => 'Maksymalnie 500 znaków',
-            'selectedDate.after_or_equal' => 'Data musi być ustawiona przynajmniej na jutro ',
+            'description.min' => 'Minimum :min znaków',
+            'description.max' => 'Maksymalnie :max znaków',
+            'selectedDate.after_or_equal' => 'Data musi być ustawiona przynajmniej na jutro',
+            'selectedDate.date' => 'Zły format daty',
+            'city.required' => 'Miasto jest wymagane',
+            'city.min' => 'Minimum :min znaki',
+            'city.max' => 'Maksymalnie :max znaków',
+            'city.string' => 'Niedozwolone znaki',
+            'price.numeric' => 'Cena musi być liczbą',
+            'price.min' => 'Cena musi być conajmniej :min',
+            'price.max' => 'Cena nie może być większa niż :max',
             'photos.*.image' => 'Zły format pliku',
-            'photos.*.mimes' => 'Wymagany format pliku: peg,png,bmp,gif',
-            'photos.*.size' => 'Plik nie może przekraczać 5MB',
-            'photos.max' => 'Ilość zdjęć nie może przekraczać 5',
-            // TODO: add more error messages in polish
+            'photos.*.mimes' => 'Wymagany format pliku: jpeg, png, bmp, gif',
+            'photos.*.max' => 'Plik nie może przekraczać 5MB',
+            'photos.max' => 'Ilość zdjęć nie może przekraczać :max',
+            'categories.required' => 'Conajmniej jedna kategoria jest wymagana',
+            'categories.min' => 'Conajmniej jedna kategoria jest wymagana',
+            'categories.array' => 'Categorie muszą być w formie tablicy',
         ];
     }
 }

@@ -48,7 +48,7 @@ class AuthenticatedSessionController extends Controller
                     $request->session()->regenerateToken();
 
                     return back()->withErrors([
-                        'email' => 'Your account has been suspended.',
+                        'email' => 'Twoje konto zostało zawieszone.',
                     ])->onlyInput('email');
                 }
 
@@ -62,7 +62,7 @@ class AuthenticatedSessionController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Podane dane logowania są niepoprawne.',
         ])->onlyInput('email');
     }
 
