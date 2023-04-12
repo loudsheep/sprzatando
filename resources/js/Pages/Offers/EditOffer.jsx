@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Head, useForm } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import {
   StyledTitle,
@@ -122,6 +123,7 @@ const EditOffer = ({ offer, images, auth }) => {
                 className="input"
                 label={"Tytuł ogłoszenia"}
                 value={data.title}
+                errorMessage={errors.title}
                 handleChange={valueHandler}
                 id="title"
                 type="text"
@@ -131,6 +133,7 @@ const EditOffer = ({ offer, images, auth }) => {
                 className="input"
                 label={"Miasto"}
                 value={data.city}
+                errorMessage={errors.city}
                 handleChange={valueHandler}
                 id="city"
                 type="text"
@@ -142,6 +145,7 @@ const EditOffer = ({ offer, images, auth }) => {
                 className="input"
                 label={"Cena"}
                 value={data.price}
+                errorMessage={errors.price}
                 handleChange={valueHandler}
                 id="price"
                 type="number"
@@ -153,6 +157,7 @@ const EditOffer = ({ offer, images, auth }) => {
             id="desc"
             handleChange={valueHandler}
             value={data.description}
+            error={errors.description}
             name="description"
           />
           <OfferImages
@@ -166,11 +171,14 @@ const EditOffer = ({ offer, images, auth }) => {
           <SelectCategory
             handleCheckboxChange={checkedCheckboxHandler}
             checked={data.categories}
+            error={errors.categories}
           />
 
           <div>
-            <PrimaryButton color={"red"} onClick={() => window.history.back()}>
-              Anuluj
+            <PrimaryButton color={"red"} onClick={(e) => e.preventDefault()}>
+              <Link href={route('offer.edit', offer.id)}>
+                Anuluj
+              </Link>
             </PrimaryButton>
             <PrimaryButton type="submit">Zapisz Zmiany</PrimaryButton>
           </div>

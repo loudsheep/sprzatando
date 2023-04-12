@@ -60,7 +60,7 @@ class UpdateOfferRequest extends FormRequest
             'selectedDate.after_or_equal' => 'Data musi być ustawiona przynajmniej na jutro',
             'photos.*.image' => 'Zły format pliku',
             'photos.*.mimes' => 'Wymagany format pliku: jpeg,png,bmp,gif',
-            'photos.*.size' => 'Plik nie może przekraczać 5MB',
+            'photos.*.max' => 'Plik nie może przekraczać 5MB',
             'photos.max' => 'Ilość zdjęć nie może przekraczać :max',
             'categories.required' => 'Conajmniej jedna kategoria jest wymagana',
             'categories.min' => 'Conajmniej jedna kategoria jest wymagana',
