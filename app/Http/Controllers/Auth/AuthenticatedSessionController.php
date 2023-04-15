@@ -31,39 +31,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $request->authenticate();
 
-        $credentials = $request->validate([
-            'email' => ['required', 'email', 'string'],
-            'password' => ['required', 'string'],
-        ]);
+        $request->session()->regenerate();
 
-        if (Auth::attempt($credentials)) {
-            // credentials are correct, check for ban
-            $user = Auth::user();
-            if ($user->ban_ending !== null) {
-                if ($user->ban_ending >= now()) {
-                    
-                    Auth::guard('web')->logout();
-                    $request->session()->invalidate();
-                    $request->session()->regenerateToken();
-
-                    return back()->withErrors([
-                        'email' => 'Twoje konto zostało zawieszone.',
-                    ])->onlyInput('email');
-                }
-
-                $user->ban_ending = null;
-                $user->save();
-            }
-
-            $request->session()->regenerate();
-
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
-
-        return back()->withErrors([
-            'email' => 'Podane dane logowania są niepoprawne.',
-        ])->onlyInput('email');
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

@@ -28,7 +28,6 @@ class ProfileUpdateRequest extends FormRequest
      */
     public function messages()
     {
-        // TODO: change to proper messages
         return [
             'name.string' => 'Niedozwolone znaki',
             'name.required' => 'Nazwa wymagana',

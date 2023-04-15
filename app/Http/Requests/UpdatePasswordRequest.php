@@ -27,7 +27,6 @@ class UpdatePasswordRequest extends FormRequest
      */
     public function messages()
     {
-        // TODO: change to proper messages, and more
         return [
             'password.required' => 'Hasło wymagane',
             'current_password.required' => 'Podaj aktualne hasło',
