@@ -44,8 +44,10 @@ export default function DeleteUserForm({ className }) {
   };
 
   return (
-    <EditProfile form={false} formFields={false} headerTexts={{ title: "Delete Account",
-        desc: " Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.",}}>
+    <EditProfile form={false} formFields={false} headerTexts={{
+      title: "Usuń konto",
+      desc: "Po usunięciu Twojego konta wszystkie jego zasoby i dane zostaną trwale usunięte. Przed usunięciem konta, pobierz wszelkie dane lub informacje, które chcesz zachować.",
+    }}>
       {/* <section className={`space-y-6 ${className}`}>
         <header>
           <h2 className="text-lg font-medium text-gray-900">Delete Account</h2>
@@ -57,15 +59,15 @@ export default function DeleteUserForm({ className }) {
           </p>
         </header> */}
 
-        <DangerButton onClick={confirmUserDeletion}>
-          Delete Account
-        </DangerButton>
+      <DangerButton onClick={confirmUserDeletion}>
+        Usuń konto
+      </DangerButton>
 
-        {
-          // <-------- ToDo -------->
-        }
+      {
+        // <-------- ToDo -------->
+      }
 
-        {/* <Modal show={confirmingUserDeletion} onClose={closeModal}>
+      {/* <Modal show={confirmingUserDeletion} onClose={closeModal}>
         <form onSubmit={deleteUser} className="p-6">
           <h2 className="text-lg font-medium text-gray-900">
             Are you sure you want to delete your account?

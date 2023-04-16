@@ -33,16 +33,8 @@ export default function Dashboard({ offers }) {
 
                 {offers.map((offer, i) => (
                     <MiniOffer
-                        id={offer.id}
-                        title={offer.title}
-                        description={offer.description}
-                        price={offer.price}
-                        image={offer.main_image}
-                        owner={offer.creator.name}
-                        category={offer.category}
-                        ends={offer.ends}
-                        city={offer.city}
-                        createdAt={offer.created_at}
+                        offer={offer}
+                        isOwner={false}
                         key={i}
                     />
                 ))}

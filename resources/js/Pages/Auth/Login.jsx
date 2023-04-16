@@ -10,7 +10,7 @@ export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     email: "",
     password: "",
-    remember: "",
+    remember: true,
   });
 
   useEffect(() => {
@@ -73,6 +73,7 @@ export default function Login({ status, canResetPassword }) {
               name="remember"
               value={data.remember}
               handleChange={onHandleChange}
+              isChecked={true}
             />
             <span style={{color: 'grey', fontSize: '13px', marginLeft: '6px'}}>Pamiętaj mnie</span>
           </label>

@@ -38,4 +38,6 @@ Route::get('/offer/{offer}', [OfferDetailsController::class, 'show'])->name('off
 Route::get('/ranking', [RankingController::class, 'show'])->name('ranking');
 
 
+require __DIR__ . '/admin.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/offers.php';

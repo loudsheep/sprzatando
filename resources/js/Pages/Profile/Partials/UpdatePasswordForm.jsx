@@ -40,29 +40,29 @@ export default function UpdatePasswordForm({ className }) {
       formFields={[
         {
           id: "current_password",
-          label: "Current Password",
+          label: "Aktualne hasło",
           required: true,
           ref: passwordInput,
           type: "password",
         },
         {
           id: "password",
-          label: "New Password",
+          label: "Nowe hasło",
           required: true,
           ref: currentPasswordInput,
           type: "password",
         },
         {
           id: "password_confirmation",
-          label: "Confirm Password",
+          label: "Potwierdź nowe hasło",
           required: true,
           ref: false,
           type: "password",
         },
       ]}
       headerTexts={{
-        title: "Update Password",
-        desc: "Ensure your account is using a long, random password to stay secure.",
+        title: "Zmień Swoje Hasło",
+        desc: "Upewnij się, że Twoje konto używa długiego, losowego hasła, aby pozostać bezpiecznym.",
       }}
       submit={updatePassword}
     >
@@ -71,7 +71,7 @@ export default function UpdatePasswordForm({ className }) {
           processing={form.processing}
           styling={{ margin: "15px 15px 15px 0" }}
         >
-          Save
+          Zapisz
         </PrimaryButton>
 
         <Transition
