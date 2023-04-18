@@ -12,9 +12,9 @@ class AdminReportedController extends Controller
     public function show()
     {
         $offers = Offer::with('creator')
-            ->where('is_reported', '=', true)
+            ->where('reported', '=', 'reported')
             ->where('is_banned', '=', false)
-            ->where('is_done', '=', false)
+            ->where('done_at', '=', null)
             ->get();
 
         return Inertia::render('Admin/Reported', [

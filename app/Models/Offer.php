@@ -23,6 +23,7 @@ class Offer extends Model
         'description',
         'ends',
         'main_image',
+        'reported',
     ];
 
     /**
@@ -31,8 +32,8 @@ class Offer extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'is_done',
-        'is_reported',
+        'done_at',
+        'reported',
         'is_banned',
     ];
 
@@ -68,8 +69,8 @@ class Offer extends Model
     {
         return Offer::with('creator')
             ->orderBy('created_at', 'desc')
-            ->where('is_done', '==', 'false')
-            ->where('is_banned', '==', 'false')
+            ->where('done_at', '=', null)
+            ->where('is_banned', '=', 'false')
             ->where('ends', '>=', today())
             ->has('creator');
     }

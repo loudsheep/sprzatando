@@ -21,7 +21,7 @@ class FollowOfferController extends Controller
     public function show(Request $request)
     {
         $interestedInOffers = $request->user()->interestedInOffers()->with('creator')
-            ->where('is_done', '=', false)
+            ->where('done_at', '=', null)
             // ->where()
             ->get()->toArray();
 

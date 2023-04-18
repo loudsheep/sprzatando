@@ -19,11 +19,11 @@ class BanOfferController extends Controller
     }
 
     public function report(Request $request, Offer $offer) {
-        if($offer->is_reported) {
+        if($offer->reported == 'reported' || $offer->reported == 'checked') {
             return back();
         }
 
-        $offer->is_reported = true;
+        $offer->reported = 'reported';
         $offer->save();
 
         return back();

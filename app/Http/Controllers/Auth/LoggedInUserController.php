@@ -17,7 +17,7 @@ class LoggedInUserController extends Controller
     public function show(Request $request)
     {
         $cities = Offer::select('city')->distinct()
-            ->where('is_done', '==', 'false')
+            ->where('done_at', '=', 'null')
             ->where('is_banned', '==', 'false')
             ->where('creator_id', '!=', $request->user()->id ?? 0)
             ->get()->toArray();

@@ -15,7 +15,7 @@ class CreatedOffersController extends Controller
     {
         $activeOffers = $request->user()->createdOffers()->with('creator')->withCount('usersInterested')
             ->where('is_banned', '=', false)
-            ->where('is_done', '=', false)
+            ->where('done_at', '=', null)
             ->where('ends', '>=', today())
             ->orderBy('created_at', 'desc')->get()->toArray();
 
@@ -24,13 +24,13 @@ class CreatedOffersController extends Controller
             ->orderBy('created_at', 'desc')->get()->toArray();
 
         $doneOffers = $request->user()->createdOffers()->with(['creator', 'contractor', 'review'])
-            ->where('is_done', '=', true)
+            ->where('done_at', '<>', null)
             ->where('is_banned', '=', false)
             ->orderBy('created_at', 'desc')->get()->toArray();
 
         $expiredOffers = $request->user()->createdOffers()->with('creator')
             ->where('is_banned', '=', false)
-            ->where('is_done', '=', false)
+            ->where('done_at', '=', null)
             ->where('ends', '<', today())
             ->orderBy('created_at', 'desc')->get()->toArray();
 

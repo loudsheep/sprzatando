@@ -13,7 +13,7 @@ class OfferInterestedUsersController extends Controller
     {
         $this->authorize('update', $offer);
 
-        if ($offer->is_done) {
+        if ($offer->done_at !== null) {
             abort(404);
         }
 
@@ -38,13 +38,13 @@ class OfferInterestedUsersController extends Controller
 
         if (
             !$offer->usersInterested->contains($user)
-            || $offer->is_done || $offer->is_banned
+            || $offer->done_at !== null || $offer->is_banned
         ) {
             abort(403);
         }
 
         $offer->contractor()->associate($user);
-        $offer->is_done = true;
+        $offer->done_at = now();
         $offer->save();
 
         return redirect()->route('offers.created')->with('tab', 'done');

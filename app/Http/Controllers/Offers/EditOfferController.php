@@ -55,6 +55,8 @@ class EditOfferController extends Controller
             }
         }
 
+        $validated["reported"] = $offer->reported == "reported" ? "reported" : "not_reported";
+
         $offer->update($validated);
         if (count($additionalPhotos) > 0) {
             $offer->images()->delete();
