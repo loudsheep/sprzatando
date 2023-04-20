@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -21,7 +22,11 @@ class EmailVerificationNotificationController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        $request->user()->sendEmailVerificationNotification($request->ip());
+        try {
+            $request->user()->sendEmailVerificationNotification($request->ip());
+        } catch (Exception $e) {
+            return back()->with('status', 'error');
+        }
 
         return back()->with('status', 'verification-link-sent');
     }

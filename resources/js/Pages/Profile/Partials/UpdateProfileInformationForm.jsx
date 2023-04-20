@@ -65,6 +65,12 @@ export default function UpdateProfileInformation({
               Nowy link weryfikacyjny został wysłany na podany adres email.
             </div>
           )}
+
+          {status === "error" && (
+            <div className="mt-2 font-medium text-xl text-red-600">
+              Wystąpił błąd podczas wysyłania wiadomości email. Spróbuj ponownie później.
+            </div>
+          )}
         </div>
       )}
 

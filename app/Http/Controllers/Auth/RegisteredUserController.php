@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,7 +49,10 @@ class RegisteredUserController extends Controller
         ]);
 
         // send email verification when register
-        $user->sendEmailVerificationNotification($request->ip());
+        try {
+            $user->sendEmailVerificationNotification($request->ip());
+        } catch (Exception $e) {
+        }
 
         event(new Registered($user));
 
