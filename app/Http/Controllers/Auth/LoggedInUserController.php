@@ -36,9 +36,9 @@ class LoggedInUserController extends Controller
         $offers = $offers->get()->toArray();
 
         // categories
-        for ($i = 0; $i < count($offers); $i++) {
-            $offers[$i]["category"] = str_replace(";", ", ", $offers[$i]["category"]);
-        }
+        // for ($i = 0; $i < count($offers); $i++) {
+        //     $offers[$i]["category"] = str_replace(";", ", ", $offers[$i]["category"]);
+        // }
 
         $categories = Offer::select('category')->get()->toArray();
         $cat = [];

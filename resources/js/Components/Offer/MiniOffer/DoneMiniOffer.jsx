@@ -69,7 +69,7 @@ export const DoneMiniOffer = ({ offer }) => {
         </div>
 
         <p>
-          <strong>Kategorie:</strong> {offer.category.replace(";", ", ")}
+          <strong>Kategorie:</strong> {offer.category.replaceAll(";", ", ")}
         </p>
 
         <div className="container">

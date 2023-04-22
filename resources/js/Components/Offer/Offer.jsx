@@ -42,7 +42,7 @@ export const Offer = ({
             : offer.description}
         </p>
         <p>
-          <strong>Kategorie:</strong> {offer.category}
+          <strong>Kategorie:</strong> {offer.category.replaceAll(";", ", ")}
         </p>
         <p>
           <strong>Miasto:</strong> {offer.city}

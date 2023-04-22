@@ -47,7 +47,7 @@ export const MiniOffer = ({
         </div>
 
         <p>
-          <strong>Kategorie:</strong> {offer.category.replace(";", ", ")}
+          <strong>Kategorie:</strong> {offer.category.replaceAll(";", ", ")}
         </p>
 
         {isOwner ? (
