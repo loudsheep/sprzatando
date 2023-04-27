@@ -53,7 +53,6 @@ class AddOfferController extends Controller
 
         $offer = $request->user()->createdOffers()->create([
             'title' => $validatedData["title"],
-            'zip_code' => '124231',
             'city' => $validatedData["city"],
             'price' => $validatedData["price"],
             'description' => $validatedData["description"],

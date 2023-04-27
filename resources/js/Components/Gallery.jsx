@@ -112,6 +112,8 @@ export const Gallery = ({ images, mainImage }) => {
   };
 
   const handleButtonPress = (button) => {
+    if (imgs.length == 1) return;
+
     if (button === "left") {
       setCurrentImg(prevImg);
       const currentIndex = imgs.indexOf(prevImg);

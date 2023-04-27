@@ -63,7 +63,8 @@ const EditOffer = ({ offer, images, auth }) => {
     city: offer.city,
     price: offer.price,
     categories: offer.category.split(";"),
-    photos: [offer.main_image].concat(images),
+    // photos: [offer.main_image].concat(images),
+    photos: offer.main_image == "/defaults/house.jpg" ? [] : [offer.main_image].concat(images),
   };
 
   const { data, setData, post, errors } = useForm(initialState);
