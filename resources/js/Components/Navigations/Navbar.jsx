@@ -103,7 +103,7 @@ export const Navbar = ({ auth }) => {
               <LogoWrapperDesktop src={logoPath} />
             </Link>
             <div>
-              <StyledLink href="#">Pomoc</StyledLink>
+              <StyledLink href={route("authors")}>Pomoc</StyledLink>
               <StyledLink href={route("ranking")}>Ranking</StyledLink>
               <StyledLink href={route("profile.edit")}>Twoje konto</StyledLink>
               <StyledLink
