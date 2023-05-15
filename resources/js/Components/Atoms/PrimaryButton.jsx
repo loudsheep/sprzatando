@@ -6,6 +6,7 @@ const Button = styled.button`
   padding: 10px 30px;
   border-radius: 10px;
   min-width: 130px;
+  width: ${({ styling }) => (styling ? styling.width : "auto")};
   margin: ${({ styling }) => (styling ? styling.margin : "15px")};
   background-size: 300% 100%;
   &:hover {

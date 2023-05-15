@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  padding: 1rem 2rem;
-  margin: 1.5rem;
+  padding: 1rem 3rem;
+  margin: ${({ margin }) => (margin ? margin : "15px")};
   width: ${(props) => props.width || "auto"};
   color: white;
-  font-size: 1.4rem;
-  font-weight: bold;
+  font-size: 1.6rem;
   background-color: #f14a4a;
   border-radius: 8px;
   transition: opacity 0.3s;
@@ -17,10 +16,12 @@ const StyledButton = styled.button`
 `;
 export const ErrorButton = (props) => {
   return (
-    <StyledButton onClick={props.onClick} width={props.width}>
+    <StyledButton
+      onClick={props.onClick}
+      width={props.width}
+      margin={props.margin}
+    >
       {props.text && props.text}
     </StyledButton>
   );
 };
-
-

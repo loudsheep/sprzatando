@@ -7,7 +7,7 @@ import {
   ReviewForm,
   Contractor,
 } from "./MiniOffer.styles";
-import ReactStars from "react-rating-stars-component";
+// import ReactStars from "react-rating-stars-component";
 import { useForm } from "@inertiajs/react";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { Textarea } from "@/Components/Atoms/Textarea";

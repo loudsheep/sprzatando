@@ -14,6 +14,7 @@ import { router } from "@inertiajs/react";
 import Button from "@/Components/Atoms/Button";
 import { SuccesReported } from "@/Components/InfoModal";
 import backIconPath from "@/assets/img/backIcon.png";
+import arrowLeft from "@/assets/img/arrow-left.svg";
 
 export default function OfferDetails({
   images,
@@ -57,7 +58,7 @@ export default function OfferDetails({
       <Navbar />
       <Wrapper>
         <IconWrapper onClick={() => history.back()}>
-          <img src={backIconPath} alt="back icon" />
+          <img src={arrowLeft} alt="back icon" />
         </IconWrapper>
         <SuccesReported
           isVisible={isVisible}
@@ -81,11 +82,18 @@ export default function OfferDetails({
           {!isOwner && (
             <>
               {!currentUserInterestedInOffer ? (
-                <PrimaryButton onClick={handleInterestedButtons}>
+                <PrimaryButton
+                  onClick={handleInterestedButtons}
+                  styling={{ margin: "15px 0", width: "100%" }}
+                >
                   Zgłoś się do oferty
                 </PrimaryButton>
               ) : (
-                <PrimaryButton color={"grey"} onClick={handleInterestedButtons}>
+                <PrimaryButton
+                  color={"grey"}
+                  onClick={handleInterestedButtons}
+                  styling={{ margin: "15px 0", width: "100%" }}
+                >
                   Rezygnuj
                 </PrimaryButton>
               )}
@@ -108,7 +116,12 @@ export default function OfferDetails({
           )}
 
           {!isOwner && isRegularUser && (
-            <ErrorButton onClick={handleReportOffer} text="Reportój :)" />
+            <ErrorButton
+              onClick={handleReportOffer}
+              text="Reportój :)"
+              margin={"15px 0"}
+              width={"100%"}
+            />
           )}
         </div>
       </Wrapper>
