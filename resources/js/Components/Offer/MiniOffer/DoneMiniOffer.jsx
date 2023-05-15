@@ -10,12 +10,13 @@ import {
 import ReactStars from "react-rating-stars-component";
 import { useForm } from "@inertiajs/react";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
-import { FormField } from "@/Components/FormField";
 import { Textarea } from "@/Components/Atoms/Textarea";
 import { useState } from "react";
+import { useWidth } from "@/hooks/useWidth";
 
 export const DoneMiniOffer = ({ offer }) => {
   const timeDifference = useTimeDifference(offer.created_at);
+  const width = useWidth();
 
   const [showReview, setShowReview] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -126,8 +127,12 @@ export const DoneMiniOffer = ({ offer }) => {
       {/* TODO review form */}
       {!offer.review && showReviewForm && (
         <ReviewForm onSubmit={submitReview}>
-          <img src={offer.creator.profile_img} alt="profile img" />
-          <div className="seperator"></div>
+          {width > 576 && (
+            <>
+              <img src={offer.creator.profile_img} alt="profile img" />
+              <div className="seperator"></div>
+            </>
+          )}
 
           <div className="description">
             <ReactStars

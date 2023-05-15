@@ -158,6 +158,10 @@ export const ReviewForm = styled.form`
     margin-left: 2rem;
     display: flex;
     flex-direction: column;
+    @media (max-width: 576px) {
+      margin-left: 0;
+      margin-top: 2rem;
+    }
   }
   
 `;
