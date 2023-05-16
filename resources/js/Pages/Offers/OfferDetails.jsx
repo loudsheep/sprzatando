@@ -15,7 +15,6 @@ import { ErrorButton } from "@/Components/Atoms/ErrorButton";
 import { router } from "@inertiajs/react";
 import Button from "@/Components/Atoms/Button";
 import { SuccesReported } from "@/Components/InfoModal";
-import backIconPath from "@/assets/img/backIcon.png";
 import arrowLeft from "@/assets/img/arrow-left.svg";
 
 export default function OfferDetails({
