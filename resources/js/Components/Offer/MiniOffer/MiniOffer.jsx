@@ -1,4 +1,10 @@
-import { Wrapper, Button, ImgWrapper, StyledLink, Review } from "./MiniOffer.styles";
+import {
+  Wrapper,
+  Button,
+  ImgWrapper,
+  StyledLink,
+  Review,
+} from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
@@ -15,11 +21,18 @@ export const MiniOffer = ({
   interested = 0,
   isOwner,
   review = null,
-  buttons = {}
+  buttons = {},
+  isAdminView,
 }) => {
   function handleClick() {
-    Inertia.post(route('offer.extend', offer.id));
+    Inertia.post(route("offer.extend", offer.id));
   }
+
+  const handleBanOffer = (e) => {
+    e.preventDefault();
+    Inertia.post(route("offer.ban", offer.id));
+  };
+
   const timeDifference = useTimeDifference(offer.created_at);
 
   const [showReview, setShowReview] = useState(false);
@@ -29,7 +42,7 @@ export const MiniOffer = ({
 
   return (
     <Wrapper>
-      <Link href={route('offer.details', offer.id)}>
+      <Link href={route("offer.details", offer.id)}>
         <ImgWrapper>
           <img src={offer.main_image} loading="lazy" alt="house photo" />
         </ImgWrapper>
@@ -42,7 +55,9 @@ export const MiniOffer = ({
             alignItems: "center",
           }}
         >
-          <StyledLink href={route('offer.details', offer.id)}>{offer.title}</StyledLink>
+          <StyledLink href={route("offer.details", offer.id)}>
+            {offer.title}
+          </StyledLink>
           <p>{timeDifference}</p>
         </div>
 
@@ -62,12 +77,11 @@ export const MiniOffer = ({
               </p>
 
               <p>
-                <Link href={route('offer.interested.users', offer.id)}>
+                <Link href={route("offer.interested.users", offer.id)}>
                   <strong>{interested}</strong> osób chętnych
                 </Link>
               </p>
             </div>
-
           </>
         ) : (
           <>
@@ -78,13 +92,26 @@ export const MiniOffer = ({
 
               <div>
                 {review ? (
-                  <p className='rating' onClick={toggleReview}>
+                  <p className="rating" onClick={toggleReview}>
                     <strong>Ocena:</strong> {review.rating} / 5
                   </p>
                 ) : (
                   <p>
                     <strong>Brak oceny pracy</strong>
                   </p>
+                )}
+                {isAdminView && (
+                  <>
+                    <Button
+                      style={{ backgroundColor: "red", margin: "15px 0" }}
+                      onClick={handleBanOffer}
+                    >
+                      Banuj
+                    </Button>
+                    <Button style={{ backgroundColor: "green" }}>
+                      Jest OK
+                    </Button>
+                  </>
                 )}
               </div>
             </div>
@@ -113,7 +140,8 @@ export const MiniOffer = ({
 
           <div className="description">
             <b>
-              {offer.creator.name} - <span style={{ color: '#ffda09' }}>{review.rating} ★</span>
+              {offer.creator.name} -{" "}
+              <span style={{ color: "#ffda09" }}>{review.rating} ★</span>
             </b>
 
             {review.description}

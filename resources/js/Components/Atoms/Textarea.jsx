@@ -39,15 +39,15 @@ const MessageLength = styled.span`
   font-size: 1.4rem;
 `;
 
-export const Textarea = ({ handleChange, id, error, value, name, height }) => {
+export const Textarea = ({ handleChange, id, error, value, name, height, isReview }) => {
   return (
     <Wrapper>
       <div className="info-wrapper">
         <Label className={error ? "error-label" : ""} htmlFor={id}>
           Opis
         </Label>
-        <MessageLength error={value.length >= 500}>
-          {value.length} / 500
+        <MessageLength error={value.length >= 255}>
+          {value.length} / {isReview ? '255' : '500' }
         </MessageLength>
       </div>
       <TextArea

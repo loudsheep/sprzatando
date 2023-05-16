@@ -41,4 +41,32 @@ export const IconWrapper = styled.div`
   @media (max-width: 992px) {
     top: 100px;
   }
+`;
+
+export const ButtonsWrapper = styled.div`
+  background-color: #fefefe;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 20px;
+  border-radius: 10px;
+  box-shadow: -2px 2px 20px -6px rgba(66, 68, 90, 1);
 `
+
+export const ReportedSatus = styled.div`
+  background-color: #fefefe;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: -2px 2px 20px -6px rgba(66, 68, 90, 1);
+  span {
+    color: ${({theme}) => theme.colors.dark};
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 15px;
+    text-align: center;
+  }
+`;
