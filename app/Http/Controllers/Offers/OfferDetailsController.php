@@ -53,6 +53,7 @@ class OfferDetailsController extends Controller
             'isAdmin' => $isAdmin,
             'isRegularUser' => $isRegularUser,
             'currentUserInterestedInOffer' => $currentUserInterestedInOffer,
+            'isReported' => $offer->reported == 'reported',
         ]);
     }
 }

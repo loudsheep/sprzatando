@@ -42,3 +42,12 @@ export const IconWrapper = styled.div`
     top: 100px;
   }
 `
+
+export const ReportedSatus = styled.div`
+  background-color: #ff000033;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+`;

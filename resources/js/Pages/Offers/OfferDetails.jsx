@@ -6,6 +6,7 @@ import {
   StyledTitle,
   StyledSubtitle,
   IconWrapper,
+  ReportedSatus
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
@@ -23,6 +24,7 @@ export default function OfferDetails({
   isRegularUser,
   currentUserInterestedInOffer,
   isBanned,
+  isReported
 }) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -105,6 +107,15 @@ export default function OfferDetails({
                 <Button onClick={handleBanOffer} text="BANUJ" color={"error"} />
               )}
             </>
+          )}
+
+          {isAdmin && isReported && (
+            <ReportedSatus>
+              Ta oferta jest zgłoszona
+              <br />
+              przez użytkowników
+              <Button text="Odreportój"></Button>
+            </ReportedSatus>
           )}
 
           {!isOwner && isRegularUser && (
