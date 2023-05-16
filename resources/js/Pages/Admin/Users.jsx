@@ -1,6 +1,7 @@
 import { Head } from "@inertiajs/react";
 import styled from "styled-components";
 import AdminLayout from "@/Layouts/AdminLayout";
+import { useState } from "react";
 
 const UserContainer = styled.table`
   border-collapse: collapse;
@@ -27,7 +28,32 @@ const Cont = styled.div`
   min-height: 90%;
 `;
 
+const Searchbar = styled.input`
+  max-width: 340px;
+  margin: 2rem 0;
+  border: none;
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
+  padding: 10px;
+  border: 1px solid ${({ theme }) => theme.colors.lightPurple};
+  border-radius: 12px;
+  font-size: 16px;
+  &:focus {
+    outline: none;
+    box-shadow: -2px 2px 20px -6px rgba(66, 68, 90, 1);
+  }
+`;
+
 export default function Dashboard({ auth, users }) {
+  const [usersArray, setUsersArray] = useState(users);
+
+  const handleInputChange = (e) => {
+    let filteredUsers = users.filter(({ name }) =>
+      name.includes(e.target.value)
+    );
+    setUsersArray(filteredUsers);
+  };
+
   return (
     <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
       {/* TODO add some layout for this */}
@@ -35,7 +61,11 @@ export default function Dashboard({ auth, users }) {
 
       <Cont>
         <h1>Lista użytkowników</h1>
-
+        <Searchbar
+          type="text"
+          onChange={handleInputChange}
+          placeholder="Znajdź po nazwie"
+        />
         <UserContainer>
           <thead>
             <tr>
@@ -49,7 +79,7 @@ export default function Dashboard({ auth, users }) {
             </tr>
           </thead>
           <tbody>
-            {users.map((u, i) => (
+            {usersArray.map((u, i) => (
               <tr key={i}>
                 <td>{i + 1}.</td>
                 <td>{u.email}</td>
@@ -58,7 +88,7 @@ export default function Dashboard({ auth, users }) {
                 <td>
                   {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
                 </td>
-                <td>{u.ban_ending !== null ? "Yes" : "No"}</td>
+                <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
                 <td>{new Date(u.created_at).toLocaleDateString("pl-PL")}</td>
               </tr>
             ))}
