@@ -91,7 +91,7 @@ export default function AddOffer(props) {
       errors={props.errors}
       prophileImg={props.auth.user.profile_img}
     >
-      <SubmitModal isOpen={isOpen} onClose={()=>setIsOpen(false)} />
+      <SubmitModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       <Head title="Dodaj ofertę">
         <meta charset="UTF-8" />
       </Head>
@@ -162,8 +162,8 @@ export default function AddOffer(props) {
           errors={errors}
           handlePhotoUpload={handlePhotoUpload}
           handleDeletePhoto={handleDeletePhoto}
-          title='Dodaj zdjęcia'
-          action='add'
+          title="Dodaj zdjęcia"
+          action="add"
         />
 
         <Textarea
