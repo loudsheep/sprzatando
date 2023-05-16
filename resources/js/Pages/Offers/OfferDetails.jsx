@@ -6,7 +6,8 @@ import {
   StyledTitle,
   StyledSubtitle,
   IconWrapper,
-  ReportedSatus
+  ReportedSatus,
+  ButtonsWrapper,
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
@@ -24,7 +25,7 @@ export default function OfferDetails({
   isRegularUser,
   currentUserInterestedInOffer,
   isBanned,
-  isReported
+  isReported,
 }) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -80,41 +81,53 @@ export default function OfferDetails({
           </p>
           <p>{offer.city}</p>
 
-          {!isOwner && (
-            <>
-              {!currentUserInterestedInOffer ? (
-                <PrimaryButton onClick={handleInterestedButtons}>
-                  Zgłoś się do oferty
-                </PrimaryButton>
-              ) : (
-                <PrimaryButton color={"grey"} onClick={handleInterestedButtons}>
-                  Rezygnuj
-                </PrimaryButton>
-              )}
-            </>
-          )}
-          <br />
+          <ButtonsWrapper>
+            {!isOwner && (
+              <>
+                {!currentUserInterestedInOffer ? (
+                  <PrimaryButton onClick={handleInterestedButtons}>
+                    Zgłoś się do oferty
+                  </PrimaryButton>
+                ) : (
+                  <PrimaryButton
+                    color={"grey"}
+                    onClick={handleInterestedButtons}
+                  >
+                    Rezygnuj
+                  </PrimaryButton>
+                )}
+              </>
+            )}
+            <br />
 
-          {isAdmin && (
-            <>
-              {isBanned ? (
-                <Button
-                  onClick={handleBanOffer}
-                  style={{ backgroundColor: "blue" }}
-                  text="ODBANUJ"
-                />
-              ) : (
-                <Button onClick={handleBanOffer} text="BANUJ" color={"error"} />
-              )}
-            </>
-          )}
+            {isAdmin && (
+              <>
+                {isBanned ? (
+                  <Button
+                    style={{ padding: ".8rem 2rem" }}
+                    onClick={handleBanOffer}
+                    text="ODBANUJ"
+                  />
+                ) : (
+                  <Button
+                    style={{ padding: ".8rem 2rem" }}
+                    onClick={handleBanOffer}
+                    text="BANUJ"
+                    color={"error"}
+                  />
+                )}
+              </>
+            )}
+          </ButtonsWrapper>
 
           {isAdmin && isReported && (
             <ReportedSatus>
-              Ta oferta jest zgłoszona
-              <br />
-              przez użytkowników
-              <Button text="Odreportój"></Button>
+              <span>
+                Ta oferta jest zgłoszona
+                <br />
+                przez użytkowników
+              </span>
+              <Button text="Jest OK"></Button>
             </ReportedSatus>
           )}
 
