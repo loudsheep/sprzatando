@@ -88,7 +88,7 @@ export default function Authenticated({ auth, children, prophileImg }) {
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Wyloguj
                 </Dropdown.Link>
-                <Dropdown.Link href={route("admin.reported")} method="post" as="button">
+                <Dropdown.Link href={route("admin.reported")} method="get" as="button">
                   ADMIN PANEL
                 </Dropdown.Link>
               </Dropdown.Content>

@@ -152,6 +152,7 @@ export const DoneMiniOffer = ({ offer }) => {
               error={errors.description}
               handleChange={onHandleChange}
               height={"15rem"}
+              isReview={true}
             />
             <Button style={{ height: "40px", margin: "10px 0" }}>Zapisz</Button>
           </div>
