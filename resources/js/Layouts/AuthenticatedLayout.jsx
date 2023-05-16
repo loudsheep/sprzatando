@@ -64,7 +64,7 @@ export default function Authenticated({ auth, children, prophileImg }) {
                 <img src={logoPath} alt="logo" style={{ width: "70px" }} />
               </Link>
             </LogoWrapper>
-            
+
             <Dropdown>
               <Dropdown.Trigger>
                 <span className="inline-flex rounded-md">
@@ -88,9 +88,13 @@ export default function Authenticated({ auth, children, prophileImg }) {
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Wyloguj
                 </Dropdown.Link>
-                <Dropdown.Link href={route("admin.reported")} method="get" as="button">
-                  ADMIN PANEL
-                </Dropdown.Link>
+
+                {auth.user.role == "admin" && (
+                  <Dropdown.Link href={route("admin.reported")} method="get" as="button">
+                    ADMIN PANEL
+                  </Dropdown.Link>
+                )}
+
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>

@@ -23,14 +23,16 @@ const Cont = styled.div`
   flex-direction: column;
   padding: 20px;
   overflow-x: hidden;
+  width: 90%;
+  min-height: 90%;
 `;
 
 export default function Dashboard({ auth, users }) {
   return (
-    <AdminLayout auth={auth}>
+    <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
       {/* TODO add some layout for this */}
       <Head title="Users" />
-        
+
       <Cont>
         <h1>Lista użytkowników</h1>
 

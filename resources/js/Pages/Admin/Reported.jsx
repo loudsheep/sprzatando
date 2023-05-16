@@ -22,11 +22,12 @@ const Cont = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 90%;
 `;
 
 export default function Dashboard({auth, offers }) {
   return (
-    <AdminLayout auth={auth}>
+    <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
       {/* TODO add some layout for this */}
       <Head title="Users" />
 

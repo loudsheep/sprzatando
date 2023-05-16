@@ -41,7 +41,6 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'remember_token',
-        'role',
         'ban_ending',
         'created_at',
         'updated_at',
