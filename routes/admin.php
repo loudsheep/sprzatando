@@ -17,7 +17,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/users', [AdminUserController::class, 'show'])
         ->middleware('can:manage_users', 'auth')
-        ->name('admin');
+        ->name('admin.users');
 
     Route::get('admin/users/{user}', [AdminUserController::class, 'detail'])
         ->middleware('can:manage_users', 'auth')
@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('admin/reported', [AdminReportedController::class, 'show'])
         ->middleware('can:manage_users', 'auth')
-        ->name('admin');
+        ->name('admin.reported');
 
     Route::get('time', [AdminUserController::class, 'time'])
         ->middleware('can:manage_users', 'auth')

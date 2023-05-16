@@ -4,6 +4,7 @@ import addIconPath from "../../assets/img/nav-icons/add.png";
 import acceptedIconPath from "../../assets/img/nav-icons/accepted.png";
 import userIconPath from "../../assets/img/nav-icons/user.png";
 import userOfferPath from "../../assets/img/nav-icons/userOffer.png";
+import dangerIconPath from "../../assets/img/nav-icons/dangerMark.png";
 import { useWidth } from "@/hooks/useWidth";
 import { useState } from "react";
 import { TestDiv } from "../Atoms/SvgDropdown";
@@ -15,6 +16,8 @@ const NavWrapper = styled.div`
   padding-top: 4rem;
   box-shadow: -4px -2px 10px 0px rgba(66, 68, 90, 1);
   z-index: 1;
+  min-width: 220px;
+  
 `;
 
 const slideIn = keyframes`
@@ -67,9 +70,11 @@ const MenuItem = styled.div`
     margin-right: 0.7rem;
   }
 `;
-export const UserNavMenu = () => {
+export const Sidebar = ({isAdmin}) => {
   const { url } = usePage();
-  const menuOptions = [
+  const menuOptions = 
+    !isAdmin ?
+  [
     {
       name: "Dodaj ofertę",
       path: route("add.offer"),
@@ -94,6 +99,19 @@ export const UserNavMenu = () => {
       routeUrl: "/profile",
       icon: userIconPath,
     },
+  ] : [
+    {
+      name: "Zgłoszone oferty",
+      path: route("admin.reported"),
+      routeUrl: "/admin/reported",
+      icon: dangerIconPath,
+    },
+    {
+      name: "Użytkownicy",
+      path: route("admin.users"),
+      routeUrl: "/admin/users",
+      icon: userIconPath,
+    }
   ];
 
   const width = useWidth();

@@ -50,10 +50,9 @@ const ChildrenWrapper = styled.div`
   align-items: center;
 `;
 
-export default function Authenticated({ auth, children, prophileImg }) {
+export default function AdminLayout({auth, children, prophileImg }) {
   const width = useWidth();
 
-  console.log(auth)
   return (
     <>
       {width >= 992 && (
@@ -88,14 +87,11 @@ export default function Authenticated({ auth, children, prophileImg }) {
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Wyloguj
                 </Dropdown.Link>
-                <Dropdown.Link href={route("admin.reported")} method="post" as="button">
-                  ADMIN PANEL
-                </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
-          {/* //To do */}
-          <Sidebar />
+          
+          <Sidebar isAdmin={true}/>
 
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </Wrapper>
@@ -131,13 +127,10 @@ export default function Authenticated({ auth, children, prophileImg }) {
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Wyloguj
                 </Dropdown.Link>
-                <Dropdown.Link href={route("admin.users")} method="get" as="button">
-                  Admin panel
-                </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
-          <Sidebar />
+          <Sidebar isAdmin={true}/>
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </MobileWrapper>
       )}
