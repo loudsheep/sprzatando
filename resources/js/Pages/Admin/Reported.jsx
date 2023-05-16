@@ -35,7 +35,7 @@ export default function Dashboard({auth, offers }) {
         <h1>Zgłoszone oferty</h1>
 
         {offers.map((offer, i) => (
-          <MiniOffer offer={offer} isOwner={false} key={i} />
+          <MiniOffer offer={offer} isOwner={false} key={i} isAdminView={true}/>
         ))}
       </Cont>
     </AdminLayout>
