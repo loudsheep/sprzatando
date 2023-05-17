@@ -16,6 +16,8 @@ import { router } from "@inertiajs/react";
 import Button from "@/Components/Atoms/Button";
 import { SuccesReported } from "@/Components/InfoModal";
 import arrowLeft from "@/assets/img/arrow-left.svg";
+import { notify } from "@/contants/notify";
+import { ToastContainer } from "react-toastify";
 
 export default function OfferDetails({
   images,
@@ -31,8 +33,10 @@ export default function OfferDetails({
 
   const handleInterestedButtons = (e) => {
     e.preventDefault();
-
     router.post(route("offer.follow", offer.id));
+    !currentUserInterestedInOffer
+      ? notify("Oferta przyjęta")
+      : notify("Zrezygnowano z oferty");
   };
 
   const handleBanOffer = (e) => {
@@ -56,6 +60,7 @@ export default function OfferDetails({
 
   return (
     <>
+      <ToastContainer />
       <Head title="Szczegóły oferty" />
       <Navbar />
       <Wrapper>

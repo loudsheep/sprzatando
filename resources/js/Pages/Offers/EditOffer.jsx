@@ -102,8 +102,7 @@ const EditOffer = ({ offer, images, auth }) => {
       onError: () => console.log(errors),
       onSuccess: () => {
         // setData(initialState);
-        console.log("SUCCESS");
-        notify("Edit");
+        notify("Zmiany zapisano pomyślnie");
       },
     });
   };
