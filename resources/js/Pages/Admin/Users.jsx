@@ -44,6 +44,12 @@ const Searchbar = styled.input`
   }
 `;
 
+const StyledTitle = styled.h1`
+  font-size: 2.4rem;
+  color: ${({ theme, error }) =>
+    error ? theme.colors.error : theme.colors.dark};
+`;
+
 export default function Dashboard({ auth, users }) {
   const [usersArray, setUsersArray] = useState(users);
 
@@ -60,40 +66,44 @@ export default function Dashboard({ auth, users }) {
       <Head title="Users" />
 
       <Cont>
-        <h1>Lista użytkowników</h1>
+        <StyledTitle>Lista użytkowników</StyledTitle>
         <Searchbar
           type="text"
           onChange={handleInputChange}
           placeholder="Znajdź po nazwie"
         />
-        <UserContainer>
-          <thead>
-            <tr>
-              <th>Lp.</th>
-              <th>Email</th>
-              <th>Nazwa</th>
-              <th>Liczba ofert</th>
-              <th>Średnia ocen</th>
-              <th>Zbanowany?</th>
-              <th>Stworzony</th>
-            </tr>
-          </thead>
-          <tbody>
-            {usersArray.map((u, i) => (
-              <tr key={i}>
-                <td>{i + 1}.</td>
-                <td>{u.email}</td>
-                <td>{u.name}</td>
-                <td>{u.created_offers_count}</td>
-                <td>
-                  {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
-                </td>
-                <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
-                <td>{new Date(u.created_at).toLocaleDateString("pl-PL")}</td>
+        {usersArray.length !== 0 ? (
+          <UserContainer>
+            <thead>
+              <tr>
+                <th>Lp.</th>
+                <th>Email</th>
+                <th>Nazwa</th>
+                <th>Liczba ofert</th>
+                <th>Średnia ocen</th>
+                <th>Zbanowany?</th>
+                <th>Stworzony</th>
               </tr>
-            ))}
-          </tbody>
-        </UserContainer>
+            </thead>
+            <tbody>
+              {usersArray.map((u, i) => (
+                <tr key={i}>
+                  <td>{i.id}</td>
+                  <td>{u.email}</td>
+                  <td>{u.name}</td>
+                  <td>{u.created_offers_count}</td>
+                  <td>
+                    {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
+                  </td>
+                  <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
+                  <td>{new Date(u.created_at).toLocaleDateString("pl-PL")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </UserContainer>
+        ) : (
+          <StyledTitle error={true}>Brak Użytkowników 🙄</StyledTitle>
+        )}
       </Cont>
     </AdminLayout>
   );
