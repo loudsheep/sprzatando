@@ -53,7 +53,6 @@ const ChildrenWrapper = styled.div`
 export default function Authenticated({ auth, children, prophileImg }) {
   const width = useWidth();
 
-  console.log(auth)
   return (
     <>
       {width >= 992 && (

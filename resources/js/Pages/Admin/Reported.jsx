@@ -25,7 +25,7 @@ const Cont = styled.div`
   min-height: 90%;
 `;
 
-export default function Dashboard({auth, offers }) {
+export default function Dashboard({ auth, offers }) {
   return (
     <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
       {/* TODO add some layout for this */}
@@ -35,7 +35,7 @@ export default function Dashboard({auth, offers }) {
         <h1>Zgłoszone oferty</h1>
 
         {offers.map((offer, i) => (
-          <MiniOffer offer={offer} isOwner={false} key={i} isAdminView={true}/>
+          <MiniOffer offer={offer} isOwner={false} key={i} isAdminView={true} />
         ))}
       </Cont>
     </AdminLayout>

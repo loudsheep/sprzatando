@@ -58,6 +58,11 @@ export default function OfferDetails({
     );
   };
 
+  const handleCheckOffer = (e) => {
+    e.preventDefault();
+    router.post(route("offer.check", offer.id));
+  };
+
   return (
     <>
       <ToastContainer />
@@ -159,7 +164,7 @@ export default function OfferDetails({
                 <br />
                 przez użytkowników
               </span>
-              <Button text="Jest OK"></Button>
+              <Button text="Jest OK" onClick={handleCheckOffer}></Button>
             </ReportedSatus>
           )}
 
