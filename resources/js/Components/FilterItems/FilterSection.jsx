@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { Wrapper, Button, ImgWrapper, StyledLink } from "../Offer/Offer.styles";
+import { Button } from "../Offer/Offer.styles";
 import FiltersWrapper from "./FiltersWrapper";
-
 
 const SectionFilterWrapper = styled.div`
   width: 100%;
@@ -11,7 +10,7 @@ const SectionFilterWrapper = styled.div`
   margin: 10rem auto 0 auto;
   padding: 0 100px;
   position: relative;
-  
+
   @media (min-width: 992px) {
     margin: 15rem auto 0 auto;
   }
@@ -29,11 +28,11 @@ const SectionFilterWrapper = styled.div`
 const TextWrapper = styled.div`
   width: 30%;
 
-  @media (max-width: 992px){
+  @media (max-width: 992px) {
     width: 40%;
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     width: 100%;
     margin-bottom: 5rem;
   }
@@ -49,24 +48,22 @@ const HeaderText = styled.h1`
 const Text = styled.p`
   font-size: 1.4rem;
   margin: 1rem 0 2rem 0;
-  color: ${({theme}) => theme.colors.darkGrey};
+  color: ${({ theme }) => theme.colors.darkGrey};
   @media (max-width: 768px) {
-    margin: .5rem 0 1rem 0;
+    margin: 0.5rem 0 1rem 0;
   }
 `;
 
-
-
-const FilterSection = ({offers}) => {
+const FilterSection = ({ offers }) => {
   return (
     <SectionFilterWrapper>
       <TextWrapper>
         <HeaderText>Przenieś sprzątanie na wyższy poziom</HeaderText>
         <Text>Wybierz jedną z tysiąca usług sprzątających</Text>
-        <Button>Sprawdź</Button>
+        <Button margin="0">Sprawdź</Button>
       </TextWrapper>
-    
-      <FiltersWrapper offers={offers}/>
+
+      <FiltersWrapper offers={offers} />
     </SectionFilterWrapper>
   );
 };

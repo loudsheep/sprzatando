@@ -3,6 +3,7 @@ import { Link } from "@inertiajs/react";
 
 export const Wrapper = styled.div`
   display: flex;
+  align-items:center;
   flex-wrap: wrap;
   max-width: 90rem;
   width: 100%;
@@ -36,11 +37,11 @@ export const Wrapper = styled.div`
     margin-right: 18px;
     overflow-wrap: anywhere;
   }
-  .span {
+  .button {
     background-color: ${({ theme }) => theme.colors.darkGrey};
     color: ${({ theme }) => theme.colors.white};
     font-weight: bold;
-    padding: 6px;
+    padding: 1rem 1.5rem;
     border-radius: 8px;
     max-width: 80px;
     text-align: center;
@@ -51,6 +52,10 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
   }
+
+  .button-container{
+    margin-top: 4rem;
+  }
   @media (max-width: 992px) {
     justify-content: center;
     }
@@ -59,7 +64,7 @@ export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.secondaryColor};
   color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
-  padding: 6px 10px;
+  padding: 1rem 1.5rem;
   border-radius: 8px;
   margin-left: 10px;
   max-width: 100px;

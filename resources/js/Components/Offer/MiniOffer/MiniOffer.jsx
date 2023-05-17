@@ -118,12 +118,11 @@ export const MiniOffer = ({
           </>
         )}
 
-        <div className="container">
-          <div className="span">
-            <span>{offer.price} zł</span>
+        <div className="container button-container">
+          <div className="button">
+            <button>{offer.price} zł</button>
           </div>
 
-          {/* Better??? idk */}
           {Object.keys(buttons).map((key, i) => (
             <Link key={i} href={buttons[key]}>
               <Button>{key}</Button>

@@ -80,11 +80,17 @@ export default function OfferDetails({
           </div>
         </div>
         <div className="section_column-second">
-          <p>{offer.creator.name}</p>
+          <p>
+            <strong>Utworzone przez: </strong>
+            {offer.creator.name}
+          </p>
           <p>
             <strong>Ważne do:</strong> {offer.ends} r.
           </p>
-          <p>{offer.city}</p>
+          <p>
+            <strong>Miejscowość: </strong>
+            {offer.city}
+          </p>
 
           {!isOwner && (
             <>
