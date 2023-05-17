@@ -36,7 +36,6 @@ export const FormWrapper = styled.form`
     margin: 14px 0;
     input {
       width: 240px;
-      margin: 5px;
     }
     @media (max-width: 576px) {
       justify-content: center;
