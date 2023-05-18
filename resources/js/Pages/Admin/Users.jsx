@@ -192,8 +192,8 @@ export default function Dashboard({ auth, users }) {
                           handleUserBan(u.id);
                           const notifyMess =
                             u.ban_ending === null
-                              ? `Zbanowano użutkownika ${u.name} na okres 7 dni`
-                              : "Odbanowano użytkownika";
+                              ? <p>Zbanowano użutkownika <strong>{u.name}</strong> na okres 7 dni🚫</p>
+                              : <p>Odbanowano użutkownika <strong>{u.name}</strong>💪🏽</p>;
                           notify(
                             notifyMess
                           );
