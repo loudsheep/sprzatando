@@ -82,7 +82,7 @@ export const Navbar = ({ auth }) => {
           <BurgerBtn open={open} setOpen={setOpen} />
           <NavMobile open={open}>
             <>
-              <StyledLink href="#">Pomoc</StyledLink>
+              <StyledLink href="#">Autorzy</StyledLink>
               <StyledLink href={route("ranking")}>Ranking</StyledLink>
               <StyledLink href={route("profile.edit")}>Twoje konto</StyledLink>
               <StyledLink
@@ -103,7 +103,7 @@ export const Navbar = ({ auth }) => {
               <LogoWrapperDesktop src={logoPath} />
             </Link>
             <div>
-              <StyledLink href={route("authors")}>Pomoc</StyledLink>
+              <StyledLink href={route("authors")}>Autorzy</StyledLink>
               <StyledLink href={route("ranking")}>Ranking</StyledLink>
               <StyledLink href={route("profile.edit")}>Twoje konto</StyledLink>
               <StyledLink

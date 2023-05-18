@@ -55,6 +55,12 @@ const StyledTitle = styled.h1`
   color: ${({ theme, error }) =>
     error ? theme.colors.error : theme.colors.dark};
 `;
+const BanBtn = styled.button`
+  color: ${({ theme }) => theme.colors.error};
+  &:hover {
+    text-decoration: underline;
+  }
+`;
 
 export default function Dashboard({ auth, users }) {
   const [usersArray, setUsersArray] = useState(users);
@@ -116,7 +122,12 @@ export default function Dashboard({ auth, users }) {
             />
             <button onClick={handleClear}>clear</button>
           </div>
-          <Button text="Najgorsi" color={"err"} onClick={showTheWorst} title='Uzytkownicy ze średnią poniżej 2.5'/>
+          <Button
+            text="Najgorsi"
+            color={"err"}
+            onClick={showTheWorst}
+            title="Uzytkownicy ze średnią poniżej 2.5"
+          />
         </InputWrapper>
         {usersArray.length !== 0 ? (
           <UserContainer>
@@ -129,6 +140,7 @@ export default function Dashboard({ auth, users }) {
                 <th>Średnia ocen</th>
                 <th>Zbanowany?</th>
                 <th>Stworzony</th>
+                <th>Ban</th>
               </tr>
             </thead>
             <tbody>
@@ -143,6 +155,10 @@ export default function Dashboard({ auth, users }) {
                   </td>
                   <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
                   <td>{new Date(u.created_at).toLocaleDateString("pl-PL")}</td>
+                  <td>
+                  {/* tuttaj ban usera */}
+                    <BanBtn onClicnk={() => {}}>Banuj</BanBtn>
+                  </td>
                 </tr>
               ))}
             </tbody>
