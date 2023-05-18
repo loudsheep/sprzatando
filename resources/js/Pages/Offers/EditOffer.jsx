@@ -3,17 +3,7 @@ import styled from "styled-components";
 import { Head, useForm } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import {
-  StyledTitle,
-  StyledSubTitle,
-  FormWrapper,
-  StyledPhotoBox,
-  ImageSection,
-  UploadedImgWrapper,
-  DeleteButton,
-  ErrorMessage,
-  ErrorWrapper,
-} from "../page-styles/AddOffer.styles";
+import { FormWrapper } from "../page-styles/AddOffer.styles";
 import { FormField } from "@/Components/FormField";
 import { Textarea } from "@/Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
