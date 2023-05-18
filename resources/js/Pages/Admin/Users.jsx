@@ -2,6 +2,7 @@ import { Head } from "@inertiajs/react";
 import styled from "styled-components";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState } from "react";
+import Button from "../../Components/Atoms/Button";
 
 const UserContainer = styled.table`
   border-collapse: collapse;
@@ -45,6 +46,8 @@ const Searchbar = styled.input`
 `;
 const InputWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const StyledTitle = styled.h1`
@@ -55,21 +58,38 @@ const StyledTitle = styled.h1`
 
 export default function Dashboard({ auth, users }) {
   const [usersArray, setUsersArray] = useState(users);
+  const [userName, setUserName] = useState("");
+  const [userId, setUserId] = useState();
 
   const handleInputChange = (e) => {
     if (e.target.type === "text") {
+      setUserName(e.target.value);
       let filteredUsers = users.filter(({ name }) =>
         name.includes(e.target.value)
       );
       setUsersArray(filteredUsers);
-    } else if(e.target.type === "number"){
-      let filteredUsers = users.filter(({ id }) =>
-        id == e.target.value
-      );
+      setUserId("");
+    } else if (e.target.type === "number") {
+      setUserId(e.target.value);
+      let filteredUsers = users.filter(({ id }) => id == e.target.value);
       setUsersArray(filteredUsers);
+      setUserName("");
     }
   };
 
+  const showTheWorst = () => {
+    let filteredUsers = users.filter(
+      ({ reviews_avg_rating }) =>
+        reviews_avg_rating < 2.5 && reviews_avg_rating !== null
+    );
+    setUsersArray(filteredUsers);
+  };
+
+  const handleClear = () => {
+    setUserName("");
+    setUserId("");
+    setUsersArray(users);
+  };
   return (
     <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
       {/* TODO add some layout for this */}
@@ -78,25 +98,31 @@ export default function Dashboard({ auth, users }) {
       <Cont>
         <StyledTitle>Lista użytkowników</StyledTitle>
         <InputWrapper>
-          <Searchbar
-            type="text"
-            onChange={handleInputChange}
-            placeholder="Znajdź po nazwie"
-          />
-          <Searchbar
-            type="number"
-            onChange={handleInputChange}
-            placeholder="Znajdź po id"
-            max={`${users.length}`}
-            min="0"
-            style={{ width: "130px" }}
-          />
+          <div>
+            <Searchbar
+              type="text"
+              onChange={handleInputChange}
+              placeholder="Znajdź po nazwie"
+              value={userName}
+            />
+            <Searchbar
+              type="number"
+              onChange={handleInputChange}
+              placeholder="Znajdź po id"
+              max={`${users.length}`}
+              min="0"
+              style={{ width: "130px" }}
+              value={userId}
+            />
+            <button onClick={handleClear}>clear</button>
+          </div>
+          <Button text="Najgorsi" color={"err"} onClick={showTheWorst} title='Uzytkownicy ze średnią poniżej 2.5'/>
         </InputWrapper>
         {usersArray.length !== 0 ? (
           <UserContainer>
             <thead>
               <tr>
-                <th>Lp.</th>
+                <th>Id.</th>
                 <th>Email</th>
                 <th>Nazwa</th>
                 <th>Liczba ofert</th>

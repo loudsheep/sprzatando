@@ -20,7 +20,7 @@ class AdminUserController extends Controller
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
             ->where('id', '!=', $request->user()->id)
-            ->get()->makeVisible(['id','created_at', 'ban_ending', 'email']);
+            ->get()->makeVisible(['id','created_at', 'ban_ending', 'email', ]);
 
         return Inertia::render('Admin/Users', [
             'users' => $users,

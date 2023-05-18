@@ -14,9 +14,15 @@ const StyledButton = styled.button`
     opacity: 0.9;
   }
 `;
-const Button = ({ width, color, onClick, text, style }) => {
+const Button = ({ width, color, onClick, text, style, title }) => {
   return (
-    <StyledButton onClick={onClick} width={width} color={color} style={style}>
+    <StyledButton
+      onClick={onClick}
+      width={width}
+      color={color}
+      style={style}
+      title={title}
+    >
       {text}
     </StyledButton>
   );
