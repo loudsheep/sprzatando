@@ -3,6 +3,8 @@ import styled from "styled-components";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState } from "react";
 import Button from "../../Components/Atoms/Button";
+import { notify } from "@/contants/notify";
+import { ToastContainer } from "react-toastify";
 
 const UserContainer = styled.table`
   border-collapse: collapse;
@@ -97,76 +99,80 @@ export default function Dashboard({ auth, users }) {
     setUsersArray(users);
   };
   return (
-    <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
-      {/* TODO add some layout for this */}
-      <Head title="Users" />
+    <>
+      <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
+        {/* TODO add some layout for this */}
+        <Head title="Users" />
 
-      <Cont>
-        <StyledTitle>Lista użytkowników</StyledTitle>
-        <InputWrapper>
-          <div>
-            <Searchbar
-              type="text"
-              onChange={handleInputChange}
-              placeholder="Znajdź po nazwie"
-              value={userName}
+        <Cont>
+          <StyledTitle>Lista użytkowników</StyledTitle>
+          <InputWrapper>
+            <div>
+              <Searchbar
+                type="text"
+                onChange={handleInputChange}
+                placeholder="Znajdź po nazwie"
+                value={userName}
+              />
+              <Searchbar
+                type="number"
+                onChange={handleInputChange}
+                placeholder="Znajdź po id"
+                max={`${users.length}`}
+                min="0"
+                style={{ width: "130px" }}
+                value={userId}
+              />
+              <Button onClick={handleClear} text="Wszyscy" />
+            </div>
+            <Button
+              text="Najgorsi"
+              color={"err"}
+              onClick={showTheWorst}
+              title="Uzytkownicy ze średnią poniżej 2.5"
             />
-            <Searchbar
-              type="number"
-              onChange={handleInputChange}
-              placeholder="Znajdź po id"
-              max={`${users.length}`}
-              min="0"
-              style={{ width: "130px" }}
-              value={userId}
-            />
-            <button onClick={handleClear}>clear</button>
-          </div>
-          <Button
-            text="Najgorsi"
-            color={"err"}
-            onClick={showTheWorst}
-            title="Uzytkownicy ze średnią poniżej 2.5"
-          />
-        </InputWrapper>
-        {usersArray.length !== 0 ? (
-          <UserContainer>
-            <thead>
-              <tr>
-                <th>Id.</th>
-                <th>Email</th>
-                <th>Nazwa</th>
-                <th>Liczba ofert</th>
-                <th>Średnia ocen</th>
-                <th>Zbanowany?</th>
-                <th>Stworzony</th>
-                <th>Ban</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usersArray.map((u, i) => (
-                <tr key={i}>
-                  <td>{u.id}. </td>
-                  <td>{u.email}</td>
-                  <td>{u.name}</td>
-                  <td>{u.created_offers_count}</td>
-                  <td>
-                    {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
-                  </td>
-                  <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
-                  <td>{new Date(u.created_at).toLocaleDateString("pl-PL")}</td>
-                  <td>
-                  {/* tuttaj ban usera */}
-                    <BanBtn onClicnk={() => {}}>Banuj</BanBtn>
-                  </td>
+          </InputWrapper>
+          {usersArray.length !== 0 ? (
+            <UserContainer>
+              <thead>
+                <tr>
+                  <th>Id.</th>
+                  <th>Email</th>
+                  <th>Nazwa</th>
+                  <th>Liczba ofert</th>
+                  <th>Średnia ocen</th>
+                  <th>Zbanowany?</th>
+                  <th>Stworzony</th>
+                  <th>Ban</th>
                 </tr>
-              ))}
-            </tbody>
-          </UserContainer>
-        ) : (
-          <StyledTitle error={true}>Brak Użytkowników 🙄</StyledTitle>
-        )}
-      </Cont>
-    </AdminLayout>
+              </thead>
+              <tbody>
+                {usersArray.map((u, i) => (
+                  <tr key={i}>
+                    <td>{u.id}. </td>
+                    <td>{u.email}</td>
+                    <td>{u.name}</td>
+                    <td>{u.created_offers_count}</td>
+                    <td>
+                      {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
+                    </td>
+                    <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
+                    <td>
+                      {new Date(u.created_at).toLocaleDateString("pl-PL")}
+                    </td>
+                    <td>
+                      {/* tuttaj ban usera */}
+                      <BanBtn onClicnk={() => {}}>Banuj</BanBtn>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </UserContainer>
+          ) : (
+            <StyledTitle error={true}>Brak Użytkowników 🙄</StyledTitle>
+          )}
+        </Cont>
+      </AdminLayout>
+    </>
   );
 }

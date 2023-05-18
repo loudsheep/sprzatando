@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import { Head, useForm } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
