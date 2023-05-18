@@ -11,7 +11,7 @@ class BanUserController extends Controller
     {
         if ($user->ban_ending == null) {
             $date = now();
-            $user->ban_ending = $date->addDays(1);
+            $user->ban_ending = $date->addWeek();
         } else {
             $user->ban_ending = null;
         }

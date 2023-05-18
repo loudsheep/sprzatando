@@ -109,4 +109,8 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(UserReviews::class, Offer::class, 'contractor_id', 'offer_id', 'id', 'id');
     }
+
+    public function latestReview() {
+        return $this->hasOneThrough(UserReviews::class, Offer::class, 'contractor_id', 'offer_id', 'id', 'id')->latest();
+    }
 }

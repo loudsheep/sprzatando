@@ -166,7 +166,7 @@ export default function Dashboard({ auth, users }) {
                   <th>Nazwa</th>
                   <th>Liczba ofert</th>
                   <th>Średnia ocen</th>
-                  <th>Zbanowany?</th>
+                  <th>Ostatnia ocena</th>
                   <th>Stworzony</th>
                   <th>Ban</th>
                 </tr>
@@ -181,7 +181,7 @@ export default function Dashboard({ auth, users }) {
                     <td>
                       {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
                     </td>
-                    <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
+                    <td>{u.latest_review ? u.latest_review.rating : '-'}</td>
                     <td>
                       {new Date(u.created_at).toLocaleDateString("pl-PL")}
                     </td>
