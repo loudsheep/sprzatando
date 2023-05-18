@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AdminReportedController;
 use App\Http\Controllers\Admin\BanOfferController;
 use App\Http\Controllers\Admin\AdminUserController;
-
+use App\Http\Controllers\Admin\BanUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -15,8 +15,12 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'throttle:6,1'])
         ->name('offer.report');
 
+    Route::post('ban-user/{user}', [BanUserController::class, 'banUser'])
+        ->middleware(['auth'])
+        ->name('user.ban');
+
     Route::post('check-offer/{offer}', [BanOfferController::class, 'markOfferOK'])
-        ->middleware(['auth', 'throttle:6,1'])
+        ->middleware(['auth'])
         ->name('offer.check');
 
     Route::get('admin/users', [AdminUserController::class, 'show'])
