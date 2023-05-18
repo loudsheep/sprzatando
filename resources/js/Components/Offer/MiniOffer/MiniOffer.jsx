@@ -6,7 +6,7 @@ import {
   Review,
 } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
-import { Inertia } from "@inertiajs/inertia";
+import { Inertia, router } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { useState } from "react";
 

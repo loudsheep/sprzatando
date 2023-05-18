@@ -48,9 +48,12 @@ export default function Dashboard({ auth, users }) {
   const [usersArray, setUsersArray] = useState(users);
 
   const handleInputChange = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+  
     let filteredUsers = users.filter(({ name }) =>
-      name.includes(e.target.value)
+      name.toLowerCase().includes(searchValue)
     );
+  
     setUsersArray(filteredUsers);
   };
 
