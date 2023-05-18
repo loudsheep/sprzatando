@@ -6,11 +6,9 @@ import {
   Review,
 } from "./MiniOffer.styles";
 import { Link } from "@inertiajs/react";
-import { Inertia, router } from "@inertiajs/inertia";
+import { Inertia } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { useState } from "react";
-import { router } from "@inertiajs/react";
-
 const formatDate = (date) => {
   let d = new Date(date);
 
@@ -36,7 +34,7 @@ export const MiniOffer = ({
 
   const handleCheckOffer = (e) => {
     e.preventDefault();
-    router.post(route("offer.check", offer.id));
+    Inertia.post(route("offer.check", offer.id));
   };
 
   const timeDifference = useTimeDifference(offer.created_at);

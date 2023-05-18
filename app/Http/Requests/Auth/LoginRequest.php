@@ -76,7 +76,7 @@ class LoginRequest extends FormRequest
                 $this->session()->regenerateToken();
 
                 throw ValidationException::withMessages([
-                    'email' => 'Twoje konto zostało zawieszone.',
+                    'email' => 'Twoje konto zostało zawieszone do ' . $user->ban_ending->toDateString(),
                 ]);
             }
 

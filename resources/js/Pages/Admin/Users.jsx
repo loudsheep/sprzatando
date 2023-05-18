@@ -3,6 +3,8 @@ import styled from "styled-components";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState } from "react";
 import Button from "../../Components/Atoms/Button";
+import { Inertia } from "@inertiajs/inertia";
+
 
 const UserContainer = styled.table`
   border-collapse: collapse;
@@ -62,10 +64,21 @@ const BanBtn = styled.button`
   }
 `;
 
+const ShowWorstDiv = styled.div`
+  background-color: #ffb6b6;
+  color: #a10000;
+  margin: 0 1rem;
+  border: 1px solid red;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
 export default function Dashboard({ auth, users }) {
   const [usersArray, setUsersArray] = useState(users);
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState();
+  const [showWorst, setShowWorst] = useState(false);
 
   const handleInputChange = (e) => {
     if (e.target.type === "text") {
@@ -88,14 +101,21 @@ export default function Dashboard({ auth, users }) {
       ({ reviews_avg_rating }) =>
         reviews_avg_rating < 2.5 && reviews_avg_rating !== null
     );
+    setShowWorst(true);
     setUsersArray(filteredUsers);
   };
 
   const handleClear = () => {
     setUserName("");
     setUserId("");
+    setShowWorst(false);
     setUsersArray(users);
   };
+
+  const handleUserBan = (userId) => {
+    Inertia.post(route('user.ban', userId));
+  };
+
   return (
     <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
       {/* TODO add some layout for this */}
@@ -104,7 +124,7 @@ export default function Dashboard({ auth, users }) {
       <Cont>
         <StyledTitle>Lista użytkowników</StyledTitle>
         <InputWrapper>
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <Searchbar
               type="text"
               onChange={handleInputChange}
@@ -120,7 +140,12 @@ export default function Dashboard({ auth, users }) {
               style={{ width: "130px" }}
               value={userId}
             />
-            <button onClick={handleClear}>clear</button>
+            {showWorst && (
+              <ShowWorstDiv onClick={handleClear}>
+                Najgorsi użytkownicy (&lt;2.5★)
+              </ShowWorstDiv>
+            )}
+            <button onClick={handleClear}>Wyczyść</button>
           </div>
           <Button
             text="Najgorsi"
@@ -156,8 +181,8 @@ export default function Dashboard({ auth, users }) {
                   <td>{u.ban_ending !== null ? "Tak" : "Nie"}</td>
                   <td>{new Date(u.created_at).toLocaleDateString("pl-PL")}</td>
                   <td>
-                  {/* tuttaj ban usera */}
-                    <BanBtn onClicnk={() => {}}>Banuj</BanBtn>
+                    {/* tuttaj ban usera */}
+                    <BanBtn onClick={() => { handleUserBan(u.id) }}>{u.ban_ending !== null ? "Odbanuj" : "Banuj"}</BanBtn>
                   </td>
                 </tr>
               ))}
