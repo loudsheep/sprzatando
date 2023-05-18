@@ -15,7 +15,9 @@ import { ErrorButton } from "@/Components/Atoms/ErrorButton";
 import { router } from "@inertiajs/react";
 import Button from "@/Components/Atoms/Button";
 import { SuccesReported } from "@/Components/InfoModal";
-import backIconPath from "@/assets/img/backIcon.png";
+import arrowLeft from "@/assets/img/arrow-left.svg";
+import { notify } from "@/contants/notify";
+import { ToastContainer } from "react-toastify";
 
 export default function OfferDetails({
   images,
@@ -31,8 +33,10 @@ export default function OfferDetails({
 
   const handleInterestedButtons = (e) => {
     e.preventDefault();
-
     router.post(route("offer.follow", offer.id));
+    !currentUserInterestedInOffer
+      ? notify("Oferta przyjęta")
+      : notify("Zrezygnowano z oferty");
   };
 
   const handleBanOffer = (e) => {
@@ -54,13 +58,19 @@ export default function OfferDetails({
     );
   };
 
+  const handleCheckOffer = (e) => {
+    e.preventDefault();
+    router.post(route("offer.check", offer.id));
+  };
+
   return (
     <>
+      <ToastContainer />
       <Head title="Szczegóły oferty" />
       <Navbar />
       <Wrapper>
         <IconWrapper onClick={() => history.back()}>
-          <img src={backIconPath} alt="back icon" />
+          <img src={arrowLeft} alt="back icon" />
         </IconWrapper>
         <SuccesReported
           isVisible={isVisible}
@@ -75,12 +85,39 @@ export default function OfferDetails({
           </div>
         </div>
         <div className="section_column-second">
-          <p>{offer.creator.name}</p>
+          <p>
+            <strong>Utworzone przez: </strong>
+            {offer.creator.name}
+          </p>
           <p>
             <strong>Ważne do:</strong> {offer.ends} r.
           </p>
-          <p>{offer.city}</p>
+          <p>
+            <strong>Miejscowość: </strong>
+            {offer.city}
+          </p>
 
+          {!isOwner && (
+            <>
+              {!currentUserInterestedInOffer ? (
+                <PrimaryButton
+                  onClick={handleInterestedButtons}
+                  styling={{ margin: "15px 0", width: "100%" }}
+                >
+                  Zgłoś się do oferty
+                </PrimaryButton>
+              ) : (
+                <PrimaryButton
+                  color={"grey"}
+                  onClick={handleInterestedButtons}
+                  styling={{ margin: "15px 0", width: "100%" }}
+                >
+                  Rezygnuj
+                </PrimaryButton>
+              )}
+            </>
+          )}
+          <br />
           <ButtonsWrapper>
             {!isOwner && (
               <>
@@ -127,12 +164,17 @@ export default function OfferDetails({
                 <br />
                 przez użytkowników
               </span>
-              <Button text="Jest OK"></Button>
+              <Button text="Jest OK" onClick={handleCheckOffer}></Button>
             </ReportedSatus>
           )}
 
           {!isOwner && isRegularUser && (
-            <ErrorButton onClick={handleReportOffer} text="Reportój :)" />
+            <ErrorButton
+              onClick={handleReportOffer}
+              text="Reportój :)"
+              margin={"15px 0"}
+              width={"100%"}
+            />
           )}
         </div>
       </Wrapper>

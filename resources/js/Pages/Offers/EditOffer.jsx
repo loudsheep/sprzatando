@@ -3,22 +3,14 @@ import styled from "styled-components";
 import { Head, useForm } from "@inertiajs/react";
 import { Link } from "@inertiajs/react";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import {
-  StyledTitle,
-  StyledSubTitle,
-  FormWrapper,
-  StyledPhotoBox,
-  ImageSection,
-  UploadedImgWrapper,
-  DeleteButton,
-  ErrorMessage,
-  ErrorWrapper,
-} from "../page-styles/AddOffer.styles";
+import { FormWrapper } from "../page-styles/AddOffer.styles";
 import { FormField } from "@/Components/FormField";
 import { Textarea } from "@/Components/Atoms/Textarea";
 import { SelectCategory } from "@/Components/SelectCategory";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
 import { OfferImages } from "@/Components/AddImages";
+import { notify } from "@/contants/notify";
+import { ToastContainer } from "react-toastify";
 
 const SectionTitle = styled.h1`
   margin: 2rem 0;
@@ -56,7 +48,6 @@ const DownInputWrapper = styled.div`
 `;
 
 const EditOffer = ({ offer, images, auth }) => {
-  
   const initialState = {
     title: offer.title,
     description: offer.description,
@@ -64,7 +55,10 @@ const EditOffer = ({ offer, images, auth }) => {
     price: offer.price,
     categories: offer.category.split(";"),
     // photos: [offer.main_image].concat(images),
-    photos: offer.main_image == "/defaults/house.jpg" ? [] : [offer.main_image].concat(images),
+    photos:
+      offer.main_image == "/defaults/house.jpg"
+        ? []
+        : [offer.main_image].concat(images),
   };
 
   const { data, setData, post, errors } = useForm(initialState);
@@ -98,7 +92,7 @@ const EditOffer = ({ offer, images, auth }) => {
       onError: () => console.log(errors),
       onSuccess: () => {
         // setData(initialState);
-        console.log("SUCCESS");
+        notify("Zmiany zapisano pomyślnie");
       },
     });
   };
@@ -114,10 +108,14 @@ const EditOffer = ({ offer, images, auth }) => {
 
   return (
     <>
+      <ToastContainer />
       <Authenticated auth={auth} prophileImg={auth.user.profile_img}>
         <Head title="Edit" />
         <SectionTitle>Edytuj Ofertę</SectionTitle>
-        <FormWrapper onSubmit={formSubmitHandler} enctype={'multipart/form-data'}>
+        <FormWrapper
+          onSubmit={formSubmitHandler}
+          enctype={"multipart/form-data"}
+        >
           <InputsWrapper>
             <HeaderInputsWrapper>
               <FormField
@@ -177,9 +175,7 @@ const EditOffer = ({ offer, images, auth }) => {
 
           <div>
             <PrimaryButton color={"red"} onClick={(e) => e.preventDefault()}>
-              <Link href={route('offer.edit', offer.id)}>
-                Anuluj
-              </Link>
+              <Link href={route("offer.edit", offer.id)}>Anuluj</Link>
             </PrimaryButton>
             <PrimaryButton type="submit">Zapisz Zmiany</PrimaryButton>
           </div>

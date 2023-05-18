@@ -17,10 +17,10 @@ class AdminUserController extends Controller
     public function show(Request $request)
     {
         $users = User::withCount('createdOffers')
-        ->withAvg('reviews', 'rating')
-        ->withCount('reviews')
-        ->where('id', '!=', $request->user()->id)
-        ->get()->makeVisible(['created_at', 'ban_ending', 'email']);
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->where('id', '!=', $request->user()->id)
+            ->get()->makeVisible(['id','created_at', 'ban_ending', 'email', ]);
 
         return Inertia::render('Admin/Users', [
             'users' => $users,

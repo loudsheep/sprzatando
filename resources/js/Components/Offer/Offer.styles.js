@@ -29,15 +29,13 @@ export const Wrapper = styled.div`
     margin-left: 18px;
     margin-right: 18px;
     overflow-wrap: anywhere;
-    
   }
-  .span {
+  .button {
     background-color: ${({ theme }) => theme.colors.darkGrey};
     color: ${({ theme }) => theme.colors.white};
     font-weight: bold;
-    padding: 6px;
+    padding: 1rem 1.5rem;
     border-radius: 8px;
-    max-width: 80px;
     text-align: center;
   }
   .container {
@@ -48,18 +46,22 @@ export const Wrapper = styled.div`
   }
   @media (max-width: 992px) {
     justify-content: center;
-    }
+  }
 `;
 export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.secondaryColor};
   color: ${({ theme }) => theme.colors.white};
   font-weight: bold;
-  padding: 6px 10px;
+  padding: 1rem 1.5rem;
   border-radius: 8px;
-  margin-left: 10px;
+  margin: ${(props) => (props.margin ? props.margin : "0 0 0 10px")};
   max-width: 100px;
   text-align: center;
-  
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(0.95);
+  }
 `;
 
 export const Image = styled.img`

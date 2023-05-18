@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  position: relative;
   display: flex;
+  justify-content: center;
   padding: 6rem 3rem;
   width: 100%;
-  justify-content: center;
-  position: relative;
-
   color: ${({ theme }) => theme.colors.dark};
   .section_column-first {
     width: 100%;
@@ -14,9 +13,12 @@ export const Wrapper = styled.div`
   }
   @media (max-width: 992px) {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
     padding: 8rem 3rem;
+
+     .section_column-first{
+      margin-bottom: 2rem;
+     }
   }
 `;
 
@@ -35,11 +37,19 @@ export const StyledTitle = styled.h1`
 export const IconWrapper = styled.div`
   max-width: 40px;
   max-height: 40px;
+  width: 40px;
+  height: 40px;
   position: absolute;
   top: 20px;
   left: 20px;
   @media (max-width: 992px) {
     top: 100px;
+  }
+
+  img {
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -52,7 +62,7 @@ export const ButtonsWrapper = styled.div`
   padding: 10px 0 20px;
   border-radius: 10px;
   box-shadow: -2px 2px 20px -6px rgba(66, 68, 90, 1);
-`
+`;
 
 export const ReportedSatus = styled.div`
   background-color: #fefefe;
@@ -63,7 +73,7 @@ export const ReportedSatus = styled.div`
   border-radius: 10px;
   box-shadow: -2px 2px 20px -6px rgba(66, 68, 90, 1);
   span {
-    color: ${({theme}) => theme.colors.dark};
+    color: ${({ theme }) => theme.colors.dark};
     font-size: 16px;
     font-weight: bold;
     margin: 10px 0 15px;

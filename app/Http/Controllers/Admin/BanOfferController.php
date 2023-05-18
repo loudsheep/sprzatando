@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class BanOfferController extends Controller
 {
     //
-    public function update(Request $request, Offer $offer) {
+    public function update(Offer $offer)
+    {
         $this->authorize('ban', $offer);
 
         $offer->is_banned = !$offer->is_banned;
@@ -18,12 +19,21 @@ class BanOfferController extends Controller
         return back();
     }
 
-    public function report(Request $request, Offer $offer) {
-        if($offer->reported == 'reported' || $offer->reported == 'checked') {
+    public function report(Offer $offer)
+    {
+        if ($offer->reported == 'reported' || $offer->reported == 'checked') {
             return back();
         }
 
         $offer->reported = 'reported';
+        $offer->save();
+
+        return back();
+    }
+
+    public function markOfferOK(Offer $offer)
+    {
+        $offer->reported = 'checked';
         $offer->save();
 
         return back();

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  padding: 0.5rem;
+  padding: 1rem 1.5rem;
   width: ${(props) => props.width || "auto"};
   font-size: 1.5rem;
   font-weight: bold;
@@ -10,14 +10,19 @@ const StyledButton = styled.button`
   color: #fff;
   border-radius: 8px;
   transition: opacity 0.3s;
-  margin: 0 5px;
   :hover {
     opacity: 0.9;
   }
 `;
-const Button = ({ width, color, onClick, text, style }) => {
+const Button = ({ width, color, onClick, text, style, title }) => {
   return (
-    <StyledButton onClick={onClick} width={width} color={color} style={style}>
+    <StyledButton
+      onClick={onClick}
+      width={width}
+      color={color}
+      style={style}
+      title={title}
+    >
       {text}
     </StyledButton>
   );

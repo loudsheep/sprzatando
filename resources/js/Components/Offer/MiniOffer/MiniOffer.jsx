@@ -9,6 +9,7 @@ import { Link } from "@inertiajs/react";
 import { Inertia, router } from "@inertiajs/inertia";
 import { useTimeDifference } from "../../../hooks/useTimeDifference";
 import { useState } from "react";
+import { router } from "@inertiajs/react";
 
 const formatDate = (date) => {
   let d = new Date(date);
@@ -31,6 +32,11 @@ export const MiniOffer = ({
   const handleBanOffer = (e) => {
     e.preventDefault();
     Inertia.post(route("offer.ban", offer.id));
+  };
+
+  const handleCheckOffer = (e) => {
+    e.preventDefault();
+    router.post(route("offer.check", offer.id));
   };
 
   const timeDifference = useTimeDifference(offer.created_at);
@@ -108,7 +114,7 @@ export const MiniOffer = ({
                     >
                       Banuj
                     </Button>
-                    <Button style={{ backgroundColor: "green" }}>
+                    <Button style={{ backgroundColor: "green" }} onClick={handleCheckOffer}>
                       Jest OK
                     </Button>
                   </>
@@ -118,12 +124,11 @@ export const MiniOffer = ({
           </>
         )}
 
-        <div className="container">
-          <div className="span">
-            <span>{offer.price} zł</span>
+        <div className="container button-container">
+          <div className="button">
+            <button>{offer.price} zł</button>
           </div>
 
-          {/* Better??? idk */}
           {Object.keys(buttons).map((key, i) => (
             <Link key={i} href={buttons[key]}>
               <Button>{key}</Button>

@@ -15,6 +15,10 @@ Route::middleware('auth')->group(function () {
         ->middleware(['auth', 'throttle:6,1'])
         ->name('offer.report');
 
+    Route::post('check-offer/{offer}', [BanOfferController::class, 'markOfferOK'])
+        ->middleware(['auth', 'throttle:6,1'])
+        ->name('offer.check');
+
     Route::get('admin/users', [AdminUserController::class, 'show'])
         ->middleware('can:manage_users', 'auth')
         ->name('admin.users');
