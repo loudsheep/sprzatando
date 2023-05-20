@@ -84,16 +84,15 @@ export default function Authenticated({ auth, children, prophileImg }) {
                 </span>
               </Dropdown.Trigger>
               <Dropdown.Content>
-                <Dropdown.Link href={route("logout")} method="post" as="button">
-                  Wyloguj
-                </Dropdown.Link>
-
                 {auth.user.role == "admin" && (
                   <Dropdown.Link href={route("admin.reported")} method="get" as="button">
-                    ADMIN PANEL
+                    Panel Administratora
                   </Dropdown.Link>
                 )}
 
+                <Dropdown.Link href={route("logout")} method="post" as="button">
+                  Wyloguj
+                </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
@@ -131,11 +130,14 @@ export default function Authenticated({ auth, children, prophileImg }) {
               </Dropdown.Trigger>
 
               <Dropdown.Content>
+                {auth.user.role == "admin" && (
+                  <Dropdown.Link href={route("admin.reported")} method="get" as="button">
+                    Panel Administratora
+                  </Dropdown.Link>
+                )}
+
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Wyloguj
-                </Dropdown.Link>
-                <Dropdown.Link href={route("admin.users")} method="get" as="button">
-                  Admin panel
                 </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>

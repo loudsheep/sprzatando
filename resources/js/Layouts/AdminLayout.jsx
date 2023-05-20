@@ -50,7 +50,7 @@ const ChildrenWrapper = styled.div`
   align-items: center;
 `;
 
-export default function AdminLayout({auth, children, prophileImg }) {
+export default function AdminLayout({ auth, children, prophileImg }) {
   const width = useWidth();
 
   return (
@@ -63,7 +63,7 @@ export default function AdminLayout({auth, children, prophileImg }) {
                 <img src={logoPath} alt="logo" style={{ width: "70px" }} />
               </Link>
             </LogoWrapper>
-            
+
             <Dropdown>
               <Dropdown.Trigger>
                 <span className="inline-flex rounded-md">
@@ -84,14 +84,18 @@ export default function AdminLayout({auth, children, prophileImg }) {
                 </span>
               </Dropdown.Trigger>
               <Dropdown.Content>
+                <Dropdown.Link href={route("profile.edit")} method="get" as="button">
+                  Panel użytkownika
+                </Dropdown.Link>
+
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Wyloguj
                 </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
-          
-          <Sidebar isAdmin={true}/>
+
+          <Sidebar isAdmin={true} />
 
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </Wrapper>
@@ -124,13 +128,17 @@ export default function AdminLayout({auth, children, prophileImg }) {
               </Dropdown.Trigger>
 
               <Dropdown.Content>
+                <Dropdown.Link href={route("profile.edit")} method="get" as="button">
+                  Panel użytkownika
+                </Dropdown.Link>
+
                 <Dropdown.Link href={route("logout")} method="post" as="button">
                   Wyloguj
                 </Dropdown.Link>
               </Dropdown.Content>
             </Dropdown>
           </UserInfoBox>
-          <Sidebar isAdmin={true}/>
+          <Sidebar isAdmin={true} />
           <ChildrenWrapper>{children}</ChildrenWrapper>
         </MobileWrapper>
       )}
