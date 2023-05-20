@@ -82,6 +82,7 @@ export default function Dashboard({ auth, users }) {
   const [showWorst, setShowWorst] = useState(false);
 
   const handleInputChange = (e) => {
+    setShowWorst(false);
     if (e.target.type === "text") {
       setUserName(e.target.value);
       let filteredUsers = users.filter(({ name }) =>
