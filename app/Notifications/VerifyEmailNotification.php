@@ -48,7 +48,7 @@ class VerifyEmailNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->view("emails.email", [
+            ->view("emails.verify", [
                 "url" => $this->url,
                 "username" => $this->username,
                 "ip" => $this->ip,

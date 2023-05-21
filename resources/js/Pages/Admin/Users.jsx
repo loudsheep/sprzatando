@@ -1,4 +1,4 @@
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 import styled from "styled-components";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState } from "react";
@@ -59,7 +59,7 @@ const StyledTitle = styled.h1`
     error ? theme.colors.error : theme.colors.dark};
 `;
 const BanBtn = styled.button`
-  color: ${({ theme }) => theme.colors.error};
+  color: ${({ theme, unban }) => unban ? theme.colors.success : theme.colors.error};
   &:hover {
     text-decoration: underline;
   }
@@ -114,8 +114,18 @@ export default function Dashboard({ auth, users }) {
     setUsersArray(users);
   };
 
-  const handleUserBan = (userId) => {
-    Inertia.post(route("user.ban", userId));
+  const handleUserBan = (event, user) => {
+    event.preventDefault();
+    router.post(route("user.ban", user.id), null, {
+      onSuccess: (x) => {
+        setUsersArray(x.props.users);
+        if (user.ban_ending == null) {
+          notify(<p>Zbanowano użutkownika <strong>{user.name}</strong> na okres 7 dni🚫</p>);
+        } else {
+          notify(<p>Odbanowano użutkownika <strong>{user.name}</strong>💪🏽</p>);
+        }
+      }
+    });
   };
 
   return (
@@ -187,21 +197,11 @@ export default function Dashboard({ auth, users }) {
                       {new Date(u.created_at).toLocaleDateString("pl-PL")}
                     </td>
                     <td>
-                      {/* tuttaj ban usera */}
-                      <BanBtn
-                        onClick={() => {
-                          handleUserBan(u.id);
-                          const notifyMess =
-                            u.ban_ending === null
-                              ? <p>Zbanowano użutkownika <strong>{u.name}</strong> na okres 7 dni🚫</p>
-                              : <p>Odbanowano użutkownika <strong>{u.name}</strong>💪🏽</p>;
-                          notify(
-                            notifyMess
-                          );
-                        }}
-                      >
-                        {u.ban_ending !== null ? "Odbanuj" : "Banuj"}
-                      </BanBtn>
+                      <form onSubmit={(e) => handleUserBan(e, u)}>
+                        <BanBtn unban={u.ban_ending != null}>
+                          {u.ban_ending !== null ? "Odbanuj" : "Banuj"}
+                        </BanBtn>
+                      </form>
                     </td>
                   </tr>
                 ))}
