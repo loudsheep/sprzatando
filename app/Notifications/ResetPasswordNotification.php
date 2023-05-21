@@ -49,7 +49,8 @@ class ResetPasswordNotification extends Notification
             ->view("emails.reset", [
                 "url" => $this->url,
                 "username" => $this->username,
-            ]);
+            ])
+            ->subject('Resetowanie hasła');
     }
 
     /**

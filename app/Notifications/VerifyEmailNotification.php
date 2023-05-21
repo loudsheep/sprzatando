@@ -52,7 +52,8 @@ class VerifyEmailNotification extends Notification
                 "url" => $this->url,
                 "username" => $this->username,
                 "ip" => $this->ip,
-            ]);
+            ])
+            ->subject('Weryfikacja adresu email');
     }
 
     /**
