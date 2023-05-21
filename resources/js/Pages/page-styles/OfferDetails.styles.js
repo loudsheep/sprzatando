@@ -80,3 +80,12 @@ export const ReportedSatus = styled.div`
     text-align: center;
   }
 `;
+
+export const PriceTag = styled.div`
+  background-color: grey;
+  color: white;
+  /* font-size: 2rem; */
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+`;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navbar } from "../../Components/Navigations/Navbar";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import {
   Wrapper,
   StyledTitle,
@@ -8,6 +8,7 @@ import {
   IconWrapper,
   ReportedSatus,
   ButtonsWrapper,
+  PriceTag,
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
 import PrimaryButton from "@/Components/Atoms/PrimaryButton";
@@ -85,6 +86,7 @@ export default function OfferDetails({
           </div>
         </div>
         <div className="section_column-second">
+          <PriceTag>{offer.price} zł</PriceTag>
           <p>
             <strong>Utworzone przez: </strong>
             {offer.creator.name}
@@ -96,30 +98,17 @@ export default function OfferDetails({
             <strong>Miejscowość: </strong>
             {offer.city}
           </p>
-
-          {!isOwner && (
-            <>
-              {!currentUserInterestedInOffer ? (
-                <PrimaryButton
-                  onClick={handleInterestedButtons}
-                  styling={{ margin: "15px 0", width: "100%" }}
-                >
-                  Zgłoś się do oferty
-                </PrimaryButton>
-              ) : (
-                <PrimaryButton
-                  color={"grey"}
-                  onClick={handleInterestedButtons}
-                  styling={{ margin: "15px 0", width: "100%" }}
-                >
-                  Rezygnuj
-                </PrimaryButton>
-              )}
-            </>
-          )}
           <br />
           <ButtonsWrapper>
-            {!isOwner && (
+            {isOwner ? (
+              <>
+                <Link href="">
+                  <PrimaryButton>
+                    Edytuj ofertę
+                  </PrimaryButton>
+                </Link>
+              </>
+            ) : (
               <>
                 {!currentUserInterestedInOffer ? (
                   <PrimaryButton onClick={handleInterestedButtons}>
@@ -177,7 +166,7 @@ export default function OfferDetails({
             />
           )}
         </div>
-      </Wrapper>
+      </Wrapper >
     </>
   );
 }
