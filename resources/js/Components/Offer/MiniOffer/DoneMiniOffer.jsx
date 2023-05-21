@@ -37,16 +37,13 @@ export const DoneMiniOffer = ({ offer }) => {
 
   const handleRatingChange = (rate) => {
     setData("rating", rate);
-    console.log(data);
   };
 
   function submitReview(e) {
     e.preventDefault();
-    console.log(errors);
     post(route("offer.review", offer.id), {
       preserveScroll: true,
       onSuccess: () => {
-        console.log(data);
       },
     });
   }

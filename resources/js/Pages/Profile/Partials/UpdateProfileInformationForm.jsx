@@ -25,7 +25,6 @@ export default function UpdateProfileInformation({
 
   const submit = (e) => {
     e.preventDefault();
-    console.log(form.data);
 
     form.patch(route("profile.update"), {
       onSuccess: () => {

@@ -88,7 +88,6 @@ const EditOffer = ({ offer, images, auth }) => {
 
     post(route("offer.update", offer.id), {
       preserveScroll: true,
-      onError: () => console.log(errors),
       onSuccess: () => {
         // setData(initialState);
         notify("Zmiany zapisano pomyślnie");
