@@ -25,19 +25,18 @@ const Cont = styled.div`
   min-height: 90%;
 `;
 
-export default function Reported({ auth, offers }) {
-  return (
-    <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
-      {/* TODO add some layout for this */}
-      <Head title="Users" />
+export default function Banned({ auth, offers }) {
+    return (
+        <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
+            <Head title="Users" />
 
-      <Cont>
-        <h1>Zgłoszone oferty</h1>
+            <Cont>
+                <h1>Zbanowane oferty</h1>
 
-        {offers.map((offer, i) => (
-          <MiniOffer offer={offer} isOwner={false} key={i} isAdminView={true} />
-        ))}
-      </Cont>
-    </AdminLayout>
-  );
+                {offers.map((offer, i) => (
+                    <MiniOffer offer={offer} isOwner={false} key={i}/>
+                ))}
+            </Cont>
+        </AdminLayout>
+    );
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBannedController;
 use App\Http\Controllers\Admin\AdminReportedController;
 use App\Http\Controllers\Admin\BanOfferController;
 use App\Http\Controllers\Admin\AdminUserController;
@@ -34,6 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/reported', [AdminReportedController::class, 'show'])
         ->middleware('can:manage_users', 'auth')
         ->name('admin.reported');
+
+    Route::get('admin/banned', [AdminBannedController::class, 'show'])
+        ->middleware('can:manage_users', 'auth')
+        ->name('admin.banned');
 
     Route::get('time', [AdminUserController::class, 'time'])
         ->middleware('can:manage_users', 'auth')

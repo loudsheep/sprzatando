@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
     font-weight: bold;
     padding: 1rem 1.5rem;
     border-radius: 8px;
-    max-width: 80px;
+    max-width: 85px;
     text-align: center;
   }
   .container {
