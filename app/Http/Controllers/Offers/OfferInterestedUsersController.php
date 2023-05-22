@@ -18,11 +18,13 @@ class OfferInterestedUsersController extends Controller
         }
 
         $interestedUsers = $offer->usersInterested()
+            ->with('latestReview')
             ->withAvg('reviews', 'rating')
             ->withCount('contractedOffers')
+            ->withCount('createdOffers')
             ->get()
             ->each(function ($i, $k) {
-                $i->makeVisible(['email', 'created_at']);
+                $i->makeVisible(['created_at']);
             })
             ->toArray();
 
