@@ -258,7 +258,7 @@ export default function UsersInterested({
 
                       <div className="description">
                         <b>
-                          {viewingUser.name} -{" "}
+                          {viewingUser.latest_review.offer.creator.name} -{" "}
                           <span style={{ color: "#ffda09" }}>{viewingUser.latest_review.rating} ★</span>
                         </b>
 

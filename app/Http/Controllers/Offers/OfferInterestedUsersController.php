@@ -18,7 +18,7 @@ class OfferInterestedUsersController extends Controller
         }
 
         $interestedUsers = $offer->usersInterested()
-            ->with('latestReview')
+            ->with('latestReview.offer.creator')
             ->withAvg('reviews', 'rating')
             ->withCount('contractedOffers')
             ->withCount('createdOffers')
