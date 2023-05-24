@@ -110,7 +110,7 @@ export const Sidebar = ({isAdmin}) => {
       name: "Zbanowane oferty",
       path: route("admin.banned"),
       routeUrl: "/admin/banned",
-      icon: dangerIconPath,
+      icon: userOfferPath,
     },
     {
       name: "Użytkownicy",
