@@ -7,7 +7,7 @@ import {
   StyledSubtitle,
   IconWrapper,
   ReportedSatus,
-  ButtonsWrapper,
+  ContentWrapper,
   PriceTag,
 } from "../page-styles/OfferDetails.styles";
 import { Gallery } from "@/Components/Gallery";
@@ -86,26 +86,30 @@ export default function OfferDetails({
           </div>
         </div>
         <div className="section_column-second">
-          <PriceTag>{offer.price} zł</PriceTag>
-          <p>
-            <strong>Utworzone przez: </strong>
-            {offer.creator.name}
-          </p>
-          <p>
-            <strong>Ważne do:</strong> {offer.ends} r.
-          </p>
-          <p>
-            <strong>Miejscowość: </strong>
-            {offer.city}
-          </p>
+          <ContentWrapper>
+            <div>
+              <p>
+                <strong>Utworzone przez: </strong>
+                {offer.creator.name}
+              </p>
+              <p>
+                <strong>Ważne do:</strong> {offer.ends} r.
+              </p>
+              <p>
+                <strong>Miejscowość: </strong>
+                {offer.city}
+              </p>
+              <PriceTag>
+                <span>{offer.price} zł</span>
+              </PriceTag>
+            </div>
+          </ContentWrapper>
           <br />
-          <ButtonsWrapper>
+          <ContentWrapper>
             {isOwner ? (
               <>
                 <Link href="">
-                  <PrimaryButton>
-                    Edytuj ofertę
-                  </PrimaryButton>
+                  <PrimaryButton>Edytuj ofertę</PrimaryButton>
                 </Link>
               </>
             ) : (
@@ -144,29 +148,27 @@ export default function OfferDetails({
                 )}
               </>
             )}
-          </ButtonsWrapper>
-
-          {isAdmin && isReported && (
-            <ReportedSatus>
-              <span>
-                Ta oferta jest zgłoszona
-                <br />
-                przez użytkowników
-              </span>
-              <Button text="Jest OK" onClick={handleCheckOffer}></Button>
-            </ReportedSatus>
-          )}
-
-          {!isOwner && isRegularUser && (
-            <ErrorButton
-              onClick={handleReportOffer}
-              text="Reportój :)"
-              margin={"15px 0"}
-              width={"100%"}
-            />
-          )}
+            {!isOwner && isRegularUser && (
+              <ErrorButton
+                onClick={handleReportOffer}
+                text="Reportój :)"
+                margin={"15px 0"}
+                width={"100%"}
+              />
+            )}
+            {isAdmin && isReported && (
+              <ReportedSatus>
+                <span>
+                  Ta oferta jest zgłoszona
+                  <br />
+                  przez użytkowników
+                </span>
+                <Button text="Jest OK" onClick={handleCheckOffer}></Button>
+              </ReportedSatus>
+            )}
+          </ContentWrapper>
         </div>
-      </Wrapper >
+      </Wrapper>
     </>
   );
 }

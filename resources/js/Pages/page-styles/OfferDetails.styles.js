@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  
   padding: 6rem 3rem;
   width: 100%;
   color: ${({ theme }) => theme.colors.dark};
@@ -11,14 +12,19 @@ export const Wrapper = styled.div`
     width: 100%;
     max-width: 700px;
   }
+  .section_column-second{
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+  }
   @media (max-width: 992px) {
     flex-direction: column;
     align-items: flex-start;
     padding: 8rem 3rem;
 
-     .section_column-first{
+    .section_column-first {
       margin-bottom: 2rem;
-     }
+    }
   }
 `;
 
@@ -53,15 +59,17 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const ButtonsWrapper = styled.div`
-  background-color: #fefefe;
+export const ContentWrapper = styled.div`
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px 0 20px;
   border-radius: 10px;
-  box-shadow: -2px 2px 20px -6px rgba(66, 68, 90, 1);
+  border: 1px solid ${({ theme }) => theme.colors.lightPurple};
+  box-shadow: rgba(149, 157, 165, 0.3) 0px 8px 24px;
+  padding: 2rem;
 `;
 
 export const ReportedSatus = styled.div`
@@ -84,8 +92,12 @@ export const ReportedSatus = styled.div`
 export const PriceTag = styled.div`
   background-color: grey;
   color: white;
+  max-width: 9rem;
   /* font-size: 2rem; */
   padding: 1rem;
   border-radius: 10px;
-  margin: 1rem 0;
+  margin: 1rem 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
