@@ -3,19 +3,25 @@ import styled from "styled-components";
 import AdminLayout from "@/Layouts/AdminLayout";
 import { useState } from "react";
 import Button from "../../Components/Atoms/Button";
-import { Inertia } from "@inertiajs/inertia";
 import { notify } from "@/contants/notify";
 import { ToastContainer } from "react-toastify";
+import { useWidth } from "@/hooks/useWidth";
+
+const TableContainer = styled.div`
+  overflow-x: auto;
+  margin-top: 4rem;
+`;
 
 const UserContainer = styled.table`
   border-collapse: collapse;
+  min-width: 100%;
 
   th,
   td {
+    padding: 1rem;
+    max-width: 240px;
     border: 1px solid black;
     text-align: center;
-    max-width: 240px;
-    word-break: break-word;
   }
 
   tr:nth-child(even) {
@@ -33,8 +39,8 @@ const Cont = styled.div`
 `;
 
 const Searchbar = styled.input`
-  max-width: 340px;
-  margin: 2rem 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
   border: none;
   background-color: #fff;
   box-shadow: rgba(149, 157, 165, 0.4) 0px 8px 24px;
@@ -49,8 +55,30 @@ const Searchbar = styled.input`
 `;
 const InputWrapper = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @media (min-width: 992px) {
+    flex-direction: row;
+
+    ${Searchbar}:nth-of-type(1) {
+      margin-right: 2rem;
+    }
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
   justify-content: space-between;
+
+  @media (min-width: 992px) {
+    justify-content: flex-start;
+  }
+`;
+
+const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledTitle = styled.h1`
@@ -59,7 +87,8 @@ const StyledTitle = styled.h1`
     error ? theme.colors.error : theme.colors.dark};
 `;
 const BanBtn = styled.button`
-  color: ${({ theme, unban }) => unban ? theme.colors.success : theme.colors.error};
+  color: ${({ theme, unban }) =>
+    unban ? theme.colors.success : theme.colors.error};
   &:hover {
     text-decoration: underline;
   }
@@ -80,6 +109,8 @@ export default function Dashboard({ auth, users }) {
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState();
   const [showWorst, setShowWorst] = useState(false);
+
+  const width = useWidth();
 
   const handleInputChange = (e) => {
     setShowWorst(false);
@@ -120,11 +151,20 @@ export default function Dashboard({ auth, users }) {
       onSuccess: (x) => {
         setUsersArray(x.props.users);
         if (user.ban_ending == null) {
-          notify(<p>Zbanowano użutkownika <strong>{user.name}</strong> na okres 7 dni🚫</p>);
+          notify(
+            <p>
+              Zbanowano użutkownika <strong>{user.name}</strong> na okres 7
+              dni🚫
+            </p>
+          );
         } else {
-          notify(<p>Odbanowano użutkownika <strong>{user.name}</strong>💪🏽</p>);
+          notify(
+            <p>
+              Odbanowano użutkownika <strong>{user.name}</strong>💪🏽
+            </p>
+          );
         }
-      }
+      },
     });
   };
 
@@ -132,13 +172,12 @@ export default function Dashboard({ auth, users }) {
     <>
       <ToastContainer />
       <AdminLayout auth={auth} prophileImg={auth.user.profile_img}>
-        {/* TODO add some layout for this */}
         <Head title="Users" />
 
         <Cont>
           <StyledTitle>Lista użytkowników</StyledTitle>
-          <InputWrapper>
-            <div style={{ display: "flex", alignItems: "center" }}>
+          <SearchWrapper>
+            <InputWrapper>
               <Searchbar
                 type="text"
                 onChange={handleInputChange}
@@ -151,7 +190,6 @@ export default function Dashboard({ auth, users }) {
                 placeholder="Znajdź po id"
                 max={`${users.length}`}
                 min="0"
-                style={{ width: "130px" }}
                 value={userId}
               />
               {showWorst && (
@@ -159,54 +197,65 @@ export default function Dashboard({ auth, users }) {
                   Najgorsi użytkownicy (&lt;2.5★)
                 </ShowWorstDiv>
               )}
-              <button onClick={handleClear}>Wyczyść</button>
-            </div>
-            <Button
-              text="Najgorsi"
-              color={"err"}
-              onClick={showTheWorst}
-              title="Uzytkownicy ze średnią poniżej 2.5"
-            />
-          </InputWrapper>
+            </InputWrapper>
+            <ButtonWrapper>
+              <Button
+                onClick={handleClear}
+                text={"Wyczyść"}
+                style={
+                  width >= 992 ? { marginRight: "2rem" } : { marginRight: "0" }
+                }
+              ></Button>
+              <Button
+                text="Najgorsi"
+                color={"err"}
+                onClick={showTheWorst}
+                title="Uzytkownicy ze średnią poniżej 2.5"
+              />
+            </ButtonWrapper>
+          </SearchWrapper>
+
           {usersArray.length !== 0 ? (
-            <UserContainer>
-              <thead>
-                <tr>
-                  <th>Id.</th>
-                  <th>Email</th>
-                  <th>Nazwa</th>
-                  <th>Liczba ofert</th>
-                  <th>Średnia ocen</th>
-                  <th>Ostatnia ocena</th>
-                  <th>Stworzony</th>
-                  <th>Ban</th>
-                </tr>
-              </thead>
-              <tbody>
-                {usersArray.map((u, i) => (
-                  <tr key={i}>
-                    <td>{u.id}. </td>
-                    <td>{u.email}</td>
-                    <td>{u.name}</td>
-                    <td>{u.created_offers_count}</td>
-                    <td>
-                      {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
-                    </td>
-                    <td>{u.latest_review ? u.latest_review.rating : '-'}</td>
-                    <td>
-                      {new Date(u.created_at).toLocaleDateString("pl-PL")}
-                    </td>
-                    <td>
-                      <form onSubmit={(e) => handleUserBan(e, u)}>
-                        <BanBtn unban={u.ban_ending != null}>
-                          {u.ban_ending !== null ? "Odbanuj" : "Banuj"}
-                        </BanBtn>
-                      </form>
-                    </td>
+            <TableContainer>
+              <UserContainer>
+                <thead>
+                  <tr>
+                    <th>Id.</th>
+                    <th>Email</th>
+                    <th>Nazwa</th>
+                    <th>Liczba ofert</th>
+                    <th>Średnia ocen</th>
+                    <th>Ostatnia ocena</th>
+                    <th>Stworzony</th>
+                    <th>Ban</th>
                   </tr>
-                ))}
-              </tbody>
-            </UserContainer>
+                </thead>
+                <tbody>
+                  {usersArray.map((u, i) => (
+                    <tr key={i}>
+                      <td>{u.id}. </td>
+                      <td>{u.email}</td>
+                      <td>{u.name}</td>
+                      <td>{u.created_offers_count}</td>
+                      <td>
+                        {u.reviews_avg_rating ?? "-"} ({u.reviews_count ?? ""})
+                      </td>
+                      <td>{u.latest_review ? u.latest_review.rating : "-"}</td>
+                      <td>
+                        {new Date(u.created_at).toLocaleDateString("pl-PL")}
+                      </td>
+                      <td>
+                        <form onSubmit={(e) => handleUserBan(e, u)}>
+                          <BanBtn unban={u.ban_ending != null}>
+                            {u.ban_ending !== null ? "Odbanuj" : "Banuj"}
+                          </BanBtn>
+                        </form>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </UserContainer>
+            </TableContainer>
           ) : (
             <StyledTitle error={true}>Brak Użytkowników 🙄</StyledTitle>
           )}
