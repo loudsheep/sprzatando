@@ -22,6 +22,7 @@ class OfferInterestedUsersController extends Controller
             ->withAvg('reviews', 'rating')
             ->withCount('contractedOffers')
             ->withCount('createdOffers')
+            ->where('ban_ending', '=', null)
             ->get()
             ->each(function ($i, $k) {
                 $i->makeVisible(['created_at']);
@@ -40,7 +41,7 @@ class OfferInterestedUsersController extends Controller
 
         if (
             !$offer->usersInterested->contains($user)
-            || $offer->done_at !== null || $offer->is_banned
+            || $offer->done_at != null || $user->ban_ending != null
         ) {
             abort(403);
         }

@@ -199,7 +199,7 @@ export default function UsersInterested({
                   <div className="btn-wrapper">
                     {/* <Button text={"TEXT"} onClick={() => setViewingUser(user)}>Szczegóły</Button> */}
                     <b onClick={() => setViewingUser(user)} style={{ marginRight: "1rem", cursor: "pointer" }}>Szczegóły</b>
-                    <Button text="wybierz" onClick={() => handleUserSelect(id)} />
+                    <Button text="wybierz" onClick={() => handleUserSelect(user.id)} />
                   </div>
                 </div>
               </User>
