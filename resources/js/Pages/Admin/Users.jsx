@@ -53,7 +53,7 @@ const InputWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const StyledTitle = styled.h1`
+export const StyledTitle = styled.h1`
   font-size: 2.4rem;
   color: ${({ theme, error }) =>
     error ? theme.colors.error : theme.colors.dark};

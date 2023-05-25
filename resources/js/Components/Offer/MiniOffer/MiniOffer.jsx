@@ -20,6 +20,7 @@ export const MiniOffer = ({
   interested = 0,
   isOwner,
   review = null,
+  isBan,
   buttons = {},
   isAdminView,
 }) => {
@@ -112,7 +113,10 @@ export const MiniOffer = ({
                     >
                       Banuj
                     </Button>
-                    <Button style={{ backgroundColor: "green" }} onClick={handleCheckOffer}>
+                    <Button
+                      style={{ backgroundColor: "green" }}
+                      onClick={handleCheckOffer}
+                    >
                       Jest OK
                     </Button>
                   </>
@@ -132,6 +136,7 @@ export const MiniOffer = ({
               <Button>{key}</Button>
             </Link>
           ))}
+          {isBan && <Button onClick={handleBanOffer}>Odbanuj</Button>}
         </div>
       </div>
 
