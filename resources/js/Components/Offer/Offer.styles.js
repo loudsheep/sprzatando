@@ -55,7 +55,7 @@ export const Button = styled.button`
   padding: 1rem 1.5rem;
   border-radius: 8px;
   margin: ${(props) => (props.margin ? props.margin : "0 0 0 10px")};
-  max-width: 100px;
+  max-width: 120px;
   text-align: center;
   transition: transform 0.3s;
 
