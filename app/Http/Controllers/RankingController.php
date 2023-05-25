@@ -13,8 +13,7 @@ class RankingController extends Controller
     {
         $users = User::withAvg('reviews', 'rating')
             ->orderBy('reviews_avg_rating', 'DESC')
-            // TODO uncomment once more reviews are in DB
-            // ->having('reviews_avg_rating', '!=', 'null')
+            ->where('ban_ending', '=', null)
             ->limit(5)
             ->get()->toArray();
 
