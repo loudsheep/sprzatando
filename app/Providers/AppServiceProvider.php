@@ -28,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('manage_users', function(User $user) {
             return $user->role === 'admin';
         });
+
+        if ($this->app->environment('production')) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
     }
 }

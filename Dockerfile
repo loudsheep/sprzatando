@@ -8,7 +8,7 @@ COPY package.json yarn.lock* package-lock.json* ./
 
 # Install frontend dependencies
 RUN if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-    elif [ -f package-lock.json ]; then npm ci; \
+    elif [ -f package-lock.json ]; then npm ci --force; \
     else echo "Lockfile not found." && exit 1; fi
 
 # Copy frontend source files
